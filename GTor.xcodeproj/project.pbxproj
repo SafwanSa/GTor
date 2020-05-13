@@ -87,12 +87,12 @@
 		17E7E7A5246C921400596500 /* GTor */ = {
 			isa = PBXGroup;
 			children = (
-				17E7E7BA246C9AE500596500 /* GoogleService-Info.plist */,
 				17E7E7A6246C921400596500 /* AppDelegate.swift */,
 				17E7E7A8246C921400596500 /* SceneDelegate.swift */,
 				17E7E7C2246CA64A00596500 /* Views */,
 				17E7E7C1246CA64300596500 /* Models */,
 				17E7E7BD246C9F9600596500 /* Firebase */,
+				17E7E7BA246C9AE500596500 /* GoogleService-Info.plist */,
 				17E7E7AC246C921800596500 /* Assets.xcassets */,
 				17E7E7B1246C921800596500 /* LaunchScreen.storyboard */,
 				17E7E7B4246C921800596500 /* Info.plist */,
