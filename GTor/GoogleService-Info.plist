@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>777148650251-5q66o7pledk61en0vag0m0likcc3im3o.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.777148650251-5q66o7pledk61en0vag0m0likcc3im3o</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA7wrqMO_qYtxa39f7YgmiLBvPooCqZ15Q</string>
+	<key>GCM_SENDER_ID</key>
+	<string>777148650251</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.safwan.GTor</string>
+	<key>PROJECT_ID</key>
+	<string>gtor120</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gtor120.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:777148650251:ios:f1a54674fa32a51855480e</string>
+	<key>DATABASE_URL</key>
+	<string>https://gtor120.firebaseio.com</string>
+</dict>
+</plist>
