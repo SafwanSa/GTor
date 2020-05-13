@@ -10,7 +10,6 @@ import Foundation
 
 struct Goal: Codable, Identifiable {
     let id = UUID()
-    var isDecomposed: Bool
     var title: String
     var note: String
     var importance: Int
@@ -19,4 +18,7 @@ struct Goal: Codable, Identifiable {
     var categories: [Category]
     var subGoals: [Goal]
     var tasks: [Task]
+    var isDecomposed: Bool {
+        !subGoals.isEmpty
+    }
 }
