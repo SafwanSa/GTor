@@ -14,6 +14,10 @@
 		17E7E7B0246C921800596500 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17E7E7AF246C921800596500 /* Preview Assets.xcassets */; };
 		17E7E7B3246C921800596500 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17E7E7B1246C921800596500 /* LaunchScreen.storyboard */; };
 		17E7E7BB246C9AE500596500 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17E7E7BA246C9AE500596500 /* GoogleService-Info.plist */; };
+		17E7E7C4246CA6EB00596500 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7C3246CA6EB00596500 /* User.swift */; };
+		17E7E7C6246CA6F400596500 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7C5246CA6F400596500 /* Goal.swift */; };
+		17E7E7C8246CA6FE00596500 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7C7246CA6FE00596500 /* Task.swift */; };
+		17E7E7CA246CA70E00596500 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7C9246CA70E00596500 /* Category.swift */; };
 		5BF3CD28DF6450DA1901838B /* Pods_GTor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FCFD1B7B551547737EE0AB /* Pods_GTor.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +33,10 @@
 		17E7E7B2246C921800596500 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17E7E7B4246C921800596500 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17E7E7BA246C9AE500596500 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		17E7E7C3246CA6EB00596500 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		17E7E7C5246CA6F400596500 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		17E7E7C7246CA6FE00596500 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		17E7E7C9246CA70E00596500 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D1FCFD1B7B551547737EE0AB /* Pods_GTor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GTor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -121,6 +129,10 @@
 		17E7E7C1246CA64300596500 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				17E7E7C3246CA6EB00596500 /* User.swift */,
+				17E7E7C5246CA6F400596500 /* Goal.swift */,
+				17E7E7C7246CA6FE00596500 /* Task.swift */,
+				17E7E7C9246CA70E00596500 /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -266,9 +278,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17E7E7C4246CA6EB00596500 /* User.swift in Sources */,
 				17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */,
 				17E7E7A9246C921400596500 /* SceneDelegate.swift in Sources */,
+				17E7E7C6246CA6F400596500 /* Goal.swift in Sources */,
+				17E7E7C8246CA6FE00596500 /* Task.swift in Sources */,
 				17E7E7AB246C921400596500 /* ContentView.swift in Sources */,
+				17E7E7CA246CA70E00596500 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
