@@ -12,6 +12,7 @@ struct Task: Codable, Identifiable {
     let id = UUID()
     var title: String
     var note: String
-    var dueDate: Date
+    var dueDate: Date?
     var isDone: Bool
+    var satisfaction: Double
 }

@@ -20,7 +20,7 @@ struct Goal: Codable, Identifiable {
     var note: String
     var importance: Importance
     var satisfaction: Double
-    var dueDate: Date
+    var dueDate: Date?
     var categories: [Category]
     var subGoals: [Goal]
     var tasks: [Task]
