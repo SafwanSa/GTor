@@ -24,7 +24,7 @@ class FirestoreService {
     static var shared = FirestoreService()
     
     
-    func getDocument<T: Codable>(collection: FirestoreKeys.Collection, documentId: String, completion: @escaping (Result<T, Error>) -> ()){
+    func getDocumentOnce<T: Codable>(collection: FirestoreKeys.Collection, documentId: String, completion: @escaping (Result<T, Error>) -> ()){
         let reference = Firestore.firestore().collection(collection.rawValue).document(documentId)
         reference.getDocument { (documentSnapshot, err) in
             DispatchQueue.main.async {
@@ -32,7 +32,7 @@ class FirestoreService {
                     completion(.failure(err))
                     return
                 }
-                //Check the dicumentSnapshot
+                //Check the documentSnapshot
                 guard let documentSnapshot = documentSnapshot else {
                     completion(.failure(FirestoreErrorHandler.noDocumentSnapshot))
                     return
@@ -52,6 +52,34 @@ class FirestoreService {
                 completion(.success(model))
             }
         }
+    }
+    
+    
+    func getDocuments<T: Codable>(collection: FirestoreKeys.Collection, userId: String, completion: @escaping (Result<[T], Error>) -> ()){
+        let reference = Firestore.firestore().collection(collection.rawValue).whereField("uid", isEqualTo: userId)
+        reference.addSnapshotListener { (querySnapshot, err) in
+            DispatchQueue.main.async {
+                if let error = err {
+                    completion(.failure(error))
+                }
+                guard let querySnapshot = querySnapshot else {
+                    completion(.failure(FirestoreErrorHandler.noDocumentSnapshot))
+                    return
+                }
+                var models: [T] = []
+                let documents = querySnapshot.documents
+                for document in documents {
+                    //Decoding
+                    do {
+                        try models.append(FirestoreDecoder().decode(T.self, from: document.data()))
+                    } catch (let error) {
+                        completion(.failure(error))
+                    }
+                }
+                completion(.success(models))
+            }
+        }
+
     }
     
     func saveDocument<T: Codable>(collection: FirestoreKeys.Collection, documentId: String, model: T, completion: @escaping (Result<Void, Error>) -> ()){
