@@ -13,6 +13,8 @@ struct Task: Codable, Identifiable {
     var title: String
     var note: String
     var dueDate: Date?
-    var isDone: Bool
     var satisfaction: Double
+    var isSatisfied: Bool {
+        satisfaction != -1
+    }
 }
