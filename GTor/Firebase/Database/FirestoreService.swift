@@ -55,8 +55,37 @@ class FirestoreService {
     }
     
     
+    func getDocument<T: Codable>(collection: FirestoreKeys.Collection, documentId: String, completion: @escaping (Result<T, Error>) -> ()){
+        let reference = Firestore.firestore().collection(collection.rawValue).document(documentId)
+        reference.addSnapshotListener { (documentSnapshot, err) in
+            DispatchQueue.main.async {
+                if let error = err {
+                    completion(.failure(error))
+                }
+                guard let documentSnapshot = documentSnapshot else {
+                    completion(.failure(FirestoreErrorHandler.noDocumentSnapshot))
+                    return
+                }
+                guard let document = documentSnapshot.data() else {
+                    completion(.failure(FirestoreErrorHandler.noSnapshotData))
+                    return
+                }
+                var model: T
+                do {
+                    model = try FirestoreDecoder().decode(T.self, from: document)
+                } catch(let error) {
+                   fatalError("Error in decoding the model: \(error.localizedDescription)")
+                }
+                completion(.success(model))
+            }
+        }
+        
+        
+        
+    }
+    
     func getDocuments<T: Codable>(collection: FirestoreKeys.Collection, userId: String, completion: @escaping (Result<[T], Error>) -> ()){
-        let reference = Firestore.firestore().collection(collection.rawValue).whereField("uid", isEqualTo: userId)
+        let reference = Firestore.firestore().collection(collection.rawValue).whereField("uid", isEqualTo: userId)//Revice this
         reference.addSnapshotListener { (querySnapshot, err) in
             DispatchQueue.main.async {
                 if let error = err {
@@ -73,7 +102,7 @@ class FirestoreService {
                     do {
                         try models.append(FirestoreDecoder().decode(T.self, from: document.data()))
                     } catch (let error) {
-                        completion(.failure(error))
+                        fatalError("Error in decoding the model: \(error.localizedDescription)")
                     }
                 }
                 completion(.success(models))
