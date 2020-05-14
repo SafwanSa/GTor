@@ -25,6 +25,10 @@
 		17E7E7D5246CAB5100596500 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7D4246CAB5100596500 /* GoalsView.swift */; };
 		17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7D6246CAB5A00596500 /* HomeView.swift */; };
 		17E7E7DD246CABFE00596500 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7DC246CABFE00596500 /* SettingsView.swift */; };
+		17E7E7E0246CE3B300596500 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7DF246CE3B300596500 /* UserService.swift */; };
+		17E7E7E2246CE3C700596500 /* GoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E1246CE3C700596500 /* GoalService.swift */; };
+		17E7E7E4246CE3D600596500 /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E3246CE3D600596500 /* TaskService.swift */; };
+		17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E5246CE3E400596500 /* CategoryService.swift */; };
 		5BF3CD28DF6450DA1901838B /* Pods_GTor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FCFD1B7B551547737EE0AB /* Pods_GTor.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +55,10 @@
 		17E7E7D4246CAB5100596500 /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
 		17E7E7D6246CAB5A00596500 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		17E7E7DC246CABFE00596500 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		17E7E7DF246CE3B300596500 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		17E7E7E1246CE3C700596500 /* GoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalService.swift; sourceTree = "<group>"; };
+		17E7E7E3246CE3D600596500 /* TaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskService.swift; sourceTree = "<group>"; };
+		17E7E7E5246CE3E400596500 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 		D1FCFD1B7B551547737EE0AB /* Pods_GTor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GTor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -91,6 +99,7 @@
 				17E7E7A8246C921400596500 /* SceneDelegate.swift */,
 				17E7E7C2246CA64A00596500 /* Views */,
 				17E7E7C1246CA64300596500 /* Models */,
+				17E7E7DE246CE39900596500 /* Services */,
 				17E7E7BD246C9F9600596500 /* Firebase */,
 				17E7E7BA246C9AE500596500 /* GoogleService-Info.plist */,
 				17E7E7AC246C921800596500 /* Assets.xcassets */,
@@ -204,6 +213,17 @@
 			children = (
 			);
 			path = "Profile Views";
+			sourceTree = "<group>";
+		};
+		17E7E7DE246CE39900596500 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				17E7E7DF246CE3B300596500 /* UserService.swift */,
+				17E7E7E1246CE3C700596500 /* GoalService.swift */,
+				17E7E7E3246CE3D600596500 /* TaskService.swift */,
+				17E7E7E5246CE3E400596500 /* CategoryService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		2FAB09895D588514586CA502 /* Frameworks */ = {
@@ -339,8 +359,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17E7E7E2246CE3C700596500 /* GoalService.swift in Sources */,
 				17E7E7CE246CAAF500596500 /* SignInView.swift in Sources */,
 				17E7E7C4246CA6EB00596500 /* User.swift in Sources */,
+				17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */,
 				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,
 				17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */,
 				17E7E7D5246CAB5100596500 /* GoalsView.swift in Sources */,
@@ -350,6 +372,8 @@
 				17E7E7D0246CAB0600596500 /* LaunchView.swift in Sources */,
 				17E7E7C6246CA6F400596500 /* Goal.swift in Sources */,
 				17E7E7CC246CAAE800596500 /* SignUpView.swift in Sources */,
+				17E7E7E4246CE3D600596500 /* TaskService.swift in Sources */,
+				17E7E7E0246CE3B300596500 /* UserService.swift in Sources */,
 				17E7E7C8246CA6FE00596500 /* Task.swift in Sources */,
 				17E7E7AB246C921400596500 /* LoginView.swift in Sources */,
 				17E7E7CA246CA70E00596500 /* Category.swift in Sources */,
