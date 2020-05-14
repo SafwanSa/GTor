@@ -9,8 +9,16 @@
 import SwiftUI
 
 struct LaunchView: View {
+    @ObservedObject var userService = UserService()
+    
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Name: \(self.userService.user.name)")
+        }
+        .onAppear{
+            self.userService.configureAuthStateDidChnageListner()
+        }
     }
 }
 
