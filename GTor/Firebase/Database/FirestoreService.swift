@@ -56,14 +56,12 @@ class FirestoreService {
     
     func saveDocument<T: Codable>(collection: FirestoreKeys.Collection, documentId: String, model: T, completion: @escaping (Result<Void, Error>) -> ()){
         let reference = Firestore.firestore().collection(collection.rawValue).document(documentId)
-        
         var doc: [String:Any] = [:]
         do {
             doc = try FirestoreEncoder().encode(model)
         }catch(let error) {
             completion(.failure(error))
         }
-        
         reference.setData(doc, merge: true) { error in
             DispatchQueue.main.async {
                 if let error = error {
@@ -72,11 +70,19 @@ class FirestoreService {
                 completion(.success(()))
             }
         }
-
     }
     
-    func deleteDocument(){
+    func deleteDocument<T: Codable>(collection: FirestoreKeys.Collection, documentId: String, model: T, completion: @escaping (Result<Void, Error>) -> ()){
+        let reference = Firestore.firestore().collection(collection.rawValue).document(documentId)
         
+        reference.delete { (error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    completion(.failure(error))
+                }
+                completion(.success(()))
+            }
+        }
     }
     
     

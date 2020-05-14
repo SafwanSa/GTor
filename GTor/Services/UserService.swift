@@ -44,7 +44,7 @@ class UserService: ObservableObject {
     
     
     
-    func retreiveUser(uid: String){
+    private func retreiveUser(uid: String){
         FirestoreService.shared.getDocument(collection: FirestoreKeys.Collection.users, documentId: uid) { (result: Result<User, Error>) in
             switch result {
             case .failure(let error):
