@@ -29,7 +29,7 @@ struct AuthService {
             }
             
             let user = User(uid: result.user.uid, name: name , email: email)
-            //Save the user data
+            FirestoreService.shared.saveDocument(collection: FirestoreKeys.Collection.users, documentId: user.uid, model: user) { completion($0) }
             completion(.success(()))
         }
     }
