@@ -32,11 +32,11 @@ class FirestoreService {
                 return
             }
             guard let documentSnapshot = documentSnapshot else {
-                completion(.failure(ErrorHandler.noDocumentSnapshot))
+                completion(.failure(FirestoreErrorHandler.noDocumentSnapshot))
                 return
             }
             guard let document = documentSnapshot.data() else {
-                completion(.failure(ErrorHandler.noSnapshotData))
+                completion(.failure(FirestoreErrorHandler.noSnapshotData))
                 return
             }
             

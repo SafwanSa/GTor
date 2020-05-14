@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ErrorHandler: Error {
+enum FirestoreErrorHandler: Error {
     case noAuthDataResult
     case noCurrentUser
     case noDocumentSnapshot
@@ -17,7 +17,7 @@ enum ErrorHandler: Error {
     case modelMismatch
 }
 
-extension ErrorHandler: LocalizedError {
+extension FirestoreErrorHandler: LocalizedError {
     var errorDescription: String? {
         switch self {
             case .noAuthDataResult:
