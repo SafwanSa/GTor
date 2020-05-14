@@ -1,5 +1,5 @@
 //
-//  BaseScreen.swift
+//  LaunchView.swift
 //  GTor
 //
 //  Created by Safwan Saigh on 14/05/2020.
