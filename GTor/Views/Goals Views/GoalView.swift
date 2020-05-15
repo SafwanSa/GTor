@@ -10,34 +10,61 @@ import SwiftUI
 
 struct GoalView: View {
     var goal: Goal
-    
+    @State var isSubGoalsExpanded = false
     var body: some View {
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 40.0) {
-                    CardView()
-                    
-                    ImportanceCard()
-                    
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 40.0) {
+                CardView()
+                
+                ImportanceCard()
+                
+                VStack(alignment: .leading) {
                     HStack {
                         Text("Sub Goals")
                             .font(.title)
                             .padding(.leading, 20)
                         Spacer()
-                    }
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach(self.goal.subGoals ?? []) { goal in
-                                GoalCardView(goal: goal)
-                            }
+                        if isSubGoalsExpanded {
+                            
                         }
-                        .padding(.bottom, 25)
+                        Button(action: {  }) {
+                            Image(systemName: "plus.circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.black)
+                        }
+                        .opacity(isSubGoalsExpanded ? 1 : 0)
+                        .offset(x: self.isSubGoalsExpanded ? 0 : 20)
+                        .animation(.spring())
+                        
+                        Image(systemName: self.isSubGoalsExpanded ? "chevron.down" : "chevron.up")
+                            .padding()
                     }
-                    
-                    Spacer()
+                    if isSubGoalsExpanded {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(self.goal.subGoals ?? []) { goal in
+                                    GoalCardView(goal: goal)
+                                }
+                            }
+                            .padding(.bottom, 30)
+                        }
+                    }
                 }
-                .padding(.top, 50)
+                .frame(maxWidth:.infinity)
+                .padding(.vertical)
+                .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
+                .animation(.easeInOut)
+                .onTapGesture {
+                    self.isSubGoalsExpanded.toggle()
+                }
+                
             }
-            .navigationBarTitle("\(self.goal.title ?? "Title")")
+            .padding(.top, 50)
+        }
+        .navigationBarTitle("\(self.goal.title ?? "Title")")
         
     }
 }
@@ -70,7 +97,7 @@ struct CardView: View {
                 .background(Color.white.opacity(0.8))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
-
+                
             }
             .background(Image(uiImage: #imageLiteral(resourceName: "shape-pdf-asset")).resizable().scaledToFill())
             .frame(width: screen.width - 60, height: 170)
@@ -96,12 +123,12 @@ struct ImportanceCard: View {
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
         .overlay(
-              HStack {
-                  Spacer()
-                  Color.red
-                      .frame(width: 6)
-                      .frame(maxHeight: .infinity)
-                      .clipShape(RoundedRectangle(cornerRadius: 2))
-          })
+            HStack {
+                Spacer()
+                Color.red
+                    .frame(width: 6)
+                    .frame(maxHeight: .infinity)
+                    .clipShape(RoundedRectangle(cornerRadius: 2))
+        })
     }
 }
