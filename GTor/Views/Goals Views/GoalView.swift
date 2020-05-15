@@ -87,15 +87,21 @@ struct ImportanceCard: View {
             Spacer()
             Text("\("Very Important")")
                 .padding()
-                .background(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                .foregroundColor(.white)
+                .foregroundColor(.primary)
         }
         .font(.headline)
-        .frame(width: screen.width - 60, height: 30)
-        .padding()
+        .frame(width: screen.width - 60, height: 20)
+        .padding(10)
         .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).opacity(1), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
+        .overlay(
+              HStack {
+                  Spacer()
+                  Color.red
+                      .frame(width: 6)
+                      .frame(maxHeight: .infinity)
+                      .clipShape(RoundedRectangle(cornerRadius: 2))
+          })
     }
 }
