@@ -24,7 +24,7 @@ struct GoalsList: View {
                 }
                 .frame(width: screen.width)
                 .padding(.horizontal, 16)
-                .padding(.top, 160)
+                .padding(.top, 150)
             }
                 
             .navigationBarTitle("My Goals")

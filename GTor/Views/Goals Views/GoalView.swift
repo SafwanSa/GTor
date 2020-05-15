@@ -20,7 +20,7 @@ struct GoalView: View {
                     
                     HStack {
                         Text("Sub Goals")
-                            .font(.largeTitle)
+                            .font(.title)
                             .padding(.leading, 20)
                         Spacer()
                     }
@@ -52,9 +52,7 @@ struct CardView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Color.black
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                
+                Spacer()
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 20.0) {
                         Text("Goal title")
@@ -68,11 +66,15 @@ struct CardView: View {
                         .foregroundColor(.secondary)
                         .padding(.trailing, 5)
                 }
+                .padding()
+                .background(Color.white.opacity(0.8))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
+
             }
+            .background(Image(uiImage: #imageLiteral(resourceName: "shape-pdf-asset")).resizable().scaledToFill())
             .frame(width: screen.width - 60, height: 170)
         }
-        .padding()
-        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
     }
@@ -92,7 +94,7 @@ struct ImportanceCard: View {
         .font(.headline)
         .frame(width: screen.width - 60, height: 30)
         .padding()
-        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
+        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).opacity(1), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
     }
