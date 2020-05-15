@@ -16,13 +16,17 @@ struct GoalsList: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
                     ForEach(self.goalService.goals) { goal in
-                        GoalCardView(goal: goal)
+                        NavigationLink(destination: GoalView(goal: goal)) {
+                            GoalCardView(goal: goal)
+                        }
+                         .buttonStyle(PlainButtonStyle())
                     }
                 }
                 .frame(width: screen.width)
                 .padding(.horizontal, 16)
                 .padding(.top, 160)
             }
+                
             .navigationBarTitle("My Goals")
             .navigationBarItems(trailing:
                 HStack(spacing: 20) {
@@ -65,11 +69,16 @@ struct GoalCardView: View {
     var body: some View {
         HStack {
             HStack(alignment: .top) {
-                Color.black
-                    .frame(width: 60, height: 90)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .multilineTextAlignment(.leading)
-                    .offset(x: -10, y: -15)
+                HStack {
+                    Image(uiImage: #imageLiteral(resourceName: "shape1"))
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 60, height: 90)
+                }
+                .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .multilineTextAlignment(.leading)
+                .offset(x: -10, y: -15)
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text(goal.title ?? "Title")
@@ -83,10 +92,10 @@ struct GoalCardView: View {
                     
                     
                     HStack(spacing: 20) {
-                        Text("Sub-Goals: \(self.goal.subGoals?.count ?? 100)")
+                        Text(self.goal.isDecomposed ? "Sub-Goals: \(self.goal.subGoals?.count ?? 100)" : "")
                         Text("Activities: \(0)/3")
                         Text("\(self.goal.dueDate?.description ?? "100")")
-                        .lineLimit(4)
+                            .lineLimit(4)
                     }
                     .foregroundColor(Color.secondary)
                     .font(.footnote)
