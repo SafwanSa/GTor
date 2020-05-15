@@ -10,19 +10,38 @@ import SwiftUI
 
 struct GoalsView: View {
     var body: some View {
-        //        NavigationView {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 20) {
-                ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                    GoalCardView()
+        NavigationView {
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 20) {
+                    ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
+                        GoalCardView()
+                    }
                 }
+                .padding(.horizontal)
+                .padding(.top, 160)
+                .navigationBarTitle("My Goals")
+                .navigationBarItems(trailing:
+                    HStack(spacing: 20) {
+                        Button(action: {  }) {
+                            Image(systemName: "slider.horizontal.3")
+                                .resizable()
+                                .imageScale(.large)
+                                .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                                .font(.headline)
+                        }
+                        
+                        Button(action: {  }) {
+                            Image(systemName: "plus")
+                                .resizable()
+                                .imageScale(.large)
+                                .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                                .font(.headline)
+                        }
+                    }
+                )
             }
-            .padding(.horizontal)
-            .padding(.top, 160)
-            .navigationBarTitle("My Goals")
+            .edgesIgnoringSafeArea(.all)
         }
-        .edgesIgnoringSafeArea(.all)
-        //        }
     }
 }
 
@@ -51,7 +70,7 @@ struct GoalCardView: View {
                     Color.secondary
                         .frame(height: 1)
                         .padding(.top, 20)
-                        
+                    
                     
                     HStack(spacing: 20) {
                         Text("Sub-Goals: \(1)")
@@ -69,7 +88,7 @@ struct GoalCardView: View {
         .frame(width: screen.width - 40, height: 120)
         .padding(.leading, 16)
         .padding(.vertical, 16)
-        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)), Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
+        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)), Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 10)
         .overlay(
