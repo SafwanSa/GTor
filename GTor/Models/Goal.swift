@@ -16,6 +16,7 @@ enum Importance: Int, Codable {
 
 struct Goal: Codable, Identifiable {
     let id = UUID()
+    var uid: String
     var title: String
     var note: String
     var importance: Importance

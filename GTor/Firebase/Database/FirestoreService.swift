@@ -136,12 +136,13 @@ class FirestoreService {
     }
     
     func saveDocument<T: Codable>(collection: FirestoreKeys.Collection, documentId: String, model: T, completion: @escaping (Result<Void, Error>) -> ()){
-        let reference = Firestore.firestore().collection(collection.rawValue).document(documentId)
+        var reference = Firestore.firestore().collection(collection.rawValue).document()
+        if !documentId.isEmpty { reference = Firestore.firestore().collection(collection.rawValue).document(documentId) }
         var doc: [String:Any] = [:]
         do {
             doc = try FirestoreEncoder().encode(model)
         }catch(let error) {
-            completion(.failure(error))
+            fatalError("Error in encoding the model: \(error.localizedDescription)")
         }
         reference.setData(doc, merge: true) { error in
             DispatchQueue.main.async {
