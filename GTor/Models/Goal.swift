@@ -24,8 +24,13 @@ struct Goal: Codable, Identifiable {
     var dueDate: Date?
     var categories: [Category]
     var subGoals: [Goal]
-    var tasks: [Task]
     var isDecomposed: Bool {
         !subGoals.isEmpty
     }
+}
+
+extension Goal {
+    static var dummy: Goal = .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "Goal1", note: "note1", importance: .important, satisfaction: 0, dueDate: Date(), categories: [], subGoals: [
+        .init(uid: "", title: "Sub-Goal1", note: "Sub-Note1", importance: .notImportant, satisfaction: 0, dueDate: Date(), categories: [], subGoals: [])
+    ])
 }

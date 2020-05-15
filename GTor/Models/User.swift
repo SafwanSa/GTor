@@ -13,3 +13,7 @@ struct User: Codable {
     var name: String
     var email: String
 }
+
+extension User {
+    static var dummyUser: User = .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", name: "Safwan", email: "safwan9f@gmail.com")
+}

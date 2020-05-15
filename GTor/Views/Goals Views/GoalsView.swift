@@ -9,17 +9,17 @@
 import SwiftUI
 
 struct GoalsView: View {
-    //    @ObservedObject var goalService = GoalService()
-    @State var goals: [Goal] = []
+    @ObservedObject var goalService = GoalService()
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    ForEach(self.goals) { goal in
+                    ForEach(self.goalService.goals) { goal in
                         GoalCardView(goal: goal)
                     }
                 }
-                .padding(.horizontal, 200)
+                .frame(width: screen.width)
+                .padding(.horizontal, 16)
                 .padding(.top, 160)
             }
             .navigationBarTitle("My Goals")
@@ -33,7 +33,7 @@ struct GoalsView: View {
                             .font(.headline)
                     }
                     
-                    Button(action: { self.goals.append(.dummy) }) {
+                    Button(action: { self.goalService.goals.append(.dummy) }) {
                         Image(systemName: "plus")
                             .resizable()
                             .imageScale(.large)
@@ -43,6 +43,9 @@ struct GoalsView: View {
                 }
             )
                 .edgesIgnoringSafeArea(.all)
+        }
+        .onAppear{
+            self.goalService.getGoalsFromDatabase(uid: User.dummyUser.uid)
         }
         
     }
