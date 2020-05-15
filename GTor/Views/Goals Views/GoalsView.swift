@@ -9,39 +9,42 @@
 import SwiftUI
 
 struct GoalsView: View {
+    //    @ObservedObject var goalService = GoalService()
+    @State var goals: [Goal] = []
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                        GoalCardView()
+                    ForEach(self.goals) { goal in
+                        GoalCardView(goal: goal)
                     }
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 200)
                 .padding(.top, 160)
-                .navigationBarTitle("My Goals")
-                .navigationBarItems(trailing:
-                    HStack(spacing: 20) {
-                        Button(action: {  }) {
-                            Image(systemName: "slider.horizontal.3")
-                                .resizable()
-                                .imageScale(.large)
-                                .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
-                                .font(.headline)
-                        }
-                        
-                        Button(action: {  }) {
-                            Image(systemName: "plus")
-                                .resizable()
-                                .imageScale(.large)
-                                .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
-                                .font(.headline)
-                        }
-                    }
-                )
             }
-            .edgesIgnoringSafeArea(.all)
+            .navigationBarTitle("My Goals")
+            .navigationBarItems(trailing:
+                HStack(spacing: 20) {
+                    Button(action: {  }) {
+                        Image(systemName: "slider.horizontal.3")
+                            .resizable()
+                            .imageScale(.large)
+                            .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                            .font(.headline)
+                    }
+                    
+                    Button(action: { self.goals.append(.dummy) }) {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .imageScale(.large)
+                            .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                            .font(.headline)
+                    }
+                }
+            )
+                .edgesIgnoringSafeArea(.all)
         }
+        
     }
 }
 
@@ -52,6 +55,8 @@ struct GoalsView_Previews: PreviewProvider {
 }
 
 struct GoalCardView: View {
+    var goal: Goal
+    
     var body: some View {
         HStack {
             HStack(alignment: .top) {
@@ -62,9 +67,9 @@ struct GoalCardView: View {
                     .offset(x: -10, y: -15)
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Get A+ in ICSS 233")
+                    Text(goal.title)
                         .font(.headline)
-                    Text("ICS 233 is 4 credit")
+                    Text(goal.note)
                         .font(.subheadline)
                     
                     Color.secondary
@@ -73,8 +78,8 @@ struct GoalCardView: View {
                     
                     
                     HStack(spacing: 20) {
-                        Text("Sub-Goals: \(1)")
-                        Text("Activities: \(3)/3")
+                        Text("Sub-Goals: \(goal.subGoals.count)")
+                        Text("Activities: \(0)/3")
                         Text("May 3, 2020")
                     }
                     .foregroundColor(Color.secondary)
