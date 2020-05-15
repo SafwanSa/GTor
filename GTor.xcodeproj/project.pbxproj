@@ -26,7 +26,7 @@
 		17E7E7CE246CAAF500596500 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7CD246CAAF500596500 /* SignInView.swift */; };
 		17E7E7D0246CAB0600596500 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7CF246CAB0600596500 /* LaunchView.swift */; };
 		17E7E7D3246CAB3F00596500 /* TODOView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7D2246CAB3F00596500 /* TODOView.swift */; };
-		17E7E7D5246CAB5100596500 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7D4246CAB5100596500 /* GoalsView.swift */; };
+		17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7D4246CAB5100596500 /* GoalsList.swift */; };
 		17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7D6246CAB5A00596500 /* HomeView.swift */; };
 		17E7E7DD246CABFE00596500 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7DC246CABFE00596500 /* SettingsView.swift */; };
 		17E7E7E0246CE3B300596500 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7DF246CE3B300596500 /* UserService.swift */; };
@@ -61,7 +61,7 @@
 		17E7E7CD246CAAF500596500 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		17E7E7CF246CAB0600596500 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		17E7E7D2246CAB3F00596500 /* TODOView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOView.swift; sourceTree = "<group>"; };
-		17E7E7D4246CAB5100596500 /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
+		17E7E7D4246CAB5100596500 /* GoalsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsList.swift; sourceTree = "<group>"; };
 		17E7E7D6246CAB5A00596500 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		17E7E7DC246CABFE00596500 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		17E7E7DF246CE3B300596500 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 		17E7E7D8246CAB7900596500 /* Goals Views */ = {
 			isa = PBXGroup;
 			children = (
-				17E7E7D4246CAB5100596500 /* GoalsView.swift */,
+				17E7E7D4246CAB5100596500 /* GoalsList.swift */,
 			);
 			path = "Goals Views";
 			sourceTree = "<group>";
@@ -383,7 +383,7 @@
 				1729898D246D0F2F00449C4F /* AuthService.swift in Sources */,
 				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,
 				17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */,
-				17E7E7D5246CAB5100596500 /* GoalsView.swift in Sources */,
+				17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */,
 				17E7E7D3246CAB3F00596500 /* TODOView.swift in Sources */,
 				17E7E7A9246C921400596500 /* SceneDelegate.swift in Sources */,
 				17E7E7DD246CABFE00596500 /* SettingsView.swift in Sources */,
