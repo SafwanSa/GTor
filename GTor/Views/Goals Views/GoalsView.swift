@@ -70,9 +70,9 @@ struct GoalCardView: View {
                     .offset(x: -10, y: -15)
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(goal.title)
+                    Text(goal.title ?? "Title")
                         .font(.headline)
-                    Text(goal.note)
+                    Text(goal.note ?? "Note")
                         .font(.subheadline)
                     
                     Color.secondary
@@ -81,9 +81,10 @@ struct GoalCardView: View {
                     
                     
                     HStack(spacing: 20) {
-                        Text("Sub-Goals: \(goal.subGoals.count)")
+                        Text("Sub-Goals: \(self.goal.subGoals?.count ?? 100)")
                         Text("Activities: \(0)/3")
-                        Text("May 3, 2020")
+                        Text("\(self.goal.dueDate?.description ?? "100")")
+                        .lineLimit(4)
                     }
                     .foregroundColor(Color.secondary)
                     .font(.footnote)

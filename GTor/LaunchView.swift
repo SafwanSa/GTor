@@ -13,6 +13,13 @@ struct LaunchView: View {
     @ObservedObject var goalService = GoalService()
     @State var msg = ""
     
+    
+    func signIn(){
+        Auth.auth().signIn(withEmail: "safwan9f@gmail.com", password: "sa123456") { (result, err) in
+            
+        }
+    }
+    
     func signUp(){
         AuthService.createUser(name: "Safwans", email: "safwan9f@gmail.com", password: "sa123456") { (result) in
             switch result {
@@ -37,8 +44,7 @@ struct LaunchView: View {
     
     
     func createGoal(){
-        let goal = Goal(uid: self.userService.user.uid, title: "Goal1", note: "note1", importance: .important, satisfaction: 0, dueDate: Date(), categories: [], subGoals: [], tasks: [])
-        self.goalService.saveGoalsToDatabase(goal: goal) { (result) in
+        self.goalService.saveGoalsToDatabase(goal: Goal.dummy) { (result) in
             switch result {
             case .failure(let error):
                 self.msg = error.localizedDescription
@@ -66,8 +72,10 @@ struct LaunchView: View {
             }
         }
         .onAppear{
-            //            try! Auth.auth().signOut()
+//                        try! Auth.auth().signOut()
+//            self.signIn()
             self.userService.configureAuthStateDidChnageListner()
+//            self.goalService.getGoalsFromDatabase(uid: self.userService.user.uid)
         }
     }
 }

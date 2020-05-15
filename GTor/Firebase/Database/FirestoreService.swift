@@ -45,7 +45,7 @@ class FirestoreService {
                 var model: T
                 //Decoding
                 do {
-                    model = try FirestoreDecoder().decode(T.self, from: document)
+                    model = try FirebaseDecoder().decode(T.self, from: document)
                 } catch (let error) {
                     fatalError("Error in decoding the model: \(error.localizedDescription)")
                 }
@@ -72,7 +72,7 @@ class FirestoreService {
                 }
                 var model: T
                 do {
-                    model = try FirestoreDecoder().decode(T.self, from: document)
+                    model = try FirebaseDecoder().decode(T.self, from: document)
                 } catch(let error) {
                     fatalError("Error in decoding the model: \(error.localizedDescription)")
                 }
@@ -98,7 +98,7 @@ class FirestoreService {
                 for document in documents {
                     //Decoding
                     do {
-                        try models.append(FirestoreDecoder().decode(T.self, from: document.data()))
+                        try models.append(FirebaseDecoder().decode(T.self, from: document.data()))
                     } catch (let error) {
                         fatalError("Error in decoding the model: \(error.localizedDescription)")
                     }
@@ -125,7 +125,7 @@ class FirestoreService {
                 for document in documents {
                     //Decoding
                     do {
-                        try models.append(FirestoreDecoder().decode(T.self, from: document.data()))
+                        try models.append(FirebaseDecoder().decode(T.self, from: document.data()))
                     } catch (let error) {
                         fatalError("Error in decoding the model: \(error.localizedDescription)")
                     }
@@ -140,7 +140,7 @@ class FirestoreService {
         if !documentId.isEmpty { reference = Firestore.firestore().collection(collection.rawValue).document(documentId) }
         var doc: [String:Any] = [:]
         do {
-            doc = try FirestoreEncoder().encode(model)
+            doc = try FirebaseEncoder().encode(model) as! [String : Any]
         }catch(let error) {
             fatalError("Error in encoding the model: \(error.localizedDescription)")
         }

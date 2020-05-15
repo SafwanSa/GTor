@@ -10,5 +10,5 @@ import Foundation
 
 struct Category: Codable, Identifiable {
     let id = UUID()
-    var name: String
+    var name: String?
 }

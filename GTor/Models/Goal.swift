@@ -15,22 +15,20 @@ enum Importance: Int, Codable {
 }
 
 struct Goal: Codable, Identifiable {
-    let id = UUID()
-    var uid: String
-    var title: String
-    var note: String
-    var importance: Importance
-    var satisfaction: Double
+    var id = UUID()
+    var uid: String?
+    var title: String?
+    var note: String?
+    var importance: Importance?
+    var satisfaction: Double?
     var dueDate: Date?
-    var categories: [Category]
-    var subGoals: [Goal]
-    var isDecomposed: Bool {
-        !subGoals.isEmpty
-    }
+    var categories: [Category]?
+    var subGoals: [SubGoal]?
+    var isDecomposed: Bool?
 }
 
 extension Goal {
-    static var dummy: Goal = .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "Goal1", note: "note1", importance: .important, satisfaction: 0, dueDate: Date(), categories: [], subGoals: [
-        .init(uid: "", title: "Sub-Goal1", note: "Sub-Note1", importance: .notImportant, satisfaction: 0, dueDate: Date(), categories: [], subGoals: [])
+    static var dummy: Goal = .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "Goal1", note: "note1", importance: .important, satisfaction: 0, dueDate: Date(), categories: [.init(name: "Category")], subGoals: [
+        SubGoal(uid: "", title: "Title 2", note: "Note2", importance: .important, satisfaction: 0, dueDate: Date())
     ])
 }

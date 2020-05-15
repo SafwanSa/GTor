@@ -10,11 +10,9 @@ import Foundation
 
 struct Task: Codable, Identifiable {
     let id = UUID()
-    var title: String
-    var note: String
+    var title: String?
+    var note: String?
     var dueDate: Date?
-    var satisfaction: Double
-    var isSatisfied: Bool {
-        satisfaction != -1
-    }
+    var satisfaction: Double?
+    var isSatisfied: Bool?
 }
