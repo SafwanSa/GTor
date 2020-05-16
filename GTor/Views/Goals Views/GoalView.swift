@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct GoalView: View {
-    var goal: Goal
+    var goal = Goal()
     @State var isSubGoalsExpanded = false
     @State var isEditingMode = false
     
@@ -114,14 +114,14 @@ struct CardView: View {
                 .padding()
                 .background(Color.white.opacity(isEditingMode ? 1 : 0.8))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
-                
+                .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
+
             }
             .background(Image(uiImage: #imageLiteral(resourceName: "shape-pdf-asset")).resizable().scaledToFill())
             .frame(width: screen.width - 60, height: 170)
         }
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
+        .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
     }
 }
 
@@ -142,7 +142,7 @@ struct ImportanceCard: View {
             }else {
                 Text("Importance")
                 Spacer()
-                Text("\("Very Important")")
+                Text("\(self.goal.importance?.rawValue ?? 0)")
                     .padding()
                     .foregroundColor(.primary)
             }
@@ -153,7 +153,7 @@ struct ImportanceCard: View {
         .padding(10)
         .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).opacity(1), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
+        .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
         .overlay(
             HStack {
                 Spacer()
@@ -177,14 +177,11 @@ struct SubGoalsCard: View {
                     .font(.system(size: 20, weight: .medium))
                     .padding(.leading, 20)
                 Spacer()
-                if isSubGoalsExpanded {
-                    
-                }
                 Button(action: {  }) {
                     Image(systemName: "plus.circle.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 20, height: 20)
+                        .frame(width: 23, height: 23)
                         .foregroundColor(.black)
                 }
                 .opacity(isSubGoalsExpanded ? 1 : 0)
@@ -203,6 +200,7 @@ struct SubGoalsCard: View {
                     HStack {
                         ForEach(self.goal.subGoals ?? []) { goal in
                             GoalCardView(goal: goal)
+                                .padding(.leading)
                         }
                     }
                     .padding(.bottom, 30)
@@ -211,7 +209,7 @@ struct SubGoalsCard: View {
         }
         .frame(maxWidth:.infinity)
         .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
+        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
         .animation(.easeInOut)
     }
 }

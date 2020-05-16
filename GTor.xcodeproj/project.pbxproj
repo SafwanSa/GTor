@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171E6C3C246FA90B003EFF36 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171E6C3B246FA90B003EFF36 /* TabBar.swift */; };
 		1721F56F246E7837004AB7AD /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721F56E246E7837004AB7AD /* GoalView.swift */; };
 		1729898B246CFCF300449C4F /* FirestoreErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898A246CFCF300449C4F /* FirestoreErrorHandler.swift */; };
 		1729898D246D0F2F00449C4F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898C246D0F2F00449C4F /* AuthService.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		0683D7F05833D06D81C6DD1B /* Pods-GTor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GTor.release.xcconfig"; path = "Target Support Files/Pods-GTor/Pods-GTor.release.xcconfig"; sourceTree = "<group>"; };
 		116A19C2249FA9F0A4483872 /* Pods-GTor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GTor.debug.xcconfig"; path = "Target Support Files/Pods-GTor/Pods-GTor.debug.xcconfig"; sourceTree = "<group>"; };
+		171E6C3B246FA90B003EFF36 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		1721F56E246E7837004AB7AD /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		1729898A246CFCF300449C4F /* FirestoreErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorHandler.swift; sourceTree = "<group>"; };
 		1729898C246D0F2F00449C4F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -107,7 +109,7 @@
 			children = (
 				17E7E7A6246C921400596500 /* AppDelegate.swift */,
 				17E7E7A8246C921400596500 /* SceneDelegate.swift */,
-				17E7E7CF246CAB0600596500 /* LaunchView.swift */,
+				171E6C3B246FA90B003EFF36 /* TabBar.swift */,
 				17E7E7C2246CA64A00596500 /* Views */,
 				17E7E7C1246CA64300596500 /* Models */,
 				17E7E7DE246CE39900596500 /* Services */,
@@ -178,6 +180,7 @@
 		17E7E7C2246CA64A00596500 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				17E7E7CF246CAB0600596500 /* LaunchView.swift */,
 				17E7E7D6246CAB5A00596500 /* HomeView.swift */,
 				17E7E7DB246CABE600596500 /* Profile Views */,
 				17E7E7DA246CABD800596500 /* Settings Views */,
@@ -377,6 +380,7 @@
 				1729898B246CFCF300449C4F /* FirestoreErrorHandler.swift in Sources */,
 				17E7E7E8246CE47900596500 /* FirestoreService.swift in Sources */,
 				17E7E7E2246CE3C700596500 /* GoalService.swift in Sources */,
+				171E6C3C246FA90B003EFF36 /* TabBar.swift in Sources */,
 				17E7E7CE246CAAF500596500 /* SignInView.swift in Sources */,
 				17E7E7C4246CA6EB00596500 /* User.swift in Sources */,
 				17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */,

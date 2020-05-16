@@ -9,8 +9,9 @@
 import SwiftUI
 import FirebaseAuth
 struct LaunchView: View {
-    @ObservedObject var userService = UserService()
-    @ObservedObject var goalService = GoalService()
+    @EnvironmentObject var userService: UserService
+    @EnvironmentObject var goalService: GoalService
+    
     @State var msg = ""
     
     
@@ -70,12 +71,6 @@ struct LaunchView: View {
             Button(action: createGoal) {
                 Text("Add goal")
             }
-        }
-        .onAppear{
-//                        try! Auth.auth().signOut()
-//            self.signIn()
-            self.userService.configureAuthStateDidChnageListner()
-//            self.goalService.getGoalsFromDatabase(uid: self.userService.user.uid)
         }
     }
 }

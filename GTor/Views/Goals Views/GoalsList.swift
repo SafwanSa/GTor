@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct GoalsList: View {
-    @ObservedObject var goalService = GoalService()
+    @EnvironmentObject var userService: UserService
+    @EnvironmentObject var goalService: GoalService
     
     var body: some View {
         NavigationView {
@@ -48,10 +49,6 @@ struct GoalsList: View {
                 }
             )
                 .edgesIgnoringSafeArea(.all)
-        }
-        .onAppear{
-//            self.goalService.getGoalsFromDatabase(uid: User.dummyUser.uid)
-            self.goalService.goals.append(.dummy)
         }
         
     }
@@ -110,7 +107,7 @@ struct GoalCardView: View {
         .padding(.vertical, 16)
         .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
         .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 10)
+        .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
         .overlay(
             HStack {
                 Spacer()
