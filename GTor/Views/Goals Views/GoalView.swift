@@ -11,28 +11,59 @@ import SwiftUI
 struct GoalView: View {
     var goal: Goal
     @State var isSubGoalsExpanded = false
-    @State var isTasksRxpanded = false
+    @State var isEditingMode = false
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 40.0) {
-                CardView()
-                    .blur(radius: self.isSubGoalsExpanded ? 3 : 0)
-                    .scaleEffect(isSubGoalsExpanded ? 0.9 : 1)
-                    .animation(.spring())
-                    
-                ImportanceCard()
+                CardView(goal: goal, isEditingMode: self.$isEditingMode)
                     .blur(radius: self.isSubGoalsExpanded ? 3 : 0)
                     .scaleEffect(isSubGoalsExpanded ? 0.9 : 1)
                     .animation(.spring())
                 
-                SubGoalsCard(isSubGoalsExpanded: self.$isSubGoalsExpanded, goal: goal)
+                ImportanceCard(goal: goal, isEditingMode: self.$isEditingMode)
+                    .blur(radius: self.isSubGoalsExpanded ? 3 : 0)
+                    .scaleEffect(isSubGoalsExpanded ? 0.9 : 1)
+                    .animation(.spring())
                 
+                SubGoalsCard(isSubGoalsExpanded: self.$isSubGoalsExpanded, isEditingMode: self.$isEditingMode, goal: goal)
             }
             .padding(.top, 50)
         }
         .navigationBarTitle("\(self.goal.title ?? "Title")")
-        
+        .navigationBarItems(trailing:
+            Group {
+                if self.isEditingMode {
+                    HStack(spacing: 50) {
+                        Button(action: { /*cancel*/ self.isEditingMode = false  }) {
+                            Image(systemName: "xmark")
+                                .resizable()
+                                .imageScale(.large)
+                                .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                                .font(.headline)
+                        }
+                        Button(action: { /*save*/ }) {
+                            Image(systemName: "checkmark")
+                                .resizable()
+                                .imageScale(.large)
+                                .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                                .font(.headline)
+                        }
+                    }
+                }else {
+                    HStack {
+                        Spacer()
+                        Button(action: { self.isEditingMode = true }) {
+                            Image(systemName: "pencil")
+                                .resizable()
+                                .imageScale(.large)
+                                .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                                .font(.headline)
+                        }
+                    }
+                }
+            }
+        )
     }
 }
 
@@ -43,25 +74,45 @@ struct GoalView_Previews: PreviewProvider {
 }
 
 struct CardView: View {
+    var goal: Goal
+    @Binding var isEditingMode: Bool
+    @State var updatedTitle: String = ""
+    @State var updatedNote: String = ""
+    @State var updatedDeadline: String = ""
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 Spacer()
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 20.0) {
-                        Text("Goal title")
-                            .font(.title)
-                        Text("Goal Note")
-                            .font(.subheadline)
+                        if isEditingMode {
+                            TextField("\(self.goal.title ?? "Title")", text: self.$updatedTitle)
+                                .font(.title)
+                            TextField("\(self.goal.note ?? "Note")", text: self.$updatedNote)
+                                .font(.subheadline)
+                        }else{
+                            Text(self.goal.title ?? "Title")
+                                .font(.title)
+                            Text(self.goal.note ?? "Goal Note")
+                                .font(.subheadline)
+                        }
                     }
                     Spacer()
-                    Text("2020-10-10")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .padding(.trailing, 5)
+                    if isEditingMode {
+                        TextField("\(self.goal.dueDate?.description ?? "100")", text: self.$updatedDeadline)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .padding(.trailing, 5)
+                    }else{
+                        Text(self.goal.dueDate?.description ?? "100")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .padding(.trailing, 5)
+                    }
                 }
                 .padding()
-                .background(Color.white.opacity(0.8))
+                .background(Color.white.opacity(isEditingMode ? 1 : 0.8))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
                 
@@ -75,13 +126,27 @@ struct CardView: View {
 }
 
 struct ImportanceCard: View {
+    var goal: Goal
+    @Binding var isEditingMode: Bool
+    @State var updatedImportance = ""
+    
+    
     var body: some View {
         HStack {
-            Text("Importance")
-            Spacer()
-            Text("\("Very Important")")
-                .padding()
-                .foregroundColor(.primary)
+            if isEditingMode && !self.goal.isDecomposed {
+                Text("Importance")
+                Spacer()
+                TextField("\("Very Important")", text: self.$updatedImportance)
+                    .padding()
+                    .foregroundColor(.primary)
+            }else {
+                Text("Importance")
+                Spacer()
+                Text("\("Very Important")")
+                    .padding()
+                    .foregroundColor(.primary)
+            }
+            
         }
         .font(.headline)
         .frame(width: screen.width - 60, height: 20)
@@ -102,7 +167,9 @@ struct ImportanceCard: View {
 
 struct SubGoalsCard: View {
     @Binding var isSubGoalsExpanded: Bool
+    @Binding var isEditingMode: Bool
     var goal: Goal
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
