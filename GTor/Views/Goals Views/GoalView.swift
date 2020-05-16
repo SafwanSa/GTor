@@ -10,23 +10,23 @@ import SwiftUI
 
 struct GoalView: View {
     var goal = Goal()
-    @State var isSubGoalsExpanded = false
+    @State var isSubGoalsListExpanded = false
     @State var isEditingMode = false
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 40.0) {
                 CardView(goal: goal, isEditingMode: self.$isEditingMode)
-                    .blur(radius: self.isSubGoalsExpanded ? 3 : 0)
-                    .scaleEffect(isSubGoalsExpanded ? 0.9 : 1)
+                    .blur(radius: self.isSubGoalsListExpanded ? 3 : 0)
+                    .scaleEffect(isSubGoalsListExpanded ? 0.9 : 1)
                     .animation(.spring())
                 
                 ImportanceCard(goal: goal, isEditingMode: self.$isEditingMode)
-                    .blur(radius: self.isSubGoalsExpanded ? 3 : 0)
-                    .scaleEffect(isSubGoalsExpanded ? 0.9 : 1)
+                    .blur(radius: self.isSubGoalsListExpanded ? 3 : 0)
+                    .scaleEffect(isSubGoalsListExpanded ? 0.9 : 1)
                     .animation(.spring())
                 
-                SubGoalsCard(isSubGoalsExpanded: self.$isSubGoalsExpanded, isEditingMode: self.$isEditingMode, goal: goal)
+                SubGoalsList(isSubGoalsListExpanded: self.$isSubGoalsListExpanded, isEditingMode: self.$isEditingMode, goal: goal)
             }
             .padding(.top, 50)
         }
@@ -167,8 +167,8 @@ struct ImportanceCard: View {
     }
 }
 
-struct SubGoalsCard: View {
-    @Binding var isSubGoalsExpanded: Bool
+struct SubGoalsList: View {
+    @Binding var isSubGoalsListExpanded: Bool
     @Binding var isEditingMode: Bool
     var goal: Goal
     
@@ -186,23 +186,26 @@ struct SubGoalsCard: View {
                         .frame(width: 23, height: 23)
                         .foregroundColor(.black)
                 }
-                .opacity(isSubGoalsExpanded ? 1 : 0)
-                .offset(x: self.isSubGoalsExpanded ? 0 : 20)
+                .opacity(isSubGoalsListExpanded ? 1 : 0)
+                .offset(x: self.isSubGoalsListExpanded ? 0 : 20)
                 .animation(.spring())
                 
-                Image(systemName: self.isSubGoalsExpanded ? "chevron.down" : "chevron.up")
+                Image(systemName: self.isSubGoalsListExpanded ? "chevron.down" : "chevron.up")
                     .padding()
             }
             .contentShape(Rectangle())
             .onTapGesture {
-                self.isSubGoalsExpanded.toggle()
+                self.isSubGoalsListExpanded.toggle()
             }
-            if isSubGoalsExpanded {
+            if isSubGoalsListExpanded {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(self.goal.subGoals ?? []) { goal in
-                            GoalCardView(goal: goal)
-                                .padding(.leading)
+                            NavigationLink(destination: GoalView(goal: goal)) {
+                                GoalCardView(goal: goal)
+                                    .padding(.leading)
+                            }
+                             .buttonStyle(PlainButtonStyle())
                         }
                     }
                     .padding(.bottom, 30)
