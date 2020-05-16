@@ -11,17 +11,26 @@ import SwiftUI
 struct GoalView: View {
     var goal: Goal
     @State var isSubGoalsExpanded = false
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 40.0) {
                 CardView()
+                    .blur(radius: self.isSubGoalsExpanded ? 3 : 0)
+                    .scaleEffect(isSubGoalsExpanded ? 0.9 : 1)
+                    .animation(.spring())
+                    
+                
                 
                 ImportanceCard()
+                    .blur(radius: self.isSubGoalsExpanded ? 3 : 0)
+                    .scaleEffect(isSubGoalsExpanded ? 0.9 : 1)
+                    .animation(.spring())
                 
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Sub Goals")
-                            .font(.title)
+                            .font(.system(size: 20, weight: .medium))
                             .padding(.leading, 20)
                         Spacer()
                         if isSubGoalsExpanded {
@@ -41,6 +50,10 @@ struct GoalView: View {
                         Image(systemName: self.isSubGoalsExpanded ? "chevron.down" : "chevron.up")
                             .padding()
                     }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        self.isSubGoalsExpanded.toggle()
+                    }
                     if isSubGoalsExpanded {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
@@ -53,13 +66,9 @@ struct GoalView: View {
                     }
                 }
                 .frame(maxWidth:.infinity)
-                .padding(.vertical)
                 .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
                 .animation(.easeInOut)
-                .onTapGesture {
-                    self.isSubGoalsExpanded.toggle()
-                }
                 
             }
             .padding(.top, 50)
