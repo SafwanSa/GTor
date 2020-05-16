@@ -11,6 +11,7 @@ import SwiftUI
 struct GoalView: View {
     var goal: Goal
     @State var isSubGoalsExpanded = false
+    @State var isTasksRxpanded = false
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -20,55 +21,12 @@ struct GoalView: View {
                     .scaleEffect(isSubGoalsExpanded ? 0.9 : 1)
                     .animation(.spring())
                     
-                
-                
                 ImportanceCard()
                     .blur(radius: self.isSubGoalsExpanded ? 3 : 0)
                     .scaleEffect(isSubGoalsExpanded ? 0.9 : 1)
                     .animation(.spring())
                 
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("Sub Goals")
-                            .font(.system(size: 20, weight: .medium))
-                            .padding(.leading, 20)
-                        Spacer()
-                        if isSubGoalsExpanded {
-                            
-                        }
-                        Button(action: {  }) {
-                            Image(systemName: "plus.circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.black)
-                        }
-                        .opacity(isSubGoalsExpanded ? 1 : 0)
-                        .offset(x: self.isSubGoalsExpanded ? 0 : 20)
-                        .animation(.spring())
-                        
-                        Image(systemName: self.isSubGoalsExpanded ? "chevron.down" : "chevron.up")
-                            .padding()
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        self.isSubGoalsExpanded.toggle()
-                    }
-                    if isSubGoalsExpanded {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(self.goal.subGoals ?? []) { goal in
-                                    GoalCardView(goal: goal)
-                                }
-                            }
-                            .padding(.bottom, 30)
-                        }
-                    }
-                }
-                .frame(maxWidth:.infinity)
-                .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
-                .animation(.easeInOut)
+                SubGoalsCard(isSubGoalsExpanded: self.$isSubGoalsExpanded, goal: goal)
                 
             }
             .padding(.top, 50)
@@ -139,5 +97,54 @@ struct ImportanceCard: View {
                     .frame(maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 2))
         })
+    }
+}
+
+struct SubGoalsCard: View {
+    @Binding var isSubGoalsExpanded: Bool
+    var goal: Goal
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text("Sub Goals")
+                    .font(.system(size: 20, weight: .medium))
+                    .padding(.leading, 20)
+                Spacer()
+                if isSubGoalsExpanded {
+                    
+                }
+                Button(action: {  }) {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.black)
+                }
+                .opacity(isSubGoalsExpanded ? 1 : 0)
+                .offset(x: self.isSubGoalsExpanded ? 0 : 20)
+                .animation(.spring())
+                
+                Image(systemName: self.isSubGoalsExpanded ? "chevron.down" : "chevron.up")
+                    .padding()
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                self.isSubGoalsExpanded.toggle()
+            }
+            if isSubGoalsExpanded {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(self.goal.subGoals ?? []) { goal in
+                            GoalCardView(goal: goal)
+                        }
+                    }
+                    .padding(.bottom, 30)
+                }
+            }
+        }
+        .frame(maxWidth:.infinity)
+        .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
+        .animation(.easeInOut)
     }
 }
