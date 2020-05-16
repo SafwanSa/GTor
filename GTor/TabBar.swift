@@ -30,13 +30,17 @@ struct TabBar: View {
                 Text("Goals")
                 Image(systemName: "doc.text")
             }
+            AddGoalView().tabItem {
+                Text("Add")
+                Image(systemName: "doc.text")
+            }
         }
         .onAppear{
             
             //            try! Auth.auth().signOut()
-            //            self.signIn()
-            self.userService.configureAuthStateDidChnageListner()
-            self.goalService.getGoalsFromDatabase(uid: AuthService.userId ?? User.dummy.uid)
+//                        self.signIn()
+//            self.userService.configureAuthStateDidChnageListner()
+//            self.goalService.getGoalsFromDatabase(uid: AuthService.userId ?? User.dummy.uid)//This should be moved to the configureAuthStateDidChnageListner
             //                                self.goalService.goals.append(.dummy)
             
             //            self.goalService.getGoalsFromDatabase(uid: self.userService.user.uid)
