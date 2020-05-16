@@ -142,7 +142,7 @@ struct ImportanceCard: View {
             }else {
                 Text("Importance")
                 Spacer()
-                Text("\(self.goal.importance?.rawValue ?? 0)")
+                Text("\(self.goal.importance?.description ?? "")")
                     .padding()
                     .foregroundColor(.primary)
             }
@@ -161,6 +161,8 @@ struct ImportanceCard: View {
                     .frame(width: 6)
                     .frame(maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 2))
+                    .opacity(self.goal.importance?.opacity ?? 0)
+
         })
     }
 }

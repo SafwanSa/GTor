@@ -12,6 +12,28 @@ enum Importance: Int, Codable {
     case notImportant = 1
     case important = 2
     case veryImportant = 3
+    
+    var description: String {
+        switch self {
+        case .important:
+            return "Important"
+        case .veryImportant:
+            return "Very Important"
+        case .notImportant:
+            return "Not Important"
+        }
+    }
+    
+    var opacity: Double {
+        switch self {
+        case .important:
+            return 0.5
+        case .veryImportant:
+            return 1
+        case .notImportant:
+            return 0.2
+        }
+    }
 }
 
 struct Goal: Codable, Identifiable {
@@ -30,7 +52,7 @@ struct Goal: Codable, Identifiable {
 }
 
 extension Goal {
-    static var dummy: Goal = .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "Goal1", note: "note1", importance: .important, satisfaction: 0, dueDate: Date(), categories: [.init(name: "Category")], subGoals: [
-        .init(title: "Sub-Goal", note: "Sub-Note", importance: .important, satisfaction: 0)
+    static var dummy: Goal = .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "Goal1", note: "note1", importance: .veryImportant, satisfaction: 0, dueDate: Date(), categories: [.init(name: "Category")], subGoals: [
+        .init(title: "Sub-Goal", note: "Sub-Note", importance: .notImportant, satisfaction: 0)
     ])
 }

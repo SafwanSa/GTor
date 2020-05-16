@@ -32,15 +32,15 @@ struct TabBar: View {
             }
         }
         .onAppear{
-//            self.goalService.getGoalsFromDatabase(uid: User.dummyUser.uid)
-                                self.goalService.goals.append(.dummy)
+            
+            //            try! Auth.auth().signOut()
+            //            self.signIn()
+            self.userService.configureAuthStateDidChnageListner()
+            self.goalService.getGoalsFromDatabase(uid: AuthService.userId ?? User.dummy.uid)
+            //                                self.goalService.goals.append(.dummy)
+            
+            //            self.goalService.getGoalsFromDatabase(uid: self.userService.user.uid)
         }
-                .onAppear{
-        //                        try! Auth.auth().signOut()
-        //            self.signIn()
-                    self.userService.configureAuthStateDidChnageListner()
-        //            self.goalService.getGoalsFromDatabase(uid: self.userService.user.uid)
-                }
     }
 }
 

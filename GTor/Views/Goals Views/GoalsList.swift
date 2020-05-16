@@ -27,7 +27,6 @@ struct GoalsList: View {
                 .padding(.horizontal, 16)
                 .padding(.top, 150)
             }
-                
             .navigationBarTitle("My Goals")
             .navigationBarItems(trailing:
                 HStack(spacing: 20) {
@@ -90,8 +89,8 @@ struct GoalCardView: View {
                     
                     HStack(spacing: 20) {
                         Text(self.goal.isDecomposed ? "Sub-Goals: \(self.goal.subGoals?.count ?? 100)" : "")
-                        Text("Activities: \(0)/3")
-                        Text("\(self.goal.dueDate?.description ?? "100")")
+                        Text("Activities: \(0)/3")//TODO
+                        Text("\(self.goal.dueDate?.description ?? "100")")//TODO
                             .lineLimit(4)
                     }
                     .foregroundColor(Color.secondary)
@@ -115,6 +114,7 @@ struct GoalCardView: View {
                     .frame(width: 10)
                     .frame(maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 2))
+                    .opacity(self.goal.importance?.opacity ?? 0)
         })
     }
 }
