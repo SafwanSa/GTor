@@ -48,7 +48,9 @@ struct GoalsList: View {
                     }
                 }
                 .sheet(isPresented: self.$isAddGoalSelceted) {
-                    AddGoalView().environmentObject(self.userService).environmentObject(self.goalService)
+                    AddGoalView(isAddGoalSelceted: self.$isAddGoalSelceted)
+                        .environmentObject(self.userService)
+                        .environmentObject(self.goalService)
                     }
             )
                 .edgesIgnoringSafeArea(.all)
@@ -59,7 +61,7 @@ struct GoalsList: View {
 
 struct GoalsView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalsList()
+        GoalsList().environmentObject(UserService()).environmentObject(GoalService())
     }
 }
 

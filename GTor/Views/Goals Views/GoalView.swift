@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct GoalView: View {
-    var goal = Goal()
+    var goal: Goal
     @State var isSubGoalsListExpanded = false
     @State var isEditingMode = false
     

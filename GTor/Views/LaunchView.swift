@@ -77,7 +77,7 @@ struct LaunchView: View {
 
 struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {
-        LaunchView()
+        LaunchView().environmentObject(UserService()).environmentObject(GoalService())
     }
 }
 

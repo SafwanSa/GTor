@@ -30,10 +30,6 @@ struct TabBar: View {
                 Text("Goals")
                 Image(systemName: "doc.text")
             }
-            AddGoalView().tabItem {
-                Text("Add")
-                Image(systemName: "doc.text")
-            }
         }
         .onAppear{
             
@@ -48,6 +44,6 @@ struct TabBar: View {
 
 struct TabBar_Previews: PreviewProvider {
     static var previews: some View {
-        TabBar()
+        TabBar().environmentObject(UserService()).environmentObject(GoalService())
     }
 }
