@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171400AD2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */; };
 		171E6C3C246FA90B003EFF36 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171E6C3B246FA90B003EFF36 /* TabBar.swift */; };
 		1721F56F246E7837004AB7AD /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721F56E246E7837004AB7AD /* GoalView.swift */; };
 		1729898B246CFCF300449C4F /* FirestoreErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898A246CFCF300449C4F /* FirestoreErrorHandler.swift */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		0683D7F05833D06D81C6DD1B /* Pods-GTor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GTor.release.xcconfig"; path = "Target Support Files/Pods-GTor/Pods-GTor.release.xcconfig"; sourceTree = "<group>"; };
 		116A19C2249FA9F0A4483872 /* Pods-GTor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GTor.debug.xcconfig"; path = "Target Support Files/Pods-GTor/Pods-GTor.debug.xcconfig"; sourceTree = "<group>"; };
+		171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPickerAsInputView.swift; sourceTree = "<group>"; };
 		171E6C3B246FA90B003EFF36 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		1721F56E246E7837004AB7AD /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		1729898A246CFCF300449C4F /* FirestoreErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorHandler.swift; sourceTree = "<group>"; };
@@ -88,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		171400AB2470EAE10001A625 /* Helper Views */ = {
+			isa = PBXGroup;
+			children = (
+				171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */,
+			);
+			path = "Helper Views";
+			sourceTree = "<group>";
+		};
 		17E7E79A246C921300596500 = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +192,7 @@
 		17E7E7C2246CA64A00596500 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				171400AB2470EAE10001A625 /* Helper Views */,
 				17E7E7CF246CAB0600596500 /* LaunchView.swift */,
 				17E7E7D6246CAB5A00596500 /* HomeView.swift */,
 				17E7E7DB246CABE600596500 /* Profile Views */,
@@ -387,6 +398,7 @@
 				17E7E7CE246CAAF500596500 /* SignInView.swift in Sources */,
 				17E7E7C4246CA6EB00596500 /* User.swift in Sources */,
 				17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */,
+				171400AD2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift in Sources */,
 				1729898D246D0F2F00449C4F /* AuthService.swift in Sources */,
 				1721F56F246E7837004AB7AD /* GoalView.swift in Sources */,
 				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,

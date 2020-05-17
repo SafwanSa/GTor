@@ -10,24 +10,23 @@ import SwiftUI
 import UIKit
 
 struct AddGoalView: View {
-    @State var category = ""
+    @EnvironmentObject var userService: UserService
+    @EnvironmentObject var goalService: GoalService
+    
+    @State var categories = categoriesData//TODO bring this from db
+    var importances = ["Very Important", "Important", "Not Important"]
+    
     @State var title = ""
     @State var note = ""
     @State var deadline = Date()
-    @State var selectedImportance = 0
-    @State var importance: String?
+    @State var importance: String = Importance.none.description
+    @State var selectedImportanceIndex = -1
+    @State var selectedCategories: [Category] = []
     
     @State var isHavingDeadline = false
     @State var isHavingSubgoals = true
     @State var isCategoryPressed = false
-    @State var selectedCategories: [Category] = []
-    @State var categories = categoriesData
-//    init() {
-//        UISegmentedControl.appearance().backgroundColor = .white
-//        UISegmentedControl.appearance().selectedSegmentTintColor = .blue
-//        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-//        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.blue], for: .normal)
-//    }
+    @State var alertMessage = "None"
     
     var body: some View {
         NavigationView {
@@ -35,13 +34,13 @@ struct AddGoalView: View {
                 SelectCategoryView(isCategoryPressed: self.$isCategoryPressed, selectedCategories: self.$selectedCategories, categories: self.$categories)
                 
                 Section {
-                    TextField("Title", text: self.$category)
-                    TextField("Note", text: self.$category)
+                    TextField("Title", text: self.$title)
+                    TextField("Note (Optional)", text: self.$note)
                 }
                 
                 Section {
                     Toggle(isOn: self.$isHavingDeadline) {
-                    Text("Add a deadline")
+                        Text("Add a deadline")
                     }
                     if self.isHavingDeadline {
                         DatePicker(selection: self.$deadline) {
@@ -52,28 +51,64 @@ struct AddGoalView: View {
                 
                 Section {
                     Toggle(isOn: self.$isHavingSubgoals) {
-                    Text("Add Sub Goals")
+                        Text("Allow Sub Goals")
                     }
                 }
                 
                 if !self.isHavingSubgoals {
-
-                Section {
-                    HStack {
+                    Section {
+                        HStack {
                             Text("Importance")
-                            TextFieldWithPickerAsInputView(data: importances, placeholder: "Importance", selectionIndex: self.$selectedImportance, text: self.$importance)
+                            TextFieldWithPickerAsInputView(data: self.importances, placeholder: "Importance", selectionIndex: self.$selectedImportanceIndex, text: self.$importance)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
                 }
+                Section {
+                    Text(self.alertMessage)
                 }
             }
-            .listStyle(GroupedListStyle())
-            .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle("Add Goal")
+            .navigationBarItems(leading:
+                Button(action: {  }) {
+                    Text("Cancel")
+                }
+                ,trailing:
+                Button(action: createGoal) {
+                    Text("Done")
+                }
+            )
+                .listStyle(GroupedListStyle())
+                .environment(\.horizontalSizeClass, .regular)
+                .navigationBarTitle("Add Goal")
         }
     }
+    
+       func createGoal() {
+            let goal = Goal(uid: self.userService.user.uid, title: self.title, note: self.note, importance: getImportance(importance: self.importance), satisfaction: 0, dueDate: self.deadline, categories: self.selectedCategories)
+            self.goalService.saveGoal(goal: goal) { (result) in
+                switch result {
+                case .failure(let error):
+                    self.alertMessage = error.localizedDescription
+                case .success(()):
+                    self.alertMessage = "Goal was sucssefully added"
+                }
+            }
+        }
+        
+        func getImportance(importance: String)->Importance {
+            switch importance {
+            case "Very Important":
+                return .veryImportant
+            case "Important":
+                return .important
+            case "Not Important":
+                return .notImportant
+            default:
+                return .none
+            }
+    }
 }
+ 
 
 struct AddGoalView_Previews: PreviewProvider {
     static var previews: some View {
@@ -89,7 +124,6 @@ var categoriesData: [Category] = [
     .init(name: "Life")
 ]
 
-var importances = ["Very Important", "Important", "Not Important"]
 
 struct SelectCategoryView: View {
     @Binding var isCategoryPressed: Bool
@@ -159,67 +193,6 @@ struct SelectCategoryView: View {
                     }
                 }
             }
-        }
-    }
-}
-
-
-struct TextFieldWithPickerAsInputView : UIViewRepresentable {
-    
-    var data : [String]
-    var placeholder : String
-    
-    @Binding var selectionIndex : Int
-    @Binding var text : String?
-    
-    private let textField = UITextField()
-    private let picker = UIPickerView()
-    
-    func makeCoordinator() -> TextFieldWithPickerAsInputView.Coordinator {
-        Coordinator(textfield: self)
-    }
-    
-    func makeUIView(context: UIViewRepresentableContext<TextFieldWithPickerAsInputView>) -> UITextField {
-        picker.delegate = context.coordinator
-        picker.dataSource = context.coordinator
-        textField.placeholder = placeholder
-        textField.inputView = picker
-        //            textField.backgroundColor = .secondarySystemFill
-        textField.textAlignment = .center
-        textField.font = .systemFont(ofSize: 20)
-        textField.delegate = context.coordinator
-        return textField
-    }
-    
-    func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<TextFieldWithPickerAsInputView>) {
-        uiView.text = text
-    }
-    
-    class Coordinator: NSObject, UIPickerViewDataSource, UIPickerViewDelegate , UITextFieldDelegate {
-        
-        private let parent : TextFieldWithPickerAsInputView
-        
-        init(textfield : TextFieldWithPickerAsInputView) {
-            self.parent = textfield
-        }
-        
-        func numberOfComponents(in pickerView: UIPickerView) -> Int {
-            return 1
-        }
-        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            return self.parent.data.count
-        }
-        func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-            return self.parent.data[row]
-        }
-        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-            self.parent.$selectionIndex.wrappedValue = row
-            self.parent.text = self.parent.data[self.parent.selectionIndex]
-            self.parent.textField.endEditing(true)
-            
-        }
-        func textFieldDidEndEditing(_ textField: UITextField) {
-            self.parent.textField.resignFirstResponder()
         }
     }
 }

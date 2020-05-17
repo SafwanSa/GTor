@@ -12,6 +12,7 @@ enum Importance: Int, Codable {
     case notImportant = 1
     case important = 2
     case veryImportant = 3
+    case none = 0
     
     var description: String {
         switch self {
@@ -21,6 +22,8 @@ enum Importance: Int, Codable {
             return "Very Important"
         case .notImportant:
             return "Not Important"
+        case .none:
+            return ""
         }
     }
     
@@ -32,6 +35,8 @@ enum Importance: Int, Codable {
             return 1
         case .notImportant:
             return 0.2
+        case .none:
+            return 0
         }
     }
 }

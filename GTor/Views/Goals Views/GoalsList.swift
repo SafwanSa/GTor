@@ -48,7 +48,7 @@ struct GoalsList: View {
                     }
                 }
                 .sheet(isPresented: self.$isAddGoalSelceted) {
-                    AddGoalView()
+                    AddGoalView().environmentObject(self.userService).environmentObject(self.goalService)
                     }
             )
                 .edgesIgnoringSafeArea(.all)

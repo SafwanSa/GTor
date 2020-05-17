@@ -39,11 +39,9 @@ struct TabBar: View {
             
             //            try! Auth.auth().signOut()
 //                        self.signIn()
-//            self.userService.configureAuthStateDidChnageListner()
-//            self.goalService.getGoalsFromDatabase(uid: AuthService.userId ?? User.dummy.uid)//This should be moved to the configureAuthStateDidChnageListner
+            self.userService.configureAuthStateDidChnageListner()
+            self.goalService.getGoalsFromDatabase(uid: AuthService.userId ?? User.dummy.uid)//This should be moved to the configureAuthStateDidChnageListner
             //                                self.goalService.goals.append(.dummy)
-            
-            //            self.goalService.getGoalsFromDatabase(uid: self.userService.user.uid)
         }
     }
 }
