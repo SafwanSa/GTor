@@ -51,9 +51,7 @@ struct Goal: Codable, Identifiable {
     var dueDate: Date?
     var categories: [Category]?
     var subGoals: [Goal]?
-    var isDecomposed: Bool {
-        !(subGoals?.isEmpty ?? true)
-    }
+    var isDecomposed: Bool?
 }
 
 extension Goal {

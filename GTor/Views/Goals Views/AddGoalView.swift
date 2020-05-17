@@ -84,7 +84,7 @@ struct AddGoalView: View {
     }
     
        func createGoal() {
-            let goal = Goal(uid: self.userService.user.uid, title: self.title, note: self.note, importance: getImportance(importance: self.importance), satisfaction: 0, dueDate: self.deadline, categories: self.selectedCategories)
+        let goal = Goal(uid: self.userService.user.uid, title: self.title, note: self.note, importance: getImportance(importance: self.importance), satisfaction: 0, dueDate: self.deadline, categories: self.selectedCategories, isDecomposed: self.isHavingSubgoals)
             self.goalService.saveGoal(goal: goal) { (result) in
                 switch result {
                 case .failure(let error):

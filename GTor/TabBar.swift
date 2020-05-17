@@ -37,7 +37,7 @@ struct TabBar: View {
         }
         .onAppear{
             
-            //            try! Auth.auth().signOut()
+//                        try! Auth.auth().signOut()
 //                        self.signIn()
             self.userService.configureAuthStateDidChnageListner()
             self.goalService.getGoalsFromDatabase(uid: AuthService.userId ?? User.dummy.uid)//This should be moved to the configureAuthStateDidChnageListner

@@ -26,7 +26,9 @@ struct GoalView: View {
                     .scaleEffect(isSubGoalsListExpanded ? 0.9 : 1)
                     .animation(.spring())
                 
-                SubGoalsList(isSubGoalsListExpanded: self.$isSubGoalsListExpanded, isEditingMode: self.$isEditingMode, goal: goal)
+                if self.goal.isDecomposed! {
+                    SubGoalsList(isSubGoalsListExpanded: self.$isSubGoalsListExpanded, isEditingMode: self.$isEditingMode, goal: goal)
+                }
             }
             .padding(.top, 50)
         }
@@ -133,7 +135,7 @@ struct ImportanceCard: View {
     
     var body: some View {
         HStack {
-            if isEditingMode && !self.goal.isDecomposed {
+            if isEditingMode && !self.goal.isDecomposed! {
                 Text("Importance")
                 Spacer()
                 TextField("\("Very Important")", text: self.$updatedImportance)
