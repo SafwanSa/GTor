@@ -154,16 +154,24 @@ class FirestoreService {
         }
     }
     
-    func deleteDocument<T: Codable>(collection: FirestoreKeys.Collection, documentId: String, model: T, completion: @escaping (Result<Void, Error>) -> ()){
-        let reference = Firestore.firestore().collection(collection.rawValue).document(documentId)
-        
-        reference.delete { (error) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    completion(.failure(error))
-                }
+    func deleteDocument(collection: FirestoreKeys.Collection, documentId: String, modelId: String, completion: @escaping (Result<Void, Error>) -> ()){
+        let reference = Firestore.firestore().collection(collection.rawValue).whereField("uid", isEqualTo: AuthService.userId ?? "").whereField("id", isEqualTo: modelId)
+        let batch = Firestore.firestore().collection(collection.rawValue)
+        reference.getDocuments { (querySnapshot, err) in
+              DispatchQueue.main.async {
+                  if let error = err {
+                      completion(.failure(error))
+                  }
+                  guard let querySnapshot = querySnapshot else {
+                      completion(.failure(FirestoreErrorHandler.noDocumentSnapshot))
+                      return
+                  }
+                  let documents = querySnapshot.documents
+                  for document in documents {
+                    batch.document(document.documentID).delete()
+                  }
                 completion(.success(()))
-            }
+              }
         }
     }
     

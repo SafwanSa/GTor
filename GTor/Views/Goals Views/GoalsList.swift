@@ -94,7 +94,7 @@ struct GoalCardView: View {
                     
                     
                     HStack(spacing: 20) {
-                        Text(self.goal.isDecomposed! ? "Sub-Goals: \(self.goal.subGoals?.count ?? 100)" : "")
+                        Text(self.goal.isDecomposed! ? "Sub-Goals: \(self.goal.subGoals?.count ?? 0)" : "")
                         Text("Activities: \(0)/3")//TODO
                         Text("\(self.goal.dueDate?.description ?? "100")")//TODO
                             .lineLimit(4)

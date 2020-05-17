@@ -32,17 +32,6 @@ struct LaunchView: View {
         }
     }
     
-    func delete(){
-        FirestoreService.shared.deleteDocument(collection: .users, documentId: self.userService.user.uid, model: self.userService.user) { (result) in
-            switch result {
-            case .failure(let error):
-                self.msg = error.localizedDescription
-            case .success():
-                self.msg = "Success"
-            }
-        }
-    }
-    
     
     func createGoal(){
         self.goalService.saveGoalsToDatabase(goal: Goal.dummy) { (result) in
@@ -64,7 +53,7 @@ struct LaunchView: View {
             Text("Name: \(self.userService.user.name)")
             Text(self.msg)
             
-            Button(action: delete) {
+            Button(action: {}) {
                 Text("Delete Doc")
             }
             

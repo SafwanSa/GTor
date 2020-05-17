@@ -82,4 +82,17 @@ class GoalService: ObservableObject {
             completion(.success(()))
         }
     }
+    
+    
+    func deleteGoal(goal: Goal, completion: @escaping (Result<Void, Error>)->()) {
+        FirestoreService.shared.deleteDocument(collection: .goals, documentId: AuthService.userId ?? "", modelId: goal.id.description) { (result) in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(()):
+                completion(.success(()))
+            }
+        }
+    }
+    
 }

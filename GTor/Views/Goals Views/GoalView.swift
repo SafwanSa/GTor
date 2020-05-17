@@ -9,9 +9,11 @@
 import SwiftUI
 
 struct GoalView: View {
+    @EnvironmentObject var goalService: GoalService
     var goal: Goal
     @State var isSubGoalsListExpanded = false
     @State var isEditingMode = false
+    @State var isShowingAlert = false
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -31,6 +33,26 @@ struct GoalView: View {
                     SubGoalsList(isSubGoalsListExpanded: self.$isSubGoalsListExpanded, isEditingMode: self.$isEditingMode, goal: goal)
                 }
                 
+                
+                Section {
+                    HStack {
+                        Button(action: { self.isShowingAlert = true } ) {
+                            Text("Delete the goal")
+                                .foregroundColor(.red)
+                        }
+                    }
+                    .font(.headline)
+                           .frame(width: screen.width - 60, height: 20)
+                           .padding(10)
+                           .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).opacity(1), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
+                           .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                           .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
+                }
+                .alert(isPresented: self.$isShowingAlert) {
+                    Alert(title: Text("Are you sure you want to delete this goal?"), message: Text("All the Sub Goals of this goal will be deleted also"), primaryButton: .default(Text("Cancel")), secondaryButton: .destructive(Text("Delete"), action: {
+                        self.deleteGoal()
+                    }))
+                }
                 
                 
             }
@@ -71,6 +93,18 @@ struct GoalView: View {
             }
         )
     }
+    
+    func deleteGoal(){
+        self.goalService.deleteGoal(goal: self.goal) { (result) in
+            switch result {//TODO show message after deleting
+            case .failure(let error):
+                self.isEditingMode = true
+            case .success(()):
+                self.isEditingMode = false
+            }
+        }
+    }
+    
 }
 
 struct GoalView_Previews: PreviewProvider {
