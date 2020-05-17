@@ -7,15 +7,18 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct AddGoalView: View {
     @State var category = ""
     @State var title = ""
     @State var note = ""
     @State var deadline = Date()
+    @State var selectedImportance = 0
+    @State var importance: String?
     
     @State var isHavingDeadline = false
-    @State var isHavingSubgoals = 0
+    @State var isHavingSubgoals = true
     @State var isCategoryPressed = false
     @State var selectedCategories: [Category] = []
     @State var categories = categoriesData
@@ -47,12 +50,22 @@ struct AddGoalView: View {
                     }
                 }
                 
-                Section(header: Text("Do you want to add sub goals?")) {
-                    Picker(selection: self.$isHavingSubgoals, label: Text("")) {
-                        Text("Yes").tag(0)
-                        Text("No").tag(1)
+                Section {
+                    Toggle(isOn: self.$isHavingSubgoals) {
+                    Text("Add Sub Goals")
                     }
-                    .pickerStyle(SegmentedPickerStyle())
+                }
+                
+                if !self.isHavingSubgoals {
+
+                Section {
+                    HStack {
+                            Text("Importance")
+                            TextFieldWithPickerAsInputView(data: importances, placeholder: "Importance", selectionIndex: self.$selectedImportance, text: self.$importance)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                }
                 }
             }
             .listStyle(GroupedListStyle())
@@ -70,13 +83,13 @@ struct AddGoalView_Previews: PreviewProvider {
 
 
 var categoriesData: [Category] = [
-    
     .init(name: "Work"),
     .init(name: "Study"),
     .init(name: "Relationships"),
     .init(name: "Life")
-    
 ]
+
+var importances = ["Very Important", "Important", "Not Important"]
 
 struct SelectCategoryView: View {
     @Binding var isCategoryPressed: Bool
@@ -84,7 +97,7 @@ struct SelectCategoryView: View {
     @Binding var categories: [Category]
     
     var body: some View {
-        Section(header: Text("Select categories")) {
+        Section(header: Text("Press to select categories")) {
             HStack {
                 Image(systemName: "tag")
                 Text("Cateogries ")
@@ -146,6 +159,67 @@ struct SelectCategoryView: View {
                     }
                 }
             }
+        }
+    }
+}
+
+
+struct TextFieldWithPickerAsInputView : UIViewRepresentable {
+    
+    var data : [String]
+    var placeholder : String
+    
+    @Binding var selectionIndex : Int
+    @Binding var text : String?
+    
+    private let textField = UITextField()
+    private let picker = UIPickerView()
+    
+    func makeCoordinator() -> TextFieldWithPickerAsInputView.Coordinator {
+        Coordinator(textfield: self)
+    }
+    
+    func makeUIView(context: UIViewRepresentableContext<TextFieldWithPickerAsInputView>) -> UITextField {
+        picker.delegate = context.coordinator
+        picker.dataSource = context.coordinator
+        textField.placeholder = placeholder
+        textField.inputView = picker
+        //            textField.backgroundColor = .secondarySystemFill
+        textField.textAlignment = .center
+        textField.font = .systemFont(ofSize: 20)
+        textField.delegate = context.coordinator
+        return textField
+    }
+    
+    func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<TextFieldWithPickerAsInputView>) {
+        uiView.text = text
+    }
+    
+    class Coordinator: NSObject, UIPickerViewDataSource, UIPickerViewDelegate , UITextFieldDelegate {
+        
+        private let parent : TextFieldWithPickerAsInputView
+        
+        init(textfield : TextFieldWithPickerAsInputView) {
+            self.parent = textfield
+        }
+        
+        func numberOfComponents(in pickerView: UIPickerView) -> Int {
+            return 1
+        }
+        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+            return self.parent.data.count
+        }
+        func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+            return self.parent.data[row]
+        }
+        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+            self.parent.$selectionIndex.wrappedValue = row
+            self.parent.text = self.parent.data[self.parent.selectionIndex]
+            self.parent.textField.endEditing(true)
+            
+        }
+        func textFieldDidEndEditing(_ textField: UITextField) {
+            self.parent.textField.resignFirstResponder()
         }
     }
 }
