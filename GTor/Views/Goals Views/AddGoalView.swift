@@ -27,6 +27,7 @@ struct AddGoalView: View {
     @State var isHavingSubgoals = true
     @State var isCategoryPressed = false
     @State var alertMessage = "None"
+    @Binding var isAddGoalSelceted: Bool
     
     var body: some View {
         NavigationView {
@@ -69,11 +70,11 @@ struct AddGoalView: View {
                 }
             }
             .navigationBarItems(leading:
-                Button(action: {  }) {
+                Button(action: { self.isAddGoalSelceted = false }) {
                     Text("Cancel")
                 }
                 ,trailing:
-                Button(action: createGoal) {
+                Button(action: { self.createGoal()}) {
                     Text("Done")
                 }
             )
@@ -84,6 +85,7 @@ struct AddGoalView: View {
     }
     
        func createGoal() {
+        if self.isHavingSubgoals { self.importance = Importance.none.description }
         let goal = Goal(uid: self.userService.user.uid, title: self.title, note: self.note, importance: getImportance(importance: self.importance), satisfaction: 0, dueDate: self.deadline, categories: self.selectedCategories, isDecomposed: self.isHavingSubgoals)
             self.goalService.saveGoal(goal: goal) { (result) in
                 switch result {
@@ -91,6 +93,7 @@ struct AddGoalView: View {
                     self.alertMessage = error.localizedDescription
                 case .success(()):
                     self.alertMessage = "Goal was sucssefully added"
+                    self.isAddGoalSelceted = false
                 }
             }
         }
@@ -112,7 +115,7 @@ struct AddGoalView: View {
 
 struct AddGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        AddGoalView()
+        AddGoalView(isAddGoalSelceted: .constant(true))
     }
 }
 
