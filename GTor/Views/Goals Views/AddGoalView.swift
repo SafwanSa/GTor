@@ -12,8 +12,9 @@ struct AddGoalView: View {
     @State var category = ""
     @State var title = ""
     @State var note = ""
-    @State var deadline = ""
+    @State var deadline = Date()
     
+    @State var isHavingDeadline = false
     @State var isHavingSubgoals = 0
     @State var isCategoryPressed = false
     @State var selectedCategories: [Category] = []
@@ -26,28 +27,38 @@ struct AddGoalView: View {
 //    }
     
     var body: some View {
-        List {
-            SelectCategoryView(isCategoryPressed: self.$isCategoryPressed, selectedCategories: self.$selectedCategories, categories: self.$categories)
-            
-            Section {
-                TextField("Title", text: self.$category)
-                TextField("Note", text: self.$category)
-            }
-            
-            Section {
-                TextField("Deadline (Optinal)", text: self.$category)
-            }
-            
-            Section(header: Text("Do you want to add sub goals?")) {
-                Picker(selection: self.$isHavingSubgoals, label: Text("")) {
-                    Text("Yes").tag(0)
-                    Text("No").tag(1)
+        NavigationView {
+            List {
+                SelectCategoryView(isCategoryPressed: self.$isCategoryPressed, selectedCategories: self.$selectedCategories, categories: self.$categories)
+                
+                Section {
+                    TextField("Title", text: self.$category)
+                    TextField("Note", text: self.$category)
                 }
-                .pickerStyle(SegmentedPickerStyle())
+                
+                Section {
+                    Toggle(isOn: self.$isHavingDeadline) {
+                    Text("Add a deadline")
+                    }
+                    if self.isHavingDeadline {
+                        DatePicker(selection: self.$deadline) {
+                            Text("Deadline")
+                        }
+                    }
+                }
+                
+                Section(header: Text("Do you want to add sub goals?")) {
+                    Picker(selection: self.$isHavingSubgoals, label: Text("")) {
+                        Text("Yes").tag(0)
+                        Text("No").tag(1)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
             }
+            .listStyle(GroupedListStyle())
+            .environment(\.horizontalSizeClass, .regular)
+            .navigationBarTitle("Add Goal")
         }
-        .listStyle(GroupedListStyle())
-        .environment(\.horizontalSizeClass, .regular)
     }
 }
 
@@ -73,8 +84,9 @@ struct SelectCategoryView: View {
     @Binding var categories: [Category]
     
     var body: some View {
-        Section(header: Text("Select a category")) {
+        Section(header: Text("Select categories")) {
             HStack {
+                Image(systemName: "tag")
                 Text("Cateogries ")
             }
             .frame(maxWidth: .infinity, alignment: .leading)

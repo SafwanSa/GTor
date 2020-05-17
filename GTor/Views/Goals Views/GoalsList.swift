@@ -11,6 +11,7 @@ import SwiftUI
 struct GoalsList: View {
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var goalService: GoalService
+    @State var isAddGoalSelceted = false
     
     var body: some View {
         NavigationView {
@@ -38,7 +39,7 @@ struct GoalsList: View {
                             .font(.headline)
                     }
                     
-                    Button(action: { self.goalService.goals.append(.dummy) }) {
+                    Button(action: { self.isAddGoalSelceted = true }) {
                         Image(systemName: "plus")
                             .resizable()
                             .imageScale(.large)
@@ -46,6 +47,9 @@ struct GoalsList: View {
                             .font(.headline)
                     }
                 }
+                .sheet(isPresented: self.$isAddGoalSelceted) {
+                    AddGoalView()
+                    }
             )
                 .edgesIgnoringSafeArea(.all)
         }
