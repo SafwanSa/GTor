@@ -26,9 +26,13 @@ struct GoalView: View {
                     .scaleEffect(isSubGoalsListExpanded ? 0.9 : 1)
                     .animation(.spring())
                 
-                if self.goal.isDecomposed! {
+                
+                if goal.isDecomposed ?? true {
                     SubGoalsList(isSubGoalsListExpanded: self.$isSubGoalsListExpanded, isEditingMode: self.$isEditingMode, goal: goal)
                 }
+                
+                
+                
             }
             .padding(.top, 50)
         }
@@ -117,7 +121,7 @@ struct CardView: View {
                 .background(Color.white.opacity(isEditingMode ? 1 : 0.8))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
-
+                
             }
             .background(Image(uiImage: #imageLiteral(resourceName: "shape-pdf-asset")).resizable().scaledToFill())
             .frame(width: screen.width - 60, height: 170)
@@ -164,7 +168,7 @@ struct ImportanceCard: View {
                     .frame(maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 2))
                     .opacity(self.goal.importance?.opacity ?? 0)
-
+                
         })
     }
 }
@@ -207,7 +211,7 @@ struct SubGoalsList: View {
                                 GoalCardView(goal: goal)
                                     .padding(.leading)
                             }
-                             .buttonStyle(PlainButtonStyle())
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                     .padding(.bottom, 30)

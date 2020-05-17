@@ -56,6 +56,6 @@ struct Goal: Codable, Identifiable {
 
 extension Goal {
     static var dummy: Goal = .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "Goal1", note: "note1", importance: .veryImportant, satisfaction: 0, dueDate: Date(), categories: [.init(name: "Category")], subGoals: [
-        .init(title: "Sub-Goal", note: "Sub-Note", importance: .notImportant, satisfaction: 0)
-    ])
+        .init(title: "Sub-Goal", note: "Sub-Note", importance: .notImportant, satisfaction: 0, isDecomposed: false)
+    ], isDecomposed: true)
 }
