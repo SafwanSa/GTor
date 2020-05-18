@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1709175E247231830011BB8C /* GoalCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1709175D247231830011BB8C /* GoalCardView.swift */; };
+		17091760247233120011BB8C /* SubGoalsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1709175F247233120011BB8C /* SubGoalsList.swift */; };
+		17091762247234700011BB8C /* ImportanceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17091761247234700011BB8C /* ImportanceCard.swift */; };
 		171400AD2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */; };
 		171E6C3C246FA90B003EFF36 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171E6C3B246FA90B003EFF36 /* TabBar.swift */; };
 		1721F56F246E7837004AB7AD /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721F56E246E7837004AB7AD /* GoalView.swift */; };
@@ -43,6 +46,9 @@
 /* Begin PBXFileReference section */
 		0683D7F05833D06D81C6DD1B /* Pods-GTor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GTor.release.xcconfig"; path = "Target Support Files/Pods-GTor/Pods-GTor.release.xcconfig"; sourceTree = "<group>"; };
 		116A19C2249FA9F0A4483872 /* Pods-GTor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GTor.debug.xcconfig"; path = "Target Support Files/Pods-GTor/Pods-GTor.debug.xcconfig"; sourceTree = "<group>"; };
+		1709175D247231830011BB8C /* GoalCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCardView.swift; sourceTree = "<group>"; };
+		1709175F247233120011BB8C /* SubGoalsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGoalsList.swift; sourceTree = "<group>"; };
+		17091761247234700011BB8C /* ImportanceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportanceCard.swift; sourceTree = "<group>"; };
 		171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPickerAsInputView.swift; sourceTree = "<group>"; };
 		171E6C3B246FA90B003EFF36 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		1721F56E246E7837004AB7AD /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
@@ -94,6 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */,
+				1709175D247231830011BB8C /* GoalCardView.swift */,
+				1709175F247233120011BB8C /* SubGoalsList.swift */,
+				17091761247234700011BB8C /* ImportanceCard.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -395,6 +404,8 @@
 				17E7E7E8246CE47900596500 /* FirestoreService.swift in Sources */,
 				17E7E7E2246CE3C700596500 /* GoalService.swift in Sources */,
 				171E6C3C246FA90B003EFF36 /* TabBar.swift in Sources */,
+				1709175E247231830011BB8C /* GoalCardView.swift in Sources */,
+				17091760247233120011BB8C /* SubGoalsList.swift in Sources */,
 				17E7E7CE246CAAF500596500 /* SignInView.swift in Sources */,
 				17E7E7C4246CA6EB00596500 /* User.swift in Sources */,
 				17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */,
@@ -404,6 +415,7 @@
 				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,
 				17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */,
 				17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */,
+				17091762247234700011BB8C /* ImportanceCard.swift in Sources */,
 				17E7E7D3246CAB3F00596500 /* TODOView.swift in Sources */,
 				17E7E7A9246C921400596500 /* SceneDelegate.swift in Sources */,
 				17E7E7DD246CABFE00596500 /* SettingsView.swift in Sources */,

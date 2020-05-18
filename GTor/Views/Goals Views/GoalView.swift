@@ -18,7 +18,7 @@ struct GoalView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 40.0) {
-                CardView(goal: goal, isEditingMode: self.$isEditingMode)
+                HeaderView(goal: goal, isEditingMode: self.$isEditingMode)
                     .blur(radius: self.isSubGoalsListExpanded ? 3 : 0)
                     .scaleEffect(isSubGoalsListExpanded ? 0.9 : 1)
                     .animation(.spring())
@@ -113,7 +113,7 @@ struct GoalView_Previews: PreviewProvider {
     }
 }
 
-struct CardView: View {
+struct HeaderView: View {
     var goal: Goal
     @Binding var isEditingMode: Bool
     @State var updatedTitle: String = ""
@@ -165,96 +165,3 @@ struct CardView: View {
     }
 }
 
-struct ImportanceCard: View {
-    var goal: Goal
-    @Binding var isEditingMode: Bool
-    @State var updatedImportance = ""
-    
-    
-    var body: some View {
-        HStack {
-            if isEditingMode && !self.goal.isDecomposed! {
-                Text("Importance")
-                Spacer()
-                TextField("\("Very Important")", text: self.$updatedImportance)
-                    .padding()
-                    .foregroundColor(.primary)
-            }else {
-                Text("Importance")
-                Spacer()
-                Text("\(self.goal.importance?.description ?? "")")
-                    .padding()
-                    .foregroundColor(.primary)
-            }
-            
-        }
-        .font(.headline)
-        .frame(width: screen.width - 60, height: 20)
-        .padding(10)
-        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).opacity(1), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
-        .overlay(
-            HStack {
-                Spacer()
-                Color.red
-                    .frame(width: 6)
-                    .frame(maxHeight: .infinity)
-                    .clipShape(RoundedRectangle(cornerRadius: 2))
-                    .opacity(self.goal.importance?.opacity ?? 0)
-                
-        })
-    }
-}
-
-struct SubGoalsList: View {
-    @Binding var isSubGoalsListExpanded: Bool
-    @Binding var isEditingMode: Bool
-    var goal: Goal
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text("Sub Goals")
-                    .font(.system(size: 20, weight: .medium))
-                    .padding(.leading, 20)
-                Spacer()
-                Button(action: {  }) {
-                    Image(systemName: "plus.circle.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 23, height: 23)
-                        .foregroundColor(.black)
-                }
-                .opacity(isSubGoalsListExpanded ? 1 : 0)
-                .offset(x: self.isSubGoalsListExpanded ? 0 : 20)
-                .animation(.spring())
-                
-                Image(systemName: self.isSubGoalsListExpanded ? "chevron.down" : "chevron.up")
-                    .padding()
-            }
-            .contentShape(Rectangle())
-            .onTapGesture {
-                self.isSubGoalsListExpanded.toggle()
-            }
-            if isSubGoalsListExpanded {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach(self.goal.subGoals ?? []) { goal in
-                            NavigationLink(destination: GoalView(goal: goal)) {
-                                GoalCardView(goal: goal)
-                                    .padding(.leading)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                    }
-                    .padding(.bottom, 30)
-                }
-            }
-        }
-        .frame(maxWidth:.infinity)
-        .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-        .animation(.easeInOut)
-    }
-}
