@@ -29,7 +29,7 @@ struct GoalView: View {
                     .animation(.spring())
                 
                 
-                if goal.isDecomposed ?? true {
+                if goal.isDecomposed {
                     SubGoalsList(isSubGoalsListExpanded: self.$isSubGoalsListExpanded, isEditingMode: self.$isEditingMode, goal: goal)
                 }
                 
