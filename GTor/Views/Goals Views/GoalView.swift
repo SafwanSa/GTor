@@ -19,53 +19,41 @@ struct GoalView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 40.0) {
                 HeaderView(goal: goal, isEditingMode: self.$isEditingMode)
-                    .blur(radius: self.isSubGoalsListExpanded ? 3 : 0)
-                    .scaleEffect(isSubGoalsListExpanded ? 0.9 : 1)
-                    .animation(.spring())
-                
-                Section {
-                    if self.goal.dueDate != nil{
-                        HStack {
-                            Text("Deadline")
-                            Spacer()
-                            Text(self.goal.dueDate?.description ?? "")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                                .padding(.trailing, 5)
-                        }
-                        .frame(width: screen.width - 60, height: 20, alignment: .leading)
-                        .padding(10)
-                        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).opacity(1), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
-                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                        .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
+                    .modifier(EditAnimation(isSubGoalsListExpanded: self.isSubGoalsListExpanded))
+
+                if self.goal.dueDate != nil{
+                    HStack {
+                        Text("Deadline")
+                        Spacer()
+                        Text(self.goal.dueDate?.description ?? "")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .padding(.trailing, 5)
                     }
+                    .modifier(SmallCell())
+                    .modifier(EditAnimation(isSubGoalsListExpanded: self.isSubGoalsListExpanded))
                 }
                 
                 ImportanceCard(goal: goal, isEditingMode: self.$isEditingMode)
-                    .blur(radius: self.isSubGoalsListExpanded ? 3 : 0)
-                    .scaleEffect(isSubGoalsListExpanded ? 0.9 : 1)
-                    .animation(.spring())
-                
-                
+                    .modifier(EditAnimation(isSubGoalsListExpanded: self.isSubGoalsListExpanded))
+
                 if goal.isDecomposed {
                     SubGoalsList(isSubGoalsListExpanded: self.$isSubGoalsListExpanded, isEditingMode: self.$isEditingMode, goal: goal)
                 }
                 
-                
-                Section {
-                    HStack {
-                        Button(action: { self.isShowingAlert = true } ) {
+                HStack {
+                    Button(action: { if !self.isSubGoalsListExpanded { self.isShowingAlert = true } } ) {
+                        HStack {
+                            Image(systemName: "trash")
                             Text("Delete the goal")
-                                .foregroundColor(.red)
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(.primary)
+                        
                     }
-                            .font(.headline)
-                           .frame(width: screen.width - 60, height: 20)
-                           .padding(10)
-                           .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).opacity(1), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
-                           .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                           .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
                 }
+                .modifier(SmallCell())
+                .modifier(EditAnimation(isSubGoalsListExpanded: isSubGoalsListExpanded))
                 .alert(isPresented: self.$isShowingAlert) {
                     Alert(title: Text("Are you sure you want to delete this goal?"), message: Text("All the Sub Goals of this goal will be deleted also"), primaryButton: .default(Text("Cancel")), secondaryButton: .destructive(Text("Delete"), action: {
                         self.deleteGoal()
@@ -79,38 +67,28 @@ struct GoalView: View {
         .navigationBarTitle("\(self.goal.title ?? "Title")")
         .navigationBarItems(trailing:
             Group {
-                if self.isEditingMode {
-                    HStack(spacing: 50) {
+                HStack(spacing: 50) {
+                    if self.isEditingMode {
                         Button(action: { /*cancel*/ self.isEditingMode = false  }) {
-                            Image(systemName: "xmark")
-                                .resizable()
-                                .imageScale(.large)
-                                .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
-                                .font(.headline)
+                            Text("Cancel")
                         }
                         Button(action: { /*save*/ }) {
-                            Image(systemName: "checkmark")
-                                .resizable()
-                                .imageScale(.large)
-                                .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
-                                .font(.headline)
+                            Text("Save")
                         }
-                    }
-                }else {
-                    HStack {
-                        Spacer()
-                        Button(action: { self.isEditingMode = true }) {
-                            Image(systemName: "pencil")
-                                .resizable()
-                                .imageScale(.large)
-                                .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
-                                .font(.headline)
+                    }else if !self.isEditingMode && !self.isSubGoalsListExpanded{
+                            Button(action: {self.isEditingMode = true }) {
+                                Image(systemName: "pencil")
+                                    .resizable()
+                                    .imageScale(.large)
+                                    .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                                    .font(.headline)
+                            }
                         }
                     }
                 }
-            }
-        )
-    }
+            )
+        }
+        
     
     func deleteGoal(){
         self.goalService.deleteGoal(goal: self.goal) { (result) in
@@ -173,3 +151,35 @@ struct HeaderView: View {
     }
 }
 
+struct ImportanceCard: View {
+    var goal: Goal
+    @Binding var isEditingMode: Bool
+    @State var updatedImportance = ""
+    var body: some View {
+        HStack {
+            if isEditingMode && !self.goal.isDecomposed {
+                Text("Importance")
+                Spacer()
+                TextField("\("Very Important")", text: self.$updatedImportance)
+                    .padding()
+                    .foregroundColor(.primary)
+            }else {
+                Text("Importance")
+                Spacer()
+                Text("\(self.goal.importance?.description ?? "")")
+                    .padding()
+                    .foregroundColor(.primary)
+            }
+            
+        }
+        .modifier(SmallCell())
+        .overlay(
+            HStack {
+                Spacer()
+                Color.red
+                    .frame(width: 6)
+                    .frame(maxHeight: .infinity)
+                    .clipShape(RoundedRectangle(cornerRadius: 2))
+        })
+    }
+}

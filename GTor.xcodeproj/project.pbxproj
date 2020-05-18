@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1709175E247231830011BB8C /* GoalCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1709175D247231830011BB8C /* GoalCardView.swift */; };
 		17091760247233120011BB8C /* SubGoalsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1709175F247233120011BB8C /* SubGoalsList.swift */; };
-		17091762247234700011BB8C /* ImportanceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17091761247234700011BB8C /* ImportanceCard.swift */; };
 		17091764247235180011BB8C /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17091763247235180011BB8C /* SelectCategoryView.swift */; };
 		17091768247244800011BB8C /* AddSubGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17091767247244800011BB8C /* AddSubGoalView.swift */; };
 		171400AD2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */; };
@@ -19,6 +18,7 @@
 		1729898D246D0F2F00449C4F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898C246D0F2F00449C4F /* AuthService.swift */; };
 		1729898F246D13C200449C4F /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898E246D13C200449C4F /* AuthError.swift */; };
 		17A61A6124707F12008B8C31 /* AddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A61A6024707F12008B8C31 /* AddGoalView.swift */; };
+		17D44200247337C700DF91EC /* ModifiersViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D441FF247337C700DF91EC /* ModifiersViews.swift */; };
 		17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7A6246C921400596500 /* AppDelegate.swift */; };
 		17E7E7A9246C921400596500 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7A8246C921400596500 /* SceneDelegate.swift */; };
 		17E7E7AB246C921400596500 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7AA246C921400596500 /* LoginView.swift */; };
@@ -50,7 +50,6 @@
 		116A19C2249FA9F0A4483872 /* Pods-GTor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GTor.debug.xcconfig"; path = "Target Support Files/Pods-GTor/Pods-GTor.debug.xcconfig"; sourceTree = "<group>"; };
 		1709175D247231830011BB8C /* GoalCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCardView.swift; sourceTree = "<group>"; };
 		1709175F247233120011BB8C /* SubGoalsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGoalsList.swift; sourceTree = "<group>"; };
-		17091761247234700011BB8C /* ImportanceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportanceCard.swift; sourceTree = "<group>"; };
 		17091763247235180011BB8C /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		17091767247244800011BB8C /* AddSubGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "\U0010AddSubGoalView.swift"; sourceTree = "<group>"; };
 		171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPickerAsInputView.swift; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 		1729898C246D0F2F00449C4F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1729898E246D13C200449C4F /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		17A61A6024707F12008B8C31 /* AddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalView.swift; sourceTree = "<group>"; };
+		17D441FF247337C700DF91EC /* ModifiersViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiersViews.swift; sourceTree = "<group>"; };
 		17E7E7A3246C921400596500 /* GTor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17E7E7A6246C921400596500 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17E7E7A8246C921400596500 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,8 +106,8 @@
 				171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */,
 				1709175D247231830011BB8C /* GoalCardView.swift */,
 				1709175F247233120011BB8C /* SubGoalsList.swift */,
-				17091761247234700011BB8C /* ImportanceCard.swift */,
 				17091763247235180011BB8C /* SelectCategoryView.swift */,
+				17D441FF247337C700DF91EC /* ModifiersViews.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -421,7 +421,6 @@
 				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,
 				17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */,
 				17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */,
-				17091762247234700011BB8C /* ImportanceCard.swift in Sources */,
 				17E7E7D3246CAB3F00596500 /* TODOView.swift in Sources */,
 				17E7E7A9246C921400596500 /* SceneDelegate.swift in Sources */,
 				17E7E7DD246CABFE00596500 /* SettingsView.swift in Sources */,
@@ -437,6 +436,7 @@
 				17E7E7AB246C921400596500 /* LoginView.swift in Sources */,
 				17091764247235180011BB8C /* SelectCategoryView.swift in Sources */,
 				17E7E7CA246CA70E00596500 /* Category.swift in Sources */,
+				17D44200247337C700DF91EC /* ModifiersViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
