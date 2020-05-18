@@ -11,7 +11,7 @@ import SwiftUI
 struct GoalView: View {
     @EnvironmentObject var goalService: GoalService
     var goal: Goal
-    @State var isSubGoalsListExpanded = false
+    @State var isSubGoalsListPresented = false
     @State var isEditingMode = false
     @State var isShowingAlert = false
     
@@ -19,7 +19,6 @@ struct GoalView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 40.0) {
                 HeaderView(goal: goal, isEditingMode: self.$isEditingMode)
-                    .modifier(EditAnimation(isSubGoalsListExpanded: self.isSubGoalsListExpanded))
 
                 if self.goal.dueDate != nil{
                     HStack {
@@ -31,14 +30,12 @@ struct GoalView: View {
                             .padding(.trailing, 5)
                     }
                     .modifier(SmallCell())
-                    .modifier(EditAnimation(isSubGoalsListExpanded: self.isSubGoalsListExpanded))
                 }
                 
                 ImportanceCard(goal: goal, isEditingMode: self.$isEditingMode)
-                    .modifier(EditAnimation(isSubGoalsListExpanded: self.isSubGoalsListExpanded))
 
                 if goal.isDecomposed {
-                    Button(action: { self.isSubGoalsListExpanded = true }) {
+                    Button(action: { self.isSubGoalsListPresented = true }) {
                         HStack {
                             Text("Sub Goals")
                             Spacer()
@@ -47,13 +44,13 @@ struct GoalView: View {
                         .modifier(SmallCell())
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .sheet(isPresented: self.$isSubGoalsListExpanded) {
-                        SubGoalsList(isEditingMode: self.$isEditingMode, goal: self.goal)
+                    .sheet(isPresented: self.$isSubGoalsListPresented) {
+                        SubGoalsList(goal: self.goal)
                     }
                 }
                 
                 HStack {
-                    Button(action: { if !self.isSubGoalsListExpanded { self.isShowingAlert = true } } ) {
+                    Button(action: { if !self.isSubGoalsListPresented { self.isShowingAlert = true } } ) {
                         HStack {
                             Image(systemName: "trash")
                             Text("Delete the goal")
@@ -64,7 +61,6 @@ struct GoalView: View {
                     }
                 }
                 .modifier(SmallCell())
-                .modifier(EditAnimation(isSubGoalsListExpanded: isSubGoalsListExpanded))
                 .alert(isPresented: self.$isShowingAlert) {
                     Alert(title: Text("Are you sure you want to delete this goal?"), message: Text("All the Sub Goals of this goal will be deleted also"), primaryButton: .default(Text("Cancel")), secondaryButton: .destructive(Text("Delete"), action: {
                         self.deleteGoal()
@@ -86,7 +82,7 @@ struct GoalView: View {
                         Button(action: { /*save*/ }) {
                             Text("Save")
                         }
-                    }else if !self.isEditingMode && !self.isSubGoalsListExpanded{
+                    }else if !self.isEditingMode && !self.isSubGoalsListPresented{
                             Button(action: {self.isEditingMode = true }) {
                                 Image(systemName: "pencil")
                                     .resizable()

@@ -61,6 +61,6 @@ struct SubGoalsList: View {
 
 struct SubGoalsList_Previews: PreviewProvider {
     static var previews: some View {
-        SubGoalsList(isEditingMode: .constant(false), goal: .dummy)
+        SubGoalsList(goal: .dummy)
     }
 }
