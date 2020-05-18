@@ -38,7 +38,18 @@ struct GoalView: View {
                     .modifier(EditAnimation(isSubGoalsListExpanded: self.isSubGoalsListExpanded))
 
                 if goal.isDecomposed {
-                    SubGoalsList(isSubGoalsListExpanded: self.$isSubGoalsListExpanded, isEditingMode: self.$isEditingMode, goal: goal)
+                    Button(action: { self.isSubGoalsListExpanded = true }) {
+                        HStack {
+                            Text("Sub Goals")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                        }
+                        .modifier(SmallCell())
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .sheet(isPresented: self.$isSubGoalsListExpanded) {
+                        SubGoalsList(isEditingMode: self.$isEditingMode, goal: self.goal)
+                    }
                 }
                 
                 HStack {

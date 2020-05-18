@@ -10,53 +10,57 @@ import SwiftUI
 
 
 struct SubGoalsList: View {
-    @Binding var isSubGoalsListExpanded: Bool
-    @Binding var isEditingMode: Bool
+    @State var isAddGoalSelceted = false
+    @Environment(\.presentationMode) private var presentationMode
+
     var goal: Goal
     
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text("Sub Goals")
-                    .font(.system(size: 20, weight: .medium))
-                    .padding(.leading, 20)
-                Spacer()
-                Button(action: {  }) {
-                    Image(systemName: "plus.circle.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 23, height: 23)
-                        .foregroundColor(.black)
-                }
-                .opacity(isSubGoalsListExpanded ? 1 : 0)
-                .offset(x: self.isSubGoalsListExpanded ? 0 : 20)
-                .animation(.spring())
-                
-                Image(systemName: self.isSubGoalsListExpanded ? "chevron.down" : "chevron.up")
-                    .padding()
-            }
-            .contentShape(Rectangle())
-            .onTapGesture {
-                self.isSubGoalsListExpanded.toggle()
-            }
-            if isSubGoalsListExpanded {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach(self.goal.subGoals!) { goal in
-                            NavigationLink(destination: GoalView(goal: goal)) {
-                                GoalCardView(goal: goal)
-                                    .padding(.leading)
-                            }
-                            .buttonStyle(PlainButtonStyle())
+        NavigationView {
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 20) {
+                    ForEach(self.goal.subGoals!) { goal in
+                        NavigationLink(destination: GoalView(goal: goal)) {
+                            GoalCardView(goal: goal)
                         }
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .padding(.bottom, 30)
                 }
+                .frame(width: screen.width)
+                .padding(.horizontal, 16)
+                .padding(.top, 150)
             }
+            .navigationBarTitle("My Goals")
+            .navigationBarItems(trailing:
+                HStack(spacing: 20) {
+                    Button(action: {  }) {
+                        Image(systemName: "slider.horizontal.3")
+                            .resizable()
+                            .imageScale(.large)
+                            .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                            .font(.headline)
+                    }
+                    Button(action: { self.isAddGoalSelceted = true }) {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .imageScale(.large)
+                            .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                            .font(.headline)
+                    }
+                }
+                .sheet(isPresented: self.$isAddGoalSelceted) {
+                    AddGoalView()
+                }
+            )
+                .edgesIgnoringSafeArea(.all)
         }
-        .frame(maxWidth:.infinity)
-        .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-        .animation(.easeInOut)
+        
+    }
+}
+
+
+struct SubGoalsList_Previews: PreviewProvider {
+    static var previews: some View {
+        SubGoalsList(isEditingMode: .constant(false), goal: .dummy)
     }
 }

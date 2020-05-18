@@ -12,7 +12,8 @@ import UIKit
 struct AddGoalView: View {
     @EnvironmentObject var userService: UserService
     @EnvironmentObject var goalService: GoalService
-    
+    @Environment(\.presentationMode) private var presentationMode
+
     @State var categories = categoriesData//TODO bring this from db
     let importances = ["Very Important", "Important", "Not Important"]
     
@@ -27,7 +28,6 @@ struct AddGoalView: View {
     @State var isHavingSubgoals = true
     @State var isSelectCategoryExpanded = false
     @State var alertMessage = "None"
-    @Binding var isAddedGoalPresented: Bool
     
     var body: some View {
         NavigationView {
@@ -63,7 +63,7 @@ struct AddGoalView: View {
                 }
             }
             .navigationBarItems(leading:
-                Button(action: { self.isAddedGoalPresented = false }) {
+                Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                     Text("Cancel")
                 }
                 ,trailing:
@@ -88,7 +88,8 @@ struct AddGoalView: View {
                     self.alertMessage = error.localizedDescription
                 case .success(()):
                     self.alertMessage = "Goal was sucssefully added"
-                    self.isAddedGoalPresented = false
+                    self.presentationMode.wrappedValue.dismiss()
+
                 }
             }
         }
@@ -98,7 +99,7 @@ struct AddGoalView: View {
 
 struct AddGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        AddGoalView(isAddedGoalPresented: .constant(true)).environmentObject(GoalService()).environmentObject(UserService())
+        AddGoalView().environmentObject(GoalService()).environmentObject(UserService())
     }
 }
 
