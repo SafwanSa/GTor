@@ -48,7 +48,7 @@ struct GoalsList: View {
                     }
                 }
                 .sheet(isPresented: self.$isAddGoalSelceted) {
-                    AddGoalView(isAddGoalSelceted: self.$isAddGoalSelceted)
+                    AddGoalView(isAddedGoalPresented: self.$isAddGoalSelceted)
                         .environmentObject(self.userService)
                         .environmentObject(self.goalService)
                     }

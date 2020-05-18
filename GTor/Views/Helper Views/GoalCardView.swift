@@ -38,7 +38,7 @@ struct GoalCardView: View {
                     
                     
                     HStack(spacing: 20) {
-                        Text(self.goal.isDecomposed! ? "Sub-Goals: \(self.goal.subGoals?.count ?? 0)" : "")
+                        Text(self.goal.isDecomposed ? "Sub-Goals: \(self.goal.subGoals.count)" : "")
                         Text("Activities: \(0)/3")//TODO
                         Text("\(self.goal.dueDate?.description ?? "100")")//TODO
                             .lineLimit(4)
@@ -64,7 +64,6 @@ struct GoalCardView: View {
                     .frame(width: 10)
                     .frame(maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 2))
-                    .opacity(self.goal.importance?.opacity ?? 0)
         })
     }
 }

@@ -17,7 +17,7 @@ struct ImportanceCard: View {
     
     var body: some View {
         HStack {
-            if isEditingMode && !self.goal.isDecomposed! {
+            if isEditingMode && !self.goal.isDecomposed {
                 Text("Importance")
                 Spacer()
                 TextField("\("Very Important")", text: self.$updatedImportance)
@@ -45,8 +45,6 @@ struct ImportanceCard: View {
                     .frame(width: 6)
                     .frame(maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 2))
-                    .opacity(self.goal.importance?.opacity ?? 0)
-                
         })
     }
 }

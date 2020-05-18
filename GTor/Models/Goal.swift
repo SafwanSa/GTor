@@ -27,18 +27,6 @@ enum Importance: Int, Codable {
         }
     }
     
-    var opacity: Double {
-        switch self {
-        case .important:
-            return 0.5
-        case .veryImportant:
-            return 1
-        case .notImportant:
-            return 0.2
-        case .none:
-            return 0
-        }
-    }
 }
 
 struct Goal: Codable, Identifiable {
@@ -50,12 +38,26 @@ struct Goal: Codable, Identifiable {
     var satisfaction: Double?
     var dueDate: Date?
     var categories: [Category]?
-    var subGoals: [Goal]?
-    var isDecomposed: Bool?
+    var subGoals: [Goal]
+    var isDecomposed: Bool
+    
+    
+    static func stringToImportance(importance: String)->Importance {
+        switch importance {
+        case "Very Important":
+            return .veryImportant
+        case "Important":
+            return .important
+        case "Not Important":
+            return .notImportant
+        default:
+            return .none
+        }
+    }
 }
 
 extension Goal {
-    static var dummy: Goal = .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "Goal1", note: "note1", importance: .veryImportant, satisfaction: 0, dueDate: Date(), categories: [.init(name: "Category")], subGoals: [
-        .init(title: "Sub-Goal", note: "Sub-Note", importance: .notImportant, satisfaction: 0, isDecomposed: false)
+    static var dummy: Goal = .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "Goal1", note: "note1", importance: .important, satisfaction: 0, dueDate: Date(), categories: [.init(name: "Category")], subGoals: [
+        .init(title: "Dummy Title", note: "Dummy note", importance: .important, satisfaction: 0, subGoals: [], isDecomposed: false)
     ], isDecomposed: true)
 }
