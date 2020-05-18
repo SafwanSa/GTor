@@ -32,7 +32,6 @@ struct ImportanceCard: View {
             }
             
         }
-        .font(.headline)
         .frame(width: screen.width - 60, height: 20)
         .padding(10)
         .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).opacity(1), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))

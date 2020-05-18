@@ -39,7 +39,7 @@ struct Goal: Codable, Identifiable {
     var satisfaction: Double?
     var dueDate: Date?
     var categories: [Category]?
-    var subGoals: [Goal]
+    var subGoals: [Goal]?
     var isDecomposed: Bool
     
     

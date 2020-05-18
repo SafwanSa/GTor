@@ -80,7 +80,7 @@ struct AddSubGoalView: View {
         if self.isHavingSubgoals { self.importance = Importance.none.description }
         let goal = Goal(uid: self.userService.user.uid, title: self.title, note: self.note, isSubGoal: true, importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0, dueDate: self.deadline, subGoals: [], isDecomposed: self.isHavingSubgoals)
            
-        self.goal.subGoals.append(goal)
+        
         
         
         }

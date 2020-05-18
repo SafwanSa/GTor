@@ -23,6 +23,24 @@ struct GoalView: View {
                     .scaleEffect(isSubGoalsListExpanded ? 0.9 : 1)
                     .animation(.spring())
                 
+                Section {
+                    if self.goal.dueDate != nil{
+                        HStack {
+                            Text("Deadline")
+                            Spacer()
+                            Text(self.goal.dueDate?.description ?? "")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                                .padding(.trailing, 5)
+                        }
+                        .frame(width: screen.width - 60, height: 20, alignment: .leading)
+                        .padding(10)
+                        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).opacity(1), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
+                    }
+                }
+                
                 ImportanceCard(goal: goal, isEditingMode: self.$isEditingMode)
                     .blur(radius: self.isSubGoalsListExpanded ? 3 : 0)
                     .scaleEffect(isSubGoalsListExpanded ? 0.9 : 1)
@@ -41,7 +59,7 @@ struct GoalView: View {
                                 .foregroundColor(.red)
                         }
                     }
-                    .font(.headline)
+                            .font(.headline)
                            .frame(width: screen.width - 60, height: 20)
                            .padding(10)
                            .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).opacity(1), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
@@ -121,36 +139,25 @@ struct HeaderView: View {
     @State var updatedDeadline: String = ""
     
     var body: some View {
-        HStack {
+        VStack {
             VStack(alignment: .leading) {
                 Spacer()
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 20.0) {
                         if isEditingMode {
                             TextField("\(self.goal.title ?? "Title")", text: self.$updatedTitle)
-                                .font(.title)
-                            TextField("\(self.goal.note ?? "Note")", text: self.$updatedNote)
+                                .font(.system(size: 20, weight: .regular))
+                            TextField("\(self.goal.note!.isEmpty ? "Note (Optional)" : self.goal.note ?? "Note")", text: self.$updatedNote)
                                 .font(.subheadline)
                         }else{
                             Text(self.goal.title ?? "Title")
-                                .font(.title)
+                                .font(.system(size: 20, weight: .regular))
                             Text(self.goal.note ?? "Goal Note")
                                 .font(.subheadline)
                         }
                     }
-                    Spacer()
-                    if isEditingMode {
-                        TextField("\(self.goal.dueDate?.description ?? "100")", text: self.$updatedDeadline)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .padding(.trailing, 5)
-                    }else{
-                        Text(self.goal.dueDate?.description ?? "100")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .padding(.trailing, 5)
-                    }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 .background(Color.white.opacity(isEditingMode ? 1 : 0.8))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
@@ -162,6 +169,7 @@ struct HeaderView: View {
         }
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
+        
     }
 }
 

@@ -42,7 +42,7 @@ struct SubGoalsList: View {
             if isSubGoalsListExpanded {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(self.goal.subGoals) { goal in
+                        ForEach(self.goal.subGoals!) { goal in
                             NavigationLink(destination: GoalView(goal: goal)) {
                                 GoalCardView(goal: goal)
                                     .padding(.leading)

@@ -58,12 +58,7 @@ struct AddGoalView: View {
                 
                 if !self.isHavingSubgoals {
                     Section {
-                        HStack {
-                            Text("Importance")
-                            Spacer()
                             TextFieldWithPickerAsInputView(data: self.importances, placeholder: "Importance", selectionIndex: self.$selectedImportanceIndex, text: self.$importance)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
             }
@@ -84,7 +79,9 @@ struct AddGoalView: View {
     
        func createGoal() {
         if self.isHavingSubgoals { self.importance = Importance.none.description }
-        let goal = Goal(uid: self.userService.user.uid, title: self.title, note: self.note, isSubGoal: false , importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0, dueDate: self.deadline, categories: self.selectedCategories, subGoals: [], isDecomposed: self.isHavingSubgoals)
+        let goal = Goal(uid: self.userService.user.uid, title: self.title, note: self.note, isSubGoal: false , importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0,
+                        dueDate: self.isHavingDeadline ? self.deadline : nil, categories: self.selectedCategories,
+                        subGoals: self.isHavingSubgoals ? [] : nil, isDecomposed: self.isHavingSubgoals)
             self.goalService.saveGoal(goal: goal) { (result) in
                 switch result {
                 case .failure(let error):
@@ -101,7 +98,7 @@ struct AddGoalView: View {
 
 struct AddGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        AddGoalView(isAddedGoalPresented: .constant(true))
+        AddGoalView(isAddedGoalPresented: .constant(true)).environmentObject(GoalService()).environmentObject(UserService())
     }
 }
 
