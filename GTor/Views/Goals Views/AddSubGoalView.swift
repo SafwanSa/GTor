@@ -9,9 +9,8 @@
 import SwiftUI
 
 struct AddSubGoalView: View {
-    @EnvironmentObject var userService: UserService
     @EnvironmentObject var goalService: GoalService
-    
+    @Environment(\.presentationMode) private var presentationMode
     let importances = ["Very Important", "Important", "Not Important"]
     
     @State var title = ""
@@ -21,10 +20,9 @@ struct AddSubGoalView: View {
     @State var selectedImportanceIndex = -1
     
     @State var isHavingDeadline = false
-    @State var isHavingSubgoals = true
     @State var alertMessage = "None"
-    @Binding var isAddedGoalPresented: Bool
     @State var goal: Goal = .dummy
+    
     var body: some View {
         NavigationView {
             List {
@@ -45,24 +43,17 @@ struct AddSubGoalView: View {
                 }
                 
                 Section {
-                    Toggle(isOn: self.$isHavingSubgoals) {
-                        Text("Allow Sub Goals")
+                    HStack {
+                        Text("Importance")
+                        Spacer()
+                        TextFieldWithPickerAsInputView(data: self.importances, placeholder: "Importance", selectionIndex: self.$selectedImportanceIndex, text: self.$importance)
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 
-                if !self.isHavingSubgoals {
-                    Section {
-                        HStack {
-                            Text("Importance")
-                            Spacer()
-                            TextFieldWithPickerAsInputView(data: self.importances, placeholder: "Importance", selectionIndex: self.$selectedImportanceIndex, text: self.$importance)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                }
             }
             .navigationBarItems(leading:
-                Button(action: { self.isAddedGoalPresented = false }) {
+                Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                     Text("Cancel")
                 }
                 ,trailing:
@@ -72,23 +63,33 @@ struct AddSubGoalView: View {
             )
                 .listStyle(GroupedListStyle())
                 .environment(\.horizontalSizeClass, .regular)
-                .navigationBarTitle("Add Goal")
+                .navigationBarTitle("Add Sub Goal")
         }
     }
     
-       func addGoal() {
-        if self.isHavingSubgoals { self.importance = Importance.none.description }
-        let goal = Goal(uid: self.userService.user.uid, title: self.title, note: self.note, isSubGoal: true, importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0, dueDate: self.deadline, subGoals: [], isDecomposed: self.isHavingSubgoals)
-           
-        
-        
-        
+    func addGoal() {
+        let goal = Goal(uid: AuthService.userId, title: self.title, note: self.note, isSubGoal: true, importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0,
+                        dueDate: self.isHavingDeadline ? self.deadline : nil,
+                        isDecomposed: false)
+        self.goal.subGoals?.append(goal)
+        self.goalService.addSubGoal(mainGoal: self.goal) { (result) in
+            switch result {
+            case .failure(let error):
+                self.alertMessage = error.localizedDescription
+            case .success(()):
+                self.alertMessage = "Goal was sucssefully added"
+                self.presentationMode.wrappedValue.dismiss()
+            }
         }
 
+        
+        
+    }
+    
 }
 
 struct _AddSubGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        AddSubGoalView(isAddedGoalPresented: .constant(true))
+        AddSubGoalView()
     }
 }

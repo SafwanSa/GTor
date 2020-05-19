@@ -95,4 +95,15 @@ class GoalService: ObservableObject {
         }
     }
     
+    func addSubGoal(mainGoal: Goal, completion: @escaping (Result<Void, Error>)->()) {
+        FirestoreService.shared.updateDocument(collection: .goals, documentId: mainGoal.id.description, field: "subGoals", newData: mainGoal.subGoals) { (result) in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(()):
+                completion(.success(()))
+            }
+        }
+    }
+    
 }

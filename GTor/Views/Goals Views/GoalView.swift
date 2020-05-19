@@ -45,7 +45,7 @@ struct GoalView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .sheet(isPresented: self.$isSubGoalsListPresented) {
-                        SubGoalsList(goal: self.goal)
+                        SubGoalsList(goal: self.goal).environmentObject(self.goalService)
                     }
                 }
                 
@@ -96,6 +96,9 @@ struct GoalView: View {
             )
         }
         
+    func deleteSubGoal(){
+        
+    }
     
     func deleteGoal(){
         self.goalService.deleteGoal(goal: self.goal) { (result) in

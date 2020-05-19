@@ -10,6 +10,7 @@ import SwiftUI
 
 
 struct SubGoalsList: View {
+    @EnvironmentObject var goalService: GoalService
     @State var isAddGoalSelceted = false
     @Environment(\.presentationMode) private var presentationMode
 
@@ -30,7 +31,7 @@ struct SubGoalsList: View {
                 .padding(.horizontal, 16)
                 .padding(.top, 150)
             }
-            .navigationBarTitle("My Goals")
+            .navigationBarTitle("Sub Goals")
             .navigationBarItems(trailing:
                 HStack(spacing: 20) {
                     Button(action: {  }) {
@@ -49,7 +50,7 @@ struct SubGoalsList: View {
                     }
                 }
                 .sheet(isPresented: self.$isAddGoalSelceted) {
-                    AddGoalView()
+                    AddSubGoalView(goal: self.goal).environmentObject(self.goalService)
                 }
             )
                 .edgesIgnoringSafeArea(.all)

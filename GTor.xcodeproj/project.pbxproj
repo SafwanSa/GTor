@@ -105,7 +105,6 @@
 			children = (
 				171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */,
 				1709175D247231830011BB8C /* GoalCardView.swift */,
-				1709175F247233120011BB8C /* SubGoalsList.swift */,
 				17091763247235180011BB8C /* SelectCategoryView.swift */,
 				17D441FF247337C700DF91EC /* ModifiersViews.swift */,
 			);
@@ -231,6 +230,7 @@
 		17E7E7D8246CAB7900596500 /* Goals Views */ = {
 			isa = PBXGroup;
 			children = (
+				1709175F247233120011BB8C /* SubGoalsList.swift */,
 				17E7E7D4246CAB5100596500 /* GoalsList.swift */,
 				1721F56E246E7837004AB7AD /* GoalView.swift */,
 				17A61A6024707F12008B8C31 /* AddGoalView.swift */,
