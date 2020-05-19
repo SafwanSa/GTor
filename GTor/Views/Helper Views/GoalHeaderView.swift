@@ -1,5 +1,5 @@
 //
-//  HeaderView.swift
+//  GoalHeaderView.swift
 //  GTor
 //
 //  Created by Safwan Saigh on 20/05/2020.
