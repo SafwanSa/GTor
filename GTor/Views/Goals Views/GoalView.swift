@@ -11,6 +11,7 @@ import SwiftUI
 struct GoalView: View {
     @EnvironmentObject var goalService: GoalService
     var goal: Goal
+    @State var mainGoal = Goal.dummy
     @State var isSubGoalsListPresented = false
     @State var isEditingMode = false
     @State var isShowingAlert = false
@@ -63,7 +64,7 @@ struct GoalView: View {
                 .modifier(SmallCell())
                 .alert(isPresented: self.$isShowingAlert) {
                     Alert(title: Text("Are you sure you want to delete this goal?"), message: Text("All the Sub Goals of this goal will be deleted also"), primaryButton: .default(Text("Cancel")), secondaryButton: .destructive(Text("Delete"), action: {
-                        self.deleteGoal()
+                        self.goal.isSubGoal ? self.deleteSubGoal() : self.deleteGoal()
                     }))
                 }
                 
@@ -97,7 +98,17 @@ struct GoalView: View {
         }
         
     func deleteSubGoal(){
-        
+        self.mainGoal.subGoals?.removeAll(where: { (goal) -> Bool in
+            return goal.id == self.goal.id
+        })
+        self.goalService.updateSubGoals(mainGoal: self.mainGoal) { (result) in
+            switch result {
+            case .failure(let error):
+                self.isEditingMode = true
+            case .success(()):
+                self.isEditingMode = false
+            }
+        }
     }
     
     func deleteGoal(){

@@ -72,7 +72,7 @@ struct AddSubGoalView: View {
                         dueDate: self.isHavingDeadline ? self.deadline : nil,
                         isDecomposed: false)
         self.goal.subGoals?.append(goal)
-        self.goalService.addSubGoal(mainGoal: self.goal) { (result) in
+        self.goalService.updateSubGoals(mainGoal: self.goal) { (result) in
             switch result {
             case .failure(let error):
                 self.alertMessage = error.localizedDescription
