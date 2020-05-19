@@ -36,7 +36,7 @@ struct GoalHeaderView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-                .background(Color.white.opacity(isEditingMode ? 1 : 0.8))
+                .background(Color(UIColor.secondarySystemGroupedBackground).opacity(isEditingMode ? 1 : 0.8))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)
                 
@@ -50,7 +50,7 @@ struct GoalHeaderView: View {
     }
 }
 
-struct HeaderView_Previews: PreviewProvider {
+struct GoalHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         GoalHeaderView(goal: .dummy, isEditingMode: .constant(false), updatedTitle: .constant(""), updatedNote: .constant(""))
     }
