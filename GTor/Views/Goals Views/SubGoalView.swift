@@ -23,7 +23,7 @@ struct SubGoalView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 40.0) {
                 
-                HeaderView(goal: goal, isEditingMode: self.$isEditingMode, updatedTitle: self.$updatedTitle, updatedNote: self.$updatedNote)
+                GoalHeaderView(goal: goal, isEditingMode: self.$isEditingMode, updatedTitle: self.$updatedTitle, updatedNote: self.$updatedNote)
 
                 if self.goal.dueDate != nil{
                     HStack {

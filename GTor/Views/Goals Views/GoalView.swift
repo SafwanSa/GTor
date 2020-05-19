@@ -22,7 +22,7 @@ struct GoalView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 40.0) {
-                HeaderView(goal: goal, isEditingMode: self.$isEditingMode, updatedTitle: self.$updatedTitle, updatedNote: self.$updatedNote)
+                GoalHeaderView(goal: goal, isEditingMode: self.$isEditingMode, updatedTitle: self.$updatedTitle, updatedNote: self.$updatedNote)
 
                 if self.goal.dueDate != nil{
                     HStack {
@@ -139,83 +139,5 @@ struct GoalView: View {
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
         GoalView(goal: .dummy)
-    }
-}
-
-struct HeaderView: View {
-    var goal: Goal
-    @Binding var isEditingMode: Bool
-    @Binding var updatedTitle: String
-    @Binding var updatedNote: String
-    
-    var body: some View {
-        VStack {
-            VStack(alignment: .leading) {
-                Spacer()
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 20.0) {
-                        if isEditingMode {
-                            TextField("\(self.goal.title ?? "Title")", text: self.$updatedTitle)
-                                .font(.system(size: 20, weight: .regular))
-                            TextField("\(self.goal.note!.isEmpty ? "Note (Optional)" : self.goal.note ?? "Note")", text: self.$updatedNote)
-                                .font(.subheadline)
-                        }else{
-                            Text(self.goal.title ?? "Title")
-                                .font(.system(size: 20, weight: .regular))
-                            Text(self.goal.note ?? "Goal Note")
-                                .font(.subheadline)
-                        }
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
-                .background(Color.white.opacity(isEditingMode ? 1 : 0.8))
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)
-                
-            }
-            .background(Image(uiImage: #imageLiteral(resourceName: "shape-pdf-asset")).resizable().scaledToFill())
-            .frame(width: screen.width - 60, height: 170)
-        }
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)
-        
-    }
-}
-
-struct ImportanceCard: View {
-    var goal: Goal
-    let importances = ["Very Important", "Important", "Not Important"]
-    @State var selectedImportanceIndex = -1
-
-    @Binding var isEditingMode: Bool
-    @Binding var updatedImportance: String
-    
-    var body: some View {
-        HStack {
-            if isEditingMode && !self.goal.isDecomposed {
-                Text("Importance")
-                Spacer()
-                TextFieldWithPickerAsInputView(data: self.importances, placeholder: "Importance", selectionIndex: self.$selectedImportanceIndex, text: self.$updatedImportance)
-                    .padding()
-                    .foregroundColor(.primary)
-            }else {
-                Text("Importance")
-                Spacer()
-                Text("\(self.goal.importance?.description ?? "")")
-                    .padding()
-                    .foregroundColor(.primary)
-            }
-            
-        }
-        .modifier(SmallCell())
-        .overlay(
-            HStack {
-                Spacer()
-                Color.red
-                    .frame(width: 6)
-                    .frame(maxHeight: .infinity)
-                    .clipShape(RoundedRectangle(cornerRadius: 2))
-        })
     }
 }

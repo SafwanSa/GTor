@@ -18,6 +18,8 @@
 		1729898D246D0F2F00449C4F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898C246D0F2F00449C4F /* AuthService.swift */; };
 		1729898F246D13C200449C4F /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898E246D13C200449C4F /* AuthError.swift */; };
 		1762732C24748759000E9661 /* SubGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732B24748759000E9661 /* SubGoalView.swift */; };
+		1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732D24748D39000E9661 /* GoalHeaderView.swift */; };
+		1762733024748DA3000E9661 /* ImportanceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732F24748DA3000E9661 /* ImportanceCard.swift */; };
 		17A61A6124707F12008B8C31 /* AddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A61A6024707F12008B8C31 /* AddGoalView.swift */; };
 		17D44200247337C700DF91EC /* ModifiersViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D441FF247337C700DF91EC /* ModifiersViews.swift */; };
 		17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7A6246C921400596500 /* AppDelegate.swift */; };
@@ -60,6 +62,8 @@
 		1729898C246D0F2F00449C4F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1729898E246D13C200449C4F /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		1762732B24748759000E9661 /* SubGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGoalView.swift; sourceTree = "<group>"; };
+		1762732D24748D39000E9661 /* GoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalHeaderView.swift; sourceTree = "<group>"; };
+		1762732F24748DA3000E9661 /* ImportanceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportanceCard.swift; sourceTree = "<group>"; };
 		17A61A6024707F12008B8C31 /* AddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalView.swift; sourceTree = "<group>"; };
 		17D441FF247337C700DF91EC /* ModifiersViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiersViews.swift; sourceTree = "<group>"; };
 		17E7E7A3246C921400596500 /* GTor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +113,8 @@
 				1709175D247231830011BB8C /* GoalCardView.swift */,
 				17091763247235180011BB8C /* SelectCategoryView.swift */,
 				17D441FF247337C700DF91EC /* ModifiersViews.swift */,
+				1762732D24748D39000E9661 /* GoalHeaderView.swift */,
+				1762732F24748DA3000E9661 /* ImportanceCard.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -233,11 +239,11 @@
 			isa = PBXGroup;
 			children = (
 				1709175F247233120011BB8C /* SubGoalsList.swift */,
+				1762732B24748759000E9661 /* SubGoalView.swift */,
+				17091767247244800011BB8C /* AddSubGoalView.swift */,
 				17E7E7D4246CAB5100596500 /* GoalsList.swift */,
 				1721F56E246E7837004AB7AD /* GoalView.swift */,
 				17A61A6024707F12008B8C31 /* AddGoalView.swift */,
-				17091767247244800011BB8C /* AddSubGoalView.swift */,
-				1762732B24748759000E9661 /* SubGoalView.swift */,
 			);
 			path = "Goals Views";
 			sourceTree = "<group>";
@@ -416,7 +422,9 @@
 				1709175E247231830011BB8C /* GoalCardView.swift in Sources */,
 				17091760247233120011BB8C /* SubGoalsList.swift in Sources */,
 				17E7E7CE246CAAF500596500 /* SignInView.swift in Sources */,
+				1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */,
 				17E7E7C4246CA6EB00596500 /* User.swift in Sources */,
+				1762733024748DA3000E9661 /* ImportanceCard.swift in Sources */,
 				17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */,
 				171400AD2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift in Sources */,
 				1729898D246D0F2F00449C4F /* AuthService.swift in Sources */,
