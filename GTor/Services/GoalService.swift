@@ -71,7 +71,7 @@ class GoalService: ObservableObject {
         }
     }
     
-    private func validateGoal(goal: Goal, completion: @escaping (Result<Void, Error>)->()) {
+    func validateGoal(goal: Goal, completion: @escaping (Result<Void, Error>)->()) {
         if goal.categories?.count == 0 && !goal.isSubGoal {
             completion(.failure(GoalErrors.noCategory))
         } else if goal.title!.isEmpty {

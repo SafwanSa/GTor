@@ -70,21 +70,26 @@ struct AddSubGoalView: View {
     }
     
     func addGoal() {
-        let goal = Goal(uid: AuthService.userId, title: self.title, note: self.note, isSubGoal: true, importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0,
-                        dueDate: self.isHavingDeadline ? self.deadline : nil,
-                        isDecomposed: false)
-        self.goal.subGoals?.append(goal)
-        self.goalService.updateSubGoals(goal: self.goal) { (result) in
+        let subGoal = Goal(uid: AuthService.userId, title: self.title, note: self.note, isSubGoal: true, importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0,
+                           dueDate: self.isHavingDeadline ? self.deadline : nil,
+                           isDecomposed: false)
+        goalService.validateGoal(goal: subGoal) { (result) in
             switch result {
             case .failure(let error):
                 self.alertMessage = error.localizedDescription
             case .success(()):
-                self.alertMessage = "Goal was sucssefully added"
-                self.presentationMode.wrappedValue.dismiss()
+                self.goal.subGoals?.append(subGoal)
+                self.goalService.updateSubGoals(goal: self.goal) { (result) in
+                    switch result {
+                    case .failure(let error):
+                        self.alertMessage = error.localizedDescription
+                    case .success(()):
+                        self.alertMessage = "Goal was sucssefully added"
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                }
             }
         }
-
-        
         
     }
     
