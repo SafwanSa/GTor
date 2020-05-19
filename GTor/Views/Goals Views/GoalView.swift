@@ -11,7 +11,6 @@ import SwiftUI
 struct GoalView: View {
     @ObservedObject var goalService = GoalService.shared
     var goal: Goal
-    @State var mainGoal: Goal
     @State var isSubGoalsListPresented = false
     @State var isEditingMode = false
     @State var isShowingAlert = false
@@ -62,20 +61,17 @@ struct GoalView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(.primary)
-                        
                     }
                 }
                 .modifier(SmallCell())
                 .alert(isPresented: self.$isShowingAlert) {
                     Alert(title: Text("Are you sure you want to delete this goal?"),
-                          message: Text(self.goal.isSubGoal ? "" : self.goal.isDecomposed ? "All the Sub Goals of this goal will be deleted also" : ""),
+                          message: Text(self.goal.isDecomposed ? "All the Sub Goals of this goal will be deleted also" : ""),
                           primaryButton: .default(Text("Cancel")),
                           secondaryButton: .destructive(Text("Delete"), action: {
-                        self.goal.isSubGoal ? self.deleteSubGoal() : self.deleteGoal()
+                            self.deleteGoal()
                     }))
                 }
-                
-                
             }
             .animation(.spring())
             .padding(.top, 50)
@@ -85,10 +81,10 @@ struct GoalView: View {
             Group {
                 HStack(spacing: 50) {
                     if self.isEditingMode {
-                        Button(action: { /*cancel*/ self.isEditingMode = false  }) {
+                        Button(action: { self.isEditingMode = false }) {
                             Text("Cancel")
                         }
-                        Button(action: { /*save*/ self.saveGoalsDetails(goal: self.goal, mainGoal: self.mainGoal) }) {
+                        Button(action: { self.saveGoal(goal: self.goal) }) {
                             Text("Save")
                         }
                     }else if !self.isEditingMode && !self.isSubGoalsListPresented{
@@ -104,21 +100,7 @@ struct GoalView: View {
                 }
             )
         }
-        
-    func deleteSubGoal(){
-        self.mainGoal.subGoals?.removeAll(where: { (goal) -> Bool in
-            return goal.id == self.goal.id
-        })
-        self.goalService.updateSubGoals(goal: self.mainGoal) { (result) in
-            switch result {
-            case .failure(let error):
-                self.isEditingMode = true
-            case .success(()):
-                self.isEditingMode = false
-            }
-        }
-    }
-    
+
     func deleteGoal(){
         self.goalService.deleteGoal(goal: self.goal) { (result) in
             switch result {//TODO show message after deleting
@@ -130,10 +112,9 @@ struct GoalView: View {
         }
     }
     
-    func saveGoalsDetails(goal: Goal, mainGoal: Goal) {
+    func saveGoal(goal: Goal) {
         var goalCopy = goal
-        var mainGoalCopy = mainGoal
-        var resultedGoal = Goal.dummy
+        
         if goalCopy.importance?.description != self.updatedImportance && updatedImportance != Importance.none.description {
             goalCopy.importance = Goal.stringToImportance(importance: self.updatedImportance)
         }
@@ -144,14 +125,7 @@ struct GoalView: View {
             goalCopy.note = self.updatedNote
         }
         
-        if goal.isSubGoal {
-            mainGoalCopy.subGoals?.removeAll(where: { (goal) -> Bool in
-                return goal.id == goalCopy.id
-            })
-            mainGoalCopy.subGoals?.append(goalCopy)
-            resultedGoal = mainGoalCopy
-        } else { resultedGoal = goalCopy }
-        goalService.updateGoal(goal: resultedGoal) { (result) in
+        goalService.updateGoal(goal: goalCopy) { (result) in
             switch result {
             case .failure(let error):
                 self.isEditingMode = true
@@ -164,7 +138,7 @@ struct GoalView: View {
 
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalView(goal: .dummy, mainGoal: .dummy)
+        GoalView(goal: .dummy)
     }
 }
 
