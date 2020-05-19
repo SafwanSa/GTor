@@ -30,8 +30,8 @@ class GoalService: ObservableObject {
     @Published var goals: [Goal] = []
     static var shared = GoalService()
     
-    func getGoalsFromDatabase(uid: String){
-        FirestoreService.shared.getDocuments(collection: .goals, documentId: uid) { (result: Result<[Goal], Error>) in
+    func getGoalsFromDatabase(){
+        FirestoreService.shared.getDocuments(collection: .goals, documentId: AuthService.userId ?? "") { (result: Result<[Goal], Error>) in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)

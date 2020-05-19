@@ -89,7 +89,6 @@ struct AddGoalView: View {
                 case .success(()):
                     self.alertMessage = "Goal was sucssefully added"
                     self.presentationMode.wrappedValue.dismiss()
-
                 }
             }
         }

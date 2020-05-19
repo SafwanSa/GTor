@@ -164,19 +164,22 @@ class FirestoreService {
     }
     
     func updateDocument<T: Codable>(collection: FirestoreKeys.Collection, documentId: String, field: String, newData: T, completion: @escaping (Result<Void, Error>) -> ()){
-        do {
-            let doc = try FirebaseEncoder().encode(newData)
-            let reference = Firestore.firestore().collection(collection.rawValue).document(documentId)
-            reference.updateData([field: doc]) { (error) in
-                if let error = error {
-                    completion(.failure(error))
+        DispatchQueue.main.async {
+            do {
+                let doc = try FirebaseEncoder().encode(newData)
+                let reference = Firestore.firestore().collection(collection.rawValue).document(documentId)
+                reference.updateData([field: doc]) { (error) in
+                    if let error = error {
+                        completion(.failure(error))
+                    }
+                    completion(.success(()))
                 }
-                completion(.success(()))
+                
+            }catch(let error) {
+                fatalError("Error in encoding the model: \(error.localizedDescription)")
             }
-            
-        }catch(let error) {
-            fatalError("Error in encoding the model: \(error.localizedDescription)")
         }
+
 
         
     }
