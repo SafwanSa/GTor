@@ -53,7 +53,7 @@ struct GoalCardView: View {
         .frame(width: screen.width - 40, height: 120)
         .padding(.leading, 16)
         .padding(.vertical, 16)
-        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
+        .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemGray).opacity(0.3), Color(UIColor.secondarySystemBackground)]), startPoint: .bottomLeading, endPoint: .topTrailing))
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
         .overlay(
@@ -64,5 +64,11 @@ struct GoalCardView: View {
                     .frame(maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 2))
         })
+    }
+}
+
+struct GoalCardView_Preview: PreviewProvider {
+    static var previews: some View {
+        GoalCardView(goal: .dummy)
     }
 }

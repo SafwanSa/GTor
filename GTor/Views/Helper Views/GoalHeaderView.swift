@@ -41,7 +41,7 @@ struct GoalHeaderView: View {
                 .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)
                 
             }
-            .background(Image(uiImage: #imageLiteral(resourceName: "shape-pdf-asset")).resizable().scaledToFill())
+            .background(Image(uiImage: #imageLiteral(resourceName: "shape1")).resizable().scaledToFill())
             .frame(width: screen.width - 60, height: 170)
         }
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
