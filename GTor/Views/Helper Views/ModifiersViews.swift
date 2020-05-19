@@ -15,7 +15,7 @@ struct SmallCell: ViewModifier {
             .padding(10)
             .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).opacity(1), Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))]), startPoint: .bottomLeading, endPoint: .topTrailing))
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
+            .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)
     }
 }
 

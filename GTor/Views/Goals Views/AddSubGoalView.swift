@@ -44,8 +44,6 @@ struct AddSubGoalView: View {
                 
                 Section {
                     HStack {
-                        Text("Importance")
-                        Spacer()
                         TextFieldWithPickerAsInputView(data: self.importances, placeholder: "Importance", selectionIndex: self.$selectedImportanceIndex, text: self.$importance)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)

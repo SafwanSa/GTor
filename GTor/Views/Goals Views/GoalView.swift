@@ -63,13 +63,17 @@ struct GoalView: View {
                 }
                 .modifier(SmallCell())
                 .alert(isPresented: self.$isShowingAlert) {
-                    Alert(title: Text("Are you sure you want to delete this goal?"), message: Text("All the Sub Goals of this goal will be deleted also"), primaryButton: .default(Text("Cancel")), secondaryButton: .destructive(Text("Delete"), action: {
+                    Alert(title: Text("Are you sure you want to delete this goal?"),
+                          message: Text(self.goal.isSubGoal ? "" : self.goal.isDecomposed ? "All the Sub Goals of this goal will be deleted also" : ""),
+                          primaryButton: .default(Text("Cancel")),
+                          secondaryButton: .destructive(Text("Delete"), action: {
                         self.goal.isSubGoal ? self.deleteSubGoal() : self.deleteGoal()
                     }))
                 }
                 
                 
             }
+            .animation(.spring())
             .padding(.top, 50)
         }
         .navigationBarTitle("\(self.goal.title ?? "Title")")
@@ -160,14 +164,14 @@ struct HeaderView: View {
                 .padding()
                 .background(Color.white.opacity(isEditingMode ? 1 : 0.8))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
+                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)
                 
             }
             .background(Image(uiImage: #imageLiteral(resourceName: "shape-pdf-asset")).resizable().scaledToFill())
             .frame(width: screen.width - 60, height: 170)
         }
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
+        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)
         
     }
 }
