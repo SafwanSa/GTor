@@ -18,7 +18,7 @@ enum AuthState{
 class UserService: ObservableObject {
     @Published var user: User = .dummy
     @Published var authState: AuthState = .udefined
-    static var shared = UserService()
+    static let shared = UserService()
 
     
     var authStateDidChangeHandler: AuthStateDidChangeListenerHandle?

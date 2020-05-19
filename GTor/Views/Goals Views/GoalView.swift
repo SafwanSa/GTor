@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GoalView: View {
     @ObservedObject var goalService = GoalService.shared
-    @State var goal: Goal
+    var goal: Goal
     @State var mainGoal: Goal
     @State var isSubGoalsListPresented = false
     @State var isEditingMode = false
@@ -88,7 +88,7 @@ struct GoalView: View {
                         Button(action: { /*cancel*/ self.isEditingMode = false  }) {
                             Text("Cancel")
                         }
-                        Button(action: { /*save*/ }) {
+                        Button(action: { /*save*/ self.saveGoalsDetails(goal: self.goal, mainGoal: self.mainGoal) }) {
                             Text("Save")
                         }
                     }else if !self.isEditingMode && !self.isSubGoalsListPresented{
@@ -130,13 +130,36 @@ struct GoalView: View {
         }
     }
     
-    func saveGoalsDetails() {
-        self.goal.importance = Goal.stringToImportance(importance: self.updatedImportance)
-        self.goal.title = self.updatedTitle
-        self.goal.note = self.updatedNote
-//        goalService.
+    func saveGoalsDetails(goal: Goal, mainGoal: Goal) {
+        var goalCopy = goal
+        var mainGoalCopy = mainGoal
+        var resultedGoal = Goal.dummy
+        if goalCopy.importance?.description != self.updatedImportance && updatedImportance != Importance.none.description {
+            goalCopy.importance = Goal.stringToImportance(importance: self.updatedImportance)
+        }
+        if goalCopy.title != self.updatedTitle && !updatedTitle.isEmpty {
+            goalCopy.title = self.updatedTitle
+        }
+        if goalCopy.note != self.updatedNote {
+            goalCopy.note = self.updatedNote
+        }
+        
+        if goal.isSubGoal {
+            mainGoalCopy.subGoals?.removeAll(where: { (goal) -> Bool in
+                return goal.id == goalCopy.id
+            })
+            mainGoalCopy.subGoals?.append(goalCopy)
+            resultedGoal = mainGoalCopy
+        } else { resultedGoal = goalCopy }
+        goalService.updateGoal(goal: resultedGoal) { (result) in
+            switch result {
+            case .failure(let error):
+                self.isEditingMode = true
+            case .success(()):
+                self.isEditingMode = false
+            }
+        }
     }
-    
 }
 
 struct GoalView_Previews: PreviewProvider {
