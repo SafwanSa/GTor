@@ -136,8 +136,7 @@ class FirestoreService {
     }
     
     func saveDocument<T: Codable>(collection: FirestoreKeys.Collection, documentId: String, model: T, completion: @escaping (Result<Void, Error>) -> ()){
-        var reference = Firestore.firestore().collection(collection.rawValue).document()
-        if !documentId.isEmpty { reference = Firestore.firestore().collection(collection.rawValue).document(documentId) }
+       let reference = Firestore.firestore().collection(collection.rawValue).document(documentId)
         var doc: [String:Any] = [:]
         do {
             doc = try FirebaseEncoder().encode(model) as! [String : Any]
@@ -154,54 +153,31 @@ class FirestoreService {
         }
     }
     
-    func deleteDocument(collection: FirestoreKeys.Collection, documentId: String, modelId: String, completion: @escaping (Result<Void, Error>) -> ()){
-        let reference = Firestore.firestore().collection(collection.rawValue).whereField("uid", isEqualTo: AuthService.userId ?? "").whereField("id", isEqualTo: modelId)
-        let batch = Firestore.firestore().collection(collection.rawValue)
-        reference.getDocuments { (querySnapshot, err) in
-              DispatchQueue.main.async {
-                  if let error = err {
-                      completion(.failure(error))
-                  }
-                  guard let querySnapshot = querySnapshot else {
-                      completion(.failure(FirestoreErrorHandler.noDocumentSnapshot))
-                      return
-                  }
-                  let documents = querySnapshot.documents
-                  for document in documents {
-                    batch.document(document.documentID).delete()
-                  }
-                completion(.success(()))
-              }
+    func deleteDocument(collection: FirestoreKeys.Collection, documentId: String, completion: @escaping (Result<Void, Error>) -> ()){
+        let reference = Firestore.firestore().collection(collection.rawValue).document(documentId)
+        reference.delete { (error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            completion(.success(()))
         }
     }
     
     func updateDocument<T: Codable>(collection: FirestoreKeys.Collection, documentId: String, field: String, newData: T, completion: @escaping (Result<Void, Error>) -> ()){
-        let reference = Firestore.firestore().collection(collection.rawValue).whereField("uid", isEqualTo: AuthService.userId).whereField("id", isEqualTo: documentId)
-        let batch = Firestore.firestore().collection(collection.rawValue)
-        reference.getDocuments { (querySnapshot, err) in
-            DispatchQueue.main.async {
-                if let error = err {
+        do {
+            let doc = try FirebaseEncoder().encode(newData)
+            let reference = Firestore.firestore().collection(collection.rawValue).document(documentId)
+            reference.updateData([field: doc]) { (error) in
+                if let error = error {
                     completion(.failure(error))
-                }
-                guard let querySnapshot = querySnapshot else {
-                    completion(.failure(FirestoreErrorHandler.noDocumentSnapshot))
-                    return
-                }
-                let documents = querySnapshot.documents
-                for document in documents {
-                    //Decoding
-                    do {
-                        let docField = try FirebaseEncoder().encode(newData)
-                        batch.document(document.documentID).updateData([
-                            field: docField
-                        ])
-                    } catch (let error) {
-                        fatalError("Error in decoding the model: \(error.localizedDescription)")
-                    }
                 }
                 completion(.success(()))
             }
+            
+        }catch(let error) {
+            fatalError("Error in encoding the model: \(error.localizedDescription)")
         }
+
         
     }
     

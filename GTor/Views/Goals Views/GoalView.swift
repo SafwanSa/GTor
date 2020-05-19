@@ -10,16 +10,20 @@ import SwiftUI
 
 struct GoalView: View {
     @EnvironmentObject var goalService: GoalService
-    var goal: Goal
-    @State var mainGoal = Goal.dummy
+    @State var goal: Goal
+    @State var mainGoal: Goal
     @State var isSubGoalsListPresented = false
     @State var isEditingMode = false
     @State var isShowingAlert = false
     
+    @State var updatedImportance: String = Importance.none.description
+    @State var updatedTitle: String = ""
+    @State var updatedNote: String = ""
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 40.0) {
-                HeaderView(goal: goal, isEditingMode: self.$isEditingMode)
+                HeaderView(goal: goal, isEditingMode: self.$isEditingMode, updatedTitle: self.$updatedTitle, updatedNote: self.$updatedNote)
 
                 if self.goal.dueDate != nil{
                     HStack {
@@ -33,7 +37,7 @@ struct GoalView: View {
                     .modifier(SmallCell())
                 }
                 
-                ImportanceCard(goal: goal, isEditingMode: self.$isEditingMode)
+                ImportanceCard(goal: goal, isEditingMode: self.$isEditingMode, updatedImportance: self.$updatedImportance)
 
                 if goal.isDecomposed {
                     Button(action: { self.isSubGoalsListPresented = true }) {
@@ -105,7 +109,7 @@ struct GoalView: View {
         self.mainGoal.subGoals?.removeAll(where: { (goal) -> Bool in
             return goal.id == self.goal.id
         })
-        self.goalService.updateSubGoals(mainGoal: self.mainGoal) { (result) in
+        self.goalService.updateSubGoals(goal: self.mainGoal) { (result) in
             switch result {
             case .failure(let error):
                 self.isEditingMode = true
@@ -126,20 +130,26 @@ struct GoalView: View {
         }
     }
     
+    func saveGoalsDetails() {
+        self.goal.importance = Goal.stringToImportance(importance: self.updatedImportance)
+        self.goal.title = self.updatedTitle
+        self.goal.note = self.updatedNote
+//        goalService.
+    }
+    
 }
 
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalView(goal: .dummy)
+        GoalView(goal: .dummy, mainGoal: .dummy)
     }
 }
 
 struct HeaderView: View {
     var goal: Goal
     @Binding var isEditingMode: Bool
-    @State var updatedTitle: String = ""
-    @State var updatedNote: String = ""
-    @State var updatedDeadline: String = ""
+    @Binding var updatedTitle: String
+    @Binding var updatedNote: String
     
     var body: some View {
         VStack {
@@ -178,14 +188,18 @@ struct HeaderView: View {
 
 struct ImportanceCard: View {
     var goal: Goal
+    let importances = ["Very Important", "Important", "Not Important"]
+    @State var selectedImportanceIndex = -1
+
     @Binding var isEditingMode: Bool
-    @State var updatedImportance = ""
+    @Binding var updatedImportance: String
+    
     var body: some View {
         HStack {
             if isEditingMode && !self.goal.isDecomposed {
                 Text("Importance")
                 Spacer()
-                TextField("\("Very Important")", text: self.$updatedImportance)
+                TextFieldWithPickerAsInputView(data: self.importances, placeholder: "Importance", selectionIndex: self.$selectedImportanceIndex, text: self.$updatedImportance)
                     .padding()
                     .foregroundColor(.primary)
             }else {

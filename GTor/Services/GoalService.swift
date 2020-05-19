@@ -42,7 +42,7 @@ class GoalService: ObservableObject {
     }
     
     func saveGoalsToDatabase(goal: Goal, completion: @escaping (Result<Void, Error>)->()){
-        FirestoreService.shared.saveDocument(collection: .goals, documentId: "", model: goal) { result in
+        FirestoreService.shared.saveDocument(collection: .goals, documentId: goal.id.description, model: goal) { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
@@ -85,7 +85,7 @@ class GoalService: ObservableObject {
     
     
     func deleteGoal(goal: Goal, completion: @escaping (Result<Void, Error>)->()) {
-        FirestoreService.shared.deleteDocument(collection: .goals, documentId: AuthService.userId ?? "", modelId: goal.id.description) { (result) in
+        FirestoreService.shared.deleteDocument(collection: .goals, documentId: goal.id.description) { (result) in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
@@ -95,8 +95,8 @@ class GoalService: ObservableObject {
         }
     }
     
-    func updateSubGoals(mainGoal: Goal, completion: @escaping (Result<Void, Error>)->()) {
-        FirestoreService.shared.updateDocument(collection: .goals, documentId: mainGoal.id.description, field: "subGoals", newData: mainGoal.subGoals) { (result) in
+    func updateSubGoals(goal: Goal, completion: @escaping (Result<Void, Error>)->()) {
+        FirestoreService.shared.updateDocument(collection: .goals, documentId: goal.id.description, field: "subGoals", newData: goal.subGoals!) { (result) in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
@@ -106,7 +106,7 @@ class GoalService: ObservableObject {
         }
     }
     
-    func deleteSubGoal(mainGoal: Goal) {
-        
+    func updateGoal(goal: Goal) {
+
     }
 }

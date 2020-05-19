@@ -18,7 +18,7 @@ struct GoalsList: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
                     ForEach(self.goalService.goals) { goal in
-                        NavigationLink(destination: GoalView(goal: goal)) {
+                        NavigationLink(destination: GoalView(goal: goal, mainGoal: .dummy)) {
                             GoalCardView(goal: goal)
                         }
                          .buttonStyle(PlainButtonStyle())

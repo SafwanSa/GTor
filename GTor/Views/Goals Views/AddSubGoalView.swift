@@ -49,6 +49,10 @@ struct AddSubGoalView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 
+                Section {
+                    Text(self.alertMessage)
+                }
+                
             }
             .navigationBarItems(leading:
                 Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
@@ -70,7 +74,7 @@ struct AddSubGoalView: View {
                         dueDate: self.isHavingDeadline ? self.deadline : nil,
                         isDecomposed: false)
         self.goal.subGoals?.append(goal)
-        self.goalService.updateSubGoals(mainGoal: self.goal) { (result) in
+        self.goalService.updateSubGoals(goal: self.goal) { (result) in
             switch result {
             case .failure(let error):
                 self.alertMessage = error.localizedDescription
