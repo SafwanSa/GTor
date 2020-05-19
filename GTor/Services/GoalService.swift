@@ -28,7 +28,7 @@ extension GoalErrors: LocalizedError {
 
 class GoalService: ObservableObject {
     @Published var goals: [Goal] = []
-    
+    static var shared = GoalService()
     
     func getGoalsFromDatabase(uid: String){
         FirestoreService.shared.getDocuments(collection: .goals, documentId: uid) { (result: Result<[Goal], Error>) in

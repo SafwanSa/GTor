@@ -9,8 +9,8 @@
 import SwiftUI
 import FirebaseAuth
 struct LaunchView: View {
-    @EnvironmentObject var userService: UserService
-    @EnvironmentObject var goalService: GoalService
+    @ObservedObject var userService = UserService.shared
+    @ObservedObject var goalService = GoalService.shared
     
     @State var msg = ""
     
@@ -66,7 +66,7 @@ struct LaunchView: View {
 
 struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {
-        LaunchView().environmentObject(UserService()).environmentObject(GoalService())
+        LaunchView()
     }
 }
 

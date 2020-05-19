@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct SubGoalsList: View {
-    @EnvironmentObject var goalService: GoalService
+    @ObservedObject var goalService = GoalService.shared
     @State var isAddGoalSelceted = false
     @Environment(\.presentationMode) private var presentationMode
 
@@ -50,7 +50,7 @@ struct SubGoalsList: View {
                     }
                 }
                 .sheet(isPresented: self.$isAddGoalSelceted) {
-                    AddSubGoalView(goal: self.goal).environmentObject(self.goalService)
+                    AddSubGoalView(goal: self.goal)
                 }
             )
                 .edgesIgnoringSafeArea(.all)

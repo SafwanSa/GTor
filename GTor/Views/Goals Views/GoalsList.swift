@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct GoalsList: View {
-    @EnvironmentObject var userService: UserService
-    @EnvironmentObject var goalService: GoalService
+    @ObservedObject var userService = UserService.shared
+    @ObservedObject var goalService = GoalService.shared
     @State var isAddGoalSelceted = false
     
     var body: some View {
@@ -49,8 +49,6 @@ struct GoalsList: View {
                 }
                 .sheet(isPresented: self.$isAddGoalSelceted) {
                     AddGoalView()
-                        .environmentObject(self.userService)
-                        .environmentObject(self.goalService)
                     }
             )
                 .edgesIgnoringSafeArea(.all)
@@ -61,6 +59,6 @@ struct GoalsList: View {
 
 struct GoalsView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalsList().environmentObject(UserService()).environmentObject(GoalService())
+        GoalsList()
     }
 }

@@ -10,8 +10,8 @@ import SwiftUI
 import UIKit
 
 struct AddGoalView: View {
-    @EnvironmentObject var userService: UserService
-    @EnvironmentObject var goalService: GoalService
+    @ObservedObject var userService = UserService.shared
+    @ObservedObject var goalService = GoalService.shared
     @Environment(\.presentationMode) private var presentationMode
 
     @State var categories = categoriesData//TODO bring this from db
@@ -99,7 +99,7 @@ struct AddGoalView: View {
 
 struct AddGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        AddGoalView().environmentObject(GoalService()).environmentObject(UserService())
+        AddGoalView()
     }
 }
 

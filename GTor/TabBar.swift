@@ -10,8 +10,8 @@ import SwiftUI
 import FirebaseAuth
 
 struct TabBar: View {
-    @EnvironmentObject var userService: UserService
-    @EnvironmentObject var goalService: GoalService
+    @ObservedObject var userService = UserService.shared
+    @ObservedObject var goalService = GoalService.shared
     
     func signIn(){
         Auth.auth().signIn(withEmail: "safwan9f@gmail.com", password: "sa123456") { (result, err) in
@@ -34,7 +34,7 @@ struct TabBar: View {
         .onAppear{
             
 //                        try! Auth.auth().signOut()
-                        self.signIn()
+//                        self.signIn()
             self.userService.configureAuthStateDidChnageListner()
             self.goalService.getGoalsFromDatabase(uid: AuthService.userId ?? User.dummy.uid)//This should be moved to the configureAuthStateDidChnageListner
 //                                            self.goalService.goals.append(.dummy)
@@ -44,6 +44,6 @@ struct TabBar: View {
 
 struct TabBar_Previews: PreviewProvider {
     static var previews: some View {
-        TabBar().environmentObject(UserService()).environmentObject(GoalService())
+        TabBar()
     }
 }

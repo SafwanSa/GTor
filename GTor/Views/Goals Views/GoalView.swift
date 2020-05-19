@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct GoalView: View {
-    @EnvironmentObject var goalService: GoalService
+    @ObservedObject var goalService = GoalService.shared
     @State var goal: Goal
     @State var mainGoal: Goal
     @State var isSubGoalsListPresented = false
@@ -50,7 +50,7 @@ struct GoalView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .sheet(isPresented: self.$isSubGoalsListPresented) {
-                        SubGoalsList(goal: self.goal).environmentObject(self.goalService)
+                        SubGoalsList(goal: self.goal)
                     }
                 }
                 

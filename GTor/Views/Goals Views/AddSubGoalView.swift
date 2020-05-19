@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct AddSubGoalView: View {
-    @EnvironmentObject var goalService: GoalService
+    @ObservedObject var goalService = GoalService.shared
     @Environment(\.presentationMode) private var presentationMode
     let importances = ["Very Important", "Important", "Not Important"]
     
