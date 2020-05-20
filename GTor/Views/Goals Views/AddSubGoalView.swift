@@ -93,7 +93,6 @@ struct AddSubGoalView: View {
                         self.alertMessage = error.localizedDescription
                     case .success(()):
                         self.isLoading = false
-                        self.alertMessage = "Goal was sucssefully added"
                         self.presentationMode.wrappedValue.dismiss()
                     }
                 }
