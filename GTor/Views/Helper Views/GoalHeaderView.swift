@@ -38,15 +38,14 @@ struct GoalHeaderView: View {
                 .padding()
                 .background(Color(UIColor.secondarySystemGroupedBackground).opacity(isEditingMode ? 1 : 0.8))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)
-                
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
             }
             .background(Image(uiImage: #imageLiteral(resourceName: "shape1")).resizable().scaledToFill())
             .frame(width: screen.width - 60, height: 170)
         }
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)
-        
+        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+
     }
 }
 

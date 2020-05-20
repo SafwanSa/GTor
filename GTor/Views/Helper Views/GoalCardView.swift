@@ -55,7 +55,7 @@ struct GoalCardView: View {
         .padding(.vertical, 16)
         .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemGray).opacity(0.3), Color(UIColor.secondarySystemBackground)]), startPoint: .bottomLeading, endPoint: .topTrailing))
         .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
+        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
         .overlay(
             HStack {
                 Spacer()
