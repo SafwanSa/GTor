@@ -28,56 +28,65 @@ struct AddGoalView: View {
     @State var isHavingSubgoals = true
     @State var isSelectCategoryExpanded = false
     @State var alertMessage = "None"
+    @State var isLoading = false
+    @State var isShowingAlert = false
     
     var body: some View {
-        NavigationView {
-            List {
-                SelectCategoryView(isCategoryPressed: self.$isSelectCategoryExpanded, selectedCategories: self.$selectedCategories, categories: self.$categories)
-                
-                Section {
-                    TextField("Title", text: self.$title)
-                    TextField("Note (Optional)", text: self.$note)
-                }
-                
-                Section {
-                    Toggle(isOn: self.$isHavingDeadline) {
-                        Text("Add a deadline")
+        ZStack {
+            NavigationView {
+                List {
+                    SelectCategoryView(isCategoryPressed: self.$isSelectCategoryExpanded, selectedCategories: self.$selectedCategories, categories: self.$categories)
+                    
+                    Section {
+                        TextField("Title", text: self.$title)
+                        TextField("Note (Optional)", text: self.$note)
                     }
-                    if self.isHavingDeadline {
-                        DatePicker(selection: self.$deadline) {
-                            Text("Deadline")
+                    
+                    Section {
+                        Toggle(isOn: self.$isHavingDeadline) {
+                            Text("Add a deadline")
+                        }
+                        if self.isHavingDeadline {
+                            DatePicker(selection: self.$deadline) {
+                                Text("Deadline")
+                            }
+                        }
+                    }
+                    
+                    Section {
+                        Toggle(isOn: self.$isHavingSubgoals) {
+                            Text("Allow Sub Goals")
+                        }
+                    }
+                    
+                    if !self.isHavingSubgoals {
+                        Section {
+                                TextFieldWithPickerAsInputView(data: self.importances, placeholder: "Importance", selectionIndex: self.$selectedImportanceIndex, text: self.$importance)
                         }
                     }
                 }
-                
-                Section {
-                    Toggle(isOn: self.$isHavingSubgoals) {
-                        Text("Allow Sub Goals")
+                .navigationBarItems(leading:
+                    Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
+                        Text("Cancel")
                     }
-                }
-                
-                if !self.isHavingSubgoals {
-                    Section {
-                            TextFieldWithPickerAsInputView(data: self.importances, placeholder: "Importance", selectionIndex: self.$selectedImportanceIndex, text: self.$importance)
+                    ,trailing:
+                    Button(action: { self.createGoal()}) {
+                        Text("Done")
                     }
-                }
+                )
+                    .listStyle(GroupedListStyle())
+                    .environment(\.horizontalSizeClass, .regular)
+                    .navigationBarTitle("Add Goal")
             }
-            .navigationBarItems(leading:
-                Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-                    Text("Cancel")
-                }
-                ,trailing:
-                Button(action: { self.createGoal()}) {
-                    Text("Done")
-                }
-            )
-                .listStyle(GroupedListStyle())
-                .environment(\.horizontalSizeClass, .regular)
-                .navigationBarTitle("Add Goal")
+            LoadingView(isLoading: self.$isLoading)
+        }
+        .alert(isPresented: self.$isShowingAlert) {
+            Alert(title: Text(self.alertMessage))
         }
     }
     
        func createGoal() {
+        isLoading = true
         if self.isHavingSubgoals { self.importance = Importance.none.description }
         let goal = Goal(uid: self.userService.user.uid, title: self.title, note: self.note, isSubGoal: false , importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0,
                         dueDate: self.isHavingDeadline ? self.deadline : nil, categories: self.selectedCategories,
@@ -85,14 +94,15 @@ struct AddGoalView: View {
             self.goalService.saveGoal(goal: goal) { (result) in
                 switch result {
                 case .failure(let error):
+                    self.isLoading = false
+                    self.isShowingAlert = true
                     self.alertMessage = error.localizedDescription
                 case .success(()):
-                    self.alertMessage = "Goal was sucssefully added"
+                    self.isLoading = false
                     self.presentationMode.wrappedValue.dismiss()
                 }
             }
         }
-
 }
  
 

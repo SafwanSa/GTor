@@ -23,7 +23,7 @@ struct LoadingView: View {
             }
         }
         .transition(.opacity)
-        .animation(.linear(duration: 0.2))
+        .animation(.linear(duration: 0.5))
     }
 }
 
