@@ -16,6 +16,7 @@ struct LoadingView: View {
             if isLoading {
                 BlurView(style: .systemMaterial)
                     .edgesIgnoringSafeArea(.all)
+                    .opacity(0.7)
                 
                 LottieView(filename: "loading")
                     .frame(width: 200, height: 200)
