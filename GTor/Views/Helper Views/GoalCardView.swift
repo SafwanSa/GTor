@@ -21,7 +21,7 @@ struct GoalCardView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 60, height: 90)
                 }
-                .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                .background(Color(UIColor.secondarySystemBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .multilineTextAlignment(.leading)
                 .offset(x: -10, y: -15)
