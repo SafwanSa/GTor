@@ -30,6 +30,7 @@ struct AddGoalView: View {
     @State var alertMessage = "None"
     @State var isLoading = false
     @State var isShowingAlert = false
+
     
     var body: some View {
         ZStack {
@@ -44,18 +45,18 @@ struct AddGoalView: View {
                     
                     Section {
                         Toggle(isOn: self.$isHavingDeadline) {
-                            Text("Add a deadline")
+                            Text("Deadline")
                         }
                         if self.isHavingDeadline {
-                            DatePicker(selection: self.$deadline) {
-                                Text("Deadline")
+                            DatePicker(selection: self.$deadline, in: Date()..., displayedComponents: .date) {
+                                Text("\(self.deadline, formatter: dateFormatter)")
                             }
                         }
                     }
                     
                     Section {
                         Toggle(isOn: self.$isHavingSubgoals) {
-                            Text("Allow Sub Goals")
+                            Text("Sub Goals")
                         }
                     }
                     
@@ -120,3 +121,14 @@ var categoriesData: [Category] = [
     .init(name: "Life")
 ]
 
+var dateFormatter: DateFormatter {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .full
+    return formatter
+}
+
+var dateFormatter2: DateFormatter {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .long
+    return formatter
+}

@@ -39,8 +39,8 @@ struct AddSubGoalView: View {
                             Text("Add a deadline")
                         }
                         if self.isHavingDeadline {
-                            DatePicker(selection: self.$deadline) {
-                                Text("Deadline")
+                            DatePicker(selection: self.$deadline, in: Date()..., displayedComponents: .date) {
+                                Text("\(self.deadline, formatter: dateFormatter)")
                             }
                         }
                     }

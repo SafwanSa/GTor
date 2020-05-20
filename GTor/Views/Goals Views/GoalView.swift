@@ -33,7 +33,7 @@ struct GoalView: View {
                         HStack {
                             Text("Deadline")
                             Spacer()
-                            Text(self.goal.dueDate?.description ?? "")
+                            Text("\(self.goal.dueDate!, formatter: dateFormatter)")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 .padding(.trailing, 5)
