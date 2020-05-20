@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,10 @@
 		1762732C24748759000E9661 /* SubGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732B24748759000E9661 /* SubGoalView.swift */; };
 		1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732D24748D39000E9661 /* GoalHeaderView.swift */; };
 		1762733024748DA3000E9661 /* ImportanceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732F24748DA3000E9661 /* ImportanceCard.swift */; };
+		176FE77E2474E02400B7FE82 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 176FE77D2474E02400B7FE82 /* Lottie */; };
+		176FE7822474E12B00B7FE82 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 176FE7812474E12B00B7FE82 /* loading.json */; };
+		176FE7842474E1A800B7FE82 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7832474E1A800B7FE82 /* LottieView.swift */; };
+		176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7852474E21100B7FE82 /* LoadingView.swift */; };
 		17A61A6124707F12008B8C31 /* AddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A61A6024707F12008B8C31 /* AddGoalView.swift */; };
 		17D44200247337C700DF91EC /* ModifiersViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D441FF247337C700DF91EC /* ModifiersViews.swift */; };
 		17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7A6246C921400596500 /* AppDelegate.swift */; };
@@ -64,6 +68,9 @@
 		1762732B24748759000E9661 /* SubGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGoalView.swift; sourceTree = "<group>"; };
 		1762732D24748D39000E9661 /* GoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalHeaderView.swift; sourceTree = "<group>"; };
 		1762732F24748DA3000E9661 /* ImportanceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportanceCard.swift; sourceTree = "<group>"; };
+		176FE7812474E12B00B7FE82 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		176FE7832474E1A800B7FE82 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		176FE7852474E21100B7FE82 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		17A61A6024707F12008B8C31 /* AddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalView.swift; sourceTree = "<group>"; };
 		17D441FF247337C700DF91EC /* ModifiersViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiersViews.swift; sourceTree = "<group>"; };
 		17E7E7A3246C921400596500 /* GTor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +107,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BF3CD28DF6450DA1901838B /* Pods_GTor.framework in Frameworks */,
+				176FE77E2474E02400B7FE82 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,8 +123,27 @@
 				17D441FF247337C700DF91EC /* ModifiersViews.swift */,
 				1762732D24748D39000E9661 /* GoalHeaderView.swift */,
 				1762732F24748DA3000E9661 /* ImportanceCard.swift */,
+				176FE7832474E1A800B7FE82 /* LottieView.swift */,
+				176FE7852474E21100B7FE82 /* LoadingView.swift */,
 			);
 			path = "Helper Views";
+			sourceTree = "<group>";
+		};
+		176FE77F2474E07300B7FE82 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				176FE7812474E12B00B7FE82 /* loading.json */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		176FE7802474E0CD00B7FE82 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				17E7E7AC246C921800596500 /* Assets.xcassets */,
+				17E7E7B1246C921800596500 /* LaunchScreen.storyboard */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 		17E7E79A246C921300596500 = {
@@ -147,11 +174,11 @@
 				17E7E7C1246CA64300596500 /* Models */,
 				17E7E7DE246CE39900596500 /* Services */,
 				17E7E7BD246C9F9600596500 /* Firebase */,
-				17E7E7BA246C9AE500596500 /* GoogleService-Info.plist */,
-				17E7E7AC246C921800596500 /* Assets.xcassets */,
-				17E7E7B1246C921800596500 /* LaunchScreen.storyboard */,
-				17E7E7B4246C921800596500 /* Info.plist */,
+				176FE77F2474E07300B7FE82 /* Animations */,
+				176FE7802474E0CD00B7FE82 /* Other */,
 				17E7E7AE246C921800596500 /* Preview Content */,
+				17E7E7BA246C9AE500596500 /* GoogleService-Info.plist */,
+				17E7E7B4246C921800596500 /* Info.plist */,
 			);
 			path = GTor;
 			sourceTree = "<group>";
@@ -213,9 +240,9 @@
 		17E7E7C2246CA64A00596500 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				171400AB2470EAE10001A625 /* Helper Views */,
 				17E7E7CF246CAB0600596500 /* LaunchView.swift */,
 				17E7E7D6246CAB5A00596500 /* HomeView.swift */,
+				171400AB2470EAE10001A625 /* Helper Views */,
 				17E7E7DB246CABE600596500 /* Profile Views */,
 				17E7E7DA246CABD800596500 /* Settings Views */,
 				17E7E7D9246CAB8900596500 /* Task Views */,
@@ -317,6 +344,9 @@
 			dependencies = (
 			);
 			name = GTor;
+			packageProductDependencies = (
+				176FE77D2474E02400B7FE82 /* Lottie */,
+			);
 			productName = GTor;
 			productReference = 17E7E7A3246C921400596500 /* GTor.app */;
 			productType = "com.apple.product-type.application";
@@ -345,6 +375,9 @@
 				Base,
 			);
 			mainGroup = 17E7E79A246C921300596500;
+			packageReferences = (
+				176FE77C2474E02400B7FE82 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 17E7E7A4246C921400596500 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -363,6 +396,7 @@
 				17E7E7BB246C9AE500596500 /* GoogleService-Info.plist in Resources */,
 				17E7E7B0246C921800596500 /* Preview Assets.xcassets in Resources */,
 				17E7E7AD246C921800596500 /* Assets.xcassets in Resources */,
+				176FE7822474E12B00B7FE82 /* loading.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +466,7 @@
 				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,
 				17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */,
 				17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */,
+				176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */,
 				17E7E7D3246CAB3F00596500 /* TODOView.swift in Sources */,
 				17E7E7A9246C921400596500 /* SceneDelegate.swift in Sources */,
 				17E7E7DD246CABFE00596500 /* SettingsView.swift in Sources */,
@@ -447,6 +482,7 @@
 				17E7E7C8246CA6FE00596500 /* Task.swift in Sources */,
 				17E7E7AB246C921400596500 /* LoginView.swift in Sources */,
 				17091764247235180011BB8C /* SelectCategoryView.swift in Sources */,
+				176FE7842474E1A800B7FE82 /* LottieView.swift in Sources */,
 				17E7E7CA246CA70E00596500 /* Category.swift in Sources */,
 				17D44200247337C700DF91EC /* ModifiersViews.swift in Sources */,
 			);
@@ -644,6 +680,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		176FE77C2474E02400B7FE82 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		176FE77D2474E02400B7FE82 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 176FE77C2474E02400B7FE82 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 17E7E79B246C921300596500 /* Project object */;
 }
