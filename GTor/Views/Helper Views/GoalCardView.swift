@@ -63,6 +63,7 @@ struct GoalCardView: View {
                     .frame(width: 10)
                     .frame(maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 2))
+                    .opacity(self.goal.importance?.value ?? 0)
         })
     }
 }

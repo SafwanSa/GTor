@@ -27,6 +27,19 @@ enum Importance: Int, Codable {
         }
     }
     
+    var value: Double {
+        switch self {
+        case .veryImportant:
+            return 1.0
+        case .important:
+            return 0.6
+        case .notImportant:
+            return 0.3
+        case .none:
+            return 0
+        }
+    }
+    
 }
 
 struct Goal: Codable, Identifiable {
