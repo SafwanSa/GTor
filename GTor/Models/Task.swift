@@ -13,6 +13,7 @@ struct Task: Codable, Identifiable {
     var title: String
     var note: String?
     var dueDate: Date?
+    var importance: Importance?
     var satisfaction: Double?
     var isSatisfied: Bool?
 }
