@@ -17,12 +17,30 @@ struct TODOList: View {
                 ScrollView {
                     VStack(spacing: 20.0) {
                         ForEach(tasks) { task in
-                            NavigationLink(destination: TaskView()) {
+                            NavigationLink(destination: TaskView(task: task)) {
                                 TaskCardView(task: task)
                             }
                         }
                     }
                 }
+                .navigationBarItems(trailing:
+                    HStack(spacing: 20) {
+                        Button(action: {  }) {
+                            Image(systemName: "slider.horizontal.3")
+                                .resizable()
+                                .imageScale(.large)
+                                .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                                .font(.headline)
+                        }
+                        Button(action: {  }) {
+                            Image(systemName: "plus")
+                                .resizable()
+                                .imageScale(.large)
+                                .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                                .font(.headline)
+                        }
+                    }
+                )
             }
             .navigationBarTitle("TODO")
         }
@@ -67,7 +85,7 @@ struct TaskCardView: View {
     }
 }
 let tasksData: [Task] = [
-    .init(title: "Do Louandry", note: "Just white T-shirts", dueDate: Date(), importance: .important, satisfaction: 0, isSatisfied: false),
-    .init(title: "Homework", note: "Chapter 1", dueDate: Date(), importance: .veryImportant, satisfaction: 0, isSatisfied: false),
-    .init(title: "Pay for the match", dueDate: Date(), importance: .notImportant, satisfaction: 0, isSatisfied: false)
+    .init(title: "Do Louandry", note: "Just white T-shirts", dueDate: Date(), satisfaction: 0, isSatisfied: false),
+    .init(title: "Homework", note: "Chapter 1", dueDate: Date(), satisfaction: 0, isSatisfied: false),
+    .init(title: "Pay for the match", dueDate: Date(), satisfaction: 0, isSatisfied: false)
 ]

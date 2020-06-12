@@ -13,7 +13,12 @@ struct Task: Codable, Identifiable {
     var title: String
     var note: String?
     var dueDate: Date?
-    var importance: Importance?
     var satisfaction: Double?
     var isSatisfied: Bool?
+    var linkedGoals: [Goal]?
+}
+
+
+extension Task {
+    static var dummy = Task(title: "Title1", note: "Note1", satisfaction: 0, isSatisfied: false, linkedGoals: [])
 }
