@@ -31,7 +31,54 @@ class TaskService: ObservableObject {
     @Published var tasks: [Task] = []
     static let shared = TaskService()
     
+    func getTasksFromDatabase(){
+          FirestoreService.shared.getDocuments(collection: .tasks, documentId: AuthService.userId ?? "") { (result: Result<[Task], Error>) in
+              switch result {
+              case .failure(let error):
+                  print(error.localizedDescription)
+              case .success(let tasks):
+                  DispatchQueue.main.async { self.tasks = tasks }
+              }
+          }
+      }
+      
+      func saveTasksToDatabase(task: Task, completion: @escaping (Result<Void, Error>)->()){
+          FirestoreService.shared.saveDocument(collection: .tasks, documentId: task.id.description, model: task) { result in
+              switch result {
+              case .failure(let error):
+                  completion(.failure(error))
+              case .success():
+                  completion(.success(()))
+              }
+          }
+      }
     
     
+    func saveTask(task: Task, completion: @escaping (Result<Void, Error>)->()) {
+           validateTask(task: task) { (result) in
+               switch result {
+               case .failure(let error):
+                   completion(.failure(error))
+               case .success(()):
+                   self.saveTasksToDatabase(task: task) { (result) in
+                       switch result {
+                       case .failure(let error):
+                           completion(.failure(error))
+                       case .success(()):
+                           completion(.success(()))
+                       }
+                   }
+                   
+               }
+           }
+       }
+       
+       func validateTask(task: Task, completion: @escaping (Result<Void, Error>)->()) {
+            if task.title.isEmpty {
+               completion(.failure(GoalErrors.noTitle))
+           } else {
+               completion(.success(()))
+           }
+       }
     
 }
