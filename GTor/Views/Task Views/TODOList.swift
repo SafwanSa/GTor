@@ -9,18 +9,23 @@
 import SwiftUI
 
 struct TODOList: View {
-    @State var tasks = tasksData
+    @ObservedObject var taskService = TaskService.shared
+    @State var isAddTaskSelected = false
+
     
     var body: some View {
         NavigationView {
             ZStack {
                 ScrollView {
                     VStack(spacing: 20.0) {
-                        ForEach(tasks) { task in
+                        ForEach(taskService.tasks) { task in
                             NavigationLink(destination: TaskView(task: task)) {
                                 TaskCardView(task: task)
                             }
                         }
+                    }
+                    .sheet(isPresented: $isAddTaskSelected) {
+                        AddTaskView()
                     }
                 }
                 .navigationBarItems(trailing:
@@ -32,7 +37,7 @@ struct TODOList: View {
                                 .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
                                 .font(.headline)
                         }
-                        Button(action: {  }) {
+                        Button(action: { self.isAddTaskSelected = true }) {
                             Image(systemName: "plus")
                                 .resizable()
                                 .imageScale(.large)

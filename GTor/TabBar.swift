@@ -12,7 +12,8 @@ import FirebaseAuth
 struct TabBar: View {
     @ObservedObject var userService = UserService.shared
     @ObservedObject var goalService = GoalService.shared
-    
+    @ObservedObject var taskService = TaskService.shared
+
     func signIn() {
         Auth.auth().signIn(withEmail: "safwan9f@gmail.com", password: "sa123456") { (result, err) in
             
@@ -41,6 +42,7 @@ struct TabBar: View {
 //                        try! Auth.auth().signOut()
                         self.signIn()
             self.userService.configureAuthStateDidChnageListner()
+            self.taskService.getTasksFromDatabase()
             self.goalService.getGoalsFromDatabase()//This should be moved to the configureAuthStateDidChnageListner
 //                                            self.goalService.goals.append(.dummy)
         }

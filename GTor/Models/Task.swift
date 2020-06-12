@@ -10,6 +10,7 @@ import Foundation
 
 struct Task: Codable, Identifiable {
     let id = UUID()
+    var uid: String?
     var title: String
     var note: String?
     var dueDate: Date?
