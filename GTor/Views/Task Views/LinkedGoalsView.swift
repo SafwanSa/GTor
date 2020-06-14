@@ -11,27 +11,35 @@ import SwiftUI
 struct LinkedGoalsView: View {
     @ObservedObject var goalService = GoalService.shared
     @Environment(\.presentationMode) private var presentationMode
-    @State var selectedGoalsIds: Set<UUID> = []
     @Binding var selectedGoals: [Goal]
     
     var body: some View {
         NavigationView {
-            List(selection: $selectedGoalsIds) {
-                ForEach(goalService.goals) { goal in
-                    Text(goal.title ?? "Goal Title")
+            List {
+                Section(header: Text("Main Goals")) {
+                    ForEach(goalService.goals) { goal in
+                        NavigationLink(destination: LinkedSubGoalsView(goal: goal, selectedGoals: self.$selectedGoals)) {
+                            Text(goal.title ?? "")
+                        }
+                    }
+                }
+                
+                Section(header: Text("Linked Goals")) {
+                    ForEach(selectedGoals) { goal in
+                        Text(goal.title ?? ";")
+                    }
                 }
 
             }
             .listStyle(GroupedListStyle())
             .environment(\.horizontalSizeClass, .regular)
-            .environment(\.editMode, .constant(EditMode.active))
             .navigationBarTitle("Linked Goals")
             .navigationBarItems(leading:
-                Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
+                Button(action: { self.selectedGoals.removeAll() ; self.presentationMode.wrappedValue.dismiss() }) {
                     Text("Cancel")
                 }
                 ,trailing:
-                Button(action: { self.selectedGoals = self.goalService.goals.filter { self.selectedGoalsIds.contains($0.id) } ; self.presentationMode.wrappedValue.dismiss() }) {
+                Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                     Text("Done")
                 }
             )

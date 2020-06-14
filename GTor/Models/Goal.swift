@@ -42,7 +42,7 @@ enum Importance: Int, Codable {
     
 }
 
-struct Goal: Codable, Identifiable {
+struct Goal: Codable, Identifiable, Hashable {
     var id = UUID()
     var uid: String?
     var title: String?
