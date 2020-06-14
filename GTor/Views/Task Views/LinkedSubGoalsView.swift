@@ -29,7 +29,7 @@ struct LinkedSubGoalsView: View {
 
             }
             .onAppear {
-                if self.selectedGoal.id != Goal.dummy.id { self.selectedGoals.append(self.selectedGoal) }
+                if self.selectedGoal.id != Goal.dummy.id && !self.selectedGoals.contains(self.goal) { self.selectedGoals.append(self.selectedGoal) }
             }
         }
         .listStyle(GroupedListStyle())
