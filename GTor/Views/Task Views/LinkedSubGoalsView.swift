@@ -13,28 +13,38 @@ struct LinkedSubGoalsView: View {
     @State var selectedGoal: Goal = .dummy
     var goal: Goal
     @Binding var selectedGoals: [Goal]
-
+    
     var body: some View {
         List {
-            Picker(selection: $selectedGoal, label: Text("Linked Goal")) {
-                if goal.isDecomposed {
-                    ForEach(goal.subGoals!, id: \.self) { subGoal in
-                        Text(subGoal.title ?? "")
+            if goal.isDecomposed {
+                if goal.subGoals!.isEmpty {
+                    HStack(spacing: 10.0) {
+                        Image(systemName: "exclamationmark.square")
+                        Text("This goal does not have sub goals yet!")
                     }
                 }else {
-                    ForEach(goalService.goals.filter { $0.id == goal.id }, id: \.self) { goal in
-                        Text(goal.title ?? "")
+                    Picker(selection: $selectedGoal, label: Text("Linked Goal")) {
+                        if goal.isDecomposed{
+                            ForEach(goal.subGoals!, id: \.self) { subGoal in
+                                Text(subGoal.title ?? "")
+                            }
+                        }else {
+                            ForEach(goalService.goals.filter { $0.id == goal.id }, id: \.self) { goal in
+                                Text(goal.title ?? "")
+                            }
+                        }
+                        
+                    }
+                    .onAppear {
+                        if self.selectedGoal.id != Goal.dummy.id && !self.selectedGoals.contains(self.goal) { self.selectedGoals.append(self.selectedGoal) }
                     }
                 }
-
             }
-            .onAppear {
-                if self.selectedGoal.id != Goal.dummy.id && !self.selectedGoals.contains(self.goal) { self.selectedGoals.append(self.selectedGoal) }
-            }
+            
         }
         .listStyle(GroupedListStyle())
         .environment(\.horizontalSizeClass, .regular)
-
+        
     }
 }
 
