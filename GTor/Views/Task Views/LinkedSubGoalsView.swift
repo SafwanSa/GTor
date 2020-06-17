@@ -22,22 +22,22 @@ struct LinkedSubGoalsView: View {
                         Image(systemName: "exclamationmark.square")
                         Text("This goal does not have sub goals yet!")
                     }
+                }
+            }
+            Picker(selection: $selectedGoal, label: Text("Linked Goal")) {
+                if goal.isDecomposed{
+                    ForEach(goal.subGoals!, id: \.self) { subGoal in
+                        Text(subGoal.title ?? "")
+                    }
                 }else {
-                    Picker(selection: $selectedGoal, label: Text("Linked Goal")) {
-                        if goal.isDecomposed{
-                            ForEach(goal.subGoals!, id: \.self) { subGoal in
-                                Text(subGoal.title ?? "")
-                            }
-                        }else {
-                            ForEach(goalService.goals.filter { $0.id == goal.id }, id: \.self) { goal in
-                                Text(goal.title ?? "")
-                            }
-                        }
-                        
+                    ForEach(goalService.goals.filter { $0.id == goal.id }, id: \.self) { goal in
+                        Text(goal.title ?? "")
                     }
-                    .onAppear {
-                        if self.selectedGoal.id != Goal.dummy.id && !self.selectedGoals.contains(self.goal) { self.selectedGoals.append(self.selectedGoal) }
-                    }
+                }
+                
+            }
+            .onAppear {
+                if self.selectedGoal.id != Goal.dummy.id && !self.selectedGoals.contains(self.goal) { self.selectedGoals.append(self.selectedGoal)
                 }
             }
             

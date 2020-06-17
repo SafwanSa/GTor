@@ -42,7 +42,7 @@ enum Importance: Int, Codable {
     
 }
 
-struct Goal: Codable, Identifiable, Hashable {
+struct Goal: Equatable, Codable, Identifiable, Hashable {
     var id = UUID()
     var uid: String?
     var title: String?
@@ -54,7 +54,7 @@ struct Goal: Codable, Identifiable, Hashable {
     var categories: [Category]?
     var subGoals: [Goal]?
     var isDecomposed: Bool
-    
+    var tasks: [Task]?
     
     static func stringToImportance(importance: String)->Importance {
         switch importance {

@@ -11,6 +11,7 @@ import SwiftUI
 struct AddTaskView: View {
     @ObservedObject var taskService = TaskService.shared
     @ObservedObject var userService = UserService.shared
+    @ObservedObject var goalService = GoalService.shared
     @Environment(\.presentationMode) private var presentationMode
     @State var title = ""
     @State var note = ""
@@ -86,6 +87,7 @@ struct AddTaskView: View {
     func createTask() {
         isLoading = true
         let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: deadline, satisfaction: 0, isSatisfied: false, linkedGoals: linkedGoals)
+
         self.taskService.saveTask(task: task) { (result) in
             switch result {
             case .failure(let error):
@@ -94,9 +96,41 @@ struct AddTaskView: View {
                 self.alertMessage = error.localizedDescription
                 print(error.localizedDescription)
             case .success(()):
-                print("Success")
-                self.isLoading = false
-                self.presentationMode.wrappedValue.dismiss()
+                var goalCopy: Goal = .dummy
+                var mainGoal: Goal = .dummy
+                
+                for goal in self.goalService.goals {
+                    mainGoal = goal
+                    if self.linkedGoals.contains(goal) {
+                        mainGoal.tasks?.append(task)
+                    }else {
+                        if goal.subGoals != nil {
+                            for subGoal in goal.subGoals! {
+                                if self.linkedGoals.contains(subGoal) {
+                                    goalCopy = subGoal
+                                    mainGoal.subGoals!.removeAll { (goal) -> Bool in
+                                        goal.id == goalCopy.id
+                                    }
+                                    goalCopy.tasks?.append(task)
+                                    mainGoal.subGoals!.append(goalCopy)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                self.goalService.updateGoal(goal: mainGoal) { (result) in
+                    switch result {
+                    case .failure(let error):
+                        self.isLoading = false
+                        self.isShowingAlert = true
+                        self.alertMessage = error.localizedDescription
+                        print(error.localizedDescription)
+                    case .success(()):
+                        self.isLoading = false
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                }
             }
         }
     }

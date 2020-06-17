@@ -91,7 +91,8 @@ struct AddGoalView: View {
         if self.isHavingSubgoals { self.importance = Importance.none.description }
         let goal = Goal(uid: self.userService.user.uid, title: self.title, note: self.note, isSubGoal: false , importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0,
                         dueDate: self.isHavingDeadline ? self.deadline : nil, categories: self.selectedCategories,
-                        subGoals: self.isHavingSubgoals ? [] : nil, isDecomposed: self.isHavingSubgoals)
+                        subGoals: self.isHavingSubgoals ? [] : nil, isDecomposed: self.isHavingSubgoals,
+                        tasks: [])
             self.goalService.saveGoal(goal: goal) { (result) in
                 switch result {
                 case .failure(let error):

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Task: Codable, Identifiable {
+struct Task: Codable, Identifiable, Equatable, Hashable {
     let id = UUID()
     var uid: String?
     var title: String

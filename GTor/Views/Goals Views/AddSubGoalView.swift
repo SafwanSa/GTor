@@ -76,7 +76,8 @@ struct AddSubGoalView: View {
         isLoading = true
         let subGoal = Goal(uid: AuthService.userId, title: self.title, note: self.note, isSubGoal: true, importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0,
                            dueDate: self.isHavingDeadline ? self.deadline : nil,
-                           isDecomposed: false)
+                           isDecomposed: false,
+                           tasks: [])
         goalService.validateGoal(goal: subGoal) { (result) in
             switch result {
             case .failure(let error):
