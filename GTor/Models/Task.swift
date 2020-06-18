@@ -9,7 +9,7 @@
 import Foundation
 
 struct Task: Codable, Identifiable, Equatable, Hashable {
-    let id = UUID()
+    var id = UUID()
     var uid: String?
     var title: String
     var note: String?

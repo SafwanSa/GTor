@@ -87,14 +87,12 @@ struct AddTaskView: View {
     func createTask() {
         isLoading = true
         let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: deadline, satisfaction: 0, isSatisfied: false, linkedGoals: linkedGoals)
-
         self.taskService.saveTask(task: task) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false
                 self.isShowingAlert = true
                 self.alertMessage = error.localizedDescription
-                print(error.localizedDescription)
             case .success(()):
                 var goalCopy: Goal = .dummy
                 var mainGoal: Goal = .dummy

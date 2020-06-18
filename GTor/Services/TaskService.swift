@@ -37,7 +37,9 @@ class TaskService: ObservableObject {
               case .failure(let error):
                   print(error.localizedDescription)
               case .success(let tasks):
-                  DispatchQueue.main.async { self.tasks = tasks }
+                  DispatchQueue.main.async { self.tasks = tasks
+                    print(self.tasks[0].id)
+                }
               }
           }
       }
@@ -80,5 +82,16 @@ class TaskService: ObservableObject {
                completion(.success(()))
            }
        }
+    
+    func deleteTask(task: Task, completion: @escaping (Result<Void, Error>)->()) {
+        FirestoreService.shared.deleteDocument(collection: .tasks, documentId: task.id.description) { (result) in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(()):
+                completion(.success(()))
+            }
+        }
+    }
     
 }
