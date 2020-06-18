@@ -39,7 +39,7 @@ struct GoalView: View {
                         .modifier(SmallCell())
                     }
                     
-//                    ImportanceCard(goal: goal, updatedImpo, isEditingMode: $isEditingMode)
+                    ImportanceCard(goal: $goal, isEditingMode: $isEditingMode)
 
 
                     if goal.isDecomposed {

@@ -37,7 +37,7 @@ struct SubGoalView: View {
                         .modifier(SmallCell())
                     }
                     
-//                    ImportanceCard(goal: goal, updatedImportance: $updatedImportance, isEditingMode: $isEditingMode)
+                    ImportanceCard(goal: $goal, isEditingMode: $isEditingMode)
                     
                     HStack {
                         Button(action: { self.isShowingDeleteAlert = true } ) {
