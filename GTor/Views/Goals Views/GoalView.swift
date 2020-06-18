@@ -11,10 +11,9 @@ import SwiftUI
 struct GoalView: View {
     @ObservedObject var goalService = GoalService.shared
     @State var goal: Goal = .dummy
-    @State var isSubGoalsListPresented = false
     @State var isEditingMode = false
     @State var isShowingDeleteAlert = false
-
+    
     
     @State var alertMessage = ""
     @State var isLoading = false
@@ -27,38 +26,63 @@ struct GoalView: View {
                     GoalHeaderView(goal: $goal, isEditingMode: $isEditingMode)
                 }
                 
-                    if goal.dueDate != nil{
-                        Section {
-                            HStack {
-                                Text("Deadline")
-                                Spacer()
-                                Text("\(goal.dueDate!, formatter: dateFormatter)")
-                                    .foregroundColor(.secondary)
-                                    .padding(.trailing, 5)
-                            }
-                        }
-                    }
-                
-                
-                Section {
-                    Picker(selection: self.$goal.importance, label: Text("Importance")) {
-                        ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
-                            Text(importance.rawValue)
+                if goal.dueDate != nil{
+                    Section {
+                        HStack {
+                            Text("Deadline")
+                            Spacer()
+                            Text("\(goal.dueDate!, formatter: dateFormatter)")
+                                .foregroundColor(.secondary)
+                                .padding(.trailing, 5)
                         }
                     }
                 }
                 
+                
                 Section {
                     if goal.isDecomposed {
+                        if goal.subGoals!.count == 0 {
+                            HStack {
+                                Image(systemName: "exclamationmark.square")
+                                Text("Add Sub Goals")
+                            }
+                        }else {
+                            if self.isEditingMode {
+                                ImportancePicker(goal: $goal)
+                            }else {
+                                HStack {
+                                    Text("Importance")
+                                    Spacer()
+                                    Text(goal.importance.rawValue)
+                                }
+                            }
+                        }
+                    }else {
+                        if self.isEditingMode {
+                            ImportancePicker(goal: $goal)
+                        }else {
+                            HStack {
+                                Text("Importance")
+                                Spacer()
+                                Text(goal.importance.rawValue)
+                            }
+                        }
+                    }
+                }
+                
+                if goal.isDecomposed {
+                    Section {
                         NavigationLink(destination: SubGoalsList(goal: $goal)) {
                             Text("SubGoals")
                         }
                     }
+                    
                 }
+                
                 
                 Section {
                     HStack {
-                        Button(action: { if !self.isSubGoalsListPresented { self.isShowingDeleteAlert = true } } ) {
+                        Button(action: { self.isShowingDeleteAlert = true } ) {
                             HStack {
                                 Image(systemName: "trash")
                                 Text("Delete the goal")
@@ -72,7 +96,7 @@ struct GoalView: View {
                               message: Text(self.goal.isDecomposed ? "All the Sub Goals of this goal will be deleted also" : ""),
                               primaryButton: .default(Text("Cancel")),
                               secondaryButton: .destructive(Text("Delete"), action: {
-                                //                                self.deleteGoal()
+                                self.deleteGoal()
                               }))
                     }
                 }
@@ -93,7 +117,7 @@ struct GoalView: View {
                             Button(action: { self.saveGoal(goal: self.goal) }) {
                                 Text("Save")
                             }
-                        }else if !isEditingMode && !isSubGoalsListPresented{
+                        }else if !isEditingMode{
                             Button(action: { self.isEditingMode = true }) {
                                 Image(systemName: "pencil")
                                     .resizable()
@@ -132,10 +156,6 @@ struct GoalView: View {
     
     func saveGoal(goal: Goal) {
         isLoading = true
-        //        var goalCopy = goal
-        
-        
-        
         goalService.updateGoal(goal: self.goal) { (result) in
             switch result {
             case .failure(let error):
@@ -157,5 +177,17 @@ struct GoalView: View {
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
         GoalView()
+    }
+}
+
+struct ImportancePicker: View {
+    @Binding var goal: Goal
+    
+    var body: some View {
+        Picker(selection: self.$goal.importance, label: Text("Importance")) {
+            ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+                Text(importance.rawValue)
+            }
+        }
     }
 }
