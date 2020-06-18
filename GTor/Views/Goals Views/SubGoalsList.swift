@@ -13,48 +13,47 @@ struct SubGoalsList: View {
     @ObservedObject var goalService = GoalService.shared
     @State var isAddGoalSelceted = false
     @Environment(\.presentationMode) private var presentationMode
-
+    
     @Binding var goal: Goal
     
     var body: some View {
-        NavigationView {
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 20) {
-                    ForEach(goal.subGoals!) { goal in
-                        NavigationLink(destination: SubGoalView(goal: goal, mainGoal: self.$goal)) {
-                            GoalCardView(goal: goal)
-                        }
-                        .buttonStyle(PlainButtonStyle())
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 20) {
+                ForEach(goal.subGoals!) { goal in
+                    NavigationLink(destination: SubGoalView(goal: goal, mainGoal: self.$goal)) {
+                        GoalCardView(goal: goal)
                     }
+                    .buttonStyle(PlainButtonStyle())
                 }
-                .frame(width: screen.width)
-                .padding(.horizontal, 16)
-                .padding(.top, 150)
             }
-            .navigationBarTitle("Sub Goals")
-            .navigationBarItems(trailing:
-                HStack(spacing: 20) {
-                    Button(action: {  }) {
-                        Image(systemName: "slider.horizontal.3")
-                            .resizable()
-                            .imageScale(.large)
-                            .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
-                            .font(.headline)
-                    }
-                    Button(action: { self.isAddGoalSelceted = true }) {
-                        Image(systemName: "plus")
-                            .resizable()
-                            .imageScale(.large)
-                            .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
-                            .font(.headline)
-                    }
-                }
-                .sheet(isPresented: $isAddGoalSelceted) {
-                    AddSubGoalView(goal: self.$goal)
-                }
-            )
-                .edgesIgnoringSafeArea(.all)
+            .frame(width: screen.width)
+            .padding(.horizontal, 16)
+            .padding(.top, 150)
         }
+        .navigationBarTitle("Sub Goals")
+        .navigationBarItems(trailing:
+            HStack(spacing: 20) {
+                Button(action: {  }) {
+                    Image(systemName: "slider.horizontal.3")
+                        .resizable()
+                        .imageScale(.large)
+                        .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                        .font(.headline)
+                }
+                Button(action: { self.isAddGoalSelceted = true }) {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .imageScale(.large)
+                        .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                        .font(.headline)
+                }
+            }
+            .sheet(isPresented: $isAddGoalSelceted) {
+                AddSubGoalView(goal: self.$goal)
+            }
+        )
+            .edgesIgnoringSafeArea(.all)
+        
         
     }
 }

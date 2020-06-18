@@ -47,14 +47,10 @@ struct GoalView: View {
                                 Text("Add Sub Goals")
                             }
                         }else {
-                            if self.isEditingMode {
-                                ImportancePicker(goal: $goal)
-                            }else {
-                                HStack {
-                                    Text("Importance")
-                                    Spacer()
-                                    Text(goal.importance.rawValue)
-                                }
+                            HStack {
+                                Text("Importance")
+                                Spacer()
+                                Text(goal.importance.rawValue)
                             }
                         }
                     }else {
