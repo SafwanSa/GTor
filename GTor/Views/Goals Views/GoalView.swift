@@ -10,14 +10,12 @@ import SwiftUI
 
 struct GoalView: View {
     @ObservedObject var goalService = GoalService.shared
-    var goal: Goal
+    @State var goal: Goal = .dummy
     @State var isSubGoalsListPresented = false
     @State var isEditingMode = false
     @State var isShowingDeleteAlert = false
+
     
-    @State var updatedImportance: String = Importance.none.description
-    @State var updatedTitle: String = ""
-    @State var updatedNote: String = ""
     @State var alertMessage = ""
     @State var isLoading = false
     @State var isShowingAlert = false
@@ -27,13 +25,13 @@ struct GoalView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 40.0) {
                     
-                    GoalHeaderView(goal: goal, isEditingMode: self.$isEditingMode, updatedTitle: self.$updatedTitle, updatedNote: self.$updatedNote)
+                    GoalHeaderView(goal: $goal, isEditingMode: $isEditingMode)
 
-                    if self.goal.dueDate != nil{
+                    if goal.dueDate != nil{
                         HStack {
                             Text("Deadline")
                             Spacer()
-                            Text("\(self.goal.dueDate!, formatter: dateFormatter)")
+                            Text("\(goal.dueDate!, formatter: dateFormatter)")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 .padding(.trailing, 5)
@@ -41,7 +39,8 @@ struct GoalView: View {
                         .modifier(SmallCell())
                     }
                     
-                    ImportanceCard(goal: goal, isEditingMode: self.$isEditingMode, updatedImportance: self.$updatedImportance)
+//                    ImportanceCard(goal: goal, updatedImpo, isEditingMode: $isEditingMode)
+
 
                     if goal.isDecomposed {
                         Button(action: { self.isSubGoalsListPresented = true }) {
@@ -53,8 +52,8 @@ struct GoalView: View {
                             .modifier(SmallCell())
                         }
                         .buttonStyle(PlainButtonStyle())
-                        .sheet(isPresented: self.$isSubGoalsListPresented) {
-                            SubGoalsList(goal: self.goal)
+                        .sheet(isPresented: $isSubGoalsListPresented) {
+                            SubGoalsList(goal: self.$goal)
                         }
                     }
                     
@@ -69,7 +68,7 @@ struct GoalView: View {
                         }
                     }
                     .modifier(SmallCell())
-                    .alert(isPresented: self.$isShowingDeleteAlert) {
+                    .alert(isPresented: $isShowingDeleteAlert) {
                         Alert(title: Text("Are you sure you want to delete this goal?"),
                               message: Text(self.goal.isDecomposed ? "All the Sub Goals of this goal will be deleted also" : ""),
                               primaryButton: .default(Text("Cancel")),
@@ -81,19 +80,19 @@ struct GoalView: View {
                 .animation(.spring())
                 .padding(.top, 50)
             }
-            .navigationBarTitle("\(self.goal.title ?? "Title")")
+            .navigationBarTitle("\(goal.title)")
             .navigationBarItems(trailing:
                 Group {
                     HStack(spacing: 50) {
-                        if self.isEditingMode {
+                        if isEditingMode {
                             Button(action: { self.isEditingMode = false }) {
                                 Text("Cancel")
                             }
                             Button(action: { self.saveGoal(goal: self.goal) }) {
                                 Text("Save")
                             }
-                        }else if !self.isEditingMode && !self.isSubGoalsListPresented{
-                                Button(action: {self.isEditingMode = true }) {
+                        }else if !isEditingMode && !isSubGoalsListPresented{
+                                Button(action: { self.isEditingMode = true }) {
                                     Image(systemName: "pencil")
                                         .resizable()
                                         .imageScale(.large)
@@ -104,9 +103,9 @@ struct GoalView: View {
                         }
                     }
                 )
-            LoadingView(isLoading: self.$isLoading)
+            LoadingView(isLoading: $isLoading)
         }
-        .alert(isPresented: self.$isShowingAlert) {
+        .alert(isPresented: $isShowingAlert) {
             Alert(title: Text(self.alertMessage))
         }
         
@@ -114,7 +113,7 @@ struct GoalView: View {
 
     func deleteGoal(){
         isLoading = true
-        self.goalService.deleteGoal(goal: self.goal) { (result) in
+        goalService.deleteGoal(goal: goal) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false
@@ -130,19 +129,11 @@ struct GoalView: View {
     
     func saveGoal(goal: Goal) {
         isLoading = true
-        var goalCopy = goal
+//        var goalCopy = goal
         
-        if goalCopy.importance?.description != self.updatedImportance && updatedImportance != Importance.none.description {
-            goalCopy.importance = Goal.stringToImportance(importance: self.updatedImportance)
-        }
-        if goalCopy.title != self.updatedTitle && !updatedTitle.isEmpty {
-            goalCopy.title = self.updatedTitle
-        }
-        if goalCopy.note != self.updatedNote {
-            goalCopy.note = self.updatedNote
-        }
+
         
-        goalService.updateGoal(goal: goalCopy) { (result) in
+        goalService.updateGoal(goal: self.goal) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false

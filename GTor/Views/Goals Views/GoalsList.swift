@@ -17,7 +17,7 @@ struct GoalsList: View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    ForEach(self.goalService.goals) { goal in
+                    ForEach(goalService.goals) { goal in
                         NavigationLink(destination: GoalView(goal: goal)) {
                             GoalCardView(goal: goal)
                         }

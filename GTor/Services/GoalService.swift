@@ -72,9 +72,9 @@ class GoalService: ObservableObject {
     }
     
     func validateGoal(goal: Goal, completion: @escaping (Result<Void, Error>)->()) {
-        if goal.categories?.count == 0 && !goal.isSubGoal {
+        if goal.categories.count == 0 && !goal.isSubGoal {
             completion(.failure(GoalErrors.noCategory))
-        } else if goal.title!.isEmpty {
+        } else if goal.title.isEmpty {
             completion(.failure(GoalErrors.noTitle))
         } else if !goal.isDecomposed && goal.importance == Importance.none{
             completion(.failure(GoalErrors.noImportance))

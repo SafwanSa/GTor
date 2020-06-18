@@ -15,17 +15,14 @@ struct AddGoalView: View {
     @Environment(\.presentationMode) private var presentationMode
 
     @State var categories = categoriesData//TODO bring this from db
-    let importances = ["Very Important", "Important", "Not Important"]
-    
     @State var title = ""
     @State var note = ""
     @State var deadline = Date()
-    @State var importance: String = Importance.none.description
-    @State var selectedImportanceIndex = -1
+    @State var selectedImportance = Importance.none
     @State var selectedCategories: [Category] = []
     
     @State var isHavingDeadline = false
-    @State var isHavingSubgoals = true
+    @State var isDecomposed = true
     @State var isSelectCategoryExpanded = false
     @State var alertMessage = "None"
     @State var isLoading = false
@@ -36,33 +33,37 @@ struct AddGoalView: View {
         ZStack {
             NavigationView {
                 List {
-                    SelectCategoryView(isCategoryPressed: self.$isSelectCategoryExpanded, selectedCategories: self.$selectedCategories, categories: self.$categories)
+                    SelectCategoryView(isCategoryPressed: $isSelectCategoryExpanded, selectedCategories: self.$selectedCategories, categories: $categories)
                     
                     Section {
-                        TextField("Title", text: self.$title)
-                        TextField("Note (Optional)", text: self.$note)
+                        TextField("Title", text: $title)
+                        TextField("Note (Optional)", text: $note)
                     }
                     
                     Section {
-                        Toggle(isOn: self.$isHavingDeadline) {
+                        Toggle(isOn: $isHavingDeadline) {
                             Text("Deadline")
                         }
-                        if self.isHavingDeadline {
-                            DatePicker(selection: self.$deadline, in: Date()..., displayedComponents: .date) {
-                                Text("\(self.deadline, formatter: dateFormatter)")
+                        if isHavingDeadline {
+                            DatePicker(selection: $deadline, in: Date()..., displayedComponents: .date) {
+                                Text("\(deadline, formatter: dateFormatter)")
                             }
                         }
                     }
                     
                     Section {
-                        Toggle(isOn: self.$isHavingSubgoals) {
+                        Toggle(isOn: $isDecomposed) {
                             Text("Sub Goals")
                         }
                     }
                     
-                    if !self.isHavingSubgoals {
+                    if !self.isDecomposed {
                         Section {
-                                TextFieldWithPickerAsInputView(data: self.importances, placeholder: "Importance", selectionIndex: self.$selectedImportanceIndex, text: self.$importance)
+                            Picker(selection: $selectedImportance, label: Text("Importance")) {
+                                ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+                                    Text(importance.rawValue)
+                                }
+                            }
                         }
                     }
                 }
@@ -79,20 +80,21 @@ struct AddGoalView: View {
                     .environment(\.horizontalSizeClass, .regular)
                     .navigationBarTitle("Add Goal")
             }
-            LoadingView(isLoading: self.$isLoading)
+            LoadingView(isLoading: $isLoading)
         }
-        .alert(isPresented: self.$isShowingAlert) {
-            Alert(title: Text(self.alertMessage))
+        .alert(isPresented: $isShowingAlert) {
+            Alert(title: Text(alertMessage))
         }
     }
     
        func createGoal() {
         isLoading = true
-        if self.isHavingSubgoals { self.importance = Importance.none.description }
-        let goal = Goal(uid: self.userService.user.uid, title: self.title, note: self.note, isSubGoal: false , importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0,
-                        dueDate: self.isHavingDeadline ? self.deadline : nil, categories: self.selectedCategories,
-                        subGoals: self.isHavingSubgoals ? [] : nil, isDecomposed: self.isHavingSubgoals)
-            self.goalService.saveGoal(goal: goal) { (result) in
+        if isDecomposed { self.selectedImportance = Importance.none }
+        let goal = Goal(uid: userService.user.uid, title: title, note: note, isSubGoal: false , importance: selectedImportance, satisfaction: 0,
+                        dueDate: isHavingDeadline ? deadline : nil, categories: selectedCategories,
+                        subGoals: isDecomposed ? [] : nil, isDecomposed: isDecomposed,
+                        tasks: [])
+            goalService.saveGoal(goal: goal) { (result) in
                 switch result {
                 case .failure(let error):
                     self.isLoading = false

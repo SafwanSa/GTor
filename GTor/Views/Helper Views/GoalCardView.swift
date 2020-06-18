@@ -27,9 +27,9 @@ struct GoalCardView: View {
                 .offset(x: -10, y: -15)
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(goal.title ?? "Title")
+                    Text(goal.title)
                         .font(.headline)
-                    Text(goal.note ?? "Note")
+                    Text(goal.note)
                         .font(.subheadline)
                     
                     Color.secondary
@@ -39,7 +39,7 @@ struct GoalCardView: View {
                     
                     HStack(spacing: 20) {
                         if self.goal.isDecomposed { Text("Sub-Goals: \(self.goal.subGoals?.count ?? 0)") }
-                        Text("Activities: \(0)/3")//TODO
+                        if self.goal.isSubGoal { Text("Activities: \(self.goal.tasks.filter{ $0.isSatisfied }.count )/\(self.goal.tasks.count)") }
                         if self.goal.dueDate != nil { Spacer () ; Text("\(self.goal.dueDate!, formatter: dateFormatter2)") }
                     }
                     .foregroundColor(Color.secondary)
@@ -63,7 +63,7 @@ struct GoalCardView: View {
                     .frame(width: 10)
                     .frame(maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 2))
-                    .opacity(self.goal.importance?.value ?? 0)
+                    .opacity(self.goal.importance.value)
         })
     }
 }

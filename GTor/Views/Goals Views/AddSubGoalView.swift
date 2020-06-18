@@ -11,16 +11,14 @@ import SwiftUI
 struct AddSubGoalView: View {
     @ObservedObject var goalService = GoalService.shared
     @Environment(\.presentationMode) private var presentationMode
-    let importances = ["Very Important", "Important", "Not Important"]
-    
     @State var title = ""
     @State var note = ""
     @State var deadline = Date()
-    @State var importance: String = Importance.none.description
-    @State var selectedImportanceIndex = -1
+    @State var selectedImportance = Importance.none
+
     
     @State var isHavingDeadline = false
-    @State var goal: Goal = .dummy
+    @Binding var goal: Goal
     @State var alertMessage = "None"
     @State var isLoading = false
     @State var isShowingAlert = false
@@ -30,26 +28,27 @@ struct AddSubGoalView: View {
             NavigationView {
                 List {
                     Section {
-                        TextField("Title", text: self.$title)
-                        TextField("Note (Optional)", text: self.$note)
+                        TextField("Title", text: $title)
+                        TextField("Note (Optional)", text: $note)
                     }
                     
                     Section {
-                        Toggle(isOn: self.$isHavingDeadline) {
+                        Toggle(isOn: $isHavingDeadline) {
                             Text("Add a deadline")
                         }
-                        if self.isHavingDeadline {
-                            DatePicker(selection: self.$deadline, in: Date()..., displayedComponents: .date) {
+                        if isHavingDeadline {
+                            DatePicker(selection: $deadline, in: Date()..., displayedComponents: .date) {
                                 Text("\(self.deadline, formatter: dateFormatter)")
                             }
                         }
                     }
                     
                     Section {
-                        HStack {
-                            TextFieldWithPickerAsInputView(data: self.importances, placeholder: "Importance", selectionIndex: self.$selectedImportanceIndex, text: self.$importance)
+                        Picker(selection: $selectedImportance, label: Text("Importance")) {
+                            ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+                                Text(importance.rawValue)
+                            }
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
                 .navigationBarItems(leading:
@@ -65,18 +64,20 @@ struct AddSubGoalView: View {
                     .environment(\.horizontalSizeClass, .regular)
                     .navigationBarTitle("Add Sub Goal")
             }
-            LoadingView(isLoading: self.$isLoading)
+            LoadingView(isLoading: $isLoading)
         }
-        .alert(isPresented: self.$isShowingAlert) {
+        .alert(isPresented: $isShowingAlert) {
             Alert(title: Text(self.alertMessage))
         }
     }
     
     func addGoal() {
         isLoading = true
-        let subGoal = Goal(uid: AuthService.userId, title: self.title, note: self.note, isSubGoal: true, importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0,
+        let subGoal = Goal(uid: AuthService.userId!, title: self.title, note: self.note, isSubGoal: true, importance: selectedImportance, satisfaction: 0,
                            dueDate: self.isHavingDeadline ? self.deadline : nil,
-                           isDecomposed: false)
+                           categories: [],
+                           isDecomposed: false,
+                           tasks: [])
         goalService.validateGoal(goal: subGoal) { (result) in
             switch result {
             case .failure(let error):
@@ -103,6 +104,6 @@ struct AddSubGoalView: View {
 
 struct _AddSubGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        AddSubGoalView()
+        AddSubGoalView(goal: .constant(.dummy))
     }
 }

@@ -31,7 +31,78 @@ class TaskService: ObservableObject {
     @Published var tasks: [Task] = []
     static let shared = TaskService()
     
+    func getTasksFromDatabase(){
+          FirestoreService.shared.getDocuments(collection: .tasks, documentId: AuthService.userId ?? "") { (result: Result<[Task], Error>) in
+              switch result {
+              case .failure(let error):
+                  print(error.localizedDescription)
+              case .success(let tasks):
+                  DispatchQueue.main.async { self.tasks = tasks }
+              }
+          }
+      }
+      
+      func saveTasksToDatabase(task: Task, completion: @escaping (Result<Void, Error>)->()){
+          FirestoreService.shared.saveDocument(collection: .tasks, documentId: task.id.description, model: task) { result in
+              switch result {
+              case .failure(let error):
+                  completion(.failure(error))
+              case .success():
+                  completion(.success(()))
+              }
+          }
+      }
     
     
+    func saveTask(task: Task, completion: @escaping (Result<Void, Error>)->()) {
+           validateTask(task: task) { (result) in
+               switch result {
+               case .failure(let error):
+                   completion(.failure(error))
+               case .success(()):
+                   self.saveTasksToDatabase(task: task) { (result) in
+                       switch result {
+                       case .failure(let error):
+                           completion(.failure(error))
+                       case .success(()):
+                           completion(.success(()))
+                       }
+                   }
+                   
+               }
+           }
+       }
+       
+       func validateTask(task: Task, completion: @escaping (Result<Void, Error>)->()) {
+            if task.title.isEmpty {
+               completion(.failure(GoalErrors.noTitle))
+           } else {
+               completion(.success(()))
+           }
+       }
+    
+    func deleteTask(task: Task, completion: @escaping (Result<Void, Error>)->()) {
+        FirestoreService.shared.deleteDocument(collection: .tasks, documentId: task.id.description) { (result) in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(()):
+                for i in 0..<GoalService.shared.goals.count {
+                    if GoalService.shared.goals[i].tasks.contains(task) {
+                        GoalService.shared.goals[i].tasks.removeAll { (Goaltask) -> Bool in
+                            Goaltask.id == task.id
+                        }
+                    }else {
+                        for j in 0..<GoalService.shared.goals[i].subGoals!.count {
+                            GoalService.shared.goals[i].subGoals![j].tasks.removeAll { (Goaltask) -> Bool in
+                                Goaltask.id == task.id
+                            }
+                        }
+                    }
+                }
+                completion(.success(()))
+            }
+        }
+    }
     
 }

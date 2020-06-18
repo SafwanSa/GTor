@@ -10,30 +10,26 @@ import SwiftUI
 
 struct SubGoalView: View {
     @ObservedObject var goalService = GoalService.shared
-    var goal: Goal
-    @State var mainGoal: Goal
+    @State var goal: Goal = .dummy
+    @Binding var mainGoal: Goal
     @State var isEditingMode = false
-    @State var isShowingDeleteAlert = false
     
-    @State var updatedImportance: String = Importance.none.description
-    @State var updatedTitle: String = ""
-    @State var updatedNote: String = ""
     @State var alertMessage = ""
     @State var isLoading = false
     @State var isShowingAlert = false
-    
+    @State var isShowingDeleteAlert = false
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 40.0) {
                     
-                    GoalHeaderView(goal: goal, isEditingMode: self.$isEditingMode, updatedTitle: self.$updatedTitle, updatedNote: self.$updatedNote)
+                    GoalHeaderView(goal: $goal, isEditingMode: $isEditingMode)
 
                     if self.goal.dueDate != nil{
                         HStack {
                             Text("Deadline")
                             Spacer()
-                            Text("\(self.goal.dueDate!, formatter: dateFormatter)")
+                            Text("\(goal.dueDate!, formatter: dateFormatter)")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 .padding(.trailing, 5)
@@ -41,21 +37,20 @@ struct SubGoalView: View {
                         .modifier(SmallCell())
                     }
                     
-                    ImportanceCard(goal: goal, isEditingMode: self.$isEditingMode, updatedImportance: self.$updatedImportance)
+//                    ImportanceCard(goal: goal, updatedImportance: $updatedImportance, isEditingMode: $isEditingMode)
                     
                     HStack {
-                        Button(action: {  self.isShowingAlert = true  } ) {
+                        Button(action: { self.isShowingDeleteAlert = true } ) {
                             HStack {
                                 Image(systemName: "trash")
                                 Text("Delete the goal")
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .foregroundColor(.primary)
-                            
                         }
                     }
                     .modifier(SmallCell())
-                    .alert(isPresented: self.$isShowingAlert) {
+                    .alert(isPresented: $isShowingDeleteAlert) {
                         Alert(title: Text("Are you sure you want to delete this goal?"),
                               primaryButton: .default(Text("Cancel")),
                               secondaryButton: .destructive(Text("Delete"), action: {
@@ -68,19 +63,19 @@ struct SubGoalView: View {
                 .animation(.spring())
                 .padding(.top, 50)
             }
-            .navigationBarTitle("\(self.goal.title ?? "Title")")
+            .navigationBarTitle("\(goal.title)")
             .navigationBarItems(trailing:
                 Group {
                     HStack(spacing: 50) {
-                        if self.isEditingMode {
+                        if isEditingMode {
                             Button(action: { self.isEditingMode = false }) {
                                 Text("Cancel")
                             }
-                            Button(action: { self.saveGoal(goal: self.goal, mainGoal: self.mainGoal) }) {
+                            Button(action: saveGoal) {
                                 Text("Save")
                             }
-                        }else if !self.isEditingMode{
-                                Button(action: {self.isEditingMode = true }) {
+                        }else if !isEditingMode{
+                            Button(action: { self.isEditingMode = true }) {
                                     Image(systemName: "pencil")
                                         .resizable()
                                         .imageScale(.large)
@@ -91,19 +86,19 @@ struct SubGoalView: View {
                         }
                     }
                 )
-            LoadingView(isLoading: self.$isLoading)
+            LoadingView(isLoading: $isLoading)
         }
-        .alert(isPresented: self.$isShowingAlert) {
+        .alert(isPresented: $isShowingAlert) {
             Alert(title: Text(self.alertMessage))
         }
         
         }
         
     func deleteGoal(){
-        self.mainGoal.subGoals?.removeAll(where: { (goal) -> Bool in
+        mainGoal.subGoals?.removeAll(where: { (goal) -> Bool in
             return goal.id == self.goal.id
         })
-        self.goalService.updateSubGoals(goal: self.mainGoal) { (result) in
+        goalService.updateSubGoals(goal: mainGoal) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false
@@ -118,26 +113,13 @@ struct SubGoalView: View {
     }
     
     
-    func saveGoal(goal: Goal, mainGoal: Goal) {
-        var goalCopy = goal
-        var mainGoalCopy = mainGoal
-        
-        if goalCopy.importance?.description != self.updatedImportance && updatedImportance != Importance.none.description {
-            goalCopy.importance = Goal.stringToImportance(importance: self.updatedImportance)
-        }
-        if goalCopy.title != self.updatedTitle && !updatedTitle.isEmpty {
-            goalCopy.title = self.updatedTitle
-        }
-        if goalCopy.note != self.updatedNote {
-            goalCopy.note = self.updatedNote
-        }
-        
-        mainGoalCopy.subGoals?.removeAll(where: { (goal) -> Bool in
-                return goal.id == goalCopy.id
+    func saveGoal() {
+        mainGoal.subGoals?.removeAll(where: { (goal) -> Bool in
+            return goal.id == self.goal.id
         })
-        mainGoalCopy.subGoals?.append(goalCopy)
+        mainGoal.subGoals?.append(goal)
 
-        goalService.updateGoal(goal: mainGoalCopy) { (result) in
+        goalService.updateGoal(goal: mainGoal) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false
@@ -156,6 +138,6 @@ struct SubGoalView: View {
 
 struct SubGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        SubGoalView(goal: .dummy, mainGoal: .dummy)
+        SubGoalView(goal: .dummy, mainGoal: .constant(.dummy))
     }
 }

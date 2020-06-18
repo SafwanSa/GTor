@@ -14,14 +14,14 @@ struct SubGoalsList: View {
     @State var isAddGoalSelceted = false
     @Environment(\.presentationMode) private var presentationMode
 
-    var goal: Goal
+    @Binding var goal: Goal
     
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    ForEach(self.goal.subGoals!) { goal in
-                        NavigationLink(destination: SubGoalView(goal: goal, mainGoal: self.goal)) {
+                    ForEach(goal.subGoals!) { goal in
+                        NavigationLink(destination: SubGoalView(goal: goal, mainGoal: self.$goal)) {
                             GoalCardView(goal: goal)
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -49,8 +49,8 @@ struct SubGoalsList: View {
                             .font(.headline)
                     }
                 }
-                .sheet(isPresented: self.$isAddGoalSelceted) {
-                    AddSubGoalView(goal: self.goal)
+                .sheet(isPresented: $isAddGoalSelceted) {
+                    AddSubGoalView(goal: self.$goal)
                 }
             )
                 .edgesIgnoringSafeArea(.all)
@@ -62,6 +62,6 @@ struct SubGoalsList: View {
 
 struct SubGoalsList_Previews: PreviewProvider {
     static var previews: some View {
-        SubGoalsList(goal: .dummy)
+        SubGoalsList(goal: .constant(.dummy))
     }
 }
