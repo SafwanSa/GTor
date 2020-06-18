@@ -15,7 +15,7 @@ struct GoalView: View {
     @State var isEditingMode = false
     @State var isShowingDeleteAlert = false
     
-    @State var updatedImportance: String = Importance.none.description
+    @State var updatedImportance = Importance.none
     @State var updatedTitle: String = ""
     @State var updatedNote: String = ""
     @State var alertMessage = ""
@@ -41,7 +41,8 @@ struct GoalView: View {
                         .modifier(SmallCell())
                     }
                     
-                    ImportanceCard(goal: goal, isEditingMode: $isEditingMode, updatedImportance: $updatedImportance)
+                    ImportanceCard(goal: goal, isEditingMode: $isEditingMode)
+
 
                     if goal.isDecomposed {
                         Button(action: { self.isSubGoalsListPresented = true }) {
@@ -132,8 +133,8 @@ struct GoalView: View {
         isLoading = true
         var goalCopy = goal
         
-        if goalCopy.importance.description != self.updatedImportance && updatedImportance != Importance.none.description {
-            goalCopy.importance = Goal.stringToImportance(importance: self.updatedImportance)
+        if goalCopy.importance != self.updatedImportance && updatedImportance != Importance.none {
+            goalCopy.importance = updatedImportance
         }
         if goalCopy.title != self.updatedTitle && !updatedTitle.isEmpty {
             goalCopy.title = self.updatedTitle

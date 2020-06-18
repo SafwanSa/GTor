@@ -15,7 +15,7 @@ struct SubGoalView: View {
     @State var isEditingMode = false
     @State var isShowingDeleteAlert = false
     
-    @State var updatedImportance: String = Importance.none.description
+    @State var updatedImportance: Importance = Importance.none
     @State var updatedTitle: String = ""
     @State var updatedNote: String = ""
     @State var alertMessage = ""
@@ -41,7 +41,7 @@ struct SubGoalView: View {
                         .modifier(SmallCell())
                     }
                     
-                    ImportanceCard(goal: goal, isEditingMode: $isEditingMode, updatedImportance: $updatedImportance)
+                    ImportanceCard(goal: goal, isEditingMode: $isEditingMode)
                     
                     HStack {
                         Button(action: {  self.isShowingAlert = true  } ) {
@@ -122,8 +122,8 @@ struct SubGoalView: View {
         var goalCopy = goal
         var mainGoalCopy = mainGoal
         
-        if goalCopy.importance.description != self.updatedImportance && updatedImportance != Importance.none.description {
-            goalCopy.importance = Goal.stringToImportance(importance: self.updatedImportance)
+        if goalCopy.importance != self.updatedImportance && updatedImportance != Importance.none {
+            goalCopy.importance = updatedImportance
         }
         if goalCopy.title != self.updatedTitle && !updatedTitle.isEmpty {
             goalCopy.title = self.updatedTitle

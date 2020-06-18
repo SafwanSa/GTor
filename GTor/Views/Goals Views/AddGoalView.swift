@@ -15,13 +15,10 @@ struct AddGoalView: View {
     @Environment(\.presentationMode) private var presentationMode
 
     @State var categories = categoriesData//TODO bring this from db
-    let importances = ["Very Important", "Important", "Not Important"]
-    
     @State var title = ""
     @State var note = ""
     @State var deadline = Date()
-    @State var importance: String = Importance.none.description
-    @State var selectedImportanceIndex = -1
+    @State var selectedImportance = Importance.none
     @State var selectedCategories: [Category] = []
     
     @State var isHavingDeadline = false
@@ -62,7 +59,11 @@ struct AddGoalView: View {
                     
                     if !self.isDecomposed {
                         Section {
-                                TextFieldWithPickerAsInputView(data: importances, placeholder: "Importance", selectionIndex: $selectedImportanceIndex, text: $importance)
+                            Picker(selection: $selectedImportance, label: Text("Importance")) {
+                                ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+                                    Text(importance.rawValue)
+                                }
+                            }
                         }
                     }
                 }
@@ -88,8 +89,8 @@ struct AddGoalView: View {
     
        func createGoal() {
         isLoading = true
-        if isDecomposed { importance = Importance.none.description }
-        let goal = Goal(uid: userService.user.uid, title: title, note: note, isSubGoal: false , importance: Goal.stringToImportance(importance: importance), satisfaction: 0,
+        if isDecomposed { self.selectedImportance = Importance.none }
+        let goal = Goal(uid: userService.user.uid, title: title, note: note, isSubGoal: false , importance: selectedImportance, satisfaction: 0,
                         dueDate: isHavingDeadline ? deadline : nil, categories: selectedCategories,
                         subGoals: isDecomposed ? [] : nil, isDecomposed: isDecomposed,
                         tasks: [])

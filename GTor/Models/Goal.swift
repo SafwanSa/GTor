@@ -8,24 +8,12 @@
 
 import Foundation
 
-enum Importance: Int, Codable {
-    case notImportant = 1
-    case important = 2
-    case veryImportant = 3
-    case none = 0
+enum Importance: String, Codable, CaseIterable{
+    case notImportant = "Not Important"
+    case important = "Important"
+    case veryImportant = "Very Important"
+    case none = ""
     
-    var description: String {
-        switch self {
-        case .important:
-            return "Important"
-        case .veryImportant:
-            return "Very Important"
-        case .notImportant:
-            return "Not Important"
-        case .none:
-            return ""
-        }
-    }
     
     var value: Double {
         switch self {
@@ -55,19 +43,6 @@ struct Goal: Equatable, Codable, Identifiable, Hashable {
     var subGoals: [Goal]?
     var isDecomposed: Bool
     var tasks: [Task]
-    
-    static func stringToImportance(importance: String)->Importance {
-        switch importance {
-        case "Very Important":
-            return .veryImportant
-        case "Important":
-            return .important
-        case "Not Important":
-            return .notImportant
-        default:
-            return .none
-        }
-    }
 }
 
 extension Goal {

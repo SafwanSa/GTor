@@ -11,13 +11,11 @@ import SwiftUI
 struct AddSubGoalView: View {
     @ObservedObject var goalService = GoalService.shared
     @Environment(\.presentationMode) private var presentationMode
-    let importances = ["Very Important", "Important", "Not Important"]
-    
     @State var title = ""
     @State var note = ""
     @State var deadline = Date()
-    @State var importance: String = Importance.none.description
-    @State var selectedImportanceIndex = -1
+    @State var selectedImportance = Importance.none
+
     
     @State var isHavingDeadline = false
     @State var goal: Goal = .dummy
@@ -46,10 +44,11 @@ struct AddSubGoalView: View {
                     }
                     
                     Section {
-                        HStack {
-                            TextFieldWithPickerAsInputView(data: importances, placeholder: "Importance", selectionIndex: $selectedImportanceIndex, text: $importance)
+                        Picker(selection: $selectedImportance, label: Text("Importance")) {
+                            ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+                                Text(importance.rawValue)
+                            }
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
                 .navigationBarItems(leading:
@@ -74,7 +73,7 @@ struct AddSubGoalView: View {
     
     func addGoal() {
         isLoading = true
-        let subGoal = Goal(uid: AuthService.userId!, title: self.title, note: self.note, isSubGoal: true, importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0,
+        let subGoal = Goal(uid: AuthService.userId!, title: self.title, note: self.note, isSubGoal: true, importance: selectedImportance, satisfaction: 0,
                            dueDate: self.isHavingDeadline ? self.deadline : nil,
                            categories: [],
                            isDecomposed: false,
