@@ -107,7 +107,7 @@ struct GoalView: View {
                 Group {
                     HStack(spacing: 50) {
                         if isEditingMode {
-                            Button(action: { self.isEditingMode = false }) {
+                            Button(action: { self.isEditingMode = false; self.goal = self.goalService.goals.filter {$0.id == self.goal.id}.first! }) {
                                 Text("Cancel")
                             }
                             Button(action: { self.saveGoal(goal: self.goal) }) {
