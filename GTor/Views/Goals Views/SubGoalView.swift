@@ -13,15 +13,11 @@ struct SubGoalView: View {
     @State var goal: Goal = .dummy
     @Binding var mainGoal: Goal
     @State var isEditingMode = false
-    @State var isShowingDeleteAlert = false
     
-    @State var updatedImportance: Importance = Importance.none
-    @State var updatedTitle: String = ""
-    @State var updatedNote: String = ""
     @State var alertMessage = ""
     @State var isLoading = false
     @State var isShowingAlert = false
-    
+    @State var isShowingDeleteAlert = false
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
@@ -44,18 +40,17 @@ struct SubGoalView: View {
 //                    ImportanceCard(goal: goal, updatedImportance: $updatedImportance, isEditingMode: $isEditingMode)
                     
                     HStack {
-                        Button(action: {  self.isShowingAlert = true  } ) {
+                        Button(action: { self.isShowingDeleteAlert = true } ) {
                             HStack {
                                 Image(systemName: "trash")
                                 Text("Delete the goal")
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .foregroundColor(.primary)
-                            
                         }
                     }
                     .modifier(SmallCell())
-                    .alert(isPresented: $isShowingAlert) {
+                    .alert(isPresented: $isShowingDeleteAlert) {
                         Alert(title: Text("Are you sure you want to delete this goal?"),
                               primaryButton: .default(Text("Cancel")),
                               secondaryButton: .destructive(Text("Delete"), action: {
@@ -119,25 +114,12 @@ struct SubGoalView: View {
     
     
     func saveGoal() {
-        var goalCopy = goal
-        var mainGoalCopy = mainGoal
-        
-        if goalCopy.importance != self.updatedImportance && updatedImportance != Importance.none {
-            goalCopy.importance = updatedImportance
-        }
-        if goalCopy.title != self.updatedTitle && !updatedTitle.isEmpty {
-            goalCopy.title = self.updatedTitle
-        }
-        if goalCopy.note != self.updatedNote {
-            goalCopy.note = self.updatedNote
-        }
-        
-        mainGoalCopy.subGoals?.removeAll(where: { (goal) -> Bool in
-                return goal.id == goalCopy.id
+        mainGoal.subGoals?.removeAll(where: { (goal) -> Bool in
+            return goal.id == self.goal.id
         })
-        mainGoalCopy.subGoals?.append(goalCopy)
+        mainGoal.subGoals?.append(goal)
 
-        goalService.updateGoal(goal: mainGoalCopy) { (result) in
+        goalService.updateGoal(goal: mainGoal) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false
