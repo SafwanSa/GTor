@@ -46,7 +46,7 @@ struct TaskView: View {
                     HStack {
                         Text("Done")
                         Spacer()
-                        TextField("100%", text: $updatedSatisfaction)
+                        TextField("\(task.satisfaction*100)%", text: $updatedSatisfaction)
                             .keyboardType(.asciiCapableNumberPad)
                             .multilineTextAlignment(.trailing)
                     }
@@ -54,9 +54,12 @@ struct TaskView: View {
                 
                 Section {
                     Button(action:  deleteTask ) {
-                        Image(systemName: "trash")
-                        Text("Delete task")
+                        HStack {
+                            Image(systemName: "trash")
+                            Text("Delete task")
+                        }
                     }
+                .buttonStyle(PlainButtonStyle())
                 }
             }
             .listStyle(GroupedListStyle())
