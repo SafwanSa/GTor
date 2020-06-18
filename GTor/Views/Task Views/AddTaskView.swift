@@ -60,7 +60,7 @@ struct AddTaskView: View {
                             LinkedGoalsView(selectedGoals: self.$linkedGoals)
                         }
                         ForEach(linkedGoals) { goal in
-                            Text(goal.title ?? "Goal Title")
+                            Text(goal.title)
                         }
                     }
                 }

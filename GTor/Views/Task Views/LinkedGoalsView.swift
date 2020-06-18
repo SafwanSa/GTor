@@ -19,14 +19,14 @@ struct LinkedGoalsView: View {
                 Section(header: Text("Main Goals")) {
                     ForEach(goalService.goals) { goal in
                         NavigationLink(destination: LinkedSubGoalsView(goal: goal, selectedGoals: self.$selectedGoals)) {
-                            Text(goal.title ?? "")
+                            Text(goal.title)
                         }
                     }
                 }
                 
                 Section(header: Text("Linked Goals")) {
                     ForEach(selectedGoals) { goal in
-                        Text(goal.title ?? ";")
+                        Text(goal.title)
                     }
                 }
 

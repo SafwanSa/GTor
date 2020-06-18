@@ -27,11 +27,11 @@ struct LinkedSubGoalsView: View {
             Picker(selection: $selectedGoal, label: Text("Linked Goal")) {
                 if goal.isDecomposed{
                     ForEach(goal.subGoals!, id: \.self) { subGoal in
-                        Text(subGoal.title ?? "")
+                        Text(subGoal.title)
                     }
                 }else {
                     ForEach(goalService.goals.filter { $0.id == goal.id }, id: \.self) { goal in
-                        Text(goal.title ?? "")
+                        Text(goal.title)
                     }
                 }
                 

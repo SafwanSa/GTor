@@ -68,7 +68,7 @@ struct SubGoalView: View {
                 .animation(.spring())
                 .padding(.top, 50)
             }
-            .navigationBarTitle("\(self.goal.title ?? "Title")")
+            .navigationBarTitle("\(self.goal.title)")
             .navigationBarItems(trailing:
                 Group {
                     HStack(spacing: 50) {
@@ -122,7 +122,7 @@ struct SubGoalView: View {
         var goalCopy = goal
         var mainGoalCopy = mainGoal
         
-        if goalCopy.importance?.description != self.updatedImportance && updatedImportance != Importance.none.description {
+        if goalCopy.importance.description != self.updatedImportance && updatedImportance != Importance.none.description {
             goalCopy.importance = Goal.stringToImportance(importance: self.updatedImportance)
         }
         if goalCopy.title != self.updatedTitle && !updatedTitle.isEmpty {

@@ -40,7 +40,7 @@ struct TaskView: View {
                 
                 Section(header: Text("Linked Goals")) {
                     ForEach(task.linkedGoals!) { linkedGoal in
-                        Text(linkedGoal.title ?? "")
+                        Text(linkedGoal.title)
                     }
                 }
 

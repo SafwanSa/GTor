@@ -22,12 +22,12 @@ struct GoalHeaderView: View {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 20.0) {
                         if isEditingMode {
-                            TextField("\(self.goal.title ?? "Title")", text: self.$updatedTitle)
+                            TextField("\(self.goal.title)", text: self.$updatedTitle)
                                 .font(.system(size: 20, weight: .regular))
                             TextField("\(self.goal.note!.isEmpty ? "Note (Optional)" : self.goal.note ?? "Note")", text: self.$updatedNote)
                                 .font(.subheadline)
                         }else{
-                            Text(self.goal.title ?? "Title")
+                            Text(self.goal.title)
                                 .font(.system(size: 20, weight: .regular))
                             Text(self.goal.note ?? "Goal Note")
                                 .font(.subheadline)

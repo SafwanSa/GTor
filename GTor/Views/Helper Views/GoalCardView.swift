@@ -27,7 +27,7 @@ struct GoalCardView: View {
                 .offset(x: -10, y: -15)
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(goal.title ?? "Title")
+                    Text(goal.title)
                         .font(.headline)
                     Text(goal.note ?? "Note")
                         .font(.subheadline)
@@ -63,7 +63,7 @@ struct GoalCardView: View {
                     .frame(width: 10)
                     .frame(maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 2))
-                    .opacity(self.goal.importance?.value ?? 0)
+                    .opacity(self.goal.importance.value)
         })
     }
 }

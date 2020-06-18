@@ -74,8 +74,9 @@ struct AddSubGoalView: View {
     
     func addGoal() {
         isLoading = true
-        let subGoal = Goal(uid: AuthService.userId, title: self.title, note: self.note, isSubGoal: true, importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0,
+        let subGoal = Goal(uid: AuthService.userId!, title: self.title, note: self.note, isSubGoal: true, importance: Goal.stringToImportance(importance: self.importance), satisfaction: 0,
                            dueDate: self.isHavingDeadline ? self.deadline : nil,
+                           categories: [],
                            isDecomposed: false,
                            tasks: [])
         goalService.validateGoal(goal: subGoal) { (result) in
