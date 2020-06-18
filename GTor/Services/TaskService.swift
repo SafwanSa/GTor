@@ -37,9 +37,7 @@ class TaskService: ObservableObject {
               case .failure(let error):
                   print(error.localizedDescription)
               case .success(let tasks):
-                  DispatchQueue.main.async { self.tasks = tasks
-                    print(self.tasks[0].id)
-                }
+                  DispatchQueue.main.async { self.tasks = tasks }
               }
           }
       }
@@ -89,6 +87,19 @@ class TaskService: ObservableObject {
             case .failure(let error):
                 completion(.failure(error))
             case .success(()):
+                for i in 0..<GoalService.shared.goals.count {
+                    if GoalService.shared.goals[i].tasks!.contains(task) {
+                        GoalService.shared.goals[i].tasks!.removeAll { (Goaltask) -> Bool in
+                            Goaltask.id == task.id
+                        }
+                    }else {
+                        for j in 0..<GoalService.shared.goals[i].subGoals!.count {
+                            GoalService.shared.goals[i].subGoals![j].tasks!.removeAll { (Goaltask) -> Bool in
+                                Goaltask.id == task.id
+                            }
+                        }
+                    }
+                }
                 completion(.success(()))
             }
         }

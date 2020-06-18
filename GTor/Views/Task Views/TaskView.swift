@@ -77,7 +77,6 @@ struct TaskView: View {
     }
     
     func deleteTask(){
-        
         isLoading = true
         self.taskService.deleteTask(task: self.task) { (result) in
             switch result {

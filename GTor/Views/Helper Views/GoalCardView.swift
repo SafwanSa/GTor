@@ -39,7 +39,7 @@ struct GoalCardView: View {
                     
                     HStack(spacing: 20) {
                         if self.goal.isDecomposed { Text("Sub-Goals: \(self.goal.subGoals?.count ?? 0)") }
-                        Text("Activities: \(0)/3")//TODO
+                        Text("Activities: \(0)/\(self.goal.tasks!.count)")//TODO
                         if self.goal.dueDate != nil { Spacer () ; Text("\(self.goal.dueDate!, formatter: dateFormatter2)") }
                     }
                     .foregroundColor(Color.secondary)
