@@ -18,7 +18,7 @@ struct AddSubGoalView: View {
 
     
     @State var isHavingDeadline = false
-    @State var goal: Goal = .dummy
+    @Binding var goal: Goal
     @State var alertMessage = "None"
     @State var isLoading = false
     @State var isShowingAlert = false
@@ -104,6 +104,6 @@ struct AddSubGoalView: View {
 
 struct _AddSubGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        AddSubGoalView()
+        AddSubGoalView(goal: .constant(.dummy))
     }
 }

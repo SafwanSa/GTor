@@ -10,10 +10,8 @@ import SwiftUI
 
 
 struct GoalHeaderView: View {
-    var goal: Goal
+    @Binding var goal: Goal
     @Binding var isEditingMode: Bool
-    @Binding var updatedTitle: String
-    @Binding var updatedNote: String
     
     var body: some View {
         VStack {
@@ -22,14 +20,14 @@ struct GoalHeaderView: View {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 20.0) {
                         if isEditingMode {
-                            TextField("\(self.goal.title)", text: self.$updatedTitle)
+                            TextField("\(self.goal.title)", text: self.$goal.title)
                                 .font(.system(size: 20, weight: .regular))
-                            TextField("\(self.goal.note!.isEmpty ? "Note (Optional)" : self.goal.note ?? "Note")", text: self.$updatedNote)
+                            TextField("\(self.goal.note.isEmpty ? "Note (Optional)" : self.goal.note)", text: $goal.note)
                                 .font(.subheadline)
                         }else{
                             Text(self.goal.title)
                                 .font(.system(size: 20, weight: .regular))
-                            Text(self.goal.note ?? "Goal Note")
+                            Text(self.goal.note)
                                 .font(.subheadline)
                         }
                     }
@@ -51,6 +49,6 @@ struct GoalHeaderView: View {
 
 struct GoalHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalHeaderView(goal: .dummy, isEditingMode: .constant(false), updatedTitle: .constant(""), updatedNote: .constant(""))
+        GoalHeaderView(goal: .constant(.dummy), isEditingMode: .constant(false))
     }
 }

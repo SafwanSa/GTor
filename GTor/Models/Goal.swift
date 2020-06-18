@@ -34,7 +34,7 @@ struct Goal: Equatable, Codable, Identifiable, Hashable {
     var id = UUID()
     var uid: String
     var title: String
-    var note: String?
+    var note: String
     var isSubGoal: Bool
     var importance: Importance
     var satisfaction: Double
@@ -47,7 +47,7 @@ struct Goal: Equatable, Codable, Identifiable, Hashable {
 
 extension Goal {
     static var dummy: Goal = .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "Goal1", note: "note1", isSubGoal: false, importance: .important, satisfaction: 0, dueDate: Date(), categories: [.init(name: "Category")], subGoals: [
-        .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "SubGoal1", isSubGoal: true, importance: .important, satisfaction: 0, categories: [], isDecomposed: false, tasks: [])
+        .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "SubGoal1", note: "", isSubGoal: true, importance: .important, satisfaction: 0, categories: [], isDecomposed: false, tasks: [])
     ], isDecomposed: true, tasks: [])
         
 }

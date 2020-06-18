@@ -15,16 +15,13 @@ struct ImportanceCard: View {
     
     var body: some View {
         HStack {
-            Text("Importance")
             if isEditingMode && !self.goal.isDecomposed {
-                Spacer()
                 Picker(selection: $selectedImportance, label: Text("Importance")) {
                     ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
                         Text(importance.rawValue)
                     }
                 }
             }else {
-                Spacer()
                 Text(self.goal.importance.rawValue)
                     .padding()
                     .foregroundColor(.primary)

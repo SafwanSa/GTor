@@ -10,14 +10,12 @@ import SwiftUI
 
 struct GoalView: View {
     @ObservedObject var goalService = GoalService.shared
-    var goal: Goal
+    @State var goal: Goal = .dummy
     @State var isSubGoalsListPresented = false
     @State var isEditingMode = false
     @State var isShowingDeleteAlert = false
+
     
-    @State var updatedImportance = Importance.none
-    @State var updatedTitle: String = ""
-    @State var updatedNote: String = ""
     @State var alertMessage = ""
     @State var isLoading = false
     @State var isShowingAlert = false
@@ -27,7 +25,7 @@ struct GoalView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 40.0) {
                     
-                    GoalHeaderView(goal: goal, isEditingMode: $isEditingMode, updatedTitle: $updatedTitle, updatedNote: $updatedNote)
+                    GoalHeaderView(goal: $goal, isEditingMode: $isEditingMode)
 
                     if goal.dueDate != nil{
                         HStack {
@@ -41,7 +39,7 @@ struct GoalView: View {
                         .modifier(SmallCell())
                     }
                     
-                    ImportanceCard(goal: goal, isEditingMode: $isEditingMode)
+//                    ImportanceCard(goal: goal, updatedImpo, isEditingMode: $isEditingMode)
 
 
                     if goal.isDecomposed {
@@ -55,7 +53,7 @@ struct GoalView: View {
                         }
                         .buttonStyle(PlainButtonStyle())
                         .sheet(isPresented: $isSubGoalsListPresented) {
-                            SubGoalsList(goal: self.goal)
+                            SubGoalsList(goal: self.$goal)
                         }
                     }
                     
@@ -131,19 +129,11 @@ struct GoalView: View {
     
     func saveGoal(goal: Goal) {
         isLoading = true
-        var goalCopy = goal
+//        var goalCopy = goal
         
-        if goalCopy.importance != self.updatedImportance && updatedImportance != Importance.none {
-            goalCopy.importance = updatedImportance
-        }
-        if goalCopy.title != self.updatedTitle && !updatedTitle.isEmpty {
-            goalCopy.title = self.updatedTitle
-        }
-        if goalCopy.note != self.updatedNote {
-            goalCopy.note = self.updatedNote
-        }
+
         
-        goalService.updateGoal(goal: goalCopy) { (result) in
+        goalService.updateGoal(goal: self.goal) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false

@@ -10,8 +10,8 @@ import SwiftUI
 
 struct SubGoalView: View {
     @ObservedObject var goalService = GoalService.shared
-    var goal: Goal
-    @State var mainGoal: Goal
+    @State var goal: Goal = .dummy
+    @Binding var mainGoal: Goal
     @State var isEditingMode = false
     @State var isShowingDeleteAlert = false
     
@@ -27,7 +27,7 @@ struct SubGoalView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 40.0) {
                     
-                    GoalHeaderView(goal: goal, isEditingMode: $isEditingMode, updatedTitle: $updatedTitle, updatedNote: $updatedNote)
+                    GoalHeaderView(goal: $goal, isEditingMode: $isEditingMode)
 
                     if self.goal.dueDate != nil{
                         HStack {
@@ -41,7 +41,7 @@ struct SubGoalView: View {
                         .modifier(SmallCell())
                     }
                     
-                    ImportanceCard(goal: goal, isEditingMode: $isEditingMode)
+//                    ImportanceCard(goal: goal, updatedImportance: $updatedImportance, isEditingMode: $isEditingMode)
                     
                     HStack {
                         Button(action: {  self.isShowingAlert = true  } ) {
@@ -156,6 +156,6 @@ struct SubGoalView: View {
 
 struct SubGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        SubGoalView(goal: .dummy, mainGoal: .dummy)
+        SubGoalView(goal: .dummy, mainGoal: .constant(.dummy))
     }
 }

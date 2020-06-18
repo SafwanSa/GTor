@@ -29,7 +29,7 @@ struct GoalCardView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(goal.title)
                         .font(.headline)
-                    Text(goal.note ?? "Note")
+                    Text(goal.note)
                         .font(.subheadline)
                     
                     Color.secondary
