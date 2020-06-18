@@ -12,7 +12,7 @@ struct Task: Codable, Identifiable, Equatable, Hashable {
     var id = UUID()
     var uid: String
     var title: String
-    var note: String?
+    var note: String
     var dueDate: Date?
     var satisfaction: Double
     var isSatisfied: Bool

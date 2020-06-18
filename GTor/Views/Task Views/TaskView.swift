@@ -10,22 +10,19 @@ import SwiftUI
 
 struct TaskView: View {
     @ObservedObject var taskService = TaskService.shared
-    var task: Task
-    @State var updatedTitle = ""
-    @State var updatedNote = ""
-    @State var satisfaction = ""
-    
+    @State var task: Task
     @State var alertMessage = ""
     @State var isLoading = false
     @State var isShowingAlert = false
     
+    @State var updatedSatisfaction = ""
     
     var body: some View {
         ZStack {
             List {
                 Section {
-                    TextField(task.title, text: $updatedTitle)
-                    TextField(task.note ?? "Note (Optional)", text: $updatedNote)
+                    TextField(task.title, text: $task.title)
+                    TextField(task.note.isEmpty ? "Note (Optional)" : task.note, text: $task.note)
                 }
                 
                 if task.dueDate != nil {
@@ -43,21 +40,22 @@ struct TaskView: View {
                         Text(linkedGoal.title)
                     }
                 }
-
+                
                 
                 Section {
                     HStack {
                         Text("Done")
                         Spacer()
-                        TextField("100%", text: $satisfaction)
-                            .keyboardType(.numberPad)
+                        TextField("100%", text: $updatedSatisfaction)
+                            .keyboardType(.asciiCapableNumberPad)
                             .multilineTextAlignment(.trailing)
                     }
                 }
                 
                 Section {
                     Button(action:  deleteTask ) {
-                    Text("Delete Task")
+                        Image(systemName: "trash")
+                        Text("Delete task")
                     }
                 }
             }
@@ -65,20 +63,20 @@ struct TaskView: View {
             .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle("Edit Task", displayMode: .inline)
             .navigationBarItems(trailing:
-                Button(action: { /*Save*/ }) {
+                Button(action: saveTask) {
                     Text("Done")
                 }
             )
-        LoadingView(isLoading: self.$isLoading)
-            }
-            .alert(isPresented: self.$isShowingAlert) {
-                Alert(title: Text(self.alertMessage))
-            }
+            LoadingView(isLoading: self.$isLoading)
+        }
+        .alert(isPresented: self.$isShowingAlert) {
+            Alert(title: Text(self.alertMessage))
+        }
     }
     
-    func deleteTask(){
+    func deleteTask() {
         isLoading = true
-        self.taskService.deleteTask(task: self.task) { (result) in
+        self.taskService.deleteTask(task: task) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false
@@ -88,6 +86,23 @@ struct TaskView: View {
                 self.isLoading = false
                 self.isShowingAlert = true
                 self.alertMessage = "Successfully deleted"
+            }
+        }
+    }
+    
+    func saveTask() {
+        if !updatedSatisfaction.isEmpty { task.satisfaction = Double(updatedSatisfaction)! }
+        isLoading = true
+        taskService.saveTask(task: task) { (result) in
+            switch result {
+            case .failure(let error):
+                self.isLoading = false
+                self.isShowingAlert = true
+                self.alertMessage = error.localizedDescription
+            case .success(()):
+                self.isLoading = false
+                self.isShowingAlert = true
+                self.alertMessage = "Successfully Saved"
             }
         }
     }
