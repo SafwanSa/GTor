@@ -26,7 +26,7 @@ struct GoalCardView2: View {
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 Spacer()
                 HStack {
-                    Text("Progress: 10%")
+                    Text("Progress: \(goal.satisfaction*100)%")
                     if goal.isDecomposed {
                         Spacer()
                         Text("SubGoals: \(goal.subGoals!.count)")
