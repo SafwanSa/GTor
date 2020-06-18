@@ -20,7 +20,6 @@
 		174DAC832493DD5C008CE35D /* LinkedGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174DAC822493DD5C008CE35D /* LinkedGoalsView.swift */; };
 		1762732C24748759000E9661 /* SubGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732B24748759000E9661 /* SubGoalView.swift */; };
 		1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732D24748D39000E9661 /* GoalHeaderView.swift */; };
-		1762733024748DA3000E9661 /* ImportanceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732F24748DA3000E9661 /* ImportanceCard.swift */; };
 		176FE77E2474E02400B7FE82 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 176FE77D2474E02400B7FE82 /* Lottie */; };
 		176FE7842474E1A800B7FE82 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7832474E1A800B7FE82 /* LottieView.swift */; };
 		176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7852474E21100B7FE82 /* LoadingView.swift */; };
@@ -72,7 +71,6 @@
 		174DAC822493DD5C008CE35D /* LinkedGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedGoalsView.swift; sourceTree = "<group>"; };
 		1762732B24748759000E9661 /* SubGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGoalView.swift; sourceTree = "<group>"; };
 		1762732D24748D39000E9661 /* GoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalHeaderView.swift; sourceTree = "<group>"; };
-		1762732F24748DA3000E9661 /* ImportanceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportanceCard.swift; sourceTree = "<group>"; };
 		176FE7832474E1A800B7FE82 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		176FE7852474E21100B7FE82 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		176FE78B2474EBAA00B7FE82 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 				17091763247235180011BB8C /* SelectCategoryView.swift */,
 				17D441FF247337C700DF91EC /* ModifiersViews.swift */,
 				1762732D24748D39000E9661 /* GoalHeaderView.swift */,
-				1762732F24748DA3000E9661 /* ImportanceCard.swift */,
 				176FE7832474E1A800B7FE82 /* LottieView.swift */,
 				176FE7852474E21100B7FE82 /* LoadingView.swift */,
 			);
@@ -472,7 +469,6 @@
 				17E7E7CE246CAAF500596500 /* SignInView.swift in Sources */,
 				1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */,
 				17E7E7C4246CA6EB00596500 /* User.swift in Sources */,
-				1762733024748DA3000E9661 /* ImportanceCard.swift in Sources */,
 				17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */,
 				171400AD2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift in Sources */,
 				17A394AC249665C8002B7E25 /* LinkedSubGoalsView.swift in Sources */,
