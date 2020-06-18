@@ -50,6 +50,7 @@ struct GoalCardView2: View {
         .padding(.vertical, 10)
         .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)).opacity(0.3))
         .clipShape(RoundedRectangle(cornerRadius: 10))
+        .shadow(color: Color.primary.opacity(0.3), radius: 20, x: 0, y: 20)
         .overlay(
             HStack {
                 Color.red
