@@ -89,8 +89,4 @@ struct TaskCardView: View {
         }
     }
 }
-let tasksData: [Task] = [
-    .init(title: "Do Louandry", note: "Just white T-shirts", dueDate: Date(), satisfaction: 0, isSatisfied: false),
-    .init(title: "Homework", note: "Chapter 1", dueDate: Date(), satisfaction: 0, isSatisfied: false),
-    .init(title: "Pay for the match", dueDate: Date(), satisfaction: 0, isSatisfied: false)
-]
+

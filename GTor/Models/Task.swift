@@ -10,16 +10,16 @@ import Foundation
 
 struct Task: Codable, Identifiable, Equatable, Hashable {
     var id = UUID()
-    var uid: String?
+    var uid: String
     var title: String
     var note: String?
     var dueDate: Date?
-    var satisfaction: Double?
-    var isSatisfied: Bool?
+    var satisfaction: Double
+    var isSatisfied: Bool
     var linkedGoals: [Goal]?
 }
 
 
 extension Task {
-    static var dummy = Task(title: "Title1", note: "Note1", satisfaction: 0, isSatisfied: false, linkedGoals: [])
+    static var dummy = Task(uid: AuthService.userId!, title: "Title1", note: "Note1", satisfaction: 0, isSatisfied: false, linkedGoals: [])
 }
