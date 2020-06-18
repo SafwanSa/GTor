@@ -100,7 +100,7 @@ struct AddTaskView: View {
                 for goal in self.goalService.goals {
                     if self.linkedGoals.contains(goal) {
                         mainGoal = goal
-                        mainGoal.tasks?.append(task)
+                        mainGoal.tasks.append(task)
                     }else {
                         if goal.subGoals != nil {
                             for subGoal in goal.subGoals! {
@@ -110,7 +110,7 @@ struct AddTaskView: View {
                                     mainGoal.subGoals!.removeAll { (goal) -> Bool in
                                         goal.id == goalCopy.id
                                     }
-                                    goalCopy.tasks?.append(task)
+                                    goalCopy.tasks.append(task)
                                     mainGoal.subGoals!.append(goalCopy)
                                 }
                             }

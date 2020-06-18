@@ -76,7 +76,7 @@ struct SubGoalView: View {
                             Button(action: { self.isEditingMode = false }) {
                                 Text("Cancel")
                             }
-                            Button(action: { self.saveGoal(goal: self.goal, mainGoal: self.mainGoal) }) {
+                            Button(action: saveGoal) {
                                 Text("Save")
                             }
                         }else if !self.isEditingMode{
@@ -118,7 +118,7 @@ struct SubGoalView: View {
     }
     
     
-    func saveGoal(goal: Goal, mainGoal: Goal) {
+    func saveGoal() {
         var goalCopy = goal
         var mainGoalCopy = mainGoal
         

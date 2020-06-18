@@ -54,7 +54,7 @@ struct Goal: Equatable, Codable, Identifiable, Hashable {
     var categories: [Category]?
     var subGoals: [Goal]?
     var isDecomposed: Bool
-    var tasks: [Task]?
+    var tasks: [Task]
     
     static func stringToImportance(importance: String)->Importance {
         switch importance {
@@ -72,6 +72,6 @@ struct Goal: Equatable, Codable, Identifiable, Hashable {
 
 extension Goal {
     static var dummy: Goal = .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "Goal1", note: "note1", isSubGoal: false, importance: .important, satisfaction: 0, dueDate: Date(), categories: [.init(name: "Category")], subGoals: [
-        .init(title: "Dummy Tiutle", note: "Dummy Note", isSubGoal: true, importance: .important, satisfaction: 0, subGoals: [], isDecomposed: false)
-    ], isDecomposed: true)
+        .init(title: "Dummy Tiutle", note: "Dummy Note", isSubGoal: true, importance: .important, satisfaction: 0, subGoals: [], isDecomposed: false, tasks: [])
+    ], isDecomposed: true, tasks: [])
 }

@@ -88,13 +88,13 @@ class TaskService: ObservableObject {
                 completion(.failure(error))
             case .success(()):
                 for i in 0..<GoalService.shared.goals.count {
-                    if GoalService.shared.goals[i].tasks!.contains(task) {
-                        GoalService.shared.goals[i].tasks!.removeAll { (Goaltask) -> Bool in
+                    if GoalService.shared.goals[i].tasks.contains(task) {
+                        GoalService.shared.goals[i].tasks.removeAll { (Goaltask) -> Bool in
                             Goaltask.id == task.id
                         }
                     }else {
                         for j in 0..<GoalService.shared.goals[i].subGoals!.count {
-                            GoalService.shared.goals[i].subGoals![j].tasks!.removeAll { (Goaltask) -> Bool in
+                            GoalService.shared.goals[i].subGoals![j].tasks.removeAll { (Goaltask) -> Bool in
                                 Goaltask.id == task.id
                             }
                         }
