@@ -20,8 +20,8 @@ struct SubGoalsList: View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    ForEach(self.goal.subGoals!) { goal in
-                        NavigationLink(destination: SubGoalView(goal: goal, mainGoal: self.goal)) {
+                    ForEach(goal.subGoals!) { goal in
+                        NavigationLink(destination: SubGoalView(goal: goal, mainGoal: goal)) {
                             GoalCardView(goal: goal)
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -49,7 +49,7 @@ struct SubGoalsList: View {
                             .font(.headline)
                     }
                 }
-                .sheet(isPresented: self.$isAddGoalSelceted) {
+                .sheet(isPresented: $isAddGoalSelceted) {
                     AddSubGoalView(goal: self.goal)
                 }
             )

@@ -30,16 +30,16 @@ struct AddSubGoalView: View {
             NavigationView {
                 List {
                     Section {
-                        TextField("Title", text: self.$title)
-                        TextField("Note (Optional)", text: self.$note)
+                        TextField("Title", text: $title)
+                        TextField("Note (Optional)", text: $note)
                     }
                     
                     Section {
-                        Toggle(isOn: self.$isHavingDeadline) {
+                        Toggle(isOn: $isHavingDeadline) {
                             Text("Add a deadline")
                         }
-                        if self.isHavingDeadline {
-                            DatePicker(selection: self.$deadline, in: Date()..., displayedComponents: .date) {
+                        if isHavingDeadline {
+                            DatePicker(selection: $deadline, in: Date()..., displayedComponents: .date) {
                                 Text("\(self.deadline, formatter: dateFormatter)")
                             }
                         }
@@ -47,7 +47,7 @@ struct AddSubGoalView: View {
                     
                     Section {
                         HStack {
-                            TextFieldWithPickerAsInputView(data: self.importances, placeholder: "Importance", selectionIndex: self.$selectedImportanceIndex, text: self.$importance)
+                            TextFieldWithPickerAsInputView(data: importances, placeholder: "Importance", selectionIndex: $selectedImportanceIndex, text: $importance)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
@@ -65,9 +65,9 @@ struct AddSubGoalView: View {
                     .environment(\.horizontalSizeClass, .regular)
                     .navigationBarTitle("Add Sub Goal")
             }
-            LoadingView(isLoading: self.$isLoading)
+            LoadingView(isLoading: $isLoading)
         }
-        .alert(isPresented: self.$isShowingAlert) {
+        .alert(isPresented: $isShowingAlert) {
             Alert(title: Text(self.alertMessage))
         }
     }

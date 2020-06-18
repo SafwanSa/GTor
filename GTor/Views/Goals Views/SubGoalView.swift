@@ -27,13 +27,13 @@ struct SubGoalView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 40.0) {
                     
-                    GoalHeaderView(goal: goal, isEditingMode: self.$isEditingMode, updatedTitle: self.$updatedTitle, updatedNote: self.$updatedNote)
+                    GoalHeaderView(goal: goal, isEditingMode: $isEditingMode, updatedTitle: $updatedTitle, updatedNote: $updatedNote)
 
                     if self.goal.dueDate != nil{
                         HStack {
                             Text("Deadline")
                             Spacer()
-                            Text("\(self.goal.dueDate!, formatter: dateFormatter)")
+                            Text("\(goal.dueDate!, formatter: dateFormatter)")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 .padding(.trailing, 5)
@@ -41,7 +41,7 @@ struct SubGoalView: View {
                         .modifier(SmallCell())
                     }
                     
-                    ImportanceCard(goal: goal, isEditingMode: self.$isEditingMode, updatedImportance: self.$updatedImportance)
+                    ImportanceCard(goal: goal, isEditingMode: $isEditingMode, updatedImportance: $updatedImportance)
                     
                     HStack {
                         Button(action: {  self.isShowingAlert = true  } ) {
@@ -55,7 +55,7 @@ struct SubGoalView: View {
                         }
                     }
                     .modifier(SmallCell())
-                    .alert(isPresented: self.$isShowingAlert) {
+                    .alert(isPresented: $isShowingAlert) {
                         Alert(title: Text("Are you sure you want to delete this goal?"),
                               primaryButton: .default(Text("Cancel")),
                               secondaryButton: .destructive(Text("Delete"), action: {
@@ -68,19 +68,19 @@ struct SubGoalView: View {
                 .animation(.spring())
                 .padding(.top, 50)
             }
-            .navigationBarTitle("\(self.goal.title)")
+            .navigationBarTitle("\(goal.title)")
             .navigationBarItems(trailing:
                 Group {
                     HStack(spacing: 50) {
-                        if self.isEditingMode {
+                        if isEditingMode {
                             Button(action: { self.isEditingMode = false }) {
                                 Text("Cancel")
                             }
                             Button(action: saveGoal) {
                                 Text("Save")
                             }
-                        }else if !self.isEditingMode{
-                                Button(action: {self.isEditingMode = true }) {
+                        }else if !isEditingMode{
+                            Button(action: { self.isEditingMode = true }) {
                                     Image(systemName: "pencil")
                                         .resizable()
                                         .imageScale(.large)
@@ -91,19 +91,19 @@ struct SubGoalView: View {
                         }
                     }
                 )
-            LoadingView(isLoading: self.$isLoading)
+            LoadingView(isLoading: $isLoading)
         }
-        .alert(isPresented: self.$isShowingAlert) {
+        .alert(isPresented: $isShowingAlert) {
             Alert(title: Text(self.alertMessage))
         }
         
         }
         
     func deleteGoal(){
-        self.mainGoal.subGoals?.removeAll(where: { (goal) -> Bool in
+        mainGoal.subGoals?.removeAll(where: { (goal) -> Bool in
             return goal.id == self.goal.id
         })
-        self.goalService.updateSubGoals(goal: self.mainGoal) { (result) in
+        goalService.updateSubGoals(goal: mainGoal) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false

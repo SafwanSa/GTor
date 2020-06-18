@@ -93,7 +93,7 @@ struct AddGoalView: View {
                         dueDate: isHavingDeadline ? deadline : nil, categories: selectedCategories,
                         subGoals: isDecomposed ? [] : nil, isDecomposed: isDecomposed,
                         tasks: [])
-            self.goalService.saveGoal(goal: goal) { (result) in
+            goalService.saveGoal(goal: goal) { (result) in
                 switch result {
                 case .failure(let error):
                     self.isLoading = false
