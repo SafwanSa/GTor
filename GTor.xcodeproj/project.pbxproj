@@ -13,7 +13,6 @@
 		17091768247244800011BB8C /* AddSubGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17091767247244800011BB8C /* AddSubGoalView.swift */; };
 		171400AD2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */; };
 		171E6C3C246FA90B003EFF36 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171E6C3B246FA90B003EFF36 /* TabBar.swift */; };
-		1721F56F246E7837004AB7AD /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721F56E246E7837004AB7AD /* GoalView.swift */; };
 		1729898B246CFCF300449C4F /* FirestoreErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898A246CFCF300449C4F /* FirestoreErrorHandler.swift */; };
 		1729898D246D0F2F00449C4F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898C246D0F2F00449C4F /* AuthService.swift */; };
 		1729898F246D13C200449C4F /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898E246D13C200449C4F /* AuthError.swift */; };
@@ -27,6 +26,7 @@
 		176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7852474E21100B7FE82 /* LoadingView.swift */; };
 		176FE78C2474EBAA00B7FE82 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 176FE78B2474EBAA00B7FE82 /* loading.json */; };
 		179E77012476604000BB77F8 /* TODOList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179E77002476604000BB77F8 /* TODOList.swift */; };
+		17A26C04249C1145004776EA /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C03249C1145004776EA /* GoalView.swift */; };
 		17A394AC249665C8002B7E25 /* LinkedSubGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A394AB249665C8002B7E25 /* LinkedSubGoalsView.swift */; };
 		17A61A6124707F12008B8C31 /* AddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A61A6024707F12008B8C31 /* AddGoalView.swift */; };
 		17C60F542492633700A3DEFF /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C60F532492633700A3DEFF /* TaskView.swift */; };
@@ -65,7 +65,6 @@
 		17091767247244800011BB8C /* AddSubGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "\U0010AddSubGoalView.swift"; sourceTree = "<group>"; };
 		171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPickerAsInputView.swift; sourceTree = "<group>"; };
 		171E6C3B246FA90B003EFF36 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		1721F56E246E7837004AB7AD /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		1729898A246CFCF300449C4F /* FirestoreErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorHandler.swift; sourceTree = "<group>"; };
 		1729898C246D0F2F00449C4F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1729898E246D13C200449C4F /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
@@ -78,6 +77,7 @@
 		176FE7852474E21100B7FE82 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		176FE78B2474EBAA00B7FE82 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		179E77002476604000BB77F8 /* TODOList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOList.swift; sourceTree = "<group>"; };
+		17A26C03249C1145004776EA /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		17A394AB249665C8002B7E25 /* LinkedSubGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedSubGoalsView.swift; sourceTree = "<group>"; };
 		17A61A6024707F12008B8C31 /* AddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalView.swift; sourceTree = "<group>"; };
 		17C60F532492633700A3DEFF /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
@@ -277,8 +277,8 @@
 				1762732B24748759000E9661 /* SubGoalView.swift */,
 				17091767247244800011BB8C /* AddSubGoalView.swift */,
 				17E7E7D4246CAB5100596500 /* GoalsList.swift */,
-				1721F56E246E7837004AB7AD /* GoalView.swift */,
 				17A61A6024707F12008B8C31 /* AddGoalView.swift */,
+				17A26C03249C1145004776EA /* GoalView.swift */,
 			);
 			path = "Goals Views";
 			sourceTree = "<group>";
@@ -468,6 +468,7 @@
 				171E6C3C246FA90B003EFF36 /* TabBar.swift in Sources */,
 				1709175E247231830011BB8C /* GoalCardView.swift in Sources */,
 				17091760247233120011BB8C /* SubGoalsList.swift in Sources */,
+				17A26C04249C1145004776EA /* GoalView.swift in Sources */,
 				17E7E7CE246CAAF500596500 /* SignInView.swift in Sources */,
 				1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */,
 				17E7E7C4246CA6EB00596500 /* User.swift in Sources */,
@@ -476,7 +477,6 @@
 				171400AD2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift in Sources */,
 				17A394AC249665C8002B7E25 /* LinkedSubGoalsView.swift in Sources */,
 				1729898D246D0F2F00449C4F /* AuthService.swift in Sources */,
-				1721F56F246E7837004AB7AD /* GoalView.swift in Sources */,
 				174DAC832493DD5C008CE35D /* LinkedGoalsView.swift in Sources */,
 				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,
 				17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */,

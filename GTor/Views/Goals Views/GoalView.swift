@@ -1,8 +1,8 @@
 //
-//  GoalView.swift
+//  SwiftUIView.swift
 //  GTor
 //
-//  Created by Safwan Saigh on 15/05/2020.
+//  Created by Safwan Saigh on 18/06/2020.
 //  Copyright © 2020 Safwan Saigh. All rights reserved.
 //
 
@@ -22,41 +22,41 @@ struct GoalView: View {
     
     var body: some View {
         ZStack {
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 40.0) {
-                    
+            List {
+                Section {
                     GoalHeaderView(goal: $goal, isEditingMode: $isEditingMode)
-
+                }
+                
                     if goal.dueDate != nil{
-                        HStack {
-                            Text("Deadline")
-                            Spacer()
-                            Text("\(goal.dueDate!, formatter: dateFormatter)")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                                .padding(.trailing, 5)
-                        }
-                        .modifier(SmallCell())
-                    }
-                    
-                    ImportanceCard(goal: $goal, isEditingMode: $isEditingMode)
-
-
-                    if goal.isDecomposed {
-                        Button(action: { self.isSubGoalsListPresented = true }) {
+                        Section {
                             HStack {
-                                Text("Sub Goals")
+                                Text("Deadline")
                                 Spacer()
-                                Image(systemName: "chevron.right")
+                                Text("\(goal.dueDate!, formatter: dateFormatter)")
+                                    .foregroundColor(.secondary)
+                                    .padding(.trailing, 5)
                             }
-                            .modifier(SmallCell())
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .sheet(isPresented: $isSubGoalsListPresented) {
-                            SubGoalsList(goal: self.$goal)
                         }
                     }
-                    
+                
+                
+                Section {
+                    Picker(selection: self.$goal.importance, label: Text("Importance")) {
+                        ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+                            Text(importance.rawValue)
+                        }
+                    }
+                }
+                
+                Section {
+                    if goal.isDecomposed {
+                        NavigationLink(destination: SubGoalsList(goal: $goal)) {
+                            Text("SubGoals")
+                        }
+                    }
+                }
+                
+                Section {
                     HStack {
                         Button(action: { if !self.isSubGoalsListPresented { self.isShowingDeleteAlert = true } } ) {
                             HStack {
@@ -67,19 +67,21 @@ struct GoalView: View {
                             .foregroundColor(.primary)
                         }
                     }
-                    .modifier(SmallCell())
                     .alert(isPresented: $isShowingDeleteAlert) {
                         Alert(title: Text("Are you sure you want to delete this goal?"),
                               message: Text(self.goal.isDecomposed ? "All the Sub Goals of this goal will be deleted also" : ""),
                               primaryButton: .default(Text("Cancel")),
                               secondaryButton: .destructive(Text("Delete"), action: {
-                                self.deleteGoal()
-                        }))
+                                //                                self.deleteGoal()
+                              }))
                     }
                 }
-                .animation(.spring())
-                .padding(.top, 50)
+                
+                
             }
+            .animation(.spring())
+            .listStyle(GroupedListStyle())
+            .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle("\(goal.title)")
             .navigationBarItems(trailing:
                 Group {
@@ -92,25 +94,26 @@ struct GoalView: View {
                                 Text("Save")
                             }
                         }else if !isEditingMode && !isSubGoalsListPresented{
-                                Button(action: { self.isEditingMode = true }) {
-                                    Image(systemName: "pencil")
-                                        .resizable()
-                                        .imageScale(.large)
-                                        .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
-                                        .font(.headline)
-                                }
+                            Button(action: { self.isEditingMode = true }) {
+                                Image(systemName: "pencil")
+                                    .resizable()
+                                    .imageScale(.large)
+                                    .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                                    .font(.headline)
                             }
                         }
                     }
-                )
+                }
+            )
             LoadingView(isLoading: $isLoading)
         }
         .alert(isPresented: $isShowingAlert) {
             Alert(title: Text(self.alertMessage))
         }
-        
-        }
-
+    }
+    
+    
+    
     func deleteGoal(){
         isLoading = true
         goalService.deleteGoal(goal: goal) { (result) in
@@ -129,9 +132,9 @@ struct GoalView: View {
     
     func saveGoal(goal: Goal) {
         isLoading = true
-//        var goalCopy = goal
+        //        var goalCopy = goal
         
-
+        
         
         goalService.updateGoal(goal: self.goal) { (result) in
             switch result {
@@ -148,10 +151,11 @@ struct GoalView: View {
             }
         }
     }
+    
 }
 
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalView(goal: .dummy)
+        GoalView()
     }
 }

@@ -44,6 +44,7 @@ struct AddSubGoalView: View {
                     }
                     
                     Section {
+                        
                         Picker(selection: $selectedImportance, label: Text("Importance")) {
                             ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
                                 Text(importance.rawValue)
