@@ -19,7 +19,9 @@ struct GoalsList: View {
                 VStack(spacing: 20) {
                     ForEach(goalService.goals) { goal in
                         NavigationLink(destination: GoalView(goal: goal)) {
-                            GoalCardView(goal: goal)
+                            GoalCardView2(goal: goal)
+                                .padding(.horizontal)
+
                         }
                          .buttonStyle(PlainButtonStyle())
                     }

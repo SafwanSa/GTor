@@ -22,7 +22,7 @@ struct GoalHeaderView: View {
             VStack(alignment: .leading) {
                     Spacer()
                     VStack {
-                        VStack(spacing: 20.0) {
+                        VStack(alignment: .leading, spacing: 20.0) {
                             if isEditingMode {
                                 TextField("\(self.goal.title)", text: self.$goal.title)
                                     .font(.system(size: 20, weight: .regular))
