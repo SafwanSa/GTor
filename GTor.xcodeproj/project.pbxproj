@@ -27,6 +27,8 @@
 		179E77012476604000BB77F8 /* TODOList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179E77002476604000BB77F8 /* TODOList.swift */; };
 		17A26C04249C1145004776EA /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C03249C1145004776EA /* GoalView.swift */; };
 		17A26C06249C1DE9004776EA /* GoalCardView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C05249C1DE9004776EA /* GoalCardView2.swift */; };
+		17A26C08249C3A16004776EA /* TaskCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C07249C3A16004776EA /* TaskCardView.swift */; };
+		17A26C0A249C4C25004776EA /* QuickSatisfactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C09249C4C25004776EA /* QuickSatisfactionView.swift */; };
 		17A394AC249665C8002B7E25 /* LinkedSubGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A394AB249665C8002B7E25 /* LinkedSubGoalsView.swift */; };
 		17A61A6124707F12008B8C31 /* AddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A61A6024707F12008B8C31 /* AddGoalView.swift */; };
 		17C60F542492633700A3DEFF /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C60F532492633700A3DEFF /* TaskView.swift */; };
@@ -78,6 +80,8 @@
 		179E77002476604000BB77F8 /* TODOList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOList.swift; sourceTree = "<group>"; };
 		17A26C03249C1145004776EA /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		17A26C05249C1DE9004776EA /* GoalCardView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCardView2.swift; sourceTree = "<group>"; };
+		17A26C07249C3A16004776EA /* TaskCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCardView.swift; sourceTree = "<group>"; };
+		17A26C09249C4C25004776EA /* QuickSatisfactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSatisfactionView.swift; sourceTree = "<group>"; };
 		17A394AB249665C8002B7E25 /* LinkedSubGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedSubGoalsView.swift; sourceTree = "<group>"; };
 		17A61A6024707F12008B8C31 /* AddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalView.swift; sourceTree = "<group>"; };
 		17C60F532492633700A3DEFF /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
@@ -133,6 +137,8 @@
 				176FE7832474E1A800B7FE82 /* LottieView.swift */,
 				176FE7852474E21100B7FE82 /* LoadingView.swift */,
 				17A26C05249C1DE9004776EA /* GoalCardView2.swift */,
+				17A26C07249C3A16004776EA /* TaskCardView.swift */,
+				17A26C09249C4C25004776EA /* QuickSatisfactionView.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -481,11 +487,13 @@
 				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,
 				17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */,
 				17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */,
+				17A26C0A249C4C25004776EA /* QuickSatisfactionView.swift in Sources */,
 				176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */,
 				17E7E7A9246C921400596500 /* SceneDelegate.swift in Sources */,
 				17E7E7DD246CABFE00596500 /* SettingsView.swift in Sources */,
 				17E7E7D0246CAB0600596500 /* LaunchView.swift in Sources */,
 				17E7E7C6246CA6F400596500 /* Goal.swift in Sources */,
+				17A26C08249C3A16004776EA /* TaskCardView.swift in Sources */,
 				174DAC812493D92F008CE35D /* AddTaskView.swift in Sources */,
 				1762732C24748759000E9661 /* SubGoalView.swift in Sources */,
 				179E77012476604000BB77F8 /* TODOList.swift in Sources */,
