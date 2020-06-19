@@ -46,7 +46,7 @@ struct TaskView: View {
                     HStack {
                         Text("Done")
                         Spacer()
-                        TextField("\(task.satisfaction*100)%", text: $updatedSatisfaction)
+                        TextField("\(task.satisfaction)%", text: $updatedSatisfaction)
                             .keyboardType(.asciiCapableNumberPad)
                             .multilineTextAlignment(.trailing)
                     }
