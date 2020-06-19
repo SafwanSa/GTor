@@ -94,7 +94,11 @@ struct TaskView: View {
     }
     
     func saveTask() {
-        if !updatedSatisfaction.isEmpty { task.satisfaction = Double(updatedSatisfaction)! }
+        if !updatedSatisfaction.isEmpty {
+//            if updatedSatisfaction.last == "%" { updatedSatisfaction.removeLast() }
+            task.satisfaction = Double(updatedSatisfaction)!
+//            updatedSatisfaction+="%"
+        }
         isLoading = true
         taskService.saveTask(task: task) { (result) in
             switch result {
