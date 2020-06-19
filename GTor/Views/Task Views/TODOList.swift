@@ -19,7 +19,13 @@ struct TODOList: View {
             ZStack {
                 ScrollView {
                     VStack(spacing: 20.0) {
-                        ForEach(taskService.tasks) { task in
+                        ForEach(taskService.tasks.filter {!$0.isSatisfied}) { task in
+                            NavigationLink(destination: TaskView(task: task)) {
+                                TaskCardView(task: task, isSatisfiedPresnted: self.$isSatisfiedPresnted, selectedTask: self.$selectedTask)
+                            }
+                        }
+                        Text("Done tasks")
+                        ForEach(taskService.tasks.filter {$0.isSatisfied} ) { task in
                             NavigationLink(destination: TaskView(task: task)) {
                                 TaskCardView(task: task, isSatisfiedPresnted: self.$isSatisfiedPresnted, selectedTask: self.$selectedTask)
                             }

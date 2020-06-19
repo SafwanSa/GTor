@@ -21,7 +21,7 @@ struct TaskCardView: View {
                         .font(.headline)
                         .foregroundColor(.primary)
                     Spacer()
-                    Image(systemName: "square")
+                    Image(systemName: task.isSatisfied ? "checkmark.square" :"square")
                         .onTapGesture {
                             self.isSatisfiedPresnted = true
                             self.selectedTask = self.task

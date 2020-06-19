@@ -35,22 +35,24 @@ struct QuickSatisfactionView: View {
         ZStack {
             VStack {
                 ZStack {
-                    Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)).opacity(0.8)
+                    Color.primary.opacity(0.8)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                     
                     VStack(spacing: 20.0) {
                         HStack {
                             Button(action: { self.isSatisfiedPresnted = false }) {
                                 Image(systemName: "xmark")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20, height: 20)
                             }
                             .buttonStyle(PlainButtonStyle())
-                            
-                            Text("Satisfaction")
-                                .font(.headline)
+                            Spacer()
                         }
+                        .foregroundColor(Color(UIColor.systemBackground))
                         ForEach(actions, id: \.self) { action in
                             VStack {
-                                Color.black
+                                Color.primary
                                     .frame(width: 180, height: 1)
                                 
                                 Button(
@@ -68,6 +70,7 @@ struct QuickSatisfactionView: View {
                                                 self.selectedTask.satisfaction = Double(self.updatedSatisfaction)!
                                             }
                                         }
+                                        self.selectedTask.isSatisfied = true
                                         self.taskService.saveTask(task: self.selectedTask) { result in
                                             switch result {
                                             case .failure(let error):
@@ -98,7 +101,7 @@ struct QuickSatisfactionView: View {
                         TextField("50%", text: $updatedSatisfaction)
                             .keyboardType(.asciiCapableNumberPad)
                             .frame(width: 50, height: 40, alignment: .center)
-                            .background(Color.white)
+                            .background(Color(UIColor.systemBackground))
                             .multilineTextAlignment(.center)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                     }

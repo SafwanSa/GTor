@@ -22,8 +22,10 @@ struct TaskView: View {
             List {
                 Section {
                     TextField(task.title, text: $task.title)
-                    TextField(task.note.isEmpty ? "Note (Optional)" : task.note, text: $task.note)
+                    if task.isSatisfied { if !task.note.isEmpty { TextField(task.note, text: $task.note) } } else { TextField(task.note.isEmpty ? "Note (Optional)" : task.note, text: $task.note) }
+                    
                 }
+                .disabled(true)
                 
                 if task.dueDate != nil {
                     Section {
@@ -64,7 +66,7 @@ struct TaskView: View {
             }
             .listStyle(GroupedListStyle())
             .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle("Edit Task", displayMode: .inline)
+            .navigationBarTitle(task.isSatisfied ? "\(task.title)" : "Edit Task", displayMode: .inline)
             .navigationBarItems(trailing:
                 Button(action: saveTask) {
                     Text("Done")
