@@ -10,6 +10,7 @@ import SwiftUI
 
 struct GoalCardView2: View {
     var goal: Goal
+    var mainGoal: Goal
 
     var body: some View {
         HStack {
@@ -29,11 +30,11 @@ struct GoalCardView2: View {
                     Text("Progress: \(goal.satisfaction*100)%")
                     if goal.isDecomposed {
                         Spacer()
-                        Text("SubGoals: \(goal.subGoals!.count)")
+                        Text("SubGoals: \(GoalService.shared.getSubGoals(mainGoal: mainGoal).count)")
                     }else {
                         if goal.isSubGoal {
                             Spacer()
-                            Text("Activities: \(goal.tasks.filter {$0.isSatisfied}.count)/\(goal.tasks.count)")
+                            Text("Activities: \(GoalService.shared.getTasks(goal: self.goal).filter {$0.isSatisfied}.count)/\(GoalService.shared.getTasks(goal: self.goal).count)")
                         }
                     }
                     Spacer()
@@ -65,6 +66,6 @@ struct GoalCardView2: View {
 
 struct GoalCardView2_Previews: PreviewProvider {
     static var previews: some View {
-        GoalCardView2(goal: .dummy)
+        GoalCardView2(goal: .dummy, mainGoal: .dummy)
     }
 }

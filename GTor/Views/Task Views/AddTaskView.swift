@@ -16,7 +16,7 @@ struct AddTaskView: View {
     @State var title = ""
     @State var note = ""
     @State var deadline = Date()
-    @State var linkedGoals: [Goal] = []
+    @State var linkedGoalsIds: [UUID] = []
     @State var isHavingDeadline = false
     @State var isLinkedGoalsPresented = false
     
@@ -57,9 +57,9 @@ struct AddTaskView: View {
                             
                         }
                         .sheet(isPresented: $isLinkedGoalsPresented) {
-                            LinkedGoalsView(selectedGoals: self.$linkedGoals)
+                            LinkedGoalsView(selectedGoals: self.$linkedGoalsIds)
                         }
-                        ForEach(linkedGoals) { goal in
+                        ForEach(goalService.goals.filter {self.linkedGoalsIds.contains($0.id)}) { goal in
                             Text(goal.title)
                         }
                     }
@@ -86,7 +86,8 @@ struct AddTaskView: View {
     
     func createTask() {
         isLoading = true
-        let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: deadline, satisfaction: 0, isSatisfied: false, linkedGoals: linkedGoals)
+
+        let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: deadline, satisfaction: 0, isSatisfied: false, linkedGoalsIds: linkedGoalsIds)
         self.taskService.saveTask(task: task) { (result) in
             switch result {
             case .failure(let error):
@@ -94,42 +95,10 @@ struct AddTaskView: View {
                 self.isShowingAlert = true
                 self.alertMessage = error.localizedDescription
             case .success(()):
-                var goalCopy: Goal = .dummy
-                var mainGoal: Goal = .dummy
-                
-                for goal in self.goalService.goals {
-                    if self.linkedGoals.contains(goal) {
-                        mainGoal = goal
-                        mainGoal.tasks.append(task)
-                    }else {
-                        if goal.subGoals != nil {
-                            for subGoal in goal.subGoals! {
-                                if self.linkedGoals.contains(subGoal) {
-                                    mainGoal = goal
-                                    goalCopy = subGoal
-                                    mainGoal.subGoals!.removeAll { (goal) -> Bool in
-                                        goal.id == goalCopy.id
-                                    }
-                                    goalCopy.tasks.append(task)
-                                    mainGoal.subGoals!.append(goalCopy)
-                                }
-                            }
-                        }
-                    }
-                }
-
-                self.goalService.updateGoal(goal: mainGoal) { (result) in
-                    switch result {
-                    case .failure(let error):
-                        self.isLoading = false
-                        self.isShowingAlert = true
-                        self.alertMessage = error.localizedDescription
-                        print(error.localizedDescription)
-                    case .success(()):
-                        self.isLoading = false
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-                }
+                self.isLoading = false
+                self.isShowingAlert = true
+                self.presentationMode.wrappedValue.dismiss()
+                self.alertMessage = "Successfully added"
             }
         }
     }

@@ -40,14 +40,10 @@ struct Goal: Equatable, Codable, Identifiable, Hashable {
     var satisfaction: Double
     var dueDate: Date?
     var categories: [Category]
-    var subGoals: [Goal]?
     var isDecomposed: Bool
-    var tasks: [Task]
+    var mid: UUID?
 }
 
 extension Goal {
-    static var dummy: Goal = .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "Goal1", note: "note1", isSubGoal: false, importance: .important, satisfaction: 0, dueDate: Date(), categories: [.init(name: "Category")], subGoals: [
-        .init(uid: "xiflrj8ydNZDfkPahfkLEja5e702", title: "SubGoal1", note: "", isSubGoal: true, importance: .important, satisfaction: 0, categories: [], isDecomposed: false, tasks: [])
-    ], isDecomposed: true, tasks: [])
-        
+    static var dummy: Goal = .init(uid: AuthService.userId!, title: "Goal1", note: "Note1", isSubGoal: false, importance: .none, satisfaction: 0, categories: [], isDecomposed: true)
 }

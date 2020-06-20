@@ -29,6 +29,11 @@ class TaskService: ObservableObject {
     @Published var tasks: [Task] = []
     static let shared = TaskService()
     
+    
+    func getLinkedGoals(task: Task) -> [Goal] {
+        return GoalService.shared.goals.filter {task.linkedGoalsIds.contains($0.id)}
+    }
+    
     func getTasksFromDatabase(){
         FirestoreService.shared.getDocuments(collection: .tasks, documentId: AuthService.userId ?? "") { (result: Result<[Task], Error>) in
             switch result {
@@ -82,35 +87,11 @@ class TaskService: ObservableObject {
     }
     
     func deleteTask(task: Task, completion: @escaping (Result<Void, Error>)->()) {
-        var deleted = false
         FirestoreService.shared.deleteDocument(collection: .tasks, documentId: task.id.description) { (result) in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
             case .success(()):
-                for i in 0..<GoalService.shared.goals.count {
-                    deleted = false
-                    if GoalService.shared.goals[i].tasks.contains(task) {
-                        GoalService.shared.goals[i].tasks.removeAll { (Goaltask) -> Bool in
-                            deleted = true
-                            return Goaltask.id == task.id
-                        }
-                        if deleted { GoalService.shared.deleteGoal(goal: GoalService.shared.goals[i], completion: completion) }
-                    }else {
-                        if GoalService.shared.goals[i].isDecomposed {
-                            for j in 0..<GoalService.shared.goals[i].subGoals!.count {
-                                deleted = false
-                                GoalService.shared.goals[i].subGoals![j].tasks.removeAll { (Goaltask) -> Bool in
-                                    deleted = true
-                                    return Goaltask.id == task.id
-                                }
-                                if deleted {
-                                    GoalService.shared.saveGoal(goal: GoalService.shared.goals[i], completion: completion)
-                                }
-                            }
-                        }
-                    }
-                }
                 completion(.success(()))
             }
         }

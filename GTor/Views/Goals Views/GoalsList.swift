@@ -17,9 +17,9 @@ struct GoalsList: View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    ForEach(goalService.goals) { goal in
+                    ForEach(goalService.getMainGoals()) { goal in
                         NavigationLink(destination: GoalView(goal: goal)) {
-                            GoalCardView2(goal: goal)
+                            GoalCardView2(goal: goal, mainGoal: goal)
                                 .padding(.horizontal)
 
                         }

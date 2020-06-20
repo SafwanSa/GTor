@@ -20,15 +20,21 @@ struct TaskView: View {
     var body: some View {
         ZStack {
             List {
-                Section {
+                Section(header: Text("Title")) {
                     TextField(task.title, text: $task.title)
-                    if task.isSatisfied { if !task.note.isEmpty { TextField(task.note, text: $task.note) } } else { TextField(task.note.isEmpty ? "Note (Optional)" : task.note, text: $task.note) }
-                    
                 }
                 .disabled(true)
                 
+                if task.isSatisfied && !task.note.isEmpty || !task.isSatisfied{
+                    Section(header: Text("Note")) {
+                        if task.isSatisfied { if !task.note.isEmpty { TextField(task.note, text: $task.note) } } else { TextField(task.note.isEmpty ? "Note (Optional)" : task.note, text: $task.note) }
+                    }
+                    .disabled(true)
+                }
+
+                
                 if task.dueDate != nil {
-                    Section {
+                    Section(header: Text("Deadline")) {
                         HStack {
                             Text("Due")
                             Spacer()
@@ -37,14 +43,16 @@ struct TaskView: View {
                     }
                 }
                 
-                Section(header: Text("Linked Goals")) {
-                    ForEach(task.linkedGoals!) { linkedGoal in
-                        Text(linkedGoal.title)
+                if !task.linkedGoalsIds.isEmpty {
+                    Section(header: Text("Linked Goals")) {
+                        ForEach(taskService.getLinkedGoals(task: self.task)) { linkedGoal in
+                            Text(linkedGoal.title)
+                        }
                     }
                 }
                 
                 
-                Section {
+                Section(header: Text("Satisfaction")) {
                     HStack {
                         Text("Done")
                         Spacer()
@@ -61,7 +69,7 @@ struct TaskView: View {
                             Text("Delete task")
                         }
                     }
-                .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
             .listStyle(GroupedListStyle())
@@ -97,9 +105,9 @@ struct TaskView: View {
     
     func saveTask() {
         if !updatedSatisfaction.isEmpty {
-//            if updatedSatisfaction.last == "%" { updatedSatisfaction.removeLast() }
+            //            if updatedSatisfaction.last == "%" { updatedSatisfaction.removeLast() }
             task.satisfaction = Double(updatedSatisfaction)!
-//            updatedSatisfaction+="%"
+            //            updatedSatisfaction+="%"
         }
         isLoading = true
         taskService.saveTask(task: task) { (result) in

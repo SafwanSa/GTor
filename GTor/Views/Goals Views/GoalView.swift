@@ -10,6 +10,7 @@ import SwiftUI
 
 struct GoalView: View {
     @ObservedObject var goalService = GoalService.shared
+    @Environment(\.presentationMode) private var presentationMode
     @State var goal: Goal = .dummy
     @State var isEditingMode = false
     @State var isShowingDeleteAlert = false
@@ -41,7 +42,7 @@ struct GoalView: View {
                 
                 Section {
                     if goal.isDecomposed {
-                        if goal.subGoals!.count == 0 {
+                        if self.goalService.getSubGoals(mainGoal: goal).count == 0 {
                             HStack {
                                 Image(systemName: "exclamationmark.square")
                                 Text("Add Sub Goals")
@@ -143,16 +144,20 @@ struct GoalView: View {
                 self.isShowingAlert = true
                 self.alertMessage = error.localizedDescription
             case .success(()):
+                for goal in self.goalService.getSubGoals(mainGoal: self.goal) {
+                    self.goalService.deleteGoal(goal: goal) {_ in}
+                }
                 self.isLoading = false
                 self.isShowingAlert = true
                 self.alertMessage = "Successfully deleted"
+                self.presentationMode.wrappedValue.dismiss()
             }
         }
     }
     
     func saveGoal(goal: Goal) {
         isLoading = true
-        goalService.updateGoal(goal: self.goal) { (result) in
+        goalService.saveGoal(goal: self.goal) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false

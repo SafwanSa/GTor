@@ -30,6 +30,18 @@ class GoalService: ObservableObject {
     @Published var goals: [Goal] = []
     static let shared = GoalService()
     
+    func getSubGoals(mainGoal: Goal) -> [Goal] {
+        return goals.filter {$0.mid == mainGoal.id}
+    }
+    
+    func getMainGoals() -> [Goal] {
+        return goals.filter {$0.mid == nil}
+    }
+    
+    func getTasks(goal: Goal) -> [Task] {
+        return TaskService.shared.tasks.filter {$0.linkedGoalsIds.contains(goal.id)}
+    }
+    
     func getGoalsFromDatabase(){
         FirestoreService.shared.getDocuments(collection: .goals, documentId: AuthService.userId ?? "") { (result: Result<[Goal], Error>) in
             switch result {
@@ -91,35 +103,6 @@ class GoalService: ObservableObject {
                 completion(.failure(error))
             case .success(()):
                 completion(.success(()))
-            }
-        }
-    }
-    
-    func updateSubGoals(goal: Goal, completion: @escaping (Result<Void, Error>)->()) {
-        FirestoreService.shared.updateDocument(collection: .goals, documentId: goal.id.description, field: "subGoals", newData: goal.subGoals!) { (result) in
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(()):
-                completion(.success(()))
-            }
-        }
-    }
-    
-    func updateGoal(goal: Goal, completion: @escaping (Result<Void, Error>)->()) {
-        validateGoal(goal: goal) { (result) in
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(()):
-                self.saveGoal(goal: goal) { (result) in
-                    switch result {
-                    case .failure(let error):
-                        completion(.failure(error))
-                    case .success(()):
-                        completion(.success(()))
-                    }
-                }
             }
         }
     }

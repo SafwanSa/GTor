@@ -74,32 +74,22 @@ struct AddSubGoalView: View {
     
     func addGoal() {
         isLoading = true
-        let subGoal = Goal(uid: AuthService.userId!, title: self.title, note: self.note, isSubGoal: true, importance: selectedImportance, satisfaction: 0,
+        let goal = Goal(uid: AuthService.userId!, title: self.title, note: self.note, isSubGoal: true, importance: selectedImportance, satisfaction: 0,
                            dueDate: self.isHavingDeadline ? self.deadline : nil,
                            categories: [],
                            isDecomposed: false,
-                           tasks: [])
-        goalService.validateGoal(goal: subGoal) { (result) in
-            switch result {
-            case .failure(let error):
-                self.isLoading = false
-                self.isShowingAlert = true
-                self.alertMessage = error.localizedDescription
-            case .success(()):
-                self.goal.subGoals?.append(subGoal)
-                self.goalService.updateSubGoals(goal: self.goal) { (result) in
-                    switch result {
-                    case .failure(let error):
-                        self.isLoading = false
-                        self.isShowingAlert = true
-                        self.alertMessage = error.localizedDescription
-                    case .success(()):
-                        self.isLoading = false
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-                }
-            }
-        }
+                           mid: self.goal.id)
+            goalService.saveGoal(goal: goal) { (result) in
+             switch result {
+             case .failure(let error):
+                 self.isLoading = false
+                 self.isShowingAlert = true
+                 self.alertMessage = error.localizedDescription
+             case .success(()):
+                 self.isLoading = false
+                 self.presentationMode.wrappedValue.dismiss()
+             }
+         }
     }
 }
 
