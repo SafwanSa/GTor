@@ -88,29 +88,29 @@ class TaskService: ObservableObject {
             case .failure(let error):
                 completion(.failure(error))
             case .success(()):
-                for i in 0..<GoalService.shared.goals.count {
-                    deleted = false
-                    if GoalService.shared.goals[i].tasks.contains(task) {
-                        GoalService.shared.goals[i].tasks.removeAll { (Goaltask) -> Bool in
-                            deleted = true
-                            return Goaltask.id == task.id
-                        }
-                        if deleted { GoalService.shared.deleteGoal(goal: GoalService.shared.goals[i], completion: completion) }
-                    }else {
-                        if GoalService.shared.goals[i].isDecomposed {
-                            for j in 0..<GoalService.shared.goals[i].subGoals!.count {
-                                deleted = false
-                                GoalService.shared.goals[i].subGoals![j].tasks.removeAll { (Goaltask) -> Bool in
-                                    deleted = true
-                                    return Goaltask.id == task.id
-                                }
-                                if deleted {
-                                    GoalService.shared.saveGoal(goal: GoalService.shared.goals[i], completion: completion)
-                                }
-                            }
-                        }
-                    }
-                }
+//                for i in 0..<GoalService.shared.goals.count {
+//                    deleted = false
+//                    if GoalService.shared.goals[i].tasks.contains(task) {
+//                        GoalService.shared.goals[i].tasks.removeAll { (Goaltask) -> Bool in
+//                            deleted = true
+//                            return Goaltask.id == task.id
+//                        }
+//                        if deleted { GoalService.shared.deleteGoal(goal: GoalService.shared.goals[i], completion: completion) }
+//                    }else {
+//                        if GoalService.shared.goals[i].isDecomposed {
+//                            for j in 0..<GoalService.shared.goals[i].subGoals!.count {
+//                                deleted = false
+//                                GoalService.shared.goals[i].subGoals![j].tasks.removeAll { (Goaltask) -> Bool in
+//                                    deleted = true
+//                                    return Goaltask.id == task.id
+//                                }
+//                                if deleted {
+//                                    GoalService.shared.saveGoal(goal: GoalService.shared.goals[i], completion: completion)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
                 completion(.success(()))
             }
         }

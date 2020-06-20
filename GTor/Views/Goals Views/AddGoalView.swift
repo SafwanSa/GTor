@@ -90,10 +90,11 @@ struct AddGoalView: View {
        func createGoal() {
         isLoading = true
         if isDecomposed { self.selectedImportance = Importance.none }
-        let goal = Goal(uid: userService.user.uid, title: title, note: note, isSubGoal: false , importance: selectedImportance, satisfaction: 0,
+        let goal = Goal(uid: userService.user.uid, title: title, note: note, isSubGoal: false, importance: selectedImportance, satisfaction: 0,
                         dueDate: isHavingDeadline ? deadline : nil, categories: selectedCategories,
-                        subGoals: isDecomposed ? [] : nil, isDecomposed: isDecomposed,
-                        tasks: [])
+                        isDecomposed: isDecomposed,
+                        tasks: [],
+                        mid: nil)
             goalService.saveGoal(goal: goal) { (result) in
                 switch result {
                 case .failure(let error):

@@ -19,9 +19,9 @@ struct SubGoalsList: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
-                ForEach(goal.subGoals!) { goal in
+                ForEach(goalService.getSubGoals(mainGoal: goal)) { goal in
                     NavigationLink(destination: SubGoalView(goal: goal, mainGoal: self.$goal)) {
-                        GoalCardView2(goal: goal)
+                        GoalCardView2(goal: goal, mainGoal: self.goal)
                     }
                     .buttonStyle(PlainButtonStyle())
                 }

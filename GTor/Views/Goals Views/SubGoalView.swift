@@ -43,7 +43,7 @@ struct SubGoalView: View {
                 
                 Section {
                     if goal.isDecomposed {
-                        if goal.subGoals!.count == 0 {
+                        if self.goalService.getSubGoals(mainGoal: goal).count == 0 {
                             HStack {
                                 Image(systemName: "exclamationmark.square")
                                 Text("Add Sub Goals")
@@ -125,10 +125,8 @@ struct SubGoalView: View {
     }
         
     func deleteGoal(){
-        mainGoal.subGoals?.removeAll(where: { (goal) -> Bool in
-            return goal.id == self.goal.id
-        })
-        goalService.updateSubGoals(goal: mainGoal) { (result) in
+        isLoading = true
+        goalService.deleteGoal(goal: goal) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false
@@ -142,14 +140,9 @@ struct SubGoalView: View {
         }
     }
     
-    
     func saveGoal() {
-        mainGoal.subGoals?.removeAll(where: { (goal) -> Bool in
-            return goal.id == self.goal.id
-        })
-        mainGoal.subGoals?.append(goal)
-
-        goalService.updateGoal(goal: mainGoal) { (result) in
+        isLoading = true
+        goalService.updateGoal(goal: self.goal) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false

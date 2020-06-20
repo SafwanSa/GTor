@@ -94,42 +94,43 @@ struct AddTaskView: View {
                 self.isShowingAlert = true
                 self.alertMessage = error.localizedDescription
             case .success(()):
-                var goalCopy: Goal = .dummy
-                var mainGoal: Goal = .dummy
-                
-                for goal in self.goalService.goals {
-                    if self.linkedGoals.contains(goal) {
-                        mainGoal = goal
-                        mainGoal.tasks.append(task)
-                    }else {
-                        if goal.subGoals != nil {
-                            for subGoal in goal.subGoals! {
-                                if self.linkedGoals.contains(subGoal) {
-                                    mainGoal = goal
-                                    goalCopy = subGoal
-                                    mainGoal.subGoals!.removeAll { (goal) -> Bool in
-                                        goal.id == goalCopy.id
-                                    }
-                                    goalCopy.tasks.append(task)
-                                    mainGoal.subGoals!.append(goalCopy)
-                                }
-                            }
-                        }
-                    }
-                }
-
-                self.goalService.updateGoal(goal: mainGoal) { (result) in
-                    switch result {
-                    case .failure(let error):
-                        self.isLoading = false
-                        self.isShowingAlert = true
-                        self.alertMessage = error.localizedDescription
-                        print(error.localizedDescription)
-                    case .success(()):
-                        self.isLoading = false
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-                }
+                self.alertMessage = ""
+//                var goalCopy: Goal = .dummy
+//                var mainGoal: Goal = .dummy
+//
+//                for goal in self.goalService.goals {
+//                    if self.linkedGoals.contains(goal) {
+//                        mainGoal = goal
+//                        mainGoal.tasks.append(task)
+//                    }else {
+//                        if goal.subGoals != nil {
+//                            for subGoal in goal.subGoals! {
+//                                if self.linkedGoals.contains(subGoal) {
+//                                    mainGoal = goal
+//                                    goalCopy = subGoal
+//                                    mainGoal.subGoals!.removeAll { (goal) -> Bool in
+//                                        goal.id == goalCopy.id
+//                                    }
+//                                    goalCopy.tasks.append(task)
+//                                    mainGoal.subGoals!.append(goalCopy)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                self.goalService.updateGoal(goal: mainGoal) { (result) in
+//                    switch result {
+//                    case .failure(let error):
+//                        self.isLoading = false
+//                        self.isShowingAlert = true
+//                        self.alertMessage = error.localizedDescription
+//                        print(error.localizedDescription)
+//                    case .success(()):
+//                        self.isLoading = false
+//                        self.presentationMode.wrappedValue.dismiss()
+//                    }
+//                }
             }
         }
     }

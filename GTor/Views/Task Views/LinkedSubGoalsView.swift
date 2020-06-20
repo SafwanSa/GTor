@@ -17,7 +17,7 @@ struct LinkedSubGoalsView: View {
     var body: some View {
         List {
             if goal.isDecomposed {
-                if goal.subGoals!.isEmpty {
+                if self.goalService.getSubGoals(mainGoal: goal).isEmpty {
                     HStack(spacing: 10.0) {
                         Image(systemName: "exclamationmark.square")
                         Text("This goal does not have sub goals yet!")
@@ -26,7 +26,7 @@ struct LinkedSubGoalsView: View {
             }
             Picker(selection: $selectedGoal, label: Text("Linked Goal")) {
                 if goal.isDecomposed{
-                    ForEach(goal.subGoals!, id: \.self) { subGoal in
+                    ForEach(self.goalService.getSubGoals(mainGoal: goal), id: \.self) { subGoal in
                         Text(subGoal.title)
                     }
                 }else {
