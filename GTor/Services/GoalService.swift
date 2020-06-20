@@ -106,33 +106,4 @@ class GoalService: ObservableObject {
             }
         }
     }
-    
-//    func updateSubGoals(goal: Goal, completion: @escaping (Result<Void, Error>)->()) {
-//        FirestoreService.shared.updateDocument(collection: .goals, documentId: goal.id.description, field: "subGoals", newData: goal.subGoals!) { (result) in
-//            switch result {
-//            case .failure(let error):
-//                completion(.failure(error))
-//            case .success(()):
-//                completion(.success(()))
-//            }
-//        }
-//    }
-    
-    func updateGoal(goal: Goal, completion: @escaping (Result<Void, Error>)->()) {
-        validateGoal(goal: goal) { (result) in
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(()):
-                self.saveGoal(goal: goal) { (result) in
-                    switch result {
-                    case .failure(let error):
-                        completion(.failure(error))
-                    case .success(()):
-                        completion(.success(()))
-                    }
-                }
-            }
-        }
-    }
 }

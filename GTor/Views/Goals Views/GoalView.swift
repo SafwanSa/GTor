@@ -157,7 +157,7 @@ struct GoalView: View {
     
     func saveGoal(goal: Goal) {
         isLoading = true
-        goalService.updateGoal(goal: self.goal) { (result) in
+        goalService.saveGoal(goal: self.goal) { (result) in
             switch result {
             case .failure(let error):
                 self.isLoading = false
