@@ -27,6 +27,8 @@ struct QuickSatisfactionView: View {
     @Binding var isSatisfiedPresnted: Bool
     @Binding var selectedTask: Task
     @State var updatedSatisfaction = ""
+    @State var isHidingTextField = true
+    
     @State var alertMessage = ""
     @State var isLoading = false
     @State var isShowingAlert = false
@@ -34,84 +36,109 @@ struct QuickSatisfactionView: View {
     var body: some View {
         ZStack {
             VStack {
-                ZStack {
-                    Color.primary.opacity(0.8)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                    
-                    VStack(spacing: 20.0) {
-                        HStack {
-                            Button(action: { self.isSatisfiedPresnted = false }) {
-                                Image(systemName: "xmark")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 20, height: 20)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                            Spacer()
-                        }
-                        .foregroundColor(Color(UIColor.systemBackground))
+                HStack {
+                    Button(action: { self.isSatisfiedPresnted = false }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 25, height: 25)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    Spacer()
+                }
+                
+                VStack(spacing: 20.0) {
+                    if self.isHidingTextField {
                         ForEach(actions, id: \.self) { action in
                             VStack {
-                                Color.primary
-                                    .frame(width: 180, height: 1)
-                                
                                 Button(
                                     action: {
-                                        self.isLoading = true
                                         if action.title != "Partially Done" {
+                                            self.isLoading = true
                                             self.selectedTask.satisfaction = action.satisfaction
+                                            self.selectedTask.isSatisfied = true
+                                            self.taskService.saveTask(task: self.selectedTask) { result in
+                                                switch result {
+                                                case .failure(let error):
+                                                    self.isLoading = false
+                                                    self.isShowingAlert = true
+                                                    self.alertMessage = error.localizedDescription
+                                                case .success(()):
+                                                    self.isLoading = false
+                                                    self.isSatisfiedPresnted = false
+                                                }
+                                            }
                                         }else {
-                                            if self.updatedSatisfaction.isEmpty {
-                                                self.isLoading = false
-                                                self.isShowingAlert = true
-                                                self.alertMessage = "Please enter a value"
-                                                return
-                                            }else{
-                                                self.selectedTask.satisfaction = Double(self.updatedSatisfaction)!
-                                            }
-                                        }
-                                        self.selectedTask.isSatisfied = true
-                                        self.taskService.saveTask(task: self.selectedTask) { result in
-                                            switch result {
-                                            case .failure(let error):
-                                                self.isLoading = false
-                                                self.isShowingAlert = true
-                                                self.alertMessage = error.localizedDescription
-                                            case .success(()):
-                                                self.isLoading = false
-                                                self.isSatisfiedPresnted = false
-                                            }
+                                            self.isHidingTextField = false
                                         }
                                 }) {
-                                    VStack {
-                                        Text(action.title)
-                                            .font(.footnote)
-//                                        Text("\(100)%")//TODO
-//                                            .font(.caption)
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 20)
-                                    .foregroundColor(Color.blue)
-                                    
+                                    Text(action.title)
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height: 20)
+                                        .padding(8)
+                                        .background(Color.white)
+                                        .clipShape(RoundedRectangle(cornerRadius: 5))
                                 }
                             }
-                            
                         }
                         .buttonStyle(PlainButtonStyle())
-                        TextField("50%", text: $updatedSatisfaction)
-                            .keyboardType(.asciiCapableNumberPad)
-                            .frame(width: 50, height: 40, alignment: .center)
-                            .background(Color(UIColor.systemBackground))
-                            .multilineTextAlignment(.center)
-                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                    }else {
+                        VStack {
+                            TextField("50%", text: $updatedSatisfaction)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 30)
+                                .keyboardType(.asciiCapableNumberPad)
+                                .background(Color(UIColor.systemBackground))
+                                .multilineTextAlignment(.center)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                            Button(action: {
+                                self.isLoading = true
+                                if self.updatedSatisfaction.isEmpty {
+                                    self.isLoading = false
+                                    self.isShowingAlert = true
+                                    self.alertMessage = "Please enter a value"
+                                    return
+                                }else{
+                                    self.selectedTask.satisfaction = Double(self.updatedSatisfaction)!
+                                }
+                                self.selectedTask.isSatisfied = true
+                                self.taskService.saveTask(task: self.selectedTask) { result in
+                                    switch result {
+                                    case .failure(let error):
+                                        self.isLoading = false
+                                        self.isShowingAlert = true
+                                        self.alertMessage = error.localizedDescription
+                                    case .success(()):
+                                        self.isLoading = false
+                                        self.isSatisfiedPresnted = false
+                                        self.isHidingTextField = true
+                                        self.updatedSatisfaction = ""
+                                    }
+                                }
+                            }) {
+                                Text("Done")
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 20)
+                                .padding(8)
+                                .background(Color.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .animation(.spring())
                     }
-                    .padding()
                 }
-                .frame(width: 200, height: 200)
-                .animation(.easeInOut)
-                .offset(y: isSatisfiedPresnted ? 0 : screen.height)
-                Spacer()
+                .padding()
+                
+                
             }
+            .frame(width: 200, height: 200)
+            .padding()
+            .background(Color.gray)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .animation(.easeInOut)
+            .offset(y: isSatisfiedPresnted ? 0 : screen.height)
+            
             LoadingView(isLoading: $isLoading)
         }
         .alert(isPresented: self.$isShowingAlert) {
