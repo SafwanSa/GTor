@@ -11,31 +11,30 @@ import SwiftUI
 struct LinkedGoalsView: View {
     @ObservedObject var goalService = GoalService.shared
     @Environment(\.presentationMode) private var presentationMode
-    @Binding var selectedGoals: [Goal]
+    @State var selectedGoalsIds: Set<UUID> = []
+    @Binding var selectedGoals: [UUID]
     
     var body: some View {
         NavigationView {
-            List {
+            List(selection: $selectedGoalsIds) {
                 Section(header: Text("Main Goals")) {
-                    ForEach(goalService.getMainGoals()) { goal in
-                        NavigationLink(destination: LinkedSubGoalsView(goal: goal, selectedGoals: self.$selectedGoals)) {
-                            Text(goal.title)
-                        }
-                    }
-                }
-                
-                Section(header: Text("Linked Goals")) {
-                    ForEach(selectedGoals) { goal in
+                    ForEach(goalService.getMainGoals().filter {!$0.isDecomposed}) {goal in
                         Text(goal.title)
                     }
                 }
-
+                
+                Section(header: Text("Sub Goals")) {
+                    ForEach(goalService.goals.filter {$0.isSubGoal}) {goal in
+                        Text("\(self.goalService.getMainGoals().filter { $0.id == goal.mid }.first?.title ?? "") > \(goal.title)")
+                    }
+                }
             }
+            .environment(\.editMode, .constant(EditMode.active))
             .listStyle(GroupedListStyle())
             .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle("Linked Goals")
             .navigationBarItems(leading:
-                Button(action: { self.selectedGoals.removeAll() ; self.presentationMode.wrappedValue.dismiss() }) {
+                Button(action: { self.selectedGoalsIds.removeAll() ; self.presentationMode.wrappedValue.dismiss() }) {
                     Text("Cancel")
                 }
                 ,trailing:
@@ -43,6 +42,11 @@ struct LinkedGoalsView: View {
                     Text("Done")
                 }
             )
+            .onDisappear {
+                for id in self.selectedGoalsIds {
+                    self.selectedGoals.append(id)
+                }
+            }
         }
     }
 }

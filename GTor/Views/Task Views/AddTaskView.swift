@@ -16,7 +16,7 @@ struct AddTaskView: View {
     @State var title = ""
     @State var note = ""
     @State var deadline = Date()
-    @State var linkedGoals: [Goal] = []
+    @State var linkedGoalsIds: [UUID] = []
     @State var isHavingDeadline = false
     @State var isLinkedGoalsPresented = false
     
@@ -57,9 +57,9 @@ struct AddTaskView: View {
                             
                         }
                         .sheet(isPresented: $isLinkedGoalsPresented) {
-                            LinkedGoalsView(selectedGoals: self.$linkedGoals)
+                            LinkedGoalsView(selectedGoals: self.$linkedGoalsIds)
                         }
-                        ForEach(linkedGoals) { goal in
+                        ForEach(goalService.goals.filter {self.linkedGoalsIds.contains($0.id)}) { goal in
                             Text(goal.title)
                         }
                     }
@@ -86,10 +86,7 @@ struct AddTaskView: View {
     
     func createTask() {
         isLoading = true
-        var linkedGoalsIds: [UUID] = []
-        for goal in linkedGoals {
-            linkedGoalsIds.append(goal.id)
-        }
+
         let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: deadline, satisfaction: 0, isSatisfied: false, linkedGoalsIds: linkedGoalsIds)
         self.taskService.saveTask(task: task) { (result) in
             switch result {
