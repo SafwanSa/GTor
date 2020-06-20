@@ -45,7 +45,7 @@ struct TaskView: View {
                 
                 if !task.linkedGoalsIds.isEmpty {
                     Section(header: Text("Linked Goals")) {
-                        ForEach(GoalService.shared.goals.filter {self.task.linkedGoalsIds.contains($0.id)}) { linkedGoal in
+                        ForEach(taskService.getLinkedGoals(task: self.task)) { linkedGoal in
                             Text(linkedGoal.title)
                         }
                     }

@@ -38,6 +38,10 @@ class GoalService: ObservableObject {
         return goals.filter {$0.mid == nil}
     }
     
+    func getTasks(goal: Goal) -> [Task] {
+        return TaskService.shared.tasks.filter {$0.linkedGoalsIds.contains(goal.id)}
+    }
+    
     func getGoalsFromDatabase(){
         FirestoreService.shared.getDocuments(collection: .goals, documentId: AuthService.userId ?? "") { (result: Result<[Goal], Error>) in
             switch result {
