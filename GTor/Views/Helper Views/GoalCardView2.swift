@@ -34,7 +34,7 @@ struct GoalCardView2: View {
                     }else {
                         if goal.isSubGoal {
                             Spacer()
-                            Text("Activities: \(TaskService.shared.tasks.filter {$0.linkedGoals!.contains(self.goal)}.filter {$0.isSatisfied}.count)/\(TaskService.shared.tasks.filter {$0.linkedGoals!.contains(self.goal)}.count)")
+                            Text("Activities: \(TaskService.shared.tasks.filter {$0.linkedGoalsIds.contains(self.goal.id)}.filter {$0.isSatisfied}.count)/\(TaskService.shared.tasks.filter {$0.linkedGoalsIds.contains(self.goal.id)}.count)")
                         }
                     }
                     Spacer()

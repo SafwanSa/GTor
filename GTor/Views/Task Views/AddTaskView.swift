@@ -86,7 +86,11 @@ struct AddTaskView: View {
     
     func createTask() {
         isLoading = true
-        let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: deadline, satisfaction: 0, isSatisfied: false, linkedGoals: linkedGoals)
+        var linkedGoalsIds: [UUID] = []
+        for goal in linkedGoals {
+            linkedGoalsIds.append(goal.id)
+        }
+        let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: deadline, satisfaction: 0, isSatisfied: false, linkedGoalsIds: linkedGoalsIds)
         self.taskService.saveTask(task: task) { (result) in
             switch result {
             case .failure(let error):
@@ -96,8 +100,8 @@ struct AddTaskView: View {
             case .success(()):
                 self.isLoading = false
                 self.isShowingAlert = true
-                self.alertMessage = "Successfully added"
                 self.presentationMode.wrappedValue.dismiss()
+                self.alertMessage = "Successfully added"
             }
         }
     }
