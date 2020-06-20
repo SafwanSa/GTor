@@ -17,7 +17,7 @@ struct LinkedGoalsView: View {
         NavigationView {
             List {
                 Section(header: Text("Main Goals")) {
-                    ForEach(goalService.goals) { goal in
+                    ForEach(goalService.getMainGoals()) { goal in
                         NavigationLink(destination: LinkedSubGoalsView(goal: goal, selectedGoals: self.$selectedGoals)) {
                             Text(goal.title)
                         }

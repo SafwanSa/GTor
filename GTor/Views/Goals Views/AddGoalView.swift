@@ -93,7 +93,6 @@ struct AddGoalView: View {
         let goal = Goal(uid: userService.user.uid, title: title, note: note, isSubGoal: false, importance: selectedImportance, satisfaction: 0,
                         dueDate: isHavingDeadline ? deadline : nil, categories: selectedCategories,
                         isDecomposed: isDecomposed,
-                        tasks: [],
                         mid: nil)
             goalService.saveGoal(goal: goal) { (result) in
                 switch result {

@@ -41,11 +41,9 @@ struct Goal: Equatable, Codable, Identifiable, Hashable {
     var dueDate: Date?
     var categories: [Category]
     var isDecomposed: Bool
-    var tasks: [Task]
     var mid: UUID?
 }
 
 extension Goal {
-    static var dummy: Goal = .init(uid: AuthService.userId!, title: "Goal1", note: "Note1", isSubGoal: false, importance: .none, satisfaction: 0, categories: [], isDecomposed: true, tasks: [])
-        
+    static var dummy: Goal = .init(uid: AuthService.userId!, title: "Goal1", note: "Note1", isSubGoal: false, importance: .none, satisfaction: 0, categories: [], isDecomposed: true)
 }

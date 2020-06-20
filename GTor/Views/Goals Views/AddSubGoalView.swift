@@ -78,7 +78,6 @@ struct AddSubGoalView: View {
                            dueDate: self.isHavingDeadline ? self.deadline : nil,
                            categories: [],
                            isDecomposed: false,
-                           tasks: [],
                            mid: self.goal.id)
             goalService.saveGoal(goal: goal) { (result) in
              switch result {
