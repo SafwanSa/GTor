@@ -9,6 +9,6 @@
 import Foundation
 
 struct Category: Codable, Identifiable, Equatable, Hashable{
-    let id = UUID()
+    var id = UUID()
     var name: String?
 }

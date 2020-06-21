@@ -26,7 +26,13 @@ extension TaskErrors: LocalizedError {//TODO
 
 
 class TaskService: ObservableObject {
-    @Published var tasks: [Task] = []
+    @Published var tasks: [Task] = [] {
+        didSet {
+            for task in tasks {
+                CalcService.shared.calcProgress(from: task)
+            }
+        }
+    }
     static let shared = TaskService()
     
     
