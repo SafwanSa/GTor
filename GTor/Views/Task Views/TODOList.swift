@@ -11,24 +11,36 @@ import SwiftUI
 struct TODOList: View {
     @ObservedObject var taskService = TaskService.shared
     @State var isAddTaskSelected = false
-    @State var isSatisfiedPresnted = false
+    @State var isSatisfiedPresented = false
     @State var selectedTask = Task.dummy
+    @State var title = "To do"
+    
     
     var body: some View {
         NavigationView {
             ZStack {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 10.0) {
-                        TODOView(isSatisfiedPresnted: $isSatisfiedPresnted, selectedTask: $selectedTask, title: .constant("Running Task"), tasksList: taskService.tasks.filter {!$0.isSatisfied})
+                ScrollView(showsIndicators: false) {
+                    VStack {
+                        HStack {
+                            Text(title)
+                                .font(.system(size: 23)).bold()
+                            Spacer()
+                        }
+                        .padding()
+                        .padding(.leading, 10)
                         
-                        TODOView(isSatisfiedPresnted: $isSatisfiedPresnted, selectedTask: $selectedTask, title: .constant("Done Task"), tasksList: taskService.tasks.filter {$0.isSatisfied})
-                        
-//                        TODOView(isSatisfiedPresnted: $isSatisfiedPresnted, selectedTask: $selectedTask, title: .constant("Today"), tasksList: taskService.tasks.filter {$0.dueDate != nil}.filter {dateFormatter2.string(from: $0.dueDate!) == dateFormatter2.string(from: Date())})
-                    
+                        ForEach(taskService.tasks.filter {!$0.isSatisfied}) { task in
+                            NavigationLink(destination: TaskView(task: task)) {
+                                TaskCardView(task: task, isSatisfiedPresnted: self.$isSatisfiedPresented, selectedTask: self.$selectedTask)
+                                    .padding(.horizontal)
+                            }
+                        }
+                        Spacer()
                     }
+                    .blur(radius: isSatisfiedPresented ? 2: 0)
                 }
                 
-                QuickSatisfactionView(isSatisfiedPresnted: $isSatisfiedPresnted, selectedTask: $selectedTask)
+                QuickSatisfactionView(isSatisfiedPresnted: $isSatisfiedPresented, selectedTask: $selectedTask)
             }
             .sheet(isPresented: $isAddTaskSelected) {
                 AddTaskView()
@@ -50,44 +62,14 @@ struct TODOList: View {
                             .font(.headline)
                     }
                 }
-                .blur(radius: isSatisfiedPresnted ? 2: 0)
+                .blur(radius: isSatisfiedPresented ? 2: 0)
             )
-                .navigationBarTitle("TODO")
+                .navigationBarTitle("Tasks")
         }
     }
 }
 struct TODOList_Previews: PreviewProvider {
     static var previews: some View {
         TODOList()
-    }
-}
-
-struct TODOView: View {
-    @Binding var isSatisfiedPresnted: Bool
-    @Binding var selectedTask: Task
-    @Binding var title: String
-    
-    var tasksList: [Task]
-    
-    var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 20.0) {
-                HStack {
-                    Text(title)
-                        .font(.system(size: 23)).bold()
-                    Spacer()
-                }
-                .padding()
-                .padding(.leading, 10)
-                
-                ForEach(tasksList) { task in
-                    NavigationLink(destination: TaskView(task: task)) {
-                        TaskCardView(task: task, isSatisfiedPresnted: self.$isSatisfiedPresnted, selectedTask: self.$selectedTask)
-                            .padding(.horizontal)
-                    }
-                }
-            }
-            .blur(radius: isSatisfiedPresnted ? 2: 0)
-        }
     }
 }
