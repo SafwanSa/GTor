@@ -56,7 +56,7 @@ struct TaskView: View {
                     HStack {
                         Text("Done")
                         Spacer()
-                        TextField("\(task.satisfaction)%", text: $updatedSatisfaction)
+                        TextField("\(String(format: "%.2f", arguments: [task.satisfaction]))%", text: $updatedSatisfaction)
                             .keyboardType(.asciiCapableNumberPad)
                             .multilineTextAlignment(.trailing)
                     }
@@ -96,6 +96,7 @@ struct TaskView: View {
                 self.isShowingAlert = true
                 self.alertMessage = error.localizedDescription
             case .success(()):
+                CalcService.shared.calcProgress(from: self.task)
                 self.isLoading = false
                 self.isShowingAlert = true
                 self.alertMessage = "Successfully deleted"
