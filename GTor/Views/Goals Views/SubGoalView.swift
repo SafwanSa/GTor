@@ -14,7 +14,6 @@ struct SubGoalView: View {
     @Binding var mainGoal: Goal
     @State var goal: Goal = .dummy
     @State var goalCopy = Goal.dummy
-    @State var importanceCopy = Importance.none
     @State var isEditingMode = false
     @State var isShowingDeleteAlert = false
     @State var alertMessage = ""
@@ -105,10 +104,15 @@ struct SubGoalView: View {
                 
             }
             .onAppear {
-                if self.goalCopy == .dummy {
+                if !self.goal.isSubGoal {
                     self.goalCopy = self.goal
-                }else {
-                    if self.goalCopy.importance == self.goal.importance { self.goalCopy = self.goal }
+
+                }else{
+                    if self.goalCopy == .dummy {
+                        self.goalCopy = self.goal
+                    }else {
+                        if self.goalCopy.importance == self.goal.importance { self.goalCopy = self.goal }
+                    }
                 }
             }
             .animation(.spring())
@@ -161,6 +165,10 @@ struct SubGoalView: View {
                         self.alertMessage = error.localizedDescription
                     case .success(let goal):
                         self.mainGoal = goal
+                        for task in TaskService.shared.tasks.filter({ $0.linkedGoalsIds.contains(self.goal.id) }) {
+                            let index = TaskService.shared.tasks.firstIndex { $0.id == task.id }!
+                            TaskService.shared.tasks[index].importance = CalcService.shared.calcImportance(from: task.linkedGoalsIds)
+                        }
                         self.isLoading = false
                         self.isEditingMode = false
                         self.isShowingAlert = true
@@ -189,6 +197,10 @@ struct SubGoalView: View {
                         self.alertMessage = error.localizedDescription
                     case .success(let goal):
                         self.mainGoal = goal
+                        for task in TaskService.shared.tasks.filter({ $0.linkedGoalsIds.contains(self.goal.id) }) {
+                            let index = TaskService.shared.tasks.firstIndex { $0.id == task.id }!
+                            TaskService.shared.tasks[index].importance = CalcService.shared.calcImportance(from: task.linkedGoalsIds)
+                        }
                         self.isLoading = false
                         self.isEditingMode = false
                         self.isShowingAlert = true
@@ -211,6 +223,10 @@ struct SubGoalView: View {
                 for goal in self.goalService.getSubGoals(mainGoal: self.goal) {
                     self.goalService.deleteGoal(goal: goal) {_ in}
                 }
+                for task in TaskService.shared.tasks.filter({ $0.linkedGoalsIds.contains(self.goal.id) }) {
+                    let index = TaskService.shared.tasks.firstIndex { $0.id == task.id }!
+                    TaskService.shared.tasks[index].importance = CalcService.shared.calcImportance(from: task.linkedGoalsIds)
+                }
                 self.isLoading = false
                 self.isShowingAlert = true
                 self.alertMessage = "Successfully deleted"
@@ -230,6 +246,10 @@ struct SubGoalView: View {
                 self.alertMessage = error.localizedDescription
                 self.isEditingMode = false
             case .success(()):
+                for task in TaskService.shared.tasks.filter({ $0.linkedGoalsIds.contains(self.goal.id) }) {
+                    let index = TaskService.shared.tasks.firstIndex { $0.id == task.id }!
+                    TaskService.shared.tasks[index].importance = CalcService.shared.calcImportance(from: task.linkedGoalsIds)
+                }
                 self.isLoading = false
                 self.isEditingMode = false
                 self.isShowingAlert = true

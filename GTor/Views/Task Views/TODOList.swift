@@ -29,7 +29,7 @@ struct TODOList: View {
                         .padding()
                         .padding(.leading, 10)
                         
-                        ForEach(taskService.tasks.filter {!$0.isSatisfied}) { task in
+                        ForEach(taskService.tasks) { task in
                             NavigationLink(destination: TaskView(task: task)) {
                                 TaskCardView(task: task, isSatisfiedPresnted: self.$isSatisfiedPresented, selectedTask: self.$selectedTask)
                                     .padding(.horizontal)

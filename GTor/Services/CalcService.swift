@@ -72,7 +72,6 @@ class CalcService {
         for subGoal in subGoals {
             sum+=subGoal.importance.value
         }
-        print(sum, "sum")
         let importance = (sum / ( sum == 0 ? 1 : Double(subGoals.count)))
         goalCopy.importance = getImportance(value: importance)
         GoalService.shared.saveGoal(goal: goalCopy) { result in
@@ -80,14 +79,12 @@ class CalcService {
             case .failure(let error):
                 fatalError(error.localizedDescription)
             case .success(()):
-                print("Success")
                 completion(.success(goalCopy))
             }
         }
     }
     
     func getImportance(value: Double ) -> Importance {
-        print(value, "Vlaue")
         if value <= 1.0 {
             return .notImportant
         }else if value > 1.0 && value <= 2.0 {
