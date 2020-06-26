@@ -104,9 +104,8 @@ struct SubGoalView: View {
                 
             }
             .onAppear {
-                if !self.goal.isSubGoal {
+                if !self.goal.isSubGoal && self.goalCopy == .dummy {
                     self.goalCopy = self.goal
-
                 }else{
                     if self.goalCopy == .dummy {
                         self.goalCopy = self.goal
@@ -237,7 +236,9 @@ struct SubGoalView: View {
     
     func saveGoal() {
         isLoading = true
+        let importance = self.goal.importance
         self.goal = self.goalCopy
+        self.goal.importance = importance
         goalService.saveGoal(goal: self.goal) { (result) in
             switch result {
             case .failure(let error):
