@@ -11,20 +11,22 @@ import SwiftUI
 struct GoalView: View {
     @ObservedObject var goalService = GoalService.shared
     @Environment(\.presentationMode) private var presentationMode
-    @State var goal: Goal = .dummy
+    @Binding var goal: Goal
+    @State var goalCopy = Goal.dummy
     @State var isEditingMode = false
     @State var isShowingDeleteAlert = false
-    
-    
     @State var alertMessage = ""
     @State var isLoading = false
     @State var isShowingAlert = false
+    var isShowingSave: Bool {
+        !self.goalCopy.title.isEmpty && (self.goal.title != self.goalCopy.title || self.goal.note != self.goalCopy.note)
+    }
     
     var body: some View {
         ZStack {
             List {
                 Section {
-                    GoalHeaderView(goal: $goal, isEditingMode: $isEditingMode)
+                    GoalHeaderView(goal: $goalCopy, isEditingMode: $isEditingMode)
                 }
                 
                 if goal.dueDate != nil{
@@ -39,11 +41,12 @@ struct GoalView: View {
                     }
                 }
                 
-                
                 Section {
-                    if goal.isDecomposed {
-                        if self.goalService.getSubGoals(mainGoal: goal).count == 0 {
+                    if goalCopy.isDecomposed {
+                        if self.goalService.getSubGoals(mainGoal: goalCopy).count == 0 {
                             HStack {
+                                Text("Importance")
+                                Spacer()
                                 Image(systemName: "exclamationmark.square")
                                 Text("Add Sub Goals")
                             }
@@ -51,17 +54,17 @@ struct GoalView: View {
                             HStack {
                                 Text("Importance")
                                 Spacer()
-                                Text(goal.importance.rawValue)
+                                Text(goalCopy.importance.rawValue)
                             }
                         }
                     }else {
                         if self.isEditingMode {
-                            ImportancePicker(goal: $goal)
+                            ImportancePicker(goal: $goalCopy)
                         }else {
                             HStack {
                                 Text("Importance")
                                 Spacer()
-                                Text(goal.importance.rawValue)
+                                Text(goalCopy.importance.rawValue)
                             }
                         }
                     }
@@ -76,7 +79,6 @@ struct GoalView: View {
                     
                 }
                 
-                
                 Section {
                     HStack {
                         Button(action: { self.isShowingDeleteAlert = true } ) {
@@ -90,7 +92,7 @@ struct GoalView: View {
                     }
                     .alert(isPresented: $isShowingDeleteAlert) {
                         Alert(title: Text("Are you sure you want to delete this goal?"),
-                              message: Text(self.goal.isDecomposed ? "All the Sub Goals of this goal will be deleted also" : ""),
+                              message: Text(self.goalCopy.isDecomposed ? "All the Sub Goals of this goal will be deleted also" : ""),
                               primaryButton: .default(Text("Cancel")),
                               secondaryButton: .destructive(Text("Delete"), action: {
                                 self.deleteGoal()
@@ -100,6 +102,9 @@ struct GoalView: View {
                 
                 
             }
+            .onAppear {
+                self.goalCopy = self.goal
+            }
             .animation(.spring())
             .listStyle(GroupedListStyle())
             .environment(\.horizontalSizeClass, .regular)
@@ -108,12 +113,12 @@ struct GoalView: View {
                 Group {
                     HStack(spacing: 50) {
                         if isEditingMode {
-                            Button(action: { self.isEditingMode = false; self.goal = self.goalService.goals.filter {$0.id == self.goal.id}.first! }) {
+                            Button(action: { self.isEditingMode = false ; self.goalCopy = self.goal }) {
                                 Text("Cancel")
                             }
-                            Button(action: { self.saveGoal(goal: self.goal) }) {
+                            Button(action: { self.saveGoal() }) {
                                 Text("Save")
-                            }
+                            }.opacity(isShowingSave ? 1 : 0)
                         }else if !isEditingMode{
                             Button(action: { self.isEditingMode = true }) {
                                 Image(systemName: "pencil")
@@ -155,8 +160,9 @@ struct GoalView: View {
         }
     }
     
-    func saveGoal(goal: Goal) {
+    func saveGoal() {
         isLoading = true
+        self.goal = self.goalCopy
         goalService.saveGoal(goal: self.goal) { (result) in
             switch result {
             case .failure(let error):
@@ -177,7 +183,9 @@ struct GoalView: View {
 
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalView()
+        NavigationView {
+            GoalView(goal: .constant(.dummy))
+        }
     }
 }
 
