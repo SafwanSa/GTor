@@ -12,25 +12,19 @@ struct GoalsList: View {
     @ObservedObject var userService = UserService.shared
     @ObservedObject var goalService = GoalService.shared
     @State var isAddGoalSelceted = false
-    @State var mainGoals: [Goal] = []
-    var mainGoalsCopy: [Goal] {
-        goalService.getMainGoals()
-    }
+
     
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    ForEach(mainGoals.indices) { index in
-                        NavigationLink(destination: GoalView(goal: self.$mainGoals[index])) {
-                            GoalCardView2(goal: self.mainGoals[index], mainGoal: self.mainGoals[index])
-                                .padding(.horizontal)
+                    ForEach(goalService.getMainGoals()) { goal in
+                        NavigationLink(destination: GoalView(goal: goal)) {
+                            GoalCardView2(goal: goal, mainGoal: goal)
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
-                }
-                .onAppear {
-                    self.mainGoals = self.mainGoalsCopy
+        
                 }
                 .frame(width: screen.width)
                 .padding(.horizontal, 16)

@@ -11,7 +11,7 @@ import SwiftUI
 struct GoalView: View {
     @ObservedObject var goalService = GoalService.shared
     @Environment(\.presentationMode) private var presentationMode
-    @Binding var goal: Goal
+    @State var goal: Goal
     @State var goalCopy = Goal.dummy
     @State var isEditingMode = false
     @State var isShowingDeleteAlert = false
@@ -184,7 +184,7 @@ struct GoalView: View {
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            GoalView(goal: .constant(.dummy))
+            GoalView(goal: .dummy)
         }
     }
 }
