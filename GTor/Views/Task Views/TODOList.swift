@@ -19,6 +19,7 @@ struct TODOList: View {
     var body: some View {
         NavigationView {
             ZStack {
+                Color("Level 1")
                 ScrollView(showsIndicators: false) {
                     VStack {
                         HStack {
@@ -64,7 +65,7 @@ struct TODOList: View {
                 }
                 .blur(radius: isSatisfiedPresented ? 2: 0)
             )
-                .navigationBarTitle("Tasks")
+                .navigationBarTitle("Tasks", displayMode: .inline)
         }
     }
 }

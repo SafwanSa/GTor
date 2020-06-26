@@ -25,10 +25,6 @@ struct TaskView: View {
                     if task.isSatisfied { if !task.note.isEmpty { TextField(task.note, text: $task.note) } } else { TextField(task.note.isEmpty ? "Note (Optional)" : task.note, text: $task.note) }
                 }
                 
-                        
-                    
-                
-
                 
                 if task.dueDate != nil {
                     Section(header: Text("Deadline")) {

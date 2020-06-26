@@ -23,9 +23,11 @@ struct GoalCardView2: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-                .background(Color.black.opacity(0.1))
-                .clipShape(RoundedRectangle(cornerRadius: 5))
+                .background(Color("Level 0").opacity(0.2))
+                .clipShape(RoundedRectangle(cornerRadius: 3))
+                
                 Spacer()
+                
                 HStack {
                     Text("Progress: \(String(format: "%.2f", arguments: [goal.satisfaction]))%")
                     if goal.isDecomposed {
@@ -39,22 +41,22 @@ struct GoalCardView2: View {
                     }
                     Spacer()
                     Text("\(Date(), formatter: dateFormatter2)")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(Color("Level 3"))
                 }
                 .font(.caption)
+                .padding(.horizontal)
             }
 
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .frame(height: 100)
-        .padding(.horizontal)
-        .padding(.vertical, 10)
-        .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)).opacity(0.3))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(color: Color.primary.opacity(0.3), radius: 20, x: 0, y: 20)
+        .frame(height: 105)
+        .padding(.bottom, 10)
+        .background(Color("Level 2"))
+        .clipShape(RoundedRectangle(cornerRadius: 5))
+        .shadow()
         .overlay(
             HStack {
-                Color.red
+                Color("Level 0")//TODO
                     .frame(width: 8)
                     .frame(maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 2))
@@ -66,6 +68,6 @@ struct GoalCardView2: View {
 
 struct GoalCardView2_Previews: PreviewProvider {
     static var previews: some View {
-        GoalCardView2(goal: .dummy, mainGoal: .dummy)
+        GoalCardView2(goal: .dummy, mainGoal: .dummy).padding()
     }
 }

@@ -42,6 +42,7 @@ struct QuickSatisfactionView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 25, height: 25)
+                            .foregroundColor(Color("Level 0"))
                     }
                     .buttonStyle(PlainButtonStyle())
                     Spacer()
@@ -76,7 +77,8 @@ struct QuickSatisfactionView: View {
                                         .frame(maxWidth: .infinity)
                                         .frame(height: 20)
                                         .padding(8)
-                                        .background(Color.white)
+                                        .foregroundColor(Color.black)
+                                        .background(Color("Level 0"))
                                         .clipShape(RoundedRectangle(cornerRadius: 5))
                                 }
                             }
@@ -134,7 +136,7 @@ struct QuickSatisfactionView: View {
             }
             .frame(width: 200, height: 200)
             .padding()
-            .background(Color.gray)
+            .background(Color("Level 2"))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .animation(.easeInOut)
             .offset(y: isSatisfiedPresnted ? 0 : screen.height)

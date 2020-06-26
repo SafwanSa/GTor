@@ -117,7 +117,7 @@ struct SubGoalView: View {
             .animation(.spring())
             .listStyle(GroupedListStyle())
             .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle("\(goal.title)")
+            .navigationBarTitle(goal.isSubGoal ? "Sub-Goal" :"Goal")
             .navigationBarItems(trailing:
                 Group {
                     HStack(spacing: 50) {

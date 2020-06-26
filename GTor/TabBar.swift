@@ -20,6 +20,11 @@ struct TabBar: View {
         }
     }
     
+    init() {
+           UITabBar.appearance().barTintColor = UIColor(named: "Level 0")
+           UITabBar.appearance().unselectedItemTintColor = UIColor(named: "Level 2")
+    }
+    
     var body: some View {
         
         TabView {
@@ -37,7 +42,8 @@ struct TabBar: View {
                 Image(systemName: "doc.text")
             }
         }
-        .onAppear {
+        .accentColor(Color("Level 4"))
+            .onAppear {
             
 //                        try! Auth.auth().signOut()
 //                        self.signIn()
