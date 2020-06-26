@@ -13,7 +13,6 @@ struct SubGoalsList: View {
     @ObservedObject var goalService = GoalService.shared
     @State var isAddGoalSelceted = false
     @Environment(\.presentationMode) private var presentationMode
-    
     @Binding var goal: Goal
     
     var body: some View {
