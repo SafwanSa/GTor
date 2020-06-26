@@ -19,7 +19,7 @@ struct SubGoalsList: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
                 ForEach(goalService.getSubGoals(mainGoal: goal)) { goal in
-                    NavigationLink(destination: SubGoalView(goal: goal, mainGoal: self.$goal)) {
+                    NavigationLink(destination: SubGoalView(mainGoal: self.$goal, goal: goal)) {
                         GoalCardView2(goal: goal, mainGoal: self.goal)
                     }
                     .buttonStyle(PlainButtonStyle())
