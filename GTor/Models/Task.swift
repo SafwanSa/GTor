@@ -17,9 +17,10 @@ struct Task: Codable, Identifiable, Equatable, Hashable {
     var satisfaction: Double
     var isSatisfied: Bool
     var linkedGoalsIds: [UUID]
+    var importance: Importance
 }
 
 
 extension Task {
-    static var dummy = Task(uid: AuthService.userId!, title: "Title1", note: "Note1", satisfaction: 0, isSatisfied: false, linkedGoalsIds: [])
+    static var dummy = Task(uid: AuthService.userId!, title: "Title1", note: "Note1", satisfaction: 0, isSatisfied: false, linkedGoalsIds: [], importance: .important)
 }

@@ -56,7 +56,45 @@ class CalcService {
         }
     }
     
+    func calcImportance(from linkedGoalsIds: [UUID]) -> Importance{
+        var sum = 0.0
+        for subGoal in GoalService.shared.goals.filter({ linkedGoalsIds.contains($0.id) }){
+            sum+=subGoal.importance.value
+        }
+        let importance = (sum / ( sum == 0 ? 1 : Double(linkedGoalsIds.count)))
+        return getImportance(value: importance)
+    }
     
+    func calcImportance(for goal: Goal) {
+        var sum = 0.0
+        var goalCopy = goal
+        let subGoals = GoalService.shared.getSubGoals(mainGoal: goal)
+        for subGoal in subGoals {
+            sum+=subGoal.importance.value
+        }
+        print(sum, "sum")
+        let importance = (sum / ( sum == 0 ? 1 : Double(subGoals.count)))
+        goalCopy.importance = getImportance(value: importance)
+        GoalService.shared.saveGoal(goal: goalCopy) { result in
+            switch result {
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            case .success(()):
+                print("Success")
+            }
+        }
+    }
     
+    func getImportance(value: Double ) -> Importance {
+        if value <= 1.0 {
+            return .notImportant
+        }else if value > 1.0 && value <= 2.0 {
+            return .important
+        }else if value > 2.0 && value <= 3 {
+            return .veryImportant
+        }else {
+            return .none
+        }
+    }
     
 }

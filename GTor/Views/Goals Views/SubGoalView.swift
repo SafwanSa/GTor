@@ -133,6 +133,7 @@ struct SubGoalView: View {
                 self.isShowingAlert = true
                 self.alertMessage = error.localizedDescription
             case .success(()):
+                CalcService.shared.calcImportance(for: self.mainGoal)
                 self.isLoading = false
                 self.isShowingAlert = true
                 self.alertMessage = "Successfully deleted"
@@ -150,6 +151,7 @@ struct SubGoalView: View {
                 self.alertMessage = error.localizedDescription
                 self.isEditingMode = false
             case .success(()):
+                CalcService.shared.calcImportance(for: self.mainGoal)
                 self.isLoading = false
                 self.isEditingMode = false
                 self.isShowingAlert = true

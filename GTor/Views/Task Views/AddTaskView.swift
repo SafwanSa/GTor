@@ -86,8 +86,7 @@ struct AddTaskView: View {
     
     func createTask() {
         isLoading = true
-
-        let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: deadline, satisfaction: 0, isSatisfied: false, linkedGoalsIds: linkedGoalsIds)
+        let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: deadline, satisfaction: 0, isSatisfied: false, linkedGoalsIds: linkedGoalsIds, importance: linkedGoalsIds.isEmpty ? .none : CalcService.shared.calcImportance(from: linkedGoalsIds))
         self.taskService.saveTask(task: task) { (result) in
             switch result {
             case .failure(let error):

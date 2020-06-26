@@ -18,11 +18,11 @@ enum Importance: String, Codable, CaseIterable{
     var value: Double {
         switch self {
         case .veryImportant:
-            return 1.0
+            return 3.0
         case .important:
-            return 0.6
+            return 2.0
         case .notImportant:
-            return 0.3
+            return 1.0
         case .none:
             return 0
         }

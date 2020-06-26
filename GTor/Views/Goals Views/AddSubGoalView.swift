@@ -86,6 +86,7 @@ struct AddSubGoalView: View {
                  self.isShowingAlert = true
                  self.alertMessage = error.localizedDescription
              case .success(()):
+                CalcService.shared.calcImportance(for: self.goal)
                  self.isLoading = false
                  self.presentationMode.wrappedValue.dismiss()
              }
