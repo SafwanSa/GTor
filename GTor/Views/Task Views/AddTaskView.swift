@@ -19,10 +19,11 @@ struct AddTaskView: View {
     @State var linkedGoalsIds: [UUID] = []
     @State var isHavingDeadline = false
     @State var isLinkedGoalsPresented = false
-    
+    @State var isHavingLinkedGoals = true
     @State var alertMessage = "None"
     @State var isLoading = false
     @State var isShowingAlert = false
+    @State var selectedImportance = Importance.none
     
     var body: some View {
         ZStack {
@@ -45,24 +46,36 @@ struct AddTaskView: View {
                     }
                     
                     
+                    
                     Section {
-                        HStack {
-                            Text("Linked Goals")
-                            Spacer()
-                            Button(action: { self.isLinkedGoalsPresented = true }) {
-                                Image(systemName: "plus")
+                        Toggle(isOn: $isHavingLinkedGoals) {
+                            Text("Add Linked Goals")
+                        }
+                        if isHavingLinkedGoals {
+                            HStack {
+                                Text("Linked Goals")
+                                Spacer()
+                                Button(action: { self.isLinkedGoalsPresented = true }) {
+                                    Image(systemName: "plus")
+                                }
+                                .buttonStyle(PlainButtonStyle())
                             }
-                            .buttonStyle(PlainButtonStyle())
-                            
-                            
+                            .sheet(isPresented: $isLinkedGoalsPresented) {
+                                LinkedGoalsView(selectedGoals: self.$linkedGoalsIds)
+                            }
+                            ForEach(goalService.goals.filter {self.linkedGoalsIds.contains($0.id)}) { goal in
+                                Text(goal.title)
+                            }
+                        }else {
+                            Picker(selection: $selectedImportance, label: Text("Importance")) {
+                                ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+                                    Text(importance.rawValue)
+                                }
+                            }
                         }
-                        .sheet(isPresented: $isLinkedGoalsPresented) {
-                            LinkedGoalsView(selectedGoals: self.$linkedGoalsIds)
-                        }
-                        ForEach(goalService.goals.filter {self.linkedGoalsIds.contains($0.id)}) { goal in
-                            Text(goal.title)
-                        }
+                        
                     }
+                    
                 }
                 .listStyle(GroupedListStyle())
                 .environment(\.horizontalSizeClass, .regular)
@@ -86,7 +99,7 @@ struct AddTaskView: View {
     
     func createTask() {
         isLoading = true
-        let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: deadline, satisfaction: 0, isSatisfied: false, linkedGoalsIds: linkedGoalsIds, importance: linkedGoalsIds.isEmpty ? .none : CalcService.shared.calcImportance(from: linkedGoalsIds))
+        let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: deadline, satisfaction: 0, isSatisfied: false, linkedGoalsIds: linkedGoalsIds, importance: linkedGoalsIds.isEmpty ? selectedImportance : CalcService.shared.calcImportance(from: linkedGoalsIds))
         self.taskService.saveTask(task: task) { (result) in
             switch result {
             case .failure(let error):

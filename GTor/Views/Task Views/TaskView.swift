@@ -20,17 +20,14 @@ struct TaskView: View {
     var body: some View {
         ZStack {
             List {
-                Section(header: Text("Title")) {
+                Section {
                     TextField(task.title, text: $task.title)
+                    if task.isSatisfied { if !task.note.isEmpty { TextField(task.note, text: $task.note) } } else { TextField(task.note.isEmpty ? "Note (Optional)" : task.note, text: $task.note) }
                 }
-                .disabled(true)
                 
-                if task.isSatisfied && !task.note.isEmpty || !task.isSatisfied{
-                    Section(header: Text("Note")) {
-                        if task.isSatisfied { if !task.note.isEmpty { TextField(task.note, text: $task.note) } } else { TextField(task.note.isEmpty ? "Note (Optional)" : task.note, text: $task.note) }
-                    }
-                    .disabled(true)
-                }
+                        
+                    
+                
 
                 
                 if task.dueDate != nil {
@@ -51,10 +48,17 @@ struct TaskView: View {
                     }
                 }
                 
-                
-                Section(header: Text("Satisfaction")) {
+                Section {
                     HStack {
-                        Text("Done")
+                        Text("Importance")
+                        Spacer()
+                        Text(self.task.importance.rawValue)
+                    }
+                }
+                
+                Section {
+                    HStack {
+                        Text("Satisfaction")
                         Spacer()
                         TextField("\(String(format: "%.2f", arguments: [task.satisfaction]))%", text: $updatedSatisfaction)
                             .keyboardType(.asciiCapableNumberPad)
