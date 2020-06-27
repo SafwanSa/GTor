@@ -52,14 +52,14 @@ struct TODOList: View {
                         Image(systemName: "slider.horizontal.3")
                             .resizable()
                             .imageScale(.large)
-                            .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                            .foregroundColor(Color("Level 3"))
                             .font(.headline)
-                    }
+                    }.opacity(0)//TODO
                     Button(action: { self.isAddTaskSelected = true }) {
                         Image(systemName: "plus")
                             .resizable()
                             .imageScale(.large)
-                            .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                            .foregroundColor(Color("Level 3"))
                             .font(.headline)
                     }
                 }
