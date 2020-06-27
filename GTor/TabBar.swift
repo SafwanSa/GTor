@@ -38,8 +38,10 @@ struct TabBar: View {
         }
         .accentColor(Color("Level 4"))
         .onAppear {
-            print(self.userService.user.uid)
             self.userService.configureAuthStateDidChangeListner()
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                print(self.userService.user.uid)
+            }
         }
     }
 }
