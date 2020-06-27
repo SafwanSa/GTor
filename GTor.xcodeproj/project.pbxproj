@@ -44,7 +44,6 @@
 		17E7E7C8246CA6FE00596500 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7C7246CA6FE00596500 /* Task.swift */; };
 		17E7E7CA246CA70E00596500 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7C9246CA70E00596500 /* Category.swift */; };
 		17E7E7CC246CAAE800596500 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7CB246CAAE800596500 /* SignUpView.swift */; };
-		17E7E7CE246CAAF500596500 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7CD246CAAF500596500 /* SignInView.swift */; };
 		17E7E7D0246CAB0600596500 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7CF246CAB0600596500 /* LaunchView.swift */; };
 		17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7D4246CAB5100596500 /* GoalsList.swift */; };
 		17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7D6246CAB5A00596500 /* HomeView.swift */; };
@@ -98,7 +97,6 @@
 		17E7E7C7246CA6FE00596500 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		17E7E7C9246CA70E00596500 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		17E7E7CB246CAAE800596500 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		17E7E7CD246CAAF500596500 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		17E7E7CF246CAB0600596500 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		17E7E7D4246CAB5100596500 /* GoalsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsList.swift; sourceTree = "<group>"; };
 		17E7E7D6246CAB5A00596500 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -277,7 +275,6 @@
 			children = (
 				17E7E7AA246C921400596500 /* LoginView.swift */,
 				17E7E7CB246CAAE800596500 /* SignUpView.swift */,
-				17E7E7CD246CAAF500596500 /* SignInView.swift */,
 			);
 			path = "Authentication Views";
 			sourceTree = "<group>";
@@ -479,7 +476,6 @@
 				171E6C3C246FA90B003EFF36 /* TabBar.swift in Sources */,
 				17091760247233120011BB8C /* SubGoalsList.swift in Sources */,
 				17A26C04249C1145004776EA /* GoalView.swift in Sources */,
-				17E7E7CE246CAAF500596500 /* SignInView.swift in Sources */,
 				1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */,
 				17E7E7C4246CA6EB00596500 /* User.swift in Sources */,
 				17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */,

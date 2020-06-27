@@ -9,14 +9,16 @@
 import Foundation
 import FirebaseAuth
 
-struct AuthService {
+class AuthService: ObservableObject {
+    
+    static var shared = AuthService()
     
     static var userId: String? {
         return Auth.auth().currentUser?.uid
     }
     
     
-    static func createUser(name: String, email: String, password: String, completion: @escaping (Result<Void, Error>)->()){
+    func createUser(name: String, email: String, password: String, completion: @escaping (Result<Void, Error>)->()){
         Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
             if let error = err {
                 completion(.failure(error))
@@ -34,8 +36,19 @@ struct AuthService {
         }
     }
     
-    func signInUser(){
-        
+    func signInUser(email: String, password: String, completion: @escaping (Result<Void, Error>)->()){
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let _ = result?.user, let _ = result else {
+                completion(.failure(error!))
+                return
+            }
+            completion(.success(()))
+        }
     }
     
     func signOutUser(){

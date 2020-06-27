@@ -22,7 +22,7 @@ struct LaunchView: View {
     }
     
     func signUp(){
-        AuthService.createUser(name: "Safwans", email: "safwan9f@gmail.com", password: "sa123456") { (result) in
+        AuthService.shared.createUser(name: "Safwans", email: "safwan9f@gmail.com", password: "sa123456") { (result) in
             switch result {
             case .failure(let error):
                 self.msg = error.localizedDescription

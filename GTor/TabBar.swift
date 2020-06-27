@@ -14,11 +14,6 @@ struct TabBar: View {
     @ObservedObject var goalService = GoalService.shared
     @ObservedObject var taskService = TaskService.shared
 
-    func signIn() {
-        Auth.auth().signIn(withEmail: "safwan9f@gmail.com", password: "sa123456") { (result, err) in
-            
-        }
-    }
     
     init() {
            UITabBar.appearance().barTintColor = UIColor(named: "Level 0")
@@ -26,10 +21,9 @@ struct TabBar: View {
     }
     
     var body: some View {
-        
         TabView {
-            LaunchView().tabItem {
-                Text("LaunchView")
+            HomeView().tabItem {
+                Text("Home")
                 Image(systemName: "text.justify")
             }
             GoalsList().tabItem {
@@ -43,14 +37,9 @@ struct TabBar: View {
             }
         }
         .accentColor(Color("Level 4"))
-            .onAppear {
-            
-//                        try! Auth.auth().signOut()
-//                        self.signIn()
-            self.userService.configureAuthStateDidChnageListner()
-            self.taskService.getTasksFromDatabase()
-            self.goalService.getGoalsFromDatabase()//This should be moved to the configureAuthStateDidChnageListner
-//                                            self.goalService.goals.append(.dummy)
+        .onAppear {
+            print(AuthService.userId!)
+            self.userService.configureAuthStateDidChangeListner()
         }
     }
 }

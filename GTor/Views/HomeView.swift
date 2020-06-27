@@ -7,12 +7,23 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 let screen = UIScreen.main.bounds
 struct HomeView: View {
+    @State var isLogingOut = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        VStack {
+            Text("Hello, tester \(UserService.shared.user.email)")
+            
+            Button(action: { try! Auth.auth().signOut() }) {
+                Text("Sign out")
+            }
+        }
     }
 }
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
