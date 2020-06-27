@@ -34,12 +34,15 @@ struct SignUpView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                             .shadow()
                         
-                        TextField("Password", text: $password)
+                        TextField("Password (At least 6 numbers)", text: $password)
                             .autocapitalization(.none)
                             .padding()
                             .background(Color("Level 1"))
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                             .shadow()
+                        
+                        Text(alertMessage)
+                            .multilineTextAlignment(.center)
                     }
                     .padding(20)
                     
