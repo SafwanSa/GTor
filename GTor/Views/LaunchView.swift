@@ -23,6 +23,7 @@ struct LaunchView: View {
             }
             LoadingView(isLoading: $isLoading)
         }
+        .animation(.linear)
         .onAppear {
             self.isLoading = true
             self.userService.configureAuthStateDidChangeListner { _ in
