@@ -38,7 +38,7 @@ struct TabBar: View {
         }
         .accentColor(Color("Level 4"))
         .onAppear {
-            print(AuthService.userId!)
+            print(self.userService.user.uid)
             self.userService.configureAuthStateDidChangeListner()
         }
     }

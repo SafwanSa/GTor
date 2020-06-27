@@ -10,52 +10,45 @@ import SwiftUI
 import FirebaseAuth
 
 struct LoginView: View {
+    @ObservedObject var userService = UserService.shared
     @State var isNewUser = false
     @State var isShowingLogin = false
     var body: some View {
-        ZStack {
-                if !isShowingLogin{
+        Group {
+            if !isShowingLogin {
                 VStack(spacing: 20.0) {
-                        Text("Welcome Tester")
-                            .font(.largeTitle)
-                        Text("Please send me feedbacks for any issues. ")
-                        
-                        Text("NOTE: Ignore the Colors and the Authentication functionality")
-                            .multilineTextAlignment(.center)
+                    Text("Welcome Tester")
+                        .font(.largeTitle)
+                    Text("Please send me feedbacks for any issues. ")
                     
-                        Text("GTor")
-                            .font(.largeTitle)
-                            .foregroundColor(Color("Level 4"))
-                        
-                        VStack(spacing: 30.0) {
-                            Button(action: { self.isShowingLogin = true ; self.isNewUser = true }) {
-                                Text("Sign up")
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                            
-                            Button(action: { self.isShowingLogin = true ; self.isNewUser = false }) {
-                                Text("Sign in")
-                            }
-                            .buttonStyle(PlainButtonStyle())
-
-                        }
-                        .foregroundColor(Color("Level 4"))
-                    }
-                    .padding(.top)
-                    .onAppear {
-                        print(AuthService.userId ?? "nil")
-                    }
+                    Text("NOTE: Ignore the Colors and the Authentication functionality")
+                        .multilineTextAlignment(.center)
                 
-                }else {
-                    if Auth.auth().currentUser == nil {
-                        SignUpView(isNewUser: isNewUser)
-                    }else {
-                        TabBar()
+                    Text("GTor")
+                        .font(.largeTitle)
+                        .foregroundColor(Color("Level 4"))
+                    
+                    VStack(spacing: 30.0) {
+                        Button(action: { self.isShowingLogin = true ; self.isNewUser = true }) {
+                            Text("Sign up")
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        Button(action: { self.isShowingLogin = true ; self.isNewUser = false }) {
+                            Text("Sign in")
+                        }
+                        .buttonStyle(PlainButtonStyle())
+
                     }
+                    .foregroundColor(Color("Level 4"))
                 }
+                .padding(.top)
+            }else {
+                SignUpView(isNewUser: self.isNewUser)
+            }
         }
         .onAppear {
-            if Auth.auth().currentUser == nil { self.isShowingLogin = false } else { self.isShowingLogin = true }
+            print(self.userService.user.uid)
         }
     }
 }
