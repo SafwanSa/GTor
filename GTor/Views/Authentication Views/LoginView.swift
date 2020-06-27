@@ -18,8 +18,11 @@ struct LoginView: View {
                 VStack(spacing: 20.0) {
                         Text("Welcome Tester")
                             .font(.largeTitle)
-                        Text("Please send me feedbacks for any issues")
+                        Text("Please send me feedbacks for any issues. ")
                         
+                        Text("NOTE: Ignore the Colors and the Authentication functionality")
+                            .multilineTextAlignment(.center)
+                    
                         Text("GTor")
                             .font(.largeTitle)
                             .foregroundColor(Color("Level 4"))
