@@ -13,34 +13,42 @@ struct TabBar: View {
     @ObservedObject var userService = UserService.shared
     @ObservedObject var goalService = GoalService.shared
     @ObservedObject var taskService = TaskService.shared
-
+    @State var isLoading = false
+    
     
     init() {
-           UITabBar.appearance().barTintColor = UIColor(named: "Level 1")
-           UITabBar.appearance().unselectedItemTintColor = UIColor(named: "Level 2")
+        UITabBar.appearance().barTintColor = UIColor(named: "Level 1")
+        UITabBar.appearance().unselectedItemTintColor = UIColor(named: "Level 2")
     }
     
     var body: some View {
-        TabView {
-            HomeView().tabItem {
-                Text("Home")
-                Image(systemName: "text.justify")
+        ZStack {
+            TabView {
+                HomeView().tabItem {
+                    Text("Home")
+                    Image(systemName: "text.justify")
+                }
+                GoalsList().tabItem {
+                    Text("Goals")
+                    Image(systemName: "doc.text")
+                }
+                
+                TODOList().tabItem {
+                    Text("TODO")
+                    Image(systemName: "doc.text")
+                }
             }
-            GoalsList().tabItem {
-                Text("Goals")
-                Image(systemName: "doc.text")
-            }
+            .accentColor(Color("Level 4"))
             
-            TODOList().tabItem {
-                Text("TODO")
-                Image(systemName: "doc.text")
-            }
+            LoadingView(isLoading: $isLoading)
         }
-        .accentColor(Color("Level 4"))
         .onAppear {
-            self.userService.configureAuthStateDidChangeListner()
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-                print(self.userService.user.uid)
+            self.isLoading = true
+            self.userService.configureAuthStateDidChangeListner { _ in
+                self.isLoading = false
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                    print(self.userService.user.uid)
+                }
             }
         }
     }

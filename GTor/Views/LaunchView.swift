@@ -10,17 +10,24 @@ import SwiftUI
 import FirebaseAuth
 struct LaunchView: View {
     @ObservedObject var userService = UserService.shared
+    @State var isLoading = false
     
     var body: some View {
-        Group {
-            if userService.authState == .udefined || userService.authState == .signOut {
-                LoginView()
-            }else {
-                TabBar()
+        ZStack {
+            Group {
+                if userService.authState == .udefined || userService.authState == .signOut {
+                    LoginView()
+                }else {
+                    TabBar()
+                }
             }
+            LoadingView(isLoading: $isLoading)
         }
         .onAppear {
-            self.userService.configureAuthStateDidChangeListner()
+            self.isLoading = true
+            self.userService.configureAuthStateDidChangeListner { _ in
+                self.isLoading = false
+            }
         }
     }
 }
