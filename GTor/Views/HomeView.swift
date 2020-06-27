@@ -17,7 +17,7 @@ struct HomeView: View {
         VStack {
             Text("Hello, tester \(self.userService.user.email).")
             
-            Button(action: { try! Auth.auth().signOut() }) {//TODO
+            Button(action: { self.authService.signOutUser() }) {
                 Text("Sign out")
             }
         }

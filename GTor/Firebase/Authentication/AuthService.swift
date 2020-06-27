@@ -47,7 +47,13 @@ class AuthService: ObservableObject {
     }
     
     func signOutUser(){
-        
+        do {
+            
+            try Auth.auth().signOut()
+            
+        }catch (let error) {
+            print("Error while sign out. ", error.localizedDescription)
+        }
     }
     
     func verifiedEmail(){
