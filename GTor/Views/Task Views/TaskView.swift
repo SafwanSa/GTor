@@ -21,7 +21,7 @@ struct TaskView: View {
     @State var isShowingDeleteAlert = false
     
     var isShowingSave: Bool {
-        !self.taskCopy.title.isEmpty && (self.task.title != self.taskCopy.title || self.task.note != self.taskCopy.note || self.taskCopy.satisfaction != Double(updatedSatisfaction)) && !updatedSatisfaction.isEmpty && updatedSatisfaction.isNumeric
+        return !self.taskCopy.title.isEmpty && (self.task.title != self.taskCopy.title || self.task.note != self.taskCopy.note || self.taskCopy.satisfaction != Double(updatedSatisfaction)) && !updatedSatisfaction.isEmpty && Double(updatedSatisfaction) != nil
     }
     var body: some View {
         ZStack {
@@ -64,6 +64,7 @@ struct TaskView: View {
                             TextField("\(String(format: "%.2f", taskCopy.satisfaction))%", text: $updatedSatisfaction)
                             .keyboardType(.asciiCapableNumberPad)
                             .multilineTextAlignment(.trailing)
+                            
                         }else {
                             Text("\(String(format: "%.2f", taskCopy.satisfaction))%")
                         }
@@ -81,10 +82,11 @@ struct TaskView: View {
                 }
             }
             .listStyle(GroupedListStyle())
+            .animation(.spring())
             .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle("Task", displayMode: .inline)
             .navigationBarItems(leading:
-                Button(action: { self.isEditingMode = false ; self.taskCopy = self.task }) {
+                Button(action: { self.isEditingMode = false ; self.taskCopy = self.task ; self.updatedSatisfaction = String(self.task.satisfaction)}) {
                     Text("Cancel")
                 }.opacity(isEditingMode ? 1 : 0)
                 , trailing:
