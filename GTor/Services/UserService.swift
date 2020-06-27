@@ -23,7 +23,7 @@ class UserService: ObservableObject {
     
     var authStateDidChangeHandler: AuthStateDidChangeListenerHandle?
     
-    func configureAuthStateDidChnageListner() {
+    func configureAuthStateDidChangeListner() {
         if authStateDidChangeHandler != nil {
             return
         }
@@ -52,10 +52,13 @@ class UserService: ObservableObject {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let user):
-                DispatchQueue.main.async { self.user = user }
+                DispatchQueue.main.async {
+                    self.user = user
+                    TaskService.shared.getTasksFromDatabase()
+                    GoalService.shared.getGoalsFromDatabase()
+                }
             }
         }
-        
     }
 }
 

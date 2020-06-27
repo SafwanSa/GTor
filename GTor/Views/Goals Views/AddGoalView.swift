@@ -15,15 +15,13 @@ struct AddGoalView: View {
     @Environment(\.presentationMode) private var presentationMode
 
     @State var categories = categoriesData//TODO bring this from db
-    @State var title = ""
-    @State var note = ""
+    @State var goal: Goal = .empty
     @State var deadline = Date()
-    @State var selectedImportance = Importance.none
-    @State var selectedCategories: [Category] = []
     
     @State var isHavingDeadline = false
     @State var isDecomposed = true
     @State var isSelectCategoryExpanded = false
+    
     @State var alertMessage = "None"
     @State var isLoading = false
     @State var isShowingAlert = false
@@ -33,11 +31,11 @@ struct AddGoalView: View {
         ZStack {
             NavigationView {
                 List {
-                    SelectCategoryView(isCategoryPressed: $isSelectCategoryExpanded, selectedCategories: self.$selectedCategories, categories: $categories)
+                    SelectCategoryView(isCategoryPressed: $isSelectCategoryExpanded, selectedCategories: self.$goal.categories, categories: $categories)
                     
                     Section {
-                        TextField("Title", text: $title)
-                        TextField("Note (Optional)", text: $note)
+                        TextField("Title", text: $goal.title)
+                        TextField("Note (Optional)", text: $goal.note)
                     }
                     
                     Section {
@@ -59,7 +57,7 @@ struct AddGoalView: View {
                     
                     if !self.isDecomposed {
                         Section {
-                            Picker(selection: $selectedImportance, label: Text("Importance")) {
+                            Picker(selection: $goal.importance, label: Text("Importance")) {
                                 ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
                                     Text(importance.rawValue)
                                 }
@@ -89,11 +87,10 @@ struct AddGoalView: View {
     
        func createGoal() {
         isLoading = true
-        if isDecomposed { self.selectedImportance = Importance.none }
-        let goal = Goal(uid: userService.user.uid, title: title, note: note, isSubGoal: false, importance: selectedImportance, satisfaction: 0,
-                        dueDate: isHavingDeadline ? deadline : nil, categories: selectedCategories,
-                        isDecomposed: isDecomposed,
-                        mid: nil)
+        self.goal.id = UUID()
+        if isDecomposed { self.goal.importance = Importance.none }
+        self.goal.dueDate = isHavingDeadline ? deadline : nil
+        self.goal.isDecomposed = self.isDecomposed
             goalService.saveGoal(goal: goal) { (result) in
                 switch result {
                 case .failure(let error):

@@ -65,14 +65,13 @@ class CalcService {
         return getImportance(value: importance)
     }
     
-    func calcImportance(for goal: Goal) {
+    func calcImportance(for goal: Goal, completion: @escaping (Result<Goal, Error>)->()){
         var sum = 0.0
         var goalCopy = goal
         let subGoals = GoalService.shared.getSubGoals(mainGoal: goal)
         for subGoal in subGoals {
             sum+=subGoal.importance.value
         }
-        print(sum, "sum")
         let importance = (sum / ( sum == 0 ? 1 : Double(subGoals.count)))
         goalCopy.importance = getImportance(value: importance)
         GoalService.shared.saveGoal(goal: goalCopy) { result in
@@ -80,7 +79,7 @@ class CalcService {
             case .failure(let error):
                 fatalError(error.localizedDescription)
             case .success(()):
-                print("Success")
+                completion(.success(goalCopy))
             }
         }
     }

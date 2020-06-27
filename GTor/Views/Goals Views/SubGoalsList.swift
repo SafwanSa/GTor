@@ -13,15 +13,15 @@ struct SubGoalsList: View {
     @ObservedObject var goalService = GoalService.shared
     @State var isAddGoalSelceted = false
     @Environment(\.presentationMode) private var presentationMode
-    
     @Binding var goal: Goal
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
                 ForEach(goalService.getSubGoals(mainGoal: goal)) { goal in
-                    NavigationLink(destination: SubGoalView(goal: goal, mainGoal: self.$goal)) {
+                    NavigationLink(destination: SubGoalView(mainGoal: self.$goal, goal: goal)) {
                         GoalCardView2(goal: goal, mainGoal: self.goal)
+                        .padding(.horizontal)
                     }
                     .buttonStyle(PlainButtonStyle())
                 }
@@ -30,6 +30,7 @@ struct SubGoalsList: View {
             .padding(.horizontal, 16)
             .padding(.top, 150)
         }
+        .background(Color("Level 1"))
         .navigationBarTitle("Sub Goals")
         .navigationBarItems(trailing:
             HStack(spacing: 20) {
@@ -37,14 +38,14 @@ struct SubGoalsList: View {
                     Image(systemName: "slider.horizontal.3")
                         .resizable()
                         .imageScale(.large)
-                        .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                        .foregroundColor(Color("Level 0"))
                         .font(.headline)
                 }
                 Button(action: { self.isAddGoalSelceted = true }) {
                     Image(systemName: "plus")
                         .resizable()
                         .imageScale(.large)
-                        .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
+                        .foregroundColor(Color("Level 0"))
                         .font(.headline)
                 }
             }

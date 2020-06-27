@@ -44,7 +44,6 @@
 		17E7E7C8246CA6FE00596500 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7C7246CA6FE00596500 /* Task.swift */; };
 		17E7E7CA246CA70E00596500 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7C9246CA70E00596500 /* Category.swift */; };
 		17E7E7CC246CAAE800596500 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7CB246CAAE800596500 /* SignUpView.swift */; };
-		17E7E7CE246CAAF500596500 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7CD246CAAF500596500 /* SignInView.swift */; };
 		17E7E7D0246CAB0600596500 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7CF246CAB0600596500 /* LaunchView.swift */; };
 		17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7D4246CAB5100596500 /* GoalsList.swift */; };
 		17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7D6246CAB5A00596500 /* HomeView.swift */; };
@@ -98,7 +97,6 @@
 		17E7E7C7246CA6FE00596500 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		17E7E7C9246CA70E00596500 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		17E7E7CB246CAAE800596500 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		17E7E7CD246CAAF500596500 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		17E7E7CF246CAB0600596500 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		17E7E7D4246CAB5100596500 /* GoalsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsList.swift; sourceTree = "<group>"; };
 		17E7E7D6246CAB5A00596500 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -157,6 +155,14 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		17CC64F824A6B85900B81438 /* Unused Views and files */ = {
+			isa = PBXGroup;
+			children = (
+				17A26C03249C1145004776EA /* GoalView.swift */,
+			);
+			path = "Unused Views and files";
+			sourceTree = "<group>";
+		};
 		17E7E79A246C921300596500 = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +184,7 @@
 		17E7E7A5246C921400596500 /* GTor */ = {
 			isa = PBXGroup;
 			children = (
+				17CC64F824A6B85900B81438 /* Unused Views and files */,
 				17E7E7A6246C921400596500 /* AppDelegate.swift */,
 				17E7E7A8246C921400596500 /* SceneDelegate.swift */,
 				171E6C3B246FA90B003EFF36 /* TabBar.swift */,
@@ -268,7 +275,6 @@
 			children = (
 				17E7E7AA246C921400596500 /* LoginView.swift */,
 				17E7E7CB246CAAE800596500 /* SignUpView.swift */,
-				17E7E7CD246CAAF500596500 /* SignInView.swift */,
 			);
 			path = "Authentication Views";
 			sourceTree = "<group>";
@@ -277,11 +283,10 @@
 			isa = PBXGroup;
 			children = (
 				1709175F247233120011BB8C /* SubGoalsList.swift */,
+				17E7E7D4246CAB5100596500 /* GoalsList.swift */,
 				1762732B24748759000E9661 /* SubGoalView.swift */,
 				17091767247244800011BB8C /* AddSubGoalView.swift */,
-				17E7E7D4246CAB5100596500 /* GoalsList.swift */,
 				17A61A6024707F12008B8C31 /* AddGoalView.swift */,
-				17A26C03249C1145004776EA /* GoalView.swift */,
 			);
 			path = "Goals Views";
 			sourceTree = "<group>";
@@ -471,7 +476,6 @@
 				171E6C3C246FA90B003EFF36 /* TabBar.swift in Sources */,
 				17091760247233120011BB8C /* SubGoalsList.swift in Sources */,
 				17A26C04249C1145004776EA /* GoalView.swift in Sources */,
-				17E7E7CE246CAAF500596500 /* SignInView.swift in Sources */,
 				1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */,
 				17E7E7C4246CA6EB00596500 /* User.swift in Sources */,
 				17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */,

@@ -38,10 +38,10 @@ struct GoalHeaderView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    .background(Color(UIColor.secondarySystemGroupedBackground).opacity(isEditingMode ? 1 : 0.8))
+                    .background(Color("Level 0").opacity(isEditingMode ? 1 : 0.8))
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                }
+                    .shadow()
+            }
         }
 
     }

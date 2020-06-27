@@ -19,6 +19,7 @@ struct TODOList: View {
     var body: some View {
         NavigationView {
             ZStack {
+                Color("Level 1")
                 ScrollView(showsIndicators: false) {
                     VStack {
                         HStack {
@@ -29,7 +30,7 @@ struct TODOList: View {
                         .padding()
                         .padding(.leading, 10)
                         
-                        ForEach(taskService.tasks.filter {!$0.isSatisfied}) { task in
+                        ForEach(taskService.tasks) { task in
                             NavigationLink(destination: TaskView(task: task)) {
                                 TaskCardView(task: task, isSatisfiedPresnted: self.$isSatisfiedPresented, selectedTask: self.$selectedTask)
                                     .padding(.horizontal)
@@ -64,7 +65,7 @@ struct TODOList: View {
                 }
                 .blur(radius: isSatisfiedPresented ? 2: 0)
             )
-                .navigationBarTitle("Tasks")
+                .navigationBarTitle("Tasks", displayMode: .inline)
         }
     }
 }
