@@ -30,7 +30,7 @@ struct SubGoalsList: View {
             .padding(.horizontal, 16)
             .padding(.top, 150)
         }
-        .background(Color("Level 1"))
+        .background(Color("Level 0"))
         .navigationBarTitle("Sub Goals")
         .navigationBarItems(trailing:
             HStack(spacing: 20) {

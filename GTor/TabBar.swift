@@ -16,7 +16,7 @@ struct TabBar: View {
 
     
     init() {
-           UITabBar.appearance().barTintColor = UIColor(named: "Level 0")
+           UITabBar.appearance().barTintColor = UIColor(named: "Level 1")
            UITabBar.appearance().unselectedItemTintColor = UIColor(named: "Level 2")
     }
     

@@ -23,6 +23,9 @@ struct TaskCardView: View {
                     Spacer()
                     
                     Image(systemName: task.isSatisfied ? "checkmark.square" :"square")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20, height: 20)
                         .onTapGesture {
                             self.isSatisfiedPresnted = true
                             self.selectedTask = self.task
@@ -40,8 +43,8 @@ struct TaskCardView: View {
             .frame(maxHeight: 85)
             .padding(.horizontal)
             .padding(.vertical, 8)
-            .background(Color("Level 2"))
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .background(Color("Level 1"))
+            .clipShape(RoundedRectangle(cornerRadius: 5))
             .shadow()
         }
     }

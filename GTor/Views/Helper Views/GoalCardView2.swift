@@ -51,7 +51,7 @@ struct GoalCardView2: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .frame(height: 105)
         .padding(.bottom, 10)
-        .background(Color("Level 2"))
+        .background(Color("Level 1"))
         .clipShape(RoundedRectangle(cornerRadius: 5))
         .shadow()
         .overlay(
@@ -68,6 +68,9 @@ struct GoalCardView2: View {
 
 struct GoalCardView2_Previews: PreviewProvider {
     static var previews: some View {
-        GoalCardView2(goal: .dummy, mainGoal: .dummy).padding()
+        GoalCardView2(goal: .dummy, mainGoal: .dummy)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
+        .background(Color("Level 0"))
     }
 }
