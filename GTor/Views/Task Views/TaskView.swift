@@ -18,6 +18,8 @@ struct TaskView: View {
     @State var isShowingAlert = false
     @State var updatedSatisfaction = ""
     @State var isEditingMode = false
+    @State var isShowingDeleteAlert = false
+    
     var isShowingSave: Bool {
         !self.taskCopy.title.isEmpty && (self.task.title != self.taskCopy.title || self.task.note != self.taskCopy.note || self.taskCopy.satisfaction != Double(updatedSatisfaction)) && !updatedSatisfaction.isEmpty && updatedSatisfaction.isNumeric
     }
@@ -58,14 +60,18 @@ struct TaskView: View {
                     HStack {
                         Text("Satisfaction")
                         Spacer()
-                        TextField("\(String(format: "%.2f", taskCopy.satisfaction))%", text: $updatedSatisfaction)
+                        if isEditingMode {
+                            TextField("\(String(format: "%.2f", taskCopy.satisfaction))%", text: $updatedSatisfaction)
                             .keyboardType(.asciiCapableNumberPad)
                             .multilineTextAlignment(.trailing)
+                        }else {
+                            Text("\(String(format: "%.2f", taskCopy.satisfaction))%")
+                        }
                     }
                 }
                 
                 Section {
-                    Button(action:  deleteTask ) {
+                    Button(action: { self.isShowingDeleteAlert = true } ) {
                         HStack {
                             Image(systemName: "trash")
                             Text("Delete task")
@@ -104,6 +110,13 @@ struct TaskView: View {
         .alert(isPresented: self.$isShowingAlert) {
             Alert(title: Text(self.alertMessage))
         }
+        .alert(isPresented: $isShowingDeleteAlert) {
+            Alert(title: Text("Are you sure you want to delete this task?"),
+            primaryButton: .default(Text("Cancel")),
+            secondaryButton: .destructive(Text("Delete"), action: {
+                self.deleteTask()
+            }))
+        }
     }
     
     func deleteTask() {
@@ -117,18 +130,11 @@ struct TaskView: View {
             case .success(()):
                 CalcService.shared.calcProgress(from: self.task)
                 self.isLoading = false
-                self.isShowingAlert = true
-                self.alertMessage = "Successfully deleted"
             }
         }
     }
     
     func saveTask() {
-        if !updatedSatisfaction.isEmpty {
-            //            if updatedSatisfaction.last == "%" { updatedSatisfaction.removeLast() }
-            taskCopy.satisfaction = Double(updatedSatisfaction)!
-            //            updatedSatisfaction+="%"
-        }
         self.task = self.taskCopy
         isLoading = true
         taskService.saveTask(task: task) { (result) in
