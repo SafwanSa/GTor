@@ -38,14 +38,14 @@ struct SubGoalsList: View {
                     Image(systemName: "slider.horizontal.3")
                         .resizable()
                         .imageScale(.large)
-                        .foregroundColor(Color("Level 0"))
+                        .foregroundColor(Color("Level 3"))
                         .font(.headline)
-                }
+                }.opacity(0)//TODO
                 Button(action: { self.isAddGoalSelceted = true }) {
                     Image(systemName: "plus")
                         .resizable()
                         .imageScale(.large)
-                        .foregroundColor(Color("Level 0"))
+                        .foregroundColor(Color("Level 3"))
                         .font(.headline)
                 }
             }
@@ -62,6 +62,8 @@ struct SubGoalsList: View {
 
 struct SubGoalsList_Previews: PreviewProvider {
     static var previews: some View {
-        SubGoalsList(goal: .constant(.dummy))
+        NavigationView {
+            SubGoalsList(goal: .constant(.dummy))
+        }
     }
 }
