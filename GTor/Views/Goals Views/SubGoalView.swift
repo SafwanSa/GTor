@@ -166,8 +166,6 @@ struct SubGoalView: View {
                         }
                         self.isLoading = false
                         self.isEditingMode = false
-                        self.isShowingAlert = true
-                        self.alertMessage = "Successfully deleted"
                     }
                 }
             }
