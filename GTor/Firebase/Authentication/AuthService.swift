@@ -10,12 +10,7 @@ import Foundation
 import FirebaseAuth
 
 class AuthService: ObservableObject {
-    
     static var shared = AuthService()
-    
-    static var userId: String? {
-        return Auth.auth().currentUser?.uid
-    }
     
     
     func createUser(name: String, email: String, password: String, completion: @escaping (Result<Void, Error>)->()){

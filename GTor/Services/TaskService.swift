@@ -41,7 +41,7 @@ class TaskService: ObservableObject {
     }
     
     func getTasksFromDatabase(){
-        FirestoreService.shared.getDocuments(collection: .tasks, documentId: AuthService.userId ?? "") { (result: Result<[Task], Error>) in
+        FirestoreService.shared.getDocuments(collection: .tasks, documentId: UserService.shared.user.uid) { (result: Result<[Task], Error>) in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)

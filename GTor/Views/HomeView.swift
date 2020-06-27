@@ -10,14 +10,14 @@ import SwiftUI
 import FirebaseAuth
 let screen = UIScreen.main.bounds
 struct HomeView: View {
-    @State var isLogingOut = false
+    @ObservedObject var userService = UserService.shared
+    @ObservedObject var authService = AuthService.shared
     
     var body: some View {
-        
         VStack {
-            Text("Hello, tester \(UserService.shared.user.email)")
+            Text("Hello, tester \(self.userService.user.email).")
             
-            Button(action: { try! Auth.auth().signOut() }) {
+            Button(action: { try! Auth.auth().signOut() }) {//TODO
                 Text("Sign out")
             }
         }

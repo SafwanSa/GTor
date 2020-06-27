@@ -9,61 +9,53 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @ObservedObject var userService = UserService.shared
-    @ObservedObject var goalService = GoalService.shared
     @ObservedObject var authService = AuthService.shared
-    
     @State var email = ""
     @State var password = ""
-    var isNewUser = false
     @State var alertMessage = ""
     @State var isLoading = false
-    
+    var isNewUser = false
+
     var body: some View {
         ZStack {
-            Group {
-                if self.userService.authState == .udefined || self.userService.authState == .signOut {
-                    VStack {
-                        Text(isNewUser ? "Sign up" : "Sign in")
-                            .font(.title)
-                        
-                        VStack(spacing: 5.0) {
-                            TextField("Email", text: $email)
-                                .autocapitalization(.none)
-                                .keyboardType(.emailAddress)
-                                .padding()
-                                .background(Color("Level 1"))
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                                .shadow()
-                            
-                            TextField("Password (At least 6 numbers)", text: $password)
-                                .autocapitalization(.none)
-                                .padding()
-                                .background(Color("Level 1"))
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                                .shadow()
-                            
-                            Text(alertMessage)
-                                .multilineTextAlignment(.center)
-                        }
-                        .padding(20)
-                        
-                        Button(action: isNewUser ? signup : signin) {
-                            Text("Go")
-                                .font(.system(size: 25))
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 10)
-                                .background(Color("Level 4"))
-                                .foregroundColor(Color("Level 0"))
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                                .shadow()
-                        }
-                        .padding(20)
-                    }
-                }else {
-                    TabBar()
+            VStack {
+                Text(isNewUser ? "Sign up" : "Sign in")
+                    .font(.title)
+                
+                VStack(spacing: 5.0) {
+                    TextField("Email", text: $email)
+                        .autocapitalization(.none)
+                        .keyboardType(.emailAddress)
+                        .padding()
+                        .background(Color("Level 1"))
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .shadow()
+                    
+                    TextField("Password (At least 6 numbers)", text: $password)
+                        .autocapitalization(.none)
+                        .padding()
+                        .background(Color("Level 1"))
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .shadow()
+                    
+                    Text(alertMessage)
+                        .multilineTextAlignment(.center)
                 }
+                .padding(20)
+                
+                Button(action: isNewUser ? signup : signin) {
+                    Text("Go")
+                        .font(.system(size: 25))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(Color("Level 4"))
+                        .foregroundColor(Color("Level 0"))
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .shadow()
+                }
+                .padding(20)
             }
+
             LoadingView(isLoading: self.$isLoading)
         }
         
@@ -78,7 +70,6 @@ struct SignUpView: View {
                 self.alertMessage = error.localizedDescription
                 self.isLoading = false
             case .success(()):
-                self.userService.configureAuthStateDidChangeListner()
                 self.isLoading = false
             }
         }
@@ -92,7 +83,6 @@ struct SignUpView: View {
                 self.alertMessage = error.localizedDescription
                 self.isLoading = false
             case .success(()):
-                self.userService.configureAuthStateDidChangeListner()
                 self.isLoading = false
             }
         }
