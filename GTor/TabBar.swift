@@ -16,7 +16,7 @@ struct TabBar: View {
 
     
     init() {
-           UITabBar.appearance().barTintColor = UIColor(named: "Level 0")
+           UITabBar.appearance().barTintColor = UIColor(named: "Level 1")
            UITabBar.appearance().unselectedItemTintColor = UIColor(named: "Level 2")
     }
     
@@ -38,8 +38,10 @@ struct TabBar: View {
         }
         .accentColor(Color("Level 4"))
         .onAppear {
-            print(self.userService.user.uid)
             self.userService.configureAuthStateDidChangeListner()
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                print(self.userService.user.uid)
+            }
         }
     }
 }

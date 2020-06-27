@@ -31,7 +31,7 @@ struct GoalsList: View {
                 .padding(.horizontal, 16)
                 .padding(.top, 120)
             }
-            .background(Color("Level 1"))
+            .background(Color("Level 0"))
             .edgesIgnoringSafeArea(.all)
             .navigationBarTitle("My Goals", displayMode: .inline)
             .navigationBarItems(trailing:

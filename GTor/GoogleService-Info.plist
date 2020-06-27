@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>777148650251-5q66o7pledk61en0vag0m0likcc3im3o.apps.googleusercontent.com</string>
+	<string>777148650251-vsu31ue0mlhr4grgdvdehq9fopds5ts3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.777148650251-5q66o7pledk61en0vag0m0likcc3im3o</string>
+	<string>com.googleusercontent.apps.777148650251-vsu31ue0mlhr4grgdvdehq9fopds5ts3</string>
 	<key>API_KEY</key>
 	<string>AIzaSyA7wrqMO_qYtxa39f7YgmiLBvPooCqZ15Q</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.safwan.GTor</string>
+	<string>com.my.app.safwan.GTor</string>
 	<key>PROJECT_ID</key>
 	<string>gtor120</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:777148650251:ios:f1a54674fa32a51855480e</string>
+	<string>1:777148650251:ios:1ed090f8319c073655480e</string>
 	<key>DATABASE_URL</key>
 	<string>https://gtor120.firebaseio.com</string>
 </dict>

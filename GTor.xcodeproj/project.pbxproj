@@ -24,6 +24,7 @@
 		176FE7842474E1A800B7FE82 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7832474E1A800B7FE82 /* LottieView.swift */; };
 		176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7852474E21100B7FE82 /* LoadingView.swift */; };
 		176FE78C2474EBAA00B7FE82 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 176FE78B2474EBAA00B7FE82 /* loading.json */; };
+		1785804624A7DC24009343DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1785804424A7DA05009343DB /* GoogleService-Info.plist */; };
 		179E77012476604000BB77F8 /* TODOList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179E77002476604000BB77F8 /* TODOList.swift */; };
 		17A26C04249C1145004776EA /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C03249C1145004776EA /* GoalView.swift */; };
 		17A26C06249C1DE9004776EA /* GoalCardView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C05249C1DE9004776EA /* GoalCardView2.swift */; };
@@ -38,7 +39,6 @@
 		17E7E7AD246C921800596500 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17E7E7AC246C921800596500 /* Assets.xcassets */; };
 		17E7E7B0246C921800596500 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17E7E7AF246C921800596500 /* Preview Assets.xcassets */; };
 		17E7E7B3246C921800596500 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17E7E7B1246C921800596500 /* LaunchScreen.storyboard */; };
-		17E7E7BB246C9AE500596500 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17E7E7BA246C9AE500596500 /* GoogleService-Info.plist */; };
 		17E7E7C4246CA6EB00596500 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7C3246CA6EB00596500 /* User.swift */; };
 		17E7E7C6246CA6F400596500 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7C5246CA6F400596500 /* Goal.swift */; };
 		17E7E7C8246CA6FE00596500 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7C7246CA6FE00596500 /* Task.swift */; };
@@ -75,6 +75,7 @@
 		176FE7832474E1A800B7FE82 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		176FE7852474E21100B7FE82 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		176FE78B2474EBAA00B7FE82 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		1785804424A7DA05009343DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		179E77002476604000BB77F8 /* TODOList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOList.swift; sourceTree = "<group>"; };
 		17A26C03249C1145004776EA /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		17A26C05249C1DE9004776EA /* GoalCardView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCardView2.swift; sourceTree = "<group>"; };
@@ -91,7 +92,6 @@
 		17E7E7AF246C921800596500 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		17E7E7B2246C921800596500 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17E7E7B4246C921800596500 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		17E7E7BA246C9AE500596500 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		17E7E7C3246CA6EB00596500 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		17E7E7C5246CA6F400596500 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		17E7E7C7246CA6FE00596500 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 				176FE77F2474E07300B7FE82 /* Animations */,
 				176FE7802474E0CD00B7FE82 /* Other */,
 				17E7E7AE246C921800596500 /* Preview Content */,
-				17E7E7BA246C9AE500596500 /* GoogleService-Info.plist */,
+				1785804424A7DA05009343DB /* GoogleService-Info.plist */,
 				17E7E7B4246C921800596500 /* Info.plist */,
 			);
 			path = GTor;
@@ -413,8 +413,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				17E7E7B3246C921800596500 /* LaunchScreen.storyboard in Resources */,
-				17E7E7BB246C9AE500596500 /* GoogleService-Info.plist in Resources */,
 				17E7E7B0246C921800596500 /* Preview Assets.xcassets in Resources */,
+				1785804624A7DC24009343DB /* GoogleService-Info.plist in Resources */,
 				17E7E7AD246C921800596500 /* Assets.xcassets in Resources */,
 				176FE78C2474EBAA00B7FE82 /* loading.json in Resources */,
 			);

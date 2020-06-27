@@ -19,7 +19,7 @@ struct TODOList: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color("Level 1")
+                Color("Level 0")
                 ScrollView(showsIndicators: false) {
                     VStack {
                         HStack {
