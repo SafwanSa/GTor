@@ -23,11 +23,12 @@ struct LaunchView: View {
             }
             LoadingView(isLoading: $isLoading)
         }
-        .animation(.linear)
         .onAppear {
             self.isLoading = true
             self.userService.configureAuthStateDidChangeListner { _ in
-                self.isLoading = false
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                    self.isLoading = false
+                }
             }
         }
     }
