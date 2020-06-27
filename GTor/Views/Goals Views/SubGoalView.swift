@@ -118,28 +118,24 @@ struct SubGoalView: View {
             .listStyle(GroupedListStyle())
             .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle(goal.isSubGoal ? "Sub-Goal" :"Goal")
-            .navigationBarItems(trailing:
+            .navigationBarItems(leading:
+                Button(action: { self.isEditingMode = false ; self.goal.importance = self.goalCopy.importance ; self.goalCopy = self.goal }) {
+                    Text("Cancel")
+                }.opacity(isEditingMode ? 1 : 0)
+                , trailing:
                 Group {
-                    HStack(spacing: 50) {
-                        if isEditingMode {
-                            Button(action: { self.isEditingMode = false ; self.goal.importance = self.goalCopy.importance ; self.goalCopy = self.goal }) {
-                                Text("Cancel")
-                            }
-                            Button(action: { self.goal.isSubGoal ? self.saveSubGoal() : self.saveGoal()}) {
-                                Text("Save")
-                            }.opacity(isShowingSave ? 1 : 0)
-                        }else if !isEditingMode{
-                            Button(action: { self.isEditingMode = true }) {
-                                Image(systemName: "pencil")
-                                    .resizable()
-                                    .imageScale(.large)
-                                    .foregroundColor(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
-                                    .font(.headline)
-                            }
+                    if isEditingMode {
+                        Button(action: { self.goal.isSubGoal ? self.saveSubGoal() : self.saveGoal()}) {
+                            Text("Save")
+                        }.opacity(isShowingSave ? 1 : 0)
+                    }else if !isEditingMode{
+                        Button(action: { self.isEditingMode = true }) {
+                            Text("Edit")
                         }
                     }
                 }
             )
+            .navigationBarBackButtonHidden(self.isEditingMode)
             LoadingView(isLoading: $isLoading)
         }
         .alert(isPresented: $isShowingAlert) {

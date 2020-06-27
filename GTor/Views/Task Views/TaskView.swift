@@ -77,7 +77,7 @@ struct TaskView: View {
             .navigationBarTitle(task.isSatisfied ? "\(task.title)" : "Edit Task", displayMode: .inline)
             .navigationBarItems(trailing:
                 Button(action: saveTask) {
-                    Text("Done")
+                    Text("Save")
                 }
             )
             LoadingView(isLoading: self.$isLoading)
