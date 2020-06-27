@@ -20,7 +20,7 @@
 		174DAC832493DD5C008CE35D /* LinkedGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174DAC822493DD5C008CE35D /* LinkedGoalsView.swift */; };
 		1762732C24748759000E9661 /* SubGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732B24748759000E9661 /* SubGoalView.swift */; };
 		1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732D24748D39000E9661 /* GoalHeaderView.swift */; };
-		176FE77E2474E02400B7FE82 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 176FE77D2474E02400B7FE82 /* Lottie */; };
+		176FE77E2474E02400B7FE82 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 176FE77D2474E02400B7FE82 /* SwiftPackageProductDependency */; };
 		176FE7842474E1A800B7FE82 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7832474E1A800B7FE82 /* LottieView.swift */; };
 		176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7852474E21100B7FE82 /* LoadingView.swift */; };
 		176FE78C2474EBAA00B7FE82 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 176FE78B2474EBAA00B7FE82 /* loading.json */; };
@@ -115,7 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BF3CD28DF6450DA1901838B /* Pods_GTor.framework in Frameworks */,
-				176FE77E2474E02400B7FE82 /* Lottie in Frameworks */,
+				176FE77E2474E02400B7FE82 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +357,7 @@
 				17E7E79F246C921400596500 /* Sources */,
 				17E7E7A0246C921400596500 /* Frameworks */,
 				17E7E7A1246C921400596500 /* Resources */,
-				C26BDE560ED104FA331EBD5B /* [CP] Embed Pods Frameworks */,
+				C489AEA315D9429D8D42C9D2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -365,7 +365,7 @@
 			);
 			name = GTor;
 			packageProductDependencies = (
-				176FE77D2474E02400B7FE82 /* Lottie */,
+				176FE77D2474E02400B7FE82 /* SwiftPackageProductDependency */,
 			);
 			productName = GTor;
 			productReference = 17E7E7A3246C921400596500 /* GTor.app */;
@@ -396,7 +396,7 @@
 			);
 			mainGroup = 17E7E79A246C921300596500;
 			packageReferences = (
-				176FE77C2474E02400B7FE82 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				176FE77C2474E02400B7FE82 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 17E7E7A4246C921400596500 /* Products */;
 			projectDirPath = "";
@@ -445,7 +445,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C26BDE560ED104FA331EBD5B /* [CP] Embed Pods Frameworks */ = {
+		C489AEA315D9429D8D42C9D2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -706,7 +706,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		176FE77C2474E02400B7FE82 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+		176FE77C2474E02400B7FE82 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
@@ -717,9 +717,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		176FE77D2474E02400B7FE82 /* Lottie */ = {
+		176FE77D2474E02400B7FE82 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 176FE77C2474E02400B7FE82 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			package = 176FE77C2474E02400B7FE82 /* RemoteSwiftPackageReference */;
 			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
