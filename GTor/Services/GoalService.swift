@@ -42,13 +42,16 @@ class GoalService: ObservableObject {
         return TaskService.shared.tasks.filter {$0.linkedGoalsIds.contains(goal.id)}
     }
     
-    func getGoalsFromDatabase(){
+    func getGoalsFromDatabase(completion: @escaping (Result<Void, Error>) -> ()){
         FirestoreService.shared.getDocuments(collection: .goals, documentId: UserService.shared.user.uid) { (result: Result<[Goal], Error>) in
             switch result {
             case .failure(let error):
-                print(error.localizedDescription)
+                completion(.failure(error))
             case .success(let goals):
-                DispatchQueue.main.async { self.goals = goals }
+                DispatchQueue.main.async {
+                    self.goals = goals
+                    completion(.success(()))
+                }
             }
         }
     }

@@ -47,9 +47,6 @@ struct LoginView: View {
                 SignUpView(isNewUser: self.isNewUser)
             }
         }
-        .onAppear {
-            print(self.userService.user.uid)
-        }
     }
 }
 

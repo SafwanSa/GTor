@@ -19,12 +19,13 @@ class UserService: ObservableObject {
     @Published var user: User = .dummy
     @Published var authState: AuthState = .udefined
     static let shared = UserService()
-
+    
     
     var authStateDidChangeHandler: AuthStateDidChangeListenerHandle?
     
-    func configureAuthStateDidChangeListner() {
+    func configureAuthStateDidChangeListner(completion: @escaping (Bool) -> ()) {
         if authStateDidChangeHandler != nil {
+            completion(false)
             return
         }
         
@@ -33,29 +34,50 @@ class UserService: ObservableObject {
                 DispatchQueue.main.async {
                     self.authState = .signOut
                     self.user = .dummy
+                    completion(true)
                 }
                 return
             }
             DispatchQueue.main.async {
-                 self.authState = .signIn
+                self.authState = .signIn
             }
-            self.retreiveUser(uid: user.uid)
+            self.retreiveUser(uid: user.uid) { (result) in
+                switch result {
+                case .failure(_ ):
+                    completion(false)
+                case .success(()):
+                    completion(true)
+                }
+            }
         })
     }
     
     
     
     
-    private func retreiveUser(uid: String){
+    private func retreiveUser(uid: String, completion: @escaping (Result<Void, Error>) -> ()){
         FirestoreService.shared.getDocument(collection: FirestoreKeys.Collection.users, documentId: uid) { (result: Result<User, Error>) in
             switch result {
             case .failure(let error):
-                print(error.localizedDescription)
+                completion(.failure(error))
             case .success(let user):
                 DispatchQueue.main.async {
                     self.user = user
-                    TaskService.shared.getTasksFromDatabase()
-                    GoalService.shared.getGoalsFromDatabase()
+                    TaskService.shared.getTasksFromDatabase { (result) in
+                        switch result {
+                        case .failure(let error):
+                            completion(.failure(error))
+                        case .success(()):
+                            GoalService.shared.getGoalsFromDatabase { (result) in
+                                switch result {
+                                case .failure(let error):
+                                    completion(.failure(error))
+                                case .success(()):
+                                    completion(.success(()))
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
