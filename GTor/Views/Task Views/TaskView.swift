@@ -10,35 +10,37 @@ import SwiftUI
 
 struct TaskView: View {
     @ObservedObject var taskService = TaskService.shared
+    @ObservedObject var goalService = GoalService.shared
     @State var task: Task
+    @State var taskCopy = Task.dummy
     @State var alertMessage = ""
     @State var isLoading = false
     @State var isShowingAlert = false
-    
     @State var updatedSatisfaction = ""
-    
+    @State var isEditingMode = false
+    var isShowingSave: Bool {
+        !self.taskCopy.title.isEmpty && (self.task.title != self.taskCopy.title || self.task.note != self.taskCopy.note || self.taskCopy.satisfaction != Double(updatedSatisfaction)) && !updatedSatisfaction.isEmpty && updatedSatisfaction.isNumeric
+    }
     var body: some View {
         ZStack {
             List {
                 Section {
-                    TextField(task.title, text: $task.title)
-                    if task.isSatisfied { if !task.note.isEmpty { TextField(task.note, text: $task.note) } } else { TextField(task.note.isEmpty ? "Note (Optional)" : task.note, text: $task.note) }
+                    TaskHeaderView(task: self.$taskCopy, isEditingMode: $isEditingMode)
                 }
                 
-                
-                if task.dueDate != nil {
-                    Section(header: Text("Deadline")) {
+                if taskCopy.dueDate != nil {
+                    Section {
                         HStack {
                             Text("Due")
                             Spacer()
-                            Text("\(task.dueDate!, formatter: dateFormatter)")
+                            Text("\(taskCopy.dueDate!, formatter: dateFormatter)")
                         }
                     }
                 }
                 
-                if !task.linkedGoalsIds.isEmpty {
+                if !goalService.goals.filter { self.taskCopy.linkedGoalsIds.contains($0.id) }.isEmpty {
                     Section(header: Text("Linked Goals")) {
-                        ForEach(taskService.getLinkedGoals(task: self.task)) { linkedGoal in
+                        ForEach(taskService.getLinkedGoals(task: self.taskCopy)) { linkedGoal in
                             Text(linkedGoal.title)
                         }
                     }
@@ -48,7 +50,7 @@ struct TaskView: View {
                     HStack {
                         Text("Importance")
                         Spacer()
-                        Text(self.task.importance.rawValue)
+                        Text(self.taskCopy.importance.rawValue)
                     }
                 }
                 
@@ -56,7 +58,7 @@ struct TaskView: View {
                     HStack {
                         Text("Satisfaction")
                         Spacer()
-                        TextField("\(String(format: "%.2f", arguments: [task.satisfaction]))%", text: $updatedSatisfaction)
+                        TextField("\(String(format: "%.2f", taskCopy.satisfaction))%", text: $updatedSatisfaction)
                             .keyboardType(.asciiCapableNumberPad)
                             .multilineTextAlignment(.trailing)
                     }
@@ -74,13 +76,30 @@ struct TaskView: View {
             }
             .listStyle(GroupedListStyle())
             .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle(task.isSatisfied ? "\(task.title)" : "Edit Task", displayMode: .inline)
-            .navigationBarItems(trailing:
-                Button(action: saveTask) {
-                    Text("Save")
+            .navigationBarTitle("Task", displayMode: .inline)
+            .navigationBarItems(leading:
+                Button(action: { self.isEditingMode = false ; self.taskCopy = self.task }) {
+                    Text("Cancel")
+                }.opacity(isEditingMode ? 1 : 0)
+                , trailing:
+                Group {
+                    if isEditingMode {
+                        Button(action: saveTask) {
+                            Text("Save")
+                        }.opacity(isShowingSave ? 1 : 0)
+                    }else if !isEditingMode{
+                        Button(action: { self.isEditingMode = true }) {
+                            Text("Edit")
+                        }
+                    }
                 }
             )
+            .navigationBarBackButtonHidden(self.isEditingMode)
             LoadingView(isLoading: self.$isLoading)
+        }
+        .onAppear {
+            self.taskCopy = self.task
+            self.updatedSatisfaction = String(self.task.satisfaction)
         }
         .alert(isPresented: self.$isShowingAlert) {
             Alert(title: Text(self.alertMessage))
@@ -107,9 +126,10 @@ struct TaskView: View {
     func saveTask() {
         if !updatedSatisfaction.isEmpty {
             //            if updatedSatisfaction.last == "%" { updatedSatisfaction.removeLast() }
-            task.satisfaction = Double(updatedSatisfaction)!
+            taskCopy.satisfaction = Double(updatedSatisfaction)!
             //            updatedSatisfaction+="%"
         }
+        self.task = self.taskCopy
         isLoading = true
         taskService.saveTask(task: task) { (result) in
             switch result {
@@ -117,9 +137,11 @@ struct TaskView: View {
                 self.isLoading = false
                 self.isShowingAlert = true
                 self.alertMessage = error.localizedDescription
+                self.updatedSatisfaction = String(self.taskCopy.satisfaction)
             case .success(()):
                 self.isLoading = false
                 self.isShowingAlert = true
+                self.isEditingMode = false
                 self.alertMessage = "Successfully Saved"
             }
         }
