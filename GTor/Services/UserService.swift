@@ -76,6 +76,14 @@ class UserService: ObservableObject {
                                     completion(.success(()))
                                 }
                             }
+                            CategoryService.shared.getCategoriesFromDatabase { (result) in
+                                switch result {
+                                case .failure(let error):
+                                    completion(.failure(error))
+                                case .success(()):
+                                    completion(.success(()))
+                                }
+                            }
                         }
                     }
                 }

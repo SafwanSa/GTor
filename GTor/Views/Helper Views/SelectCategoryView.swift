@@ -10,12 +10,22 @@ import SwiftUI
 
 
 struct SelectCategoryView: View {
+    @ObservedObject var categoryService = CategoryService.shared
     @Binding var isCategoryPressed: Bool
     @Binding var selectedCategories: [Category]
     @Binding var categories: [Category]
-    
+    @State var isEditCategoriesPresented = false
+
     var body: some View {
-        Section(header: Text("Press to select categories")) {
+        Section(header:
+            HStack {
+                Text("Press to select categories")
+                Spacer()
+                Button(action: { self.isEditCategoriesPresented = true }) {
+                    Text("Edit")
+                }
+            }
+        ) {
             HStack {
                 Image(systemName: "tag")
                 Text("Cateogries ")
@@ -28,27 +38,27 @@ struct SelectCategoryView: View {
             if !self.selectedCategories.isEmpty{
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(self.selectedCategories) { cateogry in
-                            Button(action: { self.categories.append(cateogry) ; self.selectedCategories = self.selectedCategories.filter{!self.categories.contains($0)}}) {
+                        ForEach(self.selectedCategories) { category in
+                            Button(action: { self.categories.append(category) ; self.selectedCategories = self.selectedCategories.filter{!self.categories.contains($0)}}) {
                                 HStack {
                                     VStack {
                                         Image(systemName: "xmark")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 10, height: 50)
-                                            .foregroundColor(.white)
+                                            .foregroundColor(.black)
                                     }
                                     .frame(alignment: .leading)
                                     .padding(3)
-                                    .background(Color(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)))
-                                    
-                                    Text(cateogry.name ?? "None")
+                                    .background(Color(GTColor.init(rawValue: category.colorId ?? 0)!.color).opacity(0.5))
+
+                                    Text(category.name)
                                 }
                                 .lineLimit(1)
                                 .frame(height: 20, alignment: .leading)
                                 .padding(.trailing)
                                 .padding(.vertical, 5)
-                                .background(Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)))
+                                .background(Color(GTColor.init(rawValue: category.colorId ?? 0)!.color).opacity(0.5))
                                 .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -62,14 +72,14 @@ struct SelectCategoryView: View {
             if self.isCategoryPressed && !self.categories.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(categories) { cateogry in
-                            Button(action: {  self.selectedCategories.append(cateogry) ; self.categories = self.categories.filter{!self.selectedCategories.contains($0)} }) {
+                        ForEach(categories) { category in
+                            Button(action: {  self.selectedCategories.append(category) ; self.categories = self.categories.filter{!self.selectedCategories.contains($0)} }) {
                                 HStack {
-                                    Text(cateogry.name ?? "None")
+                                    Text(category.name)
                                 }
                                 .padding(.horizontal)
                                 .padding(.vertical, 5)
-                                .background(Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)))
+                                .background(Color(GTColor.init(rawValue: category.colorId ?? 0)!.color).opacity(0.5))
                                 .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -77,6 +87,9 @@ struct SelectCategoryView: View {
                     }
                 }
             }
+        }
+        .sheet(isPresented: $isEditCategoriesPresented) {
+            CategoryEditorView(categories: self.categoryService.categories)
         }
     }
 }
