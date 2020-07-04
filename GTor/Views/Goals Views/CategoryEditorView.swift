@@ -72,7 +72,7 @@ struct CategoryEditorView: View {
                                 }
                                 .buttonStyle(PlainButtonStyle())
                                 
-                                Color(GTColor.init(rawValue: category.colorId)!.color)
+                                Color(GTColor.init(rawValue: category.colorId ?? 0)!.color)
                                     .frame(width: 30, height: 30)
                                     .clipShape(RoundedRectangle(cornerRadius: 5))
                                 
@@ -84,7 +84,7 @@ struct CategoryEditorView: View {
                                     self.isEditMode = true
                                     self.selectedCategory = category
                                     self.title = category.name
-                                    self.color = GTColor(rawValue: category.colorId)!
+                                    self.color = GTColor(rawValue: category.colorId ?? 0)!
                                 }) {
                                 Text("Edit")
                                 }

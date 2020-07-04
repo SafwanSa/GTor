@@ -50,7 +50,7 @@ struct SelectCategoryView: View {
                                     }
                                     .frame(alignment: .leading)
                                     .padding(3)
-                                    .background(Color(GTColor.init(rawValue: category.colorId)!.color).opacity(0.5))
+                                    .background(Color(GTColor.init(rawValue: category.colorId ?? 0)!.color).opacity(0.5))
 
                                     Text(category.name)
                                 }
@@ -58,7 +58,7 @@ struct SelectCategoryView: View {
                                 .frame(height: 20, alignment: .leading)
                                 .padding(.trailing)
                                 .padding(.vertical, 5)
-                                .background(Color(GTColor.init(rawValue: category.colorId)!.color).opacity(0.5))
+                                .background(Color(GTColor.init(rawValue: category.colorId ?? 0)!.color).opacity(0.5))
                                 .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -79,7 +79,7 @@ struct SelectCategoryView: View {
                                 }
                                 .padding(.horizontal)
                                 .padding(.vertical, 5)
-                                .background(Color(GTColor.init(rawValue: category.colorId)!.color).opacity(0.5))
+                                .background(Color(GTColor.init(rawValue: category.colorId ?? 0)!.color).opacity(0.5))
                                 .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                             }
                             .buttonStyle(PlainButtonStyle())
