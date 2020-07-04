@@ -114,9 +114,7 @@ struct AddTaskView: View {
                 self.alertMessage = error.localizedDescription
             case .success(()):
                 self.isLoading = false
-                self.isShowingAlert = true
                 self.presentationMode.wrappedValue.dismiss()
-                self.alertMessage = "Successfully added"
             }
         }
     }
