@@ -26,7 +26,8 @@ struct AddGoalView: View {
     @State var alertMessage = "None"
     @State var isLoading = false
     @State var isShowingAlert = false
-
+    @State var isEditCategoriesPresented = false
+    
     
     var body: some View {
         ZStack {

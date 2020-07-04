@@ -10,12 +10,22 @@ import SwiftUI
 
 
 struct SelectCategoryView: View {
+    @ObservedObject var categoryService = CategoryService.shared
     @Binding var isCategoryPressed: Bool
     @Binding var selectedCategories: [Category]
     @Binding var categories: [Category]
-    
+    @State var isEditCategoriesPresented = false
+
     var body: some View {
-        Section(header: Text("Press to select categories")) {
+        Section(header:
+            HStack {
+                Text("Press to select categories")
+                Spacer()
+                Button(action: { self.isEditCategoriesPresented = true }) {
+                    Text("Edit")
+                }
+            }
+        ) {
             HStack {
                 Image(systemName: "tag")
                 Text("Cateogries ")
@@ -77,6 +87,9 @@ struct SelectCategoryView: View {
                     }
                 }
             }
+        }
+        .sheet(isPresented: $isEditCategoriesPresented) {
+            CategoryEditorView(categories: self.categoryService.categories)
         }
     }
 }

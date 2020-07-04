@@ -24,6 +24,7 @@
 		176FE7842474E1A800B7FE82 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7832474E1A800B7FE82 /* LottieView.swift */; };
 		176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7852474E21100B7FE82 /* LoadingView.swift */; };
 		176FE78C2474EBAA00B7FE82 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 176FE78B2474EBAA00B7FE82 /* loading.json */; };
+		177A215724B107F90031A665 /* CategoryEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A215624B107F90031A665 /* CategoryEditorView.swift */; };
 		1785804624A7DC24009343DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1785804424A7DA05009343DB /* GoogleService-Info.plist */; };
 		179E77012476604000BB77F8 /* TODOList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179E77002476604000BB77F8 /* TODOList.swift */; };
 		17A26C04249C1145004776EA /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C03249C1145004776EA /* GoalView.swift */; };
@@ -75,6 +76,7 @@
 		176FE7832474E1A800B7FE82 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		176FE7852474E21100B7FE82 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		176FE78B2474EBAA00B7FE82 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		177A215624B107F90031A665 /* CategoryEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditorView.swift; sourceTree = "<group>"; };
 		1785804424A7DA05009343DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		179E77002476604000BB77F8 /* TODOList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOList.swift; sourceTree = "<group>"; };
 		17A26C03249C1145004776EA /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				1762732B24748759000E9661 /* SubGoalView.swift */,
 				17091767247244800011BB8C /* AddSubGoalView.swift */,
 				17A61A6024707F12008B8C31 /* AddGoalView.swift */,
+				177A215624B107F90031A665 /* CategoryEditorView.swift */,
 			);
 			path = "Goals Views";
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				17A61A6124707F12008B8C31 /* AddGoalView.swift in Sources */,
 				1729898F246D13C200449C4F /* AuthError.swift in Sources */,
 				17E7E7E4246CE3D600596500 /* TaskService.swift in Sources */,
+				177A215724B107F90031A665 /* CategoryEditorView.swift in Sources */,
 				17E7E7E0246CE3B300596500 /* UserService.swift in Sources */,
 				17091768247244800011BB8C /* AddSubGoalView.swift in Sources */,
 				17E7E7C8246CA6FE00596500 /* Task.swift in Sources */,

@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-enum GTColor: Int {
-    case red = 0, blue = 1 , green = 2, yellow = 3, black = 4, gray = 5, pink = 6, purple = 7, brown = 8, white = 9
+enum GTColor: Int, CaseIterable {
+    case none = -1, red = 0, blue = 1 , green = 2, yellow = 3, black = 4, gray = 5, pink = 6, purple = 7, brown = 8, white = 9
     
     var color: UIColor {
         switch self {
@@ -34,6 +34,8 @@ enum GTColor: Int {
             return UIColor.brown
         case .white:
             return UIColor.white
+        case .none:
+            return UIColor.black
         }
     }
 }
