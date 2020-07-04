@@ -40,6 +40,7 @@ enum GTColor: Int {
 
 struct Category: Codable, Identifiable, Equatable, Hashable{
     var id = UUID()
+    var uid: String
     var name: String
     var colorId: Int
 }

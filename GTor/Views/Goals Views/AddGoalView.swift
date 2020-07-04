@@ -12,9 +12,10 @@ import UIKit
 struct AddGoalView: View {
     @ObservedObject var userService = UserService.shared
     @ObservedObject var goalService = GoalService.shared
+    @ObservedObject var categoryService = CategoryService.shared
+
     @Environment(\.presentationMode) private var presentationMode
 
-    @State var categories = categoriesData//TODO bring this from db
     @State var goal: Goal = .empty
     @State var deadline = Date()
     
@@ -31,7 +32,7 @@ struct AddGoalView: View {
         ZStack {
             NavigationView {
                 List {
-                    SelectCategoryView(isCategoryPressed: $isSelectCategoryExpanded, selectedCategories: self.$goal.categories, categories: $categories)
+                    SelectCategoryView(isCategoryPressed: $isSelectCategoryExpanded, selectedCategories: self.$goal.categories, categories: self.$categoryService.categories)
                     
                     Section {
                         TextField("Title", text: $goal.title)
@@ -111,14 +112,6 @@ struct AddGoalView_Previews: PreviewProvider {
         AddGoalView()
     }
 }
-
-
-var categoriesData: [Category] = [
-    .init(name: "Work", colorId: 0),
-    .init(name: "Study", colorId: 1),
-    .init(name: "Relationships", colorId: 2),
-    .init(name: "Life", colorId: 3)
-]
 
 var dateFormatter: DateFormatter {
     let formatter = DateFormatter()
