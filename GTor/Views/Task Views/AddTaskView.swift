@@ -105,7 +105,8 @@ struct AddTaskView: View {
             self.alertMessage = "Please add linked goals"
             return
         }
-        let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: deadline, satisfaction: 0, isSatisfied: false, linkedGoalsIds: isHavingLinkedGoals ? linkedGoalsIds : [], importance: linkedGoalsIds.isEmpty ? selectedImportance : CalcService.shared.calcImportance(from: linkedGoalsIds))
+        let task = Task(uid: self.userService.user.uid, title: title, note: note, dueDate: isHavingDeadline ? deadline : nil, satisfaction: 0, isSatisfied: false, linkedGoalsIds: isHavingLinkedGoals ? linkedGoalsIds : [], importance: linkedGoalsIds.isEmpty ? selectedImportance : CalcService.shared.calcImportance(from: linkedGoalsIds))
+
         self.taskService.saveTask(task: task) { (result) in
             switch result {
             case .failure(let error):

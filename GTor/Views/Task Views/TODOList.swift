@@ -15,6 +15,7 @@ struct TODOList: View {
     @State var selectedTask = Task.dummy
     @State var isFilterViewPresented = false
     @State var currentFilter = FilterType.todo
+    @State var currentSorter = SorterType.ImportantFirst
     var filteredTasks: [Task] {
         switch currentFilter {
         case .todo:
@@ -27,6 +28,21 @@ struct TODOList: View {
             return self.taskService.tasks.filter { $0.satisfaction == 0 }
         }
     }
+    
+    var sortedTasks: [Task] {
+        switch currentSorter {
+        case .newestFirst:
+            return self.filteredTasks.sorted { $0.dueDate == nil || $1.dueDate == nil ? false : $0.dueDate! > $1.dueDate! }
+        case .oldestFirst:
+            return self.filteredTasks.sorted { $0.dueDate == nil || $1.dueDate == nil ? false : $0.dueDate! < $1.dueDate! }
+        case .ImportantFirst:
+            return self.filteredTasks.sorted { $0.importance.value > $1.importance.value }
+        case .NotImportantFirst:
+            return self.filteredTasks.sorted { $0.importance.value < $1.importance.value }
+        }
+    }
+    
+    
     var title: String {
         currentFilter.rawValue
     }
@@ -45,7 +61,7 @@ struct TODOList: View {
                         .padding()
                         .padding(.leading, 10)
                         
-                        ForEach(filteredTasks) { task in
+                        ForEach(sortedTasks) { task in
                             NavigationLink(destination: TaskView(task: task)) {
                                 TaskCardView(task: task, isSatisfiedPresnted: self.$isSatisfiedPresented, selectedTask: self.$selectedTask)
                                     .padding(.horizontal)
@@ -61,7 +77,7 @@ struct TODOList: View {
                 
                 VStack {
                     List {
-                        Section(header: Text("Filtered By")) {
+                        Section(header: Text("Filter By")) {
                             ForEach(FilterType.allCases, id: \.self) { filter in
                                 Button(action: {
                                     self.currentFilter = filter
@@ -71,27 +87,38 @@ struct TODOList: View {
                                         Text(filter.rawValue)
                                         Spacer()
                                         Image(systemName: "checkmark")
-                                        .foregroundColor(Color("Level 4"))
+                                            .foregroundColor(Color("Level 4"))
                                             .opacity(filter == self.currentFilter ? 1 : 0)
                                     }
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .contentShape(Rectangle())
                                 }
-                            .buttonStyle(PlainButtonStyle())
+                                .buttonStyle(PlainButtonStyle())
                             }
                         }
                         
-//                        Section(header: Text("Sort By")) {
-//                            ForEach(filteredTasks) { item in
-//                                Button(action: {}) {
-//                                Text("Button")
-//                                }
-//                            }
-//                        }
+                        Section(header: Text("Sort By")) {
+                            ForEach(SorterType.allCases, id: \.self) { sorter in
+                                Button(action: {
+                                    self.currentSorter = sorter
+                                    self.isFilterViewPresented = false
+                                }) {
+                                    HStack {
+                                        Text(sorter.rawValue)
+                                        Spacer()
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(Color("Level 4"))
+                                            .opacity(sorter == self.currentSorter ? 1 : 0)
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .contentShape(Rectangle())
+                                }
+                            }
+                        }
                     }
-                        
+                    .listStyle(GroupedListStyle())
                     .environment(\.horizontalSizeClass, .regular)
-
+                    
                 }
                 .frame(maxWidth: screen.width - 80)
                 .frame(height: screen.height - 250)
@@ -139,4 +166,11 @@ enum FilterType: String, CaseIterable {
     case completelyDone = "Completely Done"
     case ignored = "Ignored"
     case partiallyDone = "Partially Done"
+}
+
+enum SorterType: String, CaseIterable {
+    case oldestFirst = "Deadline - Ascending"
+    case newestFirst = "Deadline - Descending"
+    case ImportantFirst = "Importance - High to low"
+    case NotImportantFirst = "Importance - Low to High"
 }
