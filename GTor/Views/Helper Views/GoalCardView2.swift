@@ -56,7 +56,7 @@ struct GoalCardView2: View {
         .shadow()
         .overlay(
             HStack {
-                Color("Level 0")//TODO
+                Color(GTColor.init(rawValue: self.goal.categories[0].colorId)!.color).opacity(0.5)
                     .frame(width: 8)
                     .frame(maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 2))

@@ -114,10 +114,10 @@ struct AddGoalView_Previews: PreviewProvider {
 
 
 var categoriesData: [Category] = [
-    .init(name: "Work"),
-    .init(name: "Study"),
-    .init(name: "Relationships"),
-    .init(name: "Life")
+    .init(name: "Work", colorId: 0),
+    .init(name: "Study", colorId: 1),
+    .init(name: "Relationships", colorId: 2),
+    .init(name: "Life", colorId: 3)
 ]
 
 var dateFormatter: DateFormatter {
