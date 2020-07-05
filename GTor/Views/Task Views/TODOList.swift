@@ -66,15 +66,15 @@ struct TODOList: View {
                                 TaskCardView(task: task, isSatisfiedPresnted: self.$isSatisfiedPresented, selectedTask: self.$selectedTask)
                                     .padding(.horizontal)
                             }
+                            .disabled(self.isSatisfiedPresented || self.isFilterViewPresented)
                         }
                         Spacer()
                     }
-                    .blur(radius: isSatisfiedPresented || isFilterViewPresented ? 2: 0)
-                    .disabled(isSatisfiedPresented || isFilterViewPresented)
-                    .onTapGesture {
-                        self.isFilterViewPresented = false
-                        self.isSatisfiedPresented = false
-                    }
+                }
+                .blur(radius: isSatisfiedPresented || isFilterViewPresented ? 2: 0)
+                .onTapGesture {
+                    self.isFilterViewPresented = false
+                    self.isSatisfiedPresented = false
                 }
                 
                 QuickSatisfactionView(isSatisfiedPresnted: $isSatisfiedPresented, selectedTask: $selectedTask)
@@ -155,6 +155,7 @@ struct TODOList: View {
                     }
                 }
                 .blur(radius:isSatisfiedPresented || isFilterViewPresented ? 2: 0)
+                .disabled(self.isSatisfiedPresented || self.isFilterViewPresented)
             )
                 .navigationBarTitle("Tasks", displayMode: .inline)
         }

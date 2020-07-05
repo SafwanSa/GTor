@@ -66,14 +66,15 @@ struct AddTaskView: View {
                             ForEach(goalService.goals.filter {self.linkedGoalsIds.contains($0.id)}) { goal in
                                 Text(goal.title)
                             }
-                        }else {
-                            Picker(selection: $selectedImportance, label: Text("Importance")) {
-                                ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
-                                    Text(importance.rawValue)
-                                }
+                        }
+                    }
+                    
+                    if !isHavingLinkedGoals {
+                        Picker(selection: $selectedImportance, label: Text("Importance")) {
+                            ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+                                Text(importance.rawValue)
                             }
                         }
-                        
                     }
                     
                 }
