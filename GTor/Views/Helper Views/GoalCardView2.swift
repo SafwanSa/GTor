@@ -55,14 +55,18 @@ struct GoalCardView2: View {
         .clipShape(RoundedRectangle(cornerRadius: 5))
         .shadow()
         .overlay(
-            HStack {
-                Color(GTColor.init(rawValue: self.goal.categories[0].colorId ?? 0)!.color).opacity(0.5)
-                    .frame(width: 8)
-                    .frame(maxHeight: .infinity)
-                    .clipShape(RoundedRectangle(cornerRadius: 2))
-                Spacer()
-        })
-        
+            Group {
+                if !self.goal.isSubGoal {
+                    HStack {
+                        Color(GTColor.init(rawValue: self.goal.categories[0].colorId ?? 0)!.color).opacity(0.5)
+                            .frame(width: 8)
+                            .frame(maxHeight: .infinity)
+                            .clipShape(RoundedRectangle(cornerRadius: 2))
+                        Spacer()
+                    }
+                }
+            }
+        )
     }
 }
 

@@ -47,6 +47,8 @@ struct SubGoalView: View {
                     if goalCopy.isDecomposed {
                         if self.goalService.getSubGoals(mainGoal: goalCopy).count == 0 {
                             HStack {
+                                Text("Importance")
+                                Spacer()
                                 Image(systemName: "exclamationmark.square")
                                 Text("Add Sub Goals")
                             }

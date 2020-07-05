@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct SmallCell: ViewModifier {
     func body(content: Content) -> some View {
@@ -38,6 +39,7 @@ struct Shadow: ViewModifier {
         .shadow(color: Color(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1725490196, alpha: 1)).opacity(0.09), radius: 2, x: 0, y: 0.5)
     }
 }
+
 
 struct NavigationBarModifier: ViewModifier {
         
@@ -83,4 +85,75 @@ extension View {
         self.modifier(Shadow())
     }
 
+}
+
+fileprivate var keyboardHeightPublisher: AnyPublisher<CGFloat, Never> {
+    Publishers.Merge(
+        NotificationCenter.default
+            .publisher(for: UIResponder.keyboardWillShowNotification)
+            .compactMap { $0.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue }
+            .map { $0.cgRectValue.height },
+        NotificationCenter.default
+            .publisher(for: UIResponder.keyboardWillHideNotification)
+            .map { _ in CGFloat(0) }
+    ).eraseToAnyPublisher()
+}
+
+struct KeyboardAwareModifier: ViewModifier {
+    @State private var keyboardHeight: CGFloat = 0
+    fileprivate var defaultOffset: CGFloat = 0
+    fileprivate var keyboardHeightModifier: CGFloat = 0
+    
+    var isKeyboardShown: Bool {
+        return keyboardHeight != 0
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .offset(y: isKeyboardShown ? -keyboardHeight + -keyboardHeightModifier : defaultOffset)
+            .animation(.spring(response: 0.5, dampingFraction: 0.65, blendDuration: 0))
+            .onReceive(keyboardHeightPublisher) { self.keyboardHeight = $0 }
+    }
+}
+
+struct KeyboardAwareHeightModifier: ViewModifier {
+    @State private var keyboardHeight: CGFloat = 0
+    @State var viewMinY: CGFloat = 0
+    @State var bottomSafeAreaHeight: CGFloat = 0
+    
+    var isKeyboardShown: Bool {
+        return keyboardHeight != 0
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .frame(height:
+                isKeyboardShown
+                    ? screen.height - keyboardHeight - viewMinY - 22
+                    : screen.height - keyboardHeight - viewMinY - bottomSafeAreaHeight - 100 - 64
+            )
+            .onReceive(keyboardHeightPublisher) { self.keyboardHeight = $0 }
+            .overlay(
+                GeometryReader { geo in
+                    Color.clear
+                        .frame(width: 1, height: 1)
+                        .onAppear {
+                            DispatchQueue.main.async {
+                                self.viewMinY = geo.frame(in: .global).minY
+                                self.bottomSafeAreaHeight = geo.safeAreaInsets.bottom
+                            }
+                        }
+                }
+            )
+    }
+}
+
+extension View {
+    func keyboardAware(defaultOffset: CGFloat = 0, keyboardHeightModifier: CGFloat = 0) -> some View {
+        self.modifier(KeyboardAwareModifier(defaultOffset: defaultOffset, keyboardHeightModifier: keyboardHeightModifier))
+    }
+    
+    func heightKeyboardAware() -> some View {
+        self.modifier(KeyboardAwareHeightModifier())
+    }
 }
