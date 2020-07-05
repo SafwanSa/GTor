@@ -35,7 +35,7 @@ struct TaskCardView: View {
                 
                 Spacer()
                 
-                Text("\(task.dueDate ?? Date(), formatter: dateFormatter)")
+                Text(task.dueDate != nil ? "\(task.dueDate!, formatter: dateFormatter)" : "No deadline")
                     .font(.caption)
                     .foregroundColor(Color("Level 3"))
             }

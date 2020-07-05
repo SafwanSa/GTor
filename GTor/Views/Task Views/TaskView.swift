@@ -137,8 +137,15 @@ struct TaskView: View {
     }
     
     func saveTask() {
-        self.task = self.taskCopy
+        task = taskCopy
         isLoading = true
+        if Double(updatedSatisfaction) == nil {
+            self.isLoading = false
+            self.isShowingAlert = true
+            self.alertMessage = "Invalid satisfaction."
+            return
+        }
+        task.satisfaction = Double(updatedSatisfaction)!
         taskService.saveTask(task: task) { (result) in
             switch result {
             case .failure(let error):

@@ -37,7 +37,7 @@ struct QuickSatisfactionView: View {
         ZStack {
             VStack {
                 HStack {
-                    Button(action: { self.isSatisfiedPresnted = false }) {
+                    Button(action: { self.isSatisfiedPresnted = false ; self.isHidingTextField = true }) {
                         Image(systemName: "xmark.circle.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
