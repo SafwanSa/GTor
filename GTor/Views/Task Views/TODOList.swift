@@ -70,6 +70,11 @@ struct TODOList: View {
                         Spacer()
                     }
                     .blur(radius: isSatisfiedPresented || isFilterViewPresented ? 2: 0)
+                    .disabled(isSatisfiedPresented || isFilterViewPresented)
+                    .onTapGesture {
+                        self.isFilterViewPresented = false
+                        self.isSatisfiedPresented = false
+                    }
                 }
                 
                 QuickSatisfactionView(isSatisfiedPresnted: $isSatisfiedPresented, selectedTask: $selectedTask)
