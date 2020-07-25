@@ -23,11 +23,11 @@ struct NewGoalView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 40.0) {
-                NewGoalHeaderView()
+                NewGoalHeaderView(goal: $goal)
                 
-                DateCardView()
+                DateCardView(goal: $goal)
                 
-                NavigationLink(destination: SubGoalsList(goal: .constant(.dummy))) {
+                NavigationLink(destination: SubGoalsList(goal: $goal)) {
                     NewSubGoalsCardView()
                 }
             }
@@ -43,16 +43,20 @@ struct NewGoalView_Previews: PreviewProvider {
 }
 
 struct NewGoalHeaderView: View {
+    @Binding var goal: Goal
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 15.0) {
             HStack {
-                Text("Goal title")
+                Text(goal.title)
                     .font(.headline)
                 
                 Spacer()
                 
                 Button(action: {}) {
                     Text("Edit")
+                        .foregroundColor(Color("Button"))
+                        .font(.callout)
                 }
             }
             
@@ -61,13 +65,15 @@ struct NewGoalHeaderView: View {
                 .padding(.horizontal)
             
             HStack {
-                Text("Goal note")
+                Text(goal.note.isEmpty ? "Empty Note" : goal.note)
                     .font(.subheadline)
                 
                 Spacer()
                 
                 Button(action: {}) {
                     Text("Edit")
+                        .foregroundColor(Color("Button"))
+                        .font(.callout)
                 }
             }
         }
@@ -76,7 +82,7 @@ struct NewGoalHeaderView: View {
         .background(Color("Level 0"))
         .elevation()
         .overlay(
-            ProgressBarView(color1: Color("Level 3"), color2: Color.red, percentage: 50, fullWidth: 351, width: 343)
+            ProgressBarView(color1: Color("Level 3"), color2: Color.red, percentage: self.goal.satisfaction, fullWidth: 351, width: 343)
         )
     }
 }
@@ -91,21 +97,26 @@ struct NewCardView: View {
         .padding(22)
         .background(Color("Level 0"))
         .elevation()
+        .foregroundColor(Color("Primary"))
     }
 }
 
 struct DateCardView: View {
+    @Binding var goal: Goal
+
     var body: some View {
         VStack {
             NewCardView(content:
                 AnyView (
                     HStack {
-                        Text("12, April 2020")
+                        Text(goal.dueDate != nil ? "\(goal.dueDate!, formatter: dateFormatter2)" : "No deadline")
                         
                         Spacer()
                         
                         Button(action: {}) {
                             Text("Edit")
+                            .foregroundColor(Color("Button"))
+                            .font(.callout)
                         }
                     }
             ))
