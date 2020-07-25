@@ -67,7 +67,7 @@ struct NewGoalCadView: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(color: Color("Primary").opacity(0.12), radius: 10, x: 0, y: 7)
         .overlay(
-            ProgressBarView(color1: Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)), color2: Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)), percentage: 50)
+            ProgressBarView(color1: Color("Level 3"), color2: Color.red, percentage: 50)
         )
     }
 }
