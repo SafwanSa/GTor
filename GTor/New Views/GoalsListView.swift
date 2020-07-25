@@ -41,7 +41,7 @@ struct NewGoalCadView: View {
                     Text("Work")
                         .font(.system(size: 10))
                         .padding(6)
-                        .background(Color.red.opacity(0.5))
+                        .background(Color("Level 3"))
                         .clipShape(RoundedRectangle(cornerRadius: 5))
                 }
                 
@@ -63,9 +63,9 @@ struct NewGoalCadView: View {
             }
         }
         .padding(12)
-        .background(Color.white)
+        .background(Color("Level 0"))
         .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(color: Color.black.opacity(0.12), radius: 10, x: 0, y: 7)
+        .shadow(color: Color("Primary").opacity(0.12), radius: 10, x: 0, y: 7)
         .overlay(
             ProgressBarView(color1: Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)), color2: Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)), percentage: 50)
         )
@@ -90,7 +90,7 @@ struct ProgressBarView: View {
             }
         }
         .frame(width: 351, height: 8)
-        .shadow(color: Color.black.opacity(0.12), radius: 10, x: 0, y: 7)
+        .shadow(color: Color("Primary").opacity(0.12), radius: 10, x: 0, y: 7)
         .offset(x: 4, y: 50)
     }
 }
