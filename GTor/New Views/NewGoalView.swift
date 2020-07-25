@@ -14,34 +14,34 @@ struct NewGoalView: View {
     @Binding var mainGoal: Goal
     @State var goal: Goal = .dummy
     @State var goalCopy = Goal.dummy
-    @State var isEditingMode = false
-    @State var isShowingDeleteAlert = false
-    @State var alertMessage = ""
     @State var isLoading = false
-    @State var isShowingAlert = false
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 40.0) {
-                NewGoalHeaderView(goal: $goal)
-                
-                if !goal.isSubGoal { GoalCategoriesCardView(goal: goal) }
-                
-                DateCardView(goal: $goal)
-                
-                if goal.isSubGoal {
-                    NewTasksInfoView(goal: goal)
-                }else {
-                    NavigationLink(destination: SubGoalsList(goal: self.$goal)) {
-                        NewSubGoalsCardView()
+        ZStack {
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 40.0) {
+                    NewGoalHeaderView(goal: $goal)
+                    
+                    if !goal.isSubGoal { GoalCategoriesCardView(goal: goal) }
+                    
+                    DateCardView(goal: $goal)
+                    
+                    if goal.isSubGoal {
+                        NewTasksInfoView(goal: goal)
+                    }else {
+                        NavigationLink(destination: SubGoalsList(goal: self.$goal)) {
+                            NewSubGoalsCardView()
+                        }
                     }
+                    
+                    DeleteGoalCardView(goal: $goal, isLoading: $isLoading)
                 }
-                                
-                DeleteGoalCardView()
+                .padding()
             }
-            .padding()
+            .navigationBarTitle("Goal", displayMode: .inline)
+            
+            LoadingView(isLoading: $isLoading)
         }
-        .navigationBarTitle("Goal", displayMode: .inline)
     }
 }
 
@@ -205,9 +205,13 @@ struct GoalCategoriesCardView: View {
 
 struct DeleteGoalCardView: View {
     @ObservedObject var goalService = GoalService.shared
+    @ObservedObject var taskService = TaskService.shared
     @Environment(\.presentationMode) private var presentationMode
-    var mainGoal: Goal = .dummy
-    var goal: Goal = .dummy
+    @Binding var goal: Goal
+    @State var isShowingDeleteAlert = false
+    @State var alertMessage = ""
+    @State var isShowingAlert = false
+    @Binding var isLoading: Bool
     
     var body: some View {
         VStack {
@@ -217,7 +221,33 @@ struct DeleteGoalCardView: View {
                     Text("Delete Goal")
                     Spacer()
                 }
-            ), backgroundColor: Color(.white), foregroundColor: Color("Primary"), action: {  })
+            ), backgroundColor: Color(.white), foregroundColor: Color("Primary"), action: { self.isShowingDeleteAlert = true })
+        }
+        .alert(isPresented: $isShowingDeleteAlert) {
+            Alert(title: Text("Are you sure you want to delete this goal?"),
+                  message: Text(self.goal.isDecomposed ? "All the Sub Goals of this goal will be deleted also" : ""),
+                  primaryButton: .default(Text("Cancel")),
+                  secondaryButton: .destructive(Text("Delete"), action: deleteGoal))
+        }
+    }
+    
+    func deleteGoal(){
+        isLoading = true
+        goalService.deleteGoal(goal: goal) { (result) in
+            switch result {
+            case .failure(let error):
+                self.isLoading = false
+                self.isShowingAlert = true
+                self.alertMessage = error.localizedDescription
+            case .success(()):
+                if !self.goal.isSubGoal {
+                    for goal in self.goalService.getSubGoals(mainGoal: self.goal) {
+                        self.goalService.deleteGoal(goal: goal) {_ in}
+                    }
+                }
+                self.isLoading = false
+                self.presentationMode.wrappedValue.dismiss()
+            }
         }
     }
 }
