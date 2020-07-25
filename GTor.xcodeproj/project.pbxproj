@@ -25,6 +25,7 @@
 		176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7852474E21100B7FE82 /* LoadingView.swift */; };
 		176FE78C2474EBAA00B7FE82 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 176FE78B2474EBAA00B7FE82 /* loading.json */; };
 		177A215724B107F90031A665 /* CategoryEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A215624B107F90031A665 /* CategoryEditorView.swift */; };
+		177F4FFB24CCDD69005CDD75 /* TextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */; };
 		1785804624A7DC24009343DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1785804424A7DA05009343DB /* GoogleService-Info.plist */; };
 		178601CE24CC9CBC00FFEE0E /* NewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178601CD24CC9CBC00FFEE0E /* NewGoalView.swift */; };
 		179E77012476604000BB77F8 /* TODOList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179E77002476604000BB77F8 /* TODOList.swift */; };
@@ -78,6 +79,7 @@
 		176FE7852474E21100B7FE82 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		176FE78B2474EBAA00B7FE82 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		177A215624B107F90031A665 /* CategoryEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditorView.swift; sourceTree = "<group>"; };
+		177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorView.swift; sourceTree = "<group>"; };
 		1785804424A7DA05009343DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		178601CD24CC9CBC00FFEE0E /* NewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
 		179E77002476604000BB77F8 /* TODOList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOList.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				178601CD24CC9CBC00FFEE0E /* NewGoalView.swift */,
+				177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */,
 			);
 			path = "New Views";
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				174DAC832493DD5C008CE35D /* LinkedGoalsView.swift in Sources */,
 				17A26C06249C1DE9004776EA /* GoalCardView2.swift in Sources */,
 				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,
+				177F4FFB24CCDD69005CDD75 /* TextEditorView.swift in Sources */,
 				17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */,
 				17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */,
 				17A26C0A249C4C25004776EA /* QuickSatisfactionView.swift in Sources */,

@@ -53,7 +53,9 @@ struct NewGoalView_Previews: PreviewProvider {
 
 struct NewGoalHeaderView: View {
     @Binding var goal: Goal
-    
+    @State var isShowingTitleEditor = false
+    @State var isShowingNoteEditor = false
+
     var body: some View {
         VStack(alignment: .leading, spacing: 15.0) {
             HStack {
@@ -62,10 +64,13 @@ struct NewGoalHeaderView: View {
                 
                 Spacer()
                 
-                Button(action: {}) {
+                Button(action: { self.isShowingTitleEditor = true }) {
                     Text("Edit")
                         .foregroundColor(Color("Button"))
                         .font(.callout)
+                }
+                .sheet(isPresented: $isShowingTitleEditor) {
+                    TextEditorView(title: "Edit Title", text: self.$goal.title)
                 }
             }
             
@@ -79,10 +84,13 @@ struct NewGoalHeaderView: View {
                 
                 Spacer()
                 
-                Button(action: {}) {
+                Button(action: { self.isShowingNoteEditor = true }) {
                     Text("Edit")
                         .foregroundColor(Color("Button"))
                         .font(.callout)
+                }
+                .sheet(isPresented: $isShowingNoteEditor) {
+                    TextEditorView(title: "Edit Note", text: self.$goal.note)
                 }
             }
         }
