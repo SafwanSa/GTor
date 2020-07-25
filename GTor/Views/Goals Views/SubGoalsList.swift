@@ -10,6 +10,7 @@ import SwiftUI
 
 
 struct SubGoalsList: View {
+    @ObservedObject var userService = UserService.shared
     @ObservedObject var goalService = GoalService.shared
     @State var isAddGoalSelceted = false
     @Environment(\.presentationMode) private var presentationMode
@@ -38,7 +39,15 @@ struct SubGoalsList: View {
                     .font(.headline)
             }
             .sheet(isPresented: $isAddGoalSelceted) {
-                AddSubGoalView(goal: self.$goal)
+                NewAddGoalView(goal: .init(uid: self.userService.user.uid,
+                                           title: "",
+                                           note: "",
+                                           isSubGoal: true,
+                                           importance: .none,
+                                           satisfaction: 0,
+                                           categories: [],
+                                           isDecomposed: false),
+                               mainGoal: self.$goal)
             }
         )
     }

@@ -14,33 +14,66 @@ struct NewGoalView: View {
     @Binding var mainGoal: Goal
     @State var goal: Goal = .dummy
     @State var goalCopy = Goal.dummy
-    @State var isLoading = false
+    @State var isShowingDeleteAlert = false
+    @State var alertMessage = ""
+    @State var isShowingAlert = false
+    @State var isLoading: Bool = false
+    
+    var isShowingSave: Bool {
+        (goalCopy.title != goal.title || goalCopy.note != goal.note || goalCopy.dueDate != goal.dueDate)
+    }
     
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 40.0) {
-                    NewGoalHeaderView(goal: $goal)
+                    NewGoalHeaderView(goal: $goalCopy)
                     
-                    if !goal.isSubGoal { GoalCategoriesCardView(goal: goal) }
+                    if !goal.isSubGoal { GoalCategoriesCardView(goal: goalCopy) }
                     
-                    DateCardView(goal: $goal)
+                    DateCardView(goal: $goalCopy)
                     
                     if goal.isSubGoal {
-                        NewTasksInfoView(goal: goal)
+                        NewTasksInfoView(goal: goalCopy)
                     }else {
-                        NavigationLink(destination: SubGoalsList(goal: self.$goal)) {
+                        NavigationLink(destination: SubGoalsList(goal: self.$goalCopy)) {
                             NewSubGoalsCardView()
                         }
                     }
                     
-                    DeleteGoalCardView(goal: $goal, mainGoal: $mainGoal, isLoading: $isLoading)
+                    DeleteGoalCardView(goal: $goalCopy, mainGoal: $mainGoal, isLoading: $isLoading)
                 }
                 .padding()
             }
             .navigationBarTitle("Goal", displayMode: .inline)
+            .navigationBarItems(trailing:
+                Button(action: saveGoal) {
+                    Text("Save")
+                    .font(.callout)
+                    .foregroundColor(Color("Button"))
+                }
+                .opacity(isShowingSave ? 1 : 0)
+            )
             
             LoadingView(isLoading: $isLoading)
+        }
+        .onAppear {
+            self.goalCopy = self.goal
+        }
+    }
+    
+    func saveGoal() {
+        isLoading = true
+        self.goal = self.goalCopy
+        goalService.saveGoal(goal: self.goal) { (result) in
+            switch result {
+            case .failure(let error):
+                self.isLoading = false
+                self.isShowingAlert = true
+                self.alertMessage = error.localizedDescription
+            case .success(()):
+                self.isLoading = false
+            }
         }
     }
 }
@@ -53,7 +86,9 @@ struct NewGoalView_Previews: PreviewProvider {
 
 struct NewGoalHeaderView: View {
     @Binding var goal: Goal
-    
+    @State var isShowingTitleEditor = false
+    @State var isShowingNoteEditor = false
+
     var body: some View {
         VStack(alignment: .leading, spacing: 15.0) {
             HStack {
@@ -62,10 +97,13 @@ struct NewGoalHeaderView: View {
                 
                 Spacer()
                 
-                Button(action: {}) {
+                Button(action: { self.isShowingTitleEditor = true }) {
                     Text("Edit")
                         .foregroundColor(Color("Button"))
                         .font(.callout)
+                }
+                .sheet(isPresented: $isShowingTitleEditor) {
+                    TextEditorView(title: "Edit Title", text: self.$goal.title)
                 }
             }
             
@@ -79,10 +117,13 @@ struct NewGoalHeaderView: View {
                 
                 Spacer()
                 
-                Button(action: {}) {
+                Button(action: { self.isShowingNoteEditor = true }) {
                     Text("Edit")
                         .foregroundColor(Color("Button"))
                         .font(.callout)
+                }
+                .sheet(isPresented: $isShowingNoteEditor) {
+                    TextEditorView(title: "Edit Note", text: self.$goal.note)
                 }
             }
         }

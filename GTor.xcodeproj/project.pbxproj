@@ -25,6 +25,7 @@
 		176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7852474E21100B7FE82 /* LoadingView.swift */; };
 		176FE78C2474EBAA00B7FE82 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 176FE78B2474EBAA00B7FE82 /* loading.json */; };
 		177A215724B107F90031A665 /* CategoryEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A215624B107F90031A665 /* CategoryEditorView.swift */; };
+		177F4FFB24CCDD69005CDD75 /* TextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */; };
 		1785804624A7DC24009343DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1785804424A7DA05009343DB /* GoogleService-Info.plist */; };
 		178601CE24CC9CBC00FFEE0E /* NewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178601CD24CC9CBC00FFEE0E /* NewGoalView.swift */; };
 		179E77012476604000BB77F8 /* TODOList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179E77002476604000BB77F8 /* TODOList.swift */; };
@@ -55,6 +56,7 @@
 		17E7E7E4246CE3D600596500 /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E3246CE3D600596500 /* TaskService.swift */; };
 		17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E5246CE3E400596500 /* CategoryService.swift */; };
 		17E7E7E8246CE47900596500 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E7246CE47900596500 /* FirestoreService.swift */; };
+		17F9F53A24CCE70C004EC43B /* NewAddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F9F53924CCE70C004EC43B /* NewAddGoalView.swift */; };
 		5BF3CD28DF6450DA1901838B /* Pods_GTor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FCFD1B7B551547737EE0AB /* Pods_GTor.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +80,7 @@
 		176FE7852474E21100B7FE82 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		176FE78B2474EBAA00B7FE82 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		177A215624B107F90031A665 /* CategoryEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditorView.swift; sourceTree = "<group>"; };
+		177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorView.swift; sourceTree = "<group>"; };
 		1785804424A7DA05009343DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		178601CD24CC9CBC00FFEE0E /* NewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
 		179E77002476604000BB77F8 /* TODOList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOList.swift; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 		17E7E7E3246CE3D600596500 /* TaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskService.swift; sourceTree = "<group>"; };
 		17E7E7E5246CE3E400596500 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 		17E7E7E7246CE47900596500 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		17F9F53924CCE70C004EC43B /* NewAddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddGoalView.swift; sourceTree = "<group>"; };
 		D1FCFD1B7B551547737EE0AB /* Pods_GTor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GTor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -159,12 +163,14 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
-		178601CA24CC44BD00FFEE0E /* New Views */ = {
+		178601CA24CC44BD00FFEE0E /* Old Views */ = {
 			isa = PBXGroup;
 			children = (
-				178601CD24CC9CBC00FFEE0E /* NewGoalView.swift */,
+				17091767247244800011BB8C /* AddSubGoalView.swift */,
+				17A61A6024707F12008B8C31 /* AddGoalView.swift */,
+				1762732B24748759000E9661 /* SubGoalView.swift */,
 			);
-			path = "New Views";
+			path = "Old Views";
 			sourceTree = "<group>";
 		};
 		17CC64F824A6B85900B81438 /* Unused Views and files */ = {
@@ -196,7 +202,7 @@
 		17E7E7A5246C921400596500 /* GTor */ = {
 			isa = PBXGroup;
 			children = (
-				178601CA24CC44BD00FFEE0E /* New Views */,
+				178601CA24CC44BD00FFEE0E /* Old Views */,
 				17CC64F824A6B85900B81438 /* Unused Views and files */,
 				17E7E7A6246C921400596500 /* AppDelegate.swift */,
 				17E7E7A8246C921400596500 /* SceneDelegate.swift */,
@@ -295,11 +301,11 @@
 		17E7E7D8246CAB7900596500 /* Goals Views */ = {
 			isa = PBXGroup;
 			children = (
+				17F9F53924CCE70C004EC43B /* NewAddGoalView.swift */,
+				178601CD24CC9CBC00FFEE0E /* NewGoalView.swift */,
+				177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */,
 				1709175F247233120011BB8C /* SubGoalsList.swift */,
 				17E7E7D4246CAB5100596500 /* GoalsList.swift */,
-				1762732B24748759000E9661 /* SubGoalView.swift */,
-				17091767247244800011BB8C /* AddSubGoalView.swift */,
-				17A61A6024707F12008B8C31 /* AddGoalView.swift */,
 				177A215624B107F90031A665 /* CategoryEditorView.swift */,
 			);
 			path = "Goals Views";
@@ -483,6 +489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17F9F53A24CCE70C004EC43B /* NewAddGoalView.swift in Sources */,
 				1729898B246CFCF300449C4F /* FirestoreErrorHandler.swift in Sources */,
 				17E7E7E8246CE47900596500 /* FirestoreService.swift in Sources */,
 				178601CE24CC9CBC00FFEE0E /* NewGoalView.swift in Sources */,
@@ -499,6 +506,7 @@
 				174DAC832493DD5C008CE35D /* LinkedGoalsView.swift in Sources */,
 				17A26C06249C1DE9004776EA /* GoalCardView2.swift in Sources */,
 				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,
+				177F4FFB24CCDD69005CDD75 /* TextEditorView.swift in Sources */,
 				17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */,
 				17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */,
 				17A26C0A249C4C25004776EA /* QuickSatisfactionView.swift in Sources */,

@@ -91,9 +91,9 @@ class GoalService: ObservableObject {
             completion(.failure(GoalErrors.noCategory))
         } else if goal.title.isEmpty {
             completion(.failure(GoalErrors.noTitle))
-        } else if !goal.isDecomposed && goal.importance == Importance.none{
+        }/* else if !goal.isDecomposed && goal.importance == Importance.none{
             completion(.failure(GoalErrors.noImportance))
-        } else {
+        } */else {
             completion(.success(()))
         }
     }
