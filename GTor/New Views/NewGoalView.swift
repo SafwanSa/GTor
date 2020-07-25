@@ -36,6 +36,8 @@ struct NewGoalView: View {
                         NewSubGoalsCardView()
                     }
                 }
+                                
+                DeleteGoalCardView()
             }
             .padding()
         }
@@ -87,6 +89,7 @@ struct NewGoalHeaderView: View {
         .foregroundColor(Color("Primary"))
         .padding()
         .background(Color("Level 0"))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
         .elevation()
         .overlay(
             ProgressBarView(color1: Color("Level 3"), color2: Color.red, percentage: self.goal.satisfaction, fullWidth: 351, width: 343)
@@ -103,8 +106,29 @@ struct NewCardView: View {
         }
         .padding(22)
         .background(Color("Level 0"))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
         .elevation()
         .foregroundColor(Color("Primary"))
+    }
+}
+
+struct GTorButton: View {
+    var content: AnyView
+    var backgroundColor: Color
+    var foregroundColor: Color
+    var action: () -> ()
+    
+    var body: some View {
+        VStack {
+            Button(action: action) {
+                content
+            }
+        }
+        .padding()
+        .background(backgroundColor)
+        .clipShape(RoundedRectangle(cornerRadius: 5))
+        .elevation()
+        .foregroundColor(foregroundColor)
     }
 }
 
@@ -175,6 +199,25 @@ struct GoalCategoriesCardView: View {
                     }
                 }
             ))
+        }
+    }
+}
+
+struct DeleteGoalCardView: View {
+    @ObservedObject var goalService = GoalService.shared
+    @Environment(\.presentationMode) private var presentationMode
+    var mainGoal: Goal = .dummy
+    var goal: Goal = .dummy
+    
+    var body: some View {
+        VStack {
+            GTorButton(content: AnyView(
+                HStack(spacing: 8.0) {
+                    Image(systemName: "trash")
+                    Text("Delete Goal")
+                    Spacer()
+                }
+            ), backgroundColor: Color(.white), foregroundColor: Color("Primary"), action: {  })
         }
     }
 }
