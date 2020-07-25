@@ -166,8 +166,8 @@
 		178601CA24CC44BD00FFEE0E /* Old Views */ = {
 			isa = PBXGroup;
 			children = (
+				17A61A6024707F12008B8C31 /* AddGoalView.swift */,
 				1762732B24748759000E9661 /* SubGoalView.swift */,
-				17F9F53924CCE70C004EC43B /* NewAddGoalView.swift */,
 			);
 			path = "Old Views";
 			sourceTree = "<group>";
@@ -300,12 +300,12 @@
 		17E7E7D8246CAB7900596500 /* Goals Views */ = {
 			isa = PBXGroup;
 			children = (
+				17F9F53924CCE70C004EC43B /* NewAddGoalView.swift */,
 				178601CD24CC9CBC00FFEE0E /* NewGoalView.swift */,
 				177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */,
 				1709175F247233120011BB8C /* SubGoalsList.swift */,
 				17E7E7D4246CAB5100596500 /* GoalsList.swift */,
 				17091767247244800011BB8C /* AddSubGoalView.swift */,
-				17A61A6024707F12008B8C31 /* AddGoalView.swift */,
 				177A215624B107F90031A665 /* CategoryEditorView.swift */,
 			);
 			path = "Goals Views";
