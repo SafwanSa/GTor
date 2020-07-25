@@ -161,13 +161,12 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
-		178601CA24CC44BD00FFEE0E /* New Views */ = {
+		178601CA24CC44BD00FFEE0E /* Old Views */ = {
 			isa = PBXGroup;
 			children = (
-				178601CD24CC9CBC00FFEE0E /* NewGoalView.swift */,
-				177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */,
+				1762732B24748759000E9661 /* SubGoalView.swift */,
 			);
-			path = "New Views";
+			path = "Old Views";
 			sourceTree = "<group>";
 		};
 		17CC64F824A6B85900B81438 /* Unused Views and files */ = {
@@ -199,7 +198,7 @@
 		17E7E7A5246C921400596500 /* GTor */ = {
 			isa = PBXGroup;
 			children = (
-				178601CA24CC44BD00FFEE0E /* New Views */,
+				178601CA24CC44BD00FFEE0E /* Old Views */,
 				17CC64F824A6B85900B81438 /* Unused Views and files */,
 				17E7E7A6246C921400596500 /* AppDelegate.swift */,
 				17E7E7A8246C921400596500 /* SceneDelegate.swift */,
@@ -298,9 +297,10 @@
 		17E7E7D8246CAB7900596500 /* Goals Views */ = {
 			isa = PBXGroup;
 			children = (
+				178601CD24CC9CBC00FFEE0E /* NewGoalView.swift */,
+				177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */,
 				1709175F247233120011BB8C /* SubGoalsList.swift */,
 				17E7E7D4246CAB5100596500 /* GoalsList.swift */,
-				1762732B24748759000E9661 /* SubGoalView.swift */,
 				17091767247244800011BB8C /* AddSubGoalView.swift */,
 				17A61A6024707F12008B8C31 /* AddGoalView.swift */,
 				177A215624B107F90031A665 /* CategoryEditorView.swift */,
