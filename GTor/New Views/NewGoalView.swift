@@ -27,8 +27,12 @@ struct NewGoalView: View {
                 
                 DateCardView(goal: $goal)
                 
-                NavigationLink(destination: SubGoalsList(goal: $goal)) {
-                    NewSubGoalsCardView()
+                if goal.isSubGoal {
+                    NewTasksInfoView(goal: goal)
+                }else {
+                    NavigationLink(destination: SubGoalsList(goal: self.$goal)) {
+                        NewSubGoalsCardView()
+                    }
                 }
             }
             .padding()
@@ -103,7 +107,7 @@ struct NewCardView: View {
 
 struct DateCardView: View {
     @Binding var goal: Goal
-
+    
     var body: some View {
         VStack {
             NewCardView(content:
@@ -115,8 +119,8 @@ struct DateCardView: View {
                         
                         Button(action: {}) {
                             Text("Edit")
-                            .foregroundColor(Color("Button"))
-                            .font(.callout)
+                                .foregroundColor(Color("Button"))
+                                .font(.callout)
                         }
                     }
             ))
@@ -132,6 +136,22 @@ struct NewSubGoalsCardView: View {
                     Text("Sub Goals")
                     Spacer()
                     Image(systemName: "chevron.right")
+                }
+            ))
+        }
+    }
+}
+
+struct NewTasksInfoView: View {
+    @ObservedObject var goalService = GoalService.shared
+    var goal: Goal
+    var body: some View {
+        VStack {
+            NewCardView(content: AnyView(
+                HStack {
+                    Text("Linked Tasks")
+                    Spacer()
+                    Text("\(self.goalService.getTasks(goal: self.goal).filter { $0.isSatisfied }.count)/\(self.goalService.getTasks(goal: self.goal).count)")
                 }
             ))
         }
