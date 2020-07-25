@@ -13,6 +13,9 @@ struct TextEditorView: View {
     var title: String
     @Binding var text: String
     @State var textCopy = ""
+    var isShowingDone: Bool {
+        !text.isEmpty
+    }
     
     var body: some View {
         NavigationView {
@@ -28,10 +31,11 @@ struct TextEditorView: View {
             .navigationBarTitle("\(title)", displayMode: .inline)
             .navigationBarItems(trailing:
                 Button(action: { self.text = self.textCopy ; self.presentationMode.wrappedValue.dismiss() }) {
-                    Text("Save")
+                    Text("Done")
                         .font(.callout)
                         .foregroundColor(Color("Button"))
                 }
+                .opacity(isShowingDone ? 1 : 0)
             )
                 .onAppear {
                     self.textCopy = self.text

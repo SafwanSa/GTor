@@ -16,31 +16,43 @@ struct NewGoalView: View {
     @State var goalCopy = Goal.dummy
     @State var isLoading = false
     
+    var isShowingSave: Bool {
+        (goalCopy.title != goal.title || goalCopy.note != goal.note || goalCopy.dueDate != goal.dueDate)
+    }
+    
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 40.0) {
-                    NewGoalHeaderView(goal: $goal)
+                    NewGoalHeaderView(goal: $goalCopy)
                     
-                    if !goal.isSubGoal { GoalCategoriesCardView(goal: goal) }
+                    if !goal.isSubGoal { GoalCategoriesCardView(goal: goalCopy) }
                     
-                    DateCardView(goal: $goal)
+                    DateCardView(goal: $goalCopy)
                     
                     if goal.isSubGoal {
-                        NewTasksInfoView(goal: goal)
+                        NewTasksInfoView(goal: goalCopy)
                     }else {
-                        NavigationLink(destination: SubGoalsList(goal: self.$goal)) {
+                        NavigationLink(destination: SubGoalsList(goal: self.$goalCopy)) {
                             NewSubGoalsCardView()
                         }
                     }
                     
-                    DeleteGoalCardView(goal: $goal, mainGoal: $mainGoal, isLoading: $isLoading)
+                    DeleteGoalCardView(goal: $goalCopy, mainGoal: $mainGoal, isLoading: $isLoading)
                 }
                 .padding()
             }
             .navigationBarTitle("Goal", displayMode: .inline)
+            .navigationBarItems(trailing:
+                Button(action: {/*save*/}) {
+                    Text("Save")
+                }
+            )
             
             LoadingView(isLoading: $isLoading)
+        }
+        .onAppear {
+            self.goalCopy = self.goal
         }
     }
 }
