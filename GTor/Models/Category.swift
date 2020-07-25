@@ -35,7 +35,7 @@ enum GTColor: Int, CaseIterable {
         case .white:
             return UIColor.white
         case .none:
-            return UIColor.black
+            return UIColor.clear
         }
     }
 }

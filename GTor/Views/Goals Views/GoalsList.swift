@@ -53,8 +53,8 @@ struct GoalsView_Previews: PreviewProvider {
 
 struct NewGoalCardView: View {
     @ObservedObject var goalService = GoalService.shared
-    var mainGoal: Goal
-    var goal: Goal
+    var mainGoal: Goal = .dummy
+    var goal: Goal = .dummy
     
     var body: some View {
         ZStack {
@@ -67,6 +67,8 @@ struct NewGoalCardView: View {
                 
                 Text(goal.title)
                     .font(.system(size: 14))
+                
+                if goal.isSubGoal { Spacer() }
                 
                 HStack {
                     Text(goal.isSubGoal ? "Tasks: \(self.goalService.getTasks(goal: self.goal).filter {$0.isSatisfied}.count)/\(self.goalService.getTasks(goal: self.goal).count)" : "Sub-Goal: \(self.goalService.getSubGoals(mainGoal: goal).count)")
@@ -82,6 +84,7 @@ struct NewGoalCardView: View {
                 Image(systemName: "chevron.right")
             }
         }
+        .frame(height: 83)
         .padding(12)
         .background(Color("Level 0"))
         .clipShape(RoundedRectangle(cornerRadius: 10))

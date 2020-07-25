@@ -20,42 +20,27 @@ struct SubGoalsList: View {
             VStack(spacing: 20) {
                 ForEach(goalService.getSubGoals(mainGoal: goal)) { goal in
                     NavigationLink(destination: SubGoalView(mainGoal: self.$goal, goal: goal)) {
-                        GoalCardView2(goal: goal, mainGoal: self.goal)
-                        .padding(.horizontal)
+                        NewGoalCardView(mainGoal: self.goal, goal: goal)
+                        .padding()
                     }
                     .buttonStyle(PlainButtonStyle())
                 }
             }
-            .frame(width: screen.width)
-            .padding(.horizontal, 16)
-            .padding(.top, 150)
+            .padding(.vertical, 20)
         }
-        .background(Color("Level 0"))
-        .navigationBarTitle("Sub Goals")
+        .navigationBarTitle("Sub Goals", displayMode: .inline)
         .navigationBarItems(trailing:
-            HStack(spacing: 20) {
-                Button(action: {  }) {
-                    Image(systemName: "slider.horizontal.3")
-                        .resizable()
-                        .imageScale(.large)
-                        .foregroundColor(Color("Secondry"))
-                        .font(.headline)
-                }.opacity(0)//TODO
-                Button(action: { self.isAddGoalSelceted = true }) {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .imageScale(.large)
-                        .foregroundColor(Color("Secondry"))
-                        .font(.headline)
-                }
+            Button(action: { self.isAddGoalSelceted = true }) {
+                Image(systemName: "plus")
+                    .resizable()
+                    .imageScale(.large)
+                    .foregroundColor(Color("Button"))
+                    .font(.headline)
             }
             .sheet(isPresented: $isAddGoalSelceted) {
                 AddSubGoalView(goal: self.$goal)
             }
         )
-            .edgesIgnoringSafeArea(.all)
-        
-        
     }
 }
 
