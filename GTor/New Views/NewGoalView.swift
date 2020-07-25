@@ -34,7 +34,7 @@ struct NewGoalView: View {
                         }
                     }
                     
-                    DeleteGoalCardView(goal: $goal, isLoading: $isLoading)
+                    DeleteGoalCardView(goal: $goal, mainGoal: $mainGoal, isLoading: $isLoading)
                 }
                 .padding()
             }
@@ -208,6 +208,7 @@ struct DeleteGoalCardView: View {
     @ObservedObject var taskService = TaskService.shared
     @Environment(\.presentationMode) private var presentationMode
     @Binding var goal: Goal
+    @Binding var mainGoal: Goal
     @State var isShowingDeleteAlert = false
     @State var alertMessage = ""
     @State var isShowingAlert = false
@@ -244,6 +245,8 @@ struct DeleteGoalCardView: View {
                     for goal in self.goalService.getSubGoals(mainGoal: self.goal) {
                         self.goalService.deleteGoal(goal: goal) {_ in}
                     }
+                }else {
+                    CalcService.shared.calcProgress(for: self.mainGoal)
                 }
                 self.isLoading = false
                 self.presentationMode.wrappedValue.dismiss()
