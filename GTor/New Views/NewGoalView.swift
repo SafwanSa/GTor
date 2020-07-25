@@ -25,7 +25,7 @@ struct NewGoalView: View {
             VStack(spacing: 40.0) {
                 NewGoalHeaderView(goal: $goal)
                 
-                GoalCategoriesCardView(goal: goal)
+                if !goal.isSubGoal { GoalCategoriesCardView(goal: goal) }
                 
                 DateCardView(goal: $goal)
                 
@@ -39,6 +39,7 @@ struct NewGoalView: View {
             }
             .padding()
         }
+        .navigationBarTitle("Goal", displayMode: .inline)
     }
 }
 
