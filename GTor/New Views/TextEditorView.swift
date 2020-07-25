@@ -14,7 +14,7 @@ struct TextEditorView: View {
     @Binding var text: String
     @State var textCopy = ""
     var isShowingDone: Bool {
-        !text.isEmpty
+        !textCopy.isEmpty && textCopy != text
     }
     
     var body: some View {
@@ -22,7 +22,7 @@ struct TextEditorView: View {
             VStack {
                 NewCardView(content: AnyView(
                     HStack {
-                        TextField(textCopy, text: $textCopy)
+                        TextField(textCopy.isEmpty ? "Note (Optional)" : textCopy, text: $textCopy)
                     }
                 ))
                 Spacer()

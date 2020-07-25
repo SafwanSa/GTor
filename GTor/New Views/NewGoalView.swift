@@ -14,7 +14,10 @@ struct NewGoalView: View {
     @Binding var mainGoal: Goal
     @State var goal: Goal = .dummy
     @State var goalCopy = Goal.dummy
-    @State var isLoading = false
+    @State var isShowingDeleteAlert = false
+    @State var alertMessage = ""
+    @State var isShowingAlert = false
+    @State var isLoading: Bool = false
     
     var isShowingSave: Bool {
         (goalCopy.title != goal.title || goalCopy.note != goal.note || goalCopy.dueDate != goal.dueDate)
@@ -44,15 +47,33 @@ struct NewGoalView: View {
             }
             .navigationBarTitle("Goal", displayMode: .inline)
             .navigationBarItems(trailing:
-                Button(action: {/*save*/}) {
+                Button(action: saveGoal) {
                     Text("Save")
+                    .font(.callout)
+                    .foregroundColor(Color("Button"))
                 }
+                .opacity(isShowingSave ? 1 : 0)
             )
             
             LoadingView(isLoading: $isLoading)
         }
         .onAppear {
             self.goalCopy = self.goal
+        }
+    }
+    
+    func saveGoal() {
+        isLoading = true
+        self.goal = self.goalCopy
+        goalService.saveGoal(goal: self.goal) { (result) in
+            switch result {
+            case .failure(let error):
+                self.isLoading = false
+                self.isShowingAlert = true
+                self.alertMessage = error.localizedDescription
+            case .success(()):
+                self.isLoading = false
+            }
         }
     }
 }
