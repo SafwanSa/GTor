@@ -38,7 +38,7 @@ struct TabBar: View {
                     Image(systemName: "doc.text")
                 }
             }
-            .accentColor(Color("Level 4"))
+            .accentColor(Color("Primary"))
             
             LoadingView(isLoading: $isLoading)
         }

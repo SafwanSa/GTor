@@ -157,6 +157,13 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		178601CA24CC44BD00FFEE0E /* New Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Views";
+			sourceTree = "<group>";
+		};
 		17CC64F824A6B85900B81438 /* Unused Views and files */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +193,7 @@
 		17E7E7A5246C921400596500 /* GTor */ = {
 			isa = PBXGroup;
 			children = (
+				178601CA24CC44BD00FFEE0E /* New Views */,
 				17CC64F824A6B85900B81438 /* Unused Views and files */,
 				17E7E7A6246C921400596500 /* AppDelegate.swift */,
 				17E7E7A8246C921400596500 /* SceneDelegate.swift */,
