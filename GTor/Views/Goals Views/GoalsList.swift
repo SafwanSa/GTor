@@ -37,7 +37,7 @@ struct GoalsList: View {
                         .font(.headline)
                 }
                 .sheet(isPresented: self.$isAddGoalSelceted) {
-                    AddGoalView()
+                    NewAddGoalView()
                 }
             )
         }

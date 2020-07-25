@@ -56,6 +56,7 @@
 		17E7E7E4246CE3D600596500 /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E3246CE3D600596500 /* TaskService.swift */; };
 		17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E5246CE3E400596500 /* CategoryService.swift */; };
 		17E7E7E8246CE47900596500 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E7246CE47900596500 /* FirestoreService.swift */; };
+		17F9F53A24CCE70C004EC43B /* NewAddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F9F53924CCE70C004EC43B /* NewAddGoalView.swift */; };
 		5BF3CD28DF6450DA1901838B /* Pods_GTor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FCFD1B7B551547737EE0AB /* Pods_GTor.framework */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +113,7 @@
 		17E7E7E3246CE3D600596500 /* TaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskService.swift; sourceTree = "<group>"; };
 		17E7E7E5246CE3E400596500 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 		17E7E7E7246CE47900596500 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		17F9F53924CCE70C004EC43B /* NewAddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddGoalView.swift; sourceTree = "<group>"; };
 		D1FCFD1B7B551547737EE0AB /* Pods_GTor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GTor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				1762732B24748759000E9661 /* SubGoalView.swift */,
+				17F9F53924CCE70C004EC43B /* NewAddGoalView.swift */,
 			);
 			path = "Old Views";
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17F9F53A24CCE70C004EC43B /* NewAddGoalView.swift in Sources */,
 				1729898B246CFCF300449C4F /* FirestoreErrorHandler.swift in Sources */,
 				17E7E7E8246CE47900596500 /* FirestoreService.swift in Sources */,
 				178601CE24CC9CBC00FFEE0E /* NewGoalView.swift in Sources */,
