@@ -37,7 +37,7 @@ struct TaskCardView: View {
                 
                 Text(task.dueDate != nil ? "\(task.dueDate!, formatter: dateFormatter)" : "No deadline")
                     .font(.caption)
-                    .foregroundColor(Color("Level 3"))
+                    .foregroundColor(Color("Secondry"))
             }
             .frame(width: screen.width - 80, alignment: .leading)
             .frame(maxHeight: 85)

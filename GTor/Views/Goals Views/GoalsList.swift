@@ -40,7 +40,7 @@ struct GoalsList: View {
                         Image(systemName: "slider.horizontal.3")
                             .resizable()
                             .imageScale(.large)
-                            .foregroundColor(Color("Level 3"))
+                            .foregroundColor(Color("Secondry"))
                             .font(.headline)
                     }.opacity(0)//TODO
                     
@@ -48,7 +48,7 @@ struct GoalsList: View {
                         Image(systemName: "plus")
                             .resizable()
                             .imageScale(.large)
-                            .foregroundColor(Color("Level 3"))
+                            .foregroundColor(Color("Secondry"))
                             .font(.headline)
                     }
                 }

@@ -41,7 +41,7 @@ struct GoalCardView2: View {
                     }
                     Spacer()
                     Text("\(Date(), formatter: dateFormatter2)")
-                        .foregroundColor(Color("Level 3"))
+                        .foregroundColor(Color("Secondry"))
                 }
                 .font(.caption)
                 .padding(.horizontal)
