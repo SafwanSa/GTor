@@ -26,7 +26,6 @@
 		176FE78C2474EBAA00B7FE82 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 176FE78B2474EBAA00B7FE82 /* loading.json */; };
 		177A215724B107F90031A665 /* CategoryEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A215624B107F90031A665 /* CategoryEditorView.swift */; };
 		1785804624A7DC24009343DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1785804424A7DA05009343DB /* GoogleService-Info.plist */; };
-		178601CC24CC44CF00FFEE0E /* GoalsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178601CB24CC44CF00FFEE0E /* GoalsListView.swift */; };
 		179E77012476604000BB77F8 /* TODOList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179E77002476604000BB77F8 /* TODOList.swift */; };
 		17A26C04249C1145004776EA /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C03249C1145004776EA /* GoalView.swift */; };
 		17A26C06249C1DE9004776EA /* GoalCardView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C05249C1DE9004776EA /* GoalCardView2.swift */; };
@@ -79,7 +78,6 @@
 		176FE78B2474EBAA00B7FE82 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		177A215624B107F90031A665 /* CategoryEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditorView.swift; sourceTree = "<group>"; };
 		1785804424A7DA05009343DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		178601CB24CC44CF00FFEE0E /* GoalsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsListView.swift; sourceTree = "<group>"; };
 		179E77002476604000BB77F8 /* TODOList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOList.swift; sourceTree = "<group>"; };
 		17A26C03249C1145004776EA /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		17A26C05249C1DE9004776EA /* GoalCardView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCardView2.swift; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 		178601CA24CC44BD00FFEE0E /* New Views */ = {
 			isa = PBXGroup;
 			children = (
-				178601CB24CC44CF00FFEE0E /* GoalsListView.swift */,
 			);
 			path = "New Views";
 			sourceTree = "<group>";
@@ -496,7 +493,6 @@
 				171400AD2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift in Sources */,
 				1729898D246D0F2F00449C4F /* AuthService.swift in Sources */,
 				174DAC832493DD5C008CE35D /* LinkedGoalsView.swift in Sources */,
-				178601CC24CC44CF00FFEE0E /* GoalsListView.swift in Sources */,
 				17A26C06249C1DE9004776EA /* GoalCardView2.swift in Sources */,
 				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,
 				17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */,
