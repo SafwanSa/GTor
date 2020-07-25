@@ -18,7 +18,7 @@ struct GoalsList: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
                     ForEach(goalService.getMainGoals()) { goal in
-                        NavigationLink(destination: SubGoalView(mainGoal: .constant(goal), goal: goal)) {
+                        NavigationLink(destination: NewGoalView(mainGoal: .constant(goal), goal: goal)) {
                             NewGoalCardView(mainGoal: .dummy, goal: goal)
                                 .padding()
                         }
@@ -90,7 +90,7 @@ struct NewGoalCardView: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(color: Color("Primary").opacity(0.12), radius: 10, x: 0, y: 7)
         .overlay(
-            ProgressBarView(color1: Color("Level 3"), color2: Color.red, percentage: self.goal.satisfaction)
+            ProgressBarView(color1: Color("Level 3"), color2: Color.red, percentage: self.goal.satisfaction, fullWidth: 351, width: 343)
         )
     }
 }
@@ -99,7 +99,8 @@ struct ProgressBarView: View {
     var color1: Color
     var color2: Color
     var percentage: Double
-    
+    var fullWidth: Double
+    var width: Double
     var body: some View {
         ZStack {
             HStack {
@@ -108,11 +109,11 @@ struct ProgressBarView: View {
             }
             HStack {
                 color2
-                    .frame(width: CGFloat((percentage / 100) * 343))
+                    .frame(width: CGFloat((percentage / 100) * width))
                 Spacer()
             }
         }
-        .frame(width: 351, height: 8)
+        .frame(width: CGFloat(fullWidth), height: 8)
         .shadow(color: Color("Primary").opacity(0.12), radius: 10, x: 0, y: 7)
         .offset(x: 4, y: 50)
     }

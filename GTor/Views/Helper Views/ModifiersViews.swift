@@ -156,4 +156,8 @@ extension View {
     func heightKeyboardAware() -> some View {
         self.modifier(KeyboardAwareHeightModifier())
     }
+    
+    func elevation() -> some View {
+        self.modifier(Shadow())
+    }
 }
