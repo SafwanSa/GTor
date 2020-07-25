@@ -19,7 +19,7 @@ struct SubGoalsList: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
                 ForEach(goalService.getSubGoals(mainGoal: goal)) { goal in
-                    NavigationLink(destination: SubGoalView(mainGoal: self.$goal, goal: goal)) {
+                    NavigationLink(destination: NewGoalView(mainGoal: self.$goal, goal: goal)) {
                         NewGoalCardView(mainGoal: self.goal, goal: goal)
                         .padding()
                     }

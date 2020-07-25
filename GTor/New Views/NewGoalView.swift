@@ -25,6 +25,8 @@ struct NewGoalView: View {
             VStack(spacing: 40.0) {
                 NewGoalHeaderView(goal: $goal)
                 
+                GoalCategoriesCardView(goal: goal)
+                
                 DateCardView(goal: $goal)
                 
                 if goal.isSubGoal {
@@ -152,6 +154,24 @@ struct NewTasksInfoView: View {
                     Text("Linked Tasks")
                     Spacer()
                     Text("\(self.goalService.getTasks(goal: self.goal).filter { $0.isSatisfied }.count)/\(self.goalService.getTasks(goal: self.goal).count)")
+                }
+            ))
+        }
+    }
+}
+
+struct GoalCategoriesCardView: View {
+    var goal: Goal
+    
+    var body: some View {
+        VStack {
+            NewCardView(content: AnyView(
+                HStack {
+                    Text("Categories")
+                    Spacer()
+                    ForEach(goal.categories) { category in
+                        CategoryCardView(category: category)
+                    }
                 }
             ))
         }
