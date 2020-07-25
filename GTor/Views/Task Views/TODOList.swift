@@ -92,7 +92,7 @@ struct TODOList: View {
                                         Text(filter.rawValue)
                                         Spacer()
                                         Image(systemName: "checkmark")
-                                            .foregroundColor(Color("Level 4"))
+                                            .foregroundColor(Color("Primary"))
                                             .opacity(filter == self.currentFilter ? 1 : 0)
                                     }
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -112,7 +112,7 @@ struct TODOList: View {
                                         Text(sorter.rawValue)
                                         Spacer()
                                         Image(systemName: "checkmark")
-                                            .foregroundColor(Color("Level 4"))
+                                            .foregroundColor(Color("Primary"))
                                             .opacity(sorter == self.currentSorter ? 1 : 0)
                                     }
                                     .frame(maxWidth: .infinity, alignment: .leading)

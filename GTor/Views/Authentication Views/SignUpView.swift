@@ -48,7 +48,7 @@ struct SignUpView: View {
                         .font(.system(size: 25))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
-                        .background(Color("Level 4"))
+                        .background(Color("Primary"))
                         .foregroundColor(Color("Level 0"))
                         .clipShape(RoundedRectangle(cornerRadius: 5))
                         .shadow()

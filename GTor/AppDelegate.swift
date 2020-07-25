@@ -17,12 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        UITableView.appearance().backgroundColor = UIColor(named: "Level 1")
-        UITableViewCell.appearance().backgroundColor = UIColor(named: "Level 0")
-        
-        UINavigationBar.appearance().backgroundColor = UIColor(named: "Level 1")
-//        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: "Level 4")]
-//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: "Level 4")]
+//        UITableView.appearance().backgroundColor = UIColor(named: "Level 1")
+//        UITableViewCell.appearance().backgroundColor = UIColor(named: "Level 0")
+//
+//        UINavigationBar.appearance().backgroundColor = UIColor(named: "Level 1")
+//        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: "Primary")]
+//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: "Primary")]
         return true
     }
 

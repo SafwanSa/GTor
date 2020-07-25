@@ -26,7 +26,7 @@ struct LoginView: View {
                 
                     Text("GTor")
                         .font(.largeTitle)
-                        .foregroundColor(Color("Level 4"))
+                        .foregroundColor(Color("Primary"))
                     
                     VStack(spacing: 30.0) {
                         Button(action: { self.isShowingLogin = true ; self.isNewUser = true }) {
@@ -40,7 +40,7 @@ struct LoginView: View {
                         .buttonStyle(PlainButtonStyle())
 
                     }
-                    .foregroundColor(Color("Level 4"))
+                    .foregroundColor(Color("Primary"))
                 }
                 .padding(.top)
             }else {
