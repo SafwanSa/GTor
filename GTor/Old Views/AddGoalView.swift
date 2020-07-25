@@ -114,14 +114,3 @@ struct AddGoalView_Previews: PreviewProvider {
     }
 }
 
-var dateFormatter: DateFormatter {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .full
-    return formatter
-}
-
-var dateFormatter2: DateFormatter {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .long
-    return formatter
-}

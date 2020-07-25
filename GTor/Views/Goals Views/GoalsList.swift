@@ -37,7 +37,15 @@ struct GoalsList: View {
                         .font(.headline)
                 }
                 .sheet(isPresented: self.$isAddGoalSelceted) {
-                    NewAddGoalView()
+                    NewAddGoalView(goal: .init(uid: self.userService.user.uid,
+                                               title: "",
+                                               note: "",
+                                               isSubGoal: false,
+                                               importance: .none,
+                                               satisfaction: 0,
+                                               categories: [],
+                                               isDecomposed: true),
+                                   mainGoal: .constant(.dummy))
                 }
             )
         }

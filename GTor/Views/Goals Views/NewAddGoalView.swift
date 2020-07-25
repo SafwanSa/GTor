@@ -23,7 +23,6 @@ struct NewAddGoalView: View {
     @State var deadline = Date()
     
     @State var isHavingDeadline = false
-    @State var isDecomposed = true
     @State var isSelectCategoryExpanded = true
     
     @State var alertMessage = "None"
@@ -33,26 +32,29 @@ struct NewAddGoalView: View {
     var selectedCategories: [Category] {
         categoryService.categories.filter { self.selectedCategoriesIds.contains($0.id) }
     }
+    @Binding var mainGoal: Goal
     var body: some View {
         ZStack {
             NavigationView {
                 List(selection: $selectedCategoriesIds) {
-                    Section(header: Text(isSelectCategoryExpanded ? "Press to fold" : "Press to open")) {
-                        HStack {
-                            Image(systemName: "tag")
-                            Text(selectedCategoriesIds.isEmpty ? "Select Categories" : selectedCategories.map { $0.name }.joined(separator: ", "))
-                        }
-                        .onTapGesture {
-                            self.isSelectCategoryExpanded.toggle()
-                        }
-                        
-                        if isSelectCategoryExpanded {
-                            ForEach(self.categoryService.categories) { category in
-                                Text(category.name)
-                                    .font(.system(size: 12))
-                                    .padding(7)
-                                    .background(Color(GTColor.init(rawValue: category.colorId ?? 0)!.color).opacity(0.5))
-                                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    if !goal.isSubGoal {
+                        Section(header: Text(isSelectCategoryExpanded ? "Press to fold" : "Press to open")) {
+                            HStack {
+                                Image(systemName: "tag")
+                                Text(selectedCategoriesIds.isEmpty ? "Select Categories" : selectedCategories.map { $0.name }.joined(separator: ", "))
+                            }
+                            .onTapGesture {
+                                self.isSelectCategoryExpanded.toggle()
+                            }
+                            
+                            if isSelectCategoryExpanded {
+                                ForEach(self.categoryService.categories) { category in
+                                    Text(category.name)
+                                        .font(.system(size: 12))
+                                        .padding(7)
+                                        .background(Color(GTColor.init(rawValue: category.colorId ?? 0)!.color).opacity(0.5))
+                                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                                }
                             }
                         }
                     }
@@ -73,9 +75,11 @@ struct NewAddGoalView: View {
                         }
                     }
                     
-                    Section {
-                        Toggle(isOn: $isDecomposed) {
-                            Text("Sub Goals")
+                    if !goal.isSubGoal {
+                        Section {
+                            Toggle(isOn: $goal.isDecomposed) {
+                                Text("Sub Goals")
+                            }
                         }
                     }
                 }
@@ -85,13 +89,13 @@ struct NewAddGoalView: View {
                         Text("Cancel")
                     }
                     ,trailing:
-                    Button(action: createGoal) {
+                    Button(action: !goal.isSubGoal ? createGoal : addGoal) {
                         Text("Done")
                     }
                 )
                     .listStyle(GroupedListStyle())
                     .environment(\.horizontalSizeClass, .regular)
-                    .navigationBarTitle("Add Goal")
+                    .navigationBarTitle(goal.isSubGoal ? "Add Sub-Goal" : "Add Goal")
             }
             LoadingView(isLoading: $isLoading)
         }
@@ -104,9 +108,25 @@ struct NewAddGoalView: View {
         isLoading = true
         self.goal.id = UUID()
         self.goal.categories = selectedCategories
-        if isDecomposed { self.goal.importance = Importance.none }
         self.goal.dueDate = isHavingDeadline ? deadline : nil
-        self.goal.isDecomposed = self.isDecomposed
+        goalService.saveGoal(goal: goal) { (result) in
+            switch result {
+            case .failure(let error):
+                self.isLoading = false
+                self.isShowingAlert = true
+                self.alertMessage = error.localizedDescription
+            case .success(()):
+                self.isLoading = false
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
+    }
+    
+    func addGoal() {
+        isLoading = true
+        self.goal.id = UUID()
+        self.goal.dueDate = isHavingDeadline ? deadline : nil
+        self.goal.mid = self.mainGoal.id
         goalService.saveGoal(goal: goal) { (result) in
             switch result {
             case .failure(let error):
@@ -124,6 +144,18 @@ struct NewAddGoalView: View {
 
 struct NewAddGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        NewAddGoalView()
+        NewAddGoalView(mainGoal: .constant(.dummy))
     }
+}
+
+var dateFormatter: DateFormatter {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .full
+    return formatter
+}
+
+var dateFormatter2: DateFormatter {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .long
+    return formatter
 }
