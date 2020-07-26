@@ -33,7 +33,7 @@ struct TabBar: View {
                     Image(systemName: "doc.text")
                 }
                 
-                TODOList().tabItem {
+                NewTODOListView().tabItem {
                     Text("TODO")
                     Image(systemName: "doc.text")
                 }
