@@ -41,6 +41,7 @@
 		17A61A6124707F12008B8C31 /* AddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A61A6024707F12008B8C31 /* AddGoalView.swift */; };
 		17C60F542492633700A3DEFF /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C60F532492633700A3DEFF /* TaskView.swift */; };
 		17D44200247337C700DF91EC /* ModifiersViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D441FF247337C700DF91EC /* ModifiersViews.swift */; };
+		17DC11B724CD92CB0035EFD9 /* NewTODOListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DC11B624CD92CB0035EFD9 /* NewTODOListView.swift */; };
 		17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7A6246C921400596500 /* AppDelegate.swift */; };
 		17E7E7A9246C921400596500 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7A8246C921400596500 /* SceneDelegate.swift */; };
 		17E7E7AB246C921400596500 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7AA246C921400596500 /* LoginView.swift */; };
@@ -100,6 +101,7 @@
 		17A61A6024707F12008B8C31 /* AddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalView.swift; sourceTree = "<group>"; };
 		17C60F532492633700A3DEFF /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		17D441FF247337C700DF91EC /* ModifiersViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiersViews.swift; sourceTree = "<group>"; };
+		17DC11B624CD92CB0035EFD9 /* NewTODOListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTODOListView.swift; sourceTree = "<group>"; };
 		17E7E7A3246C921400596500 /* GTor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17E7E7A6246C921400596500 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17E7E7A8246C921400596500 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				17E7E7AE246C921800596500 /* Preview Content */,
 				1785804424A7DA05009343DB /* GoogleService-Info.plist */,
 				17E7E7B4246C921800596500 /* Info.plist */,
+				17DC11B624CD92CB0035EFD9 /* NewTODOListView.swift */,
 			);
 			path = GTor;
 			sourceTree = "<group>";
@@ -328,7 +331,6 @@
 				177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */,
 				1709175F247233120011BB8C /* SubGoalsList.swift */,
 				17E7E7D4246CAB5100596500 /* GoalsList.swift */,
-				177A215624B107F90031A665 /* CategoryEditorView.swift */,
 			);
 			path = "Goals Views";
 			sourceTree = "<group>";
@@ -347,6 +349,7 @@
 		17E7E7DA246CABD800596500 /* Settings Views */ = {
 			isa = PBXGroup;
 			children = (
+				177A215624B107F90031A665 /* CategoryEditorView.swift */,
 				17E7E7DC246CABFE00596500 /* SettingsView.swift */,
 			);
 			path = "Settings Views";
@@ -521,6 +524,7 @@
 				178601CE24CC9CBC00FFEE0E /* NewGoalView.swift in Sources */,
 				17C60F542492633700A3DEFF /* TaskView.swift in Sources */,
 				17E7E7E2246CE3C700596500 /* GoalService.swift in Sources */,
+				17DC11B724CD92CB0035EFD9 /* NewTODOListView.swift in Sources */,
 				171E6C3C246FA90B003EFF36 /* TabBar.swift in Sources */,
 				17091760247233120011BB8C /* SubGoalsList.swift in Sources */,
 				17A26C04249C1145004776EA /* GoalView.swift in Sources */,
