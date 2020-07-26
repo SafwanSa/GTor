@@ -79,7 +79,8 @@ struct NewGoalCardView: View {
                 if goal.isSubGoal { Spacer() }
                 
                 HStack {
-                    Text(goal.isSubGoal ? "Tasks: \(self.goalService.getTasks(goal: self.goal).filter {$0.isSatisfied}.count)/\(self.goalService.getTasks(goal: self.goal).count)" : "Sub-Goal: \(self.goalService.getSubGoals(mainGoal: goal).count)")
+                    Text(goal.isSubGoal ? "Tasks: \(self.goalService.getTasks(goal: self.goal).filter {$0.isSatisfied}.count)/\(self.goalService.getTasks(goal: self.goal).count)"
+                        : goal.isDecomposed ? "Sub-Goal: \(self.goalService.getSubGoals(mainGoal: goal).count)" : "Tasks: \(self.goalService.getTasks(goal: self.goal).filter {$0.isSatisfied}.count)/\(self.goalService.getTasks(goal: self.goal).count)")
                     Spacer()
                     if goal.dueDate != nil { Text("\(goal.dueDate!, formatter: dateFormatter2)") }
                 }

@@ -36,8 +36,12 @@ struct NewGoalView: View {
                     if goal.isSubGoal {
                         NewTasksInfoView(goal: goalCopy)
                     }else {
-                        NavigationLink(destination: SubGoalsList(goal: self.$goalCopy)) {
-                            NewSubGoalsCardView()
+                        if goal.isDecomposed {
+                            NavigationLink(destination: SubGoalsList(goal: self.$goalCopy)) {
+                                NewSubGoalsCardView()
+                            }
+                        }else {
+                            NewTasksInfoView(goal: goalCopy)
                         }
                     }
                     
