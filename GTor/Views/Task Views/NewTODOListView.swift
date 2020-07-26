@@ -170,15 +170,16 @@ struct RowListView: View {
             }
             .padding(.horizontal)
             VStack {
-                if isExpanded { ForEach(tasks) { task in
-                    NavigationLink(destination: TaskView(task: task)) {
-                        NewTaskCardView(task: task)
-                            .padding(.horizontal)
-                    }
+                if isExpanded {
+                    ForEach(tasks) { task in
+                        NavigationLink(destination: TaskView(task: task)) {
+                            NewTaskCardView(task: task)
+                                .padding(.horizontal)
+                        }
                     }
                 }
             }
-            .animation(.easeInOut)
+            .animation(Animation.easeInOut)
         }
     }
 }
