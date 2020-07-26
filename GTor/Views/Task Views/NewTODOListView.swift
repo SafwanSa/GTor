@@ -54,7 +54,7 @@ struct NewTODOListView: View {
 
 struct NewTODOListView_Previews: PreviewProvider {
     static var previews: some View {
-        NewTODOListView()
+        NewTaskCardView(task: .dummy)
     }
 }
 
@@ -187,25 +187,35 @@ struct NewTaskCardView: View {
     var task: Task
     
     var body: some View {
-        VStack(alignment: .trailing, spacing: 2.0) {
-            HStack {
-                Image(systemName: task.isSatisfied ? "circle.fill" : "circle")
-                    .frame(width: 28, height: 28)
+        HStack(spacing: 12.0) {
+            Image(systemName: task.isSatisfied ? "circle.fill" : "circle")
+                .resizable()
+                .frame(width: 24, height: 24)
+            
+            VStack(alignment: .leading, spacing: 2.0) {
                 Text(task.title)
                     .font(.system(size: 15))
+                    .offset(y: 13)
                 Spacer()
+                
+                HStack {
+                    Spacer()
+                    if task.dueDate != nil {
+                        Text("\(task.dueDate!, formatter: dateFormatter2)")
+                            .foregroundColor(Color("Secondry"))
+                            .font(.system(size: 10))
+                    }
+                }
             }
             .foregroundColor(Color("Primary"))
             
-            if task.dueDate != nil {
-                Text("\(task.dueDate!, formatter: dateFormatter2)")
-                    .foregroundColor(Color("Secondry"))
-                    .font(.system(size: 10))
-            }
+            Spacer()
+            
+
         }
-        .frame(height: 50)
+        .frame(height: 45)
         .padding(.vertical, 4)
-        .padding(.horizontal, 10)
+        .padding(.leading, 10)
         .background(Color("Level 0"))
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(color: Color("Primary").opacity(0.12), radius: 10, x: 0, y: 7)
