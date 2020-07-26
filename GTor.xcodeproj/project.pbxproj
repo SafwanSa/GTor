@@ -223,9 +223,6 @@
 		17E7E7A5246C921400596500 /* GTor */ = {
 			isa = PBXGroup;
 			children = (
-				1758A35524CD6E7D0065CFA8 /* Calendar Views */,
-				178601CA24CC44BD00FFEE0E /* Old Views */,
-				17CC64F824A6B85900B81438 /* Unused Views and files */,
 				17E7E7A6246C921400596500 /* AppDelegate.swift */,
 				17E7E7A8246C921400596500 /* SceneDelegate.swift */,
 				171E6C3B246FA90B003EFF36 /* TabBar.swift */,
@@ -301,6 +298,9 @@
 			children = (
 				17E7E7CF246CAB0600596500 /* LaunchView.swift */,
 				17E7E7D6246CAB5A00596500 /* HomeView.swift */,
+				17CC64F824A6B85900B81438 /* Unused Views and files */,
+				178601CA24CC44BD00FFEE0E /* Old Views */,
+				1758A35524CD6E7D0065CFA8 /* Calendar Views */,
 				171400AB2470EAE10001A625 /* Helper Views */,
 				17E7E7DB246CABE600596500 /* Profile Views */,
 				17E7E7DA246CABD800596500 /* Settings Views */,
