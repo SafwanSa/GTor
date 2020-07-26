@@ -25,6 +25,8 @@ struct NewAddGoalView: View {
     @State var isHavingDeadline = false
     @State var isSelectCategoryExpanded = true
     
+    @State var isCalendarPresented = false
+    
     @State var alertMessage = "None"
     @State var isLoading = false
     @State var isShowingAlert = false
@@ -69,10 +71,21 @@ struct NewAddGoalView: View {
                             Text("Deadline")
                         }
                         if isHavingDeadline {
-                            DatePicker(selection: $deadline, in: Date()..., displayedComponents: .date) {
-                                Text("\(deadline, formatter: dateFormatter)")
+                            Button(action: { self.isCalendarPresented = true }) {
+                            HStack {
+                                Text("Select a deadline")
+                                    .foregroundColor(Color("Button"))
+                                Spacer()
+                                Text("\(self.deadline, formatter: dateFormatter2)")
                             }
+                            .frame(maxWidth: .infinity)
+                            .contentShape(Rectangle())
+                            }
+                        .buttonStyle(PlainButtonStyle())
                         }
+                    }
+                    .sheet(isPresented: $isCalendarPresented) {
+                        GTorCalendarView(date: self.$deadline)
                     }
                     
                     if !goal.isSubGoal {

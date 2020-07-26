@@ -2,6 +2,24 @@
   "object": {
     "pins": [
       {
+        "package": "ElegantCalendar",
+        "repositoryURL": "https://github.com/ThasianX/ElegantCalendar.git",
+        "state": {
+          "branch": null,
+          "revision": "a14d1f2e6f9cf2a23d3f0f8c450c1f0990e43148",
+          "version": "4.1.0"
+        }
+      },
+      {
+        "package": "ElegantPages",
+        "repositoryURL": "https://github.com/ThasianX/ElegantPages",
+        "state": {
+          "branch": null,
+          "revision": "7eb457484e04375d7e6a3ca442a98cbe75ead7b0",
+          "version": "1.4.0"
+        }
+      },
+      {
         "package": "Lottie",
         "repositoryURL": "https://github.com/airbnb/lottie-ios.git",
         "state": {
