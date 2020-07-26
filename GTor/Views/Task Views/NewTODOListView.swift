@@ -33,13 +33,16 @@ struct NewTODOListView: View {
             .padding(.top, 20)
             .navigationBarTitle("My Tasks", displayMode: .inline)
             .navigationBarItems(trailing:
-            Button(action: { self.isAddTaskSelected = true }) {
-                Image(systemName: "plus")
-                    .foregroundColor(Color("Button"))
-            }
-            .sheet(isPresented: $isAddTaskSelected) {
-                AddTaskView()
-            }
+                Button(action: { self.isAddTaskSelected = true }) {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .imageScale(.large)
+                        .foregroundColor(Color("Button"))
+                        .font(.headline)
+                }
+                .sheet(isPresented: $isAddTaskSelected) {
+                    AddTaskView()
+                }
             )
         }
         
@@ -132,9 +135,7 @@ struct TODOView: View {
             
             ForEach(taskService.tasks.filter { !$0.isSatisfied }) { task in
                 NavigationLink(destination: TaskView(task: task)) {
-                    TaskCardView(task: task,
-                                 isSatisfiedPresnted: .constant(false),
-                                 selectedTask: .constant(.dummy))
+                    NewTaskCardView(task: task)
                         .padding(.horizontal)
                 }
             }
@@ -167,18 +168,46 @@ struct RowListView: View {
             .onTapGesture {
                 self.isExpanded.toggle()
             }
+            .padding(.horizontal)
             VStack {
                 if isExpanded { ForEach(tasks) { task in
                     NavigationLink(destination: TaskView(task: task)) {
-                        TaskCardView(task: task,
-                                     isSatisfiedPresnted: .constant(false),
-                                     selectedTask: .constant(.dummy))
+                        NewTaskCardView(task: task)
+                            .padding(.horizontal)
                     }
                     }
                 }
             }
             .animation(.easeInOut)
         }
-        .padding(.horizontal)
+    }
+}
+
+struct NewTaskCardView: View {
+    var task: Task
+    
+    var body: some View {
+        VStack(alignment: .trailing, spacing: 2.0) {
+            HStack {
+                Image(systemName: task.isSatisfied ? "circle.fill" : "circle")
+                    .frame(width: 28, height: 28)
+                Text(task.title)
+                    .font(.system(size: 15))
+                Spacer()
+            }
+            .foregroundColor(Color("Primary"))
+            
+            if task.dueDate != nil {
+                Text("\(task.dueDate!, formatter: dateFormatter2)")
+                    .foregroundColor(Color("Secondry"))
+                    .font(.system(size: 10))
+            }
+        }
+        .frame(height: 50)
+        .padding(.vertical, 4)
+        .padding(.horizontal, 10)
+        .background(Color("Level 0"))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .shadow(color: Color("Primary").opacity(0.12), radius: 10, x: 0, y: 7)
     }
 }
