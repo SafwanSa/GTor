@@ -188,6 +188,7 @@
 		178601CA24CC44BD00FFEE0E /* Old Views */ = {
 			isa = PBXGroup;
 			children = (
+				179E77002476604000BB77F8 /* TODOList.swift */,
 				17091767247244800011BB8C /* AddSubGoalView.swift */,
 				17A61A6024707F12008B8C31 /* AddGoalView.swift */,
 				1762732B24748759000E9661 /* SubGoalView.swift */,
@@ -237,7 +238,6 @@
 				17E7E7AE246C921800596500 /* Preview Content */,
 				1785804424A7DA05009343DB /* GoogleService-Info.plist */,
 				17E7E7B4246C921800596500 /* Info.plist */,
-				17DC11B624CD92CB0035EFD9 /* NewTODOListView.swift */,
 			);
 			path = GTor;
 			sourceTree = "<group>";
@@ -338,7 +338,7 @@
 		17E7E7D9246CAB8900596500 /* Task Views */ = {
 			isa = PBXGroup;
 			children = (
-				179E77002476604000BB77F8 /* TODOList.swift */,
+				17DC11B624CD92CB0035EFD9 /* NewTODOListView.swift */,
 				17C60F532492633700A3DEFF /* TaskView.swift */,
 				174DAC802493D92F008CE35D /* AddTaskView.swift */,
 				174DAC822493DD5C008CE35D /* LinkedGoalsView.swift */,
