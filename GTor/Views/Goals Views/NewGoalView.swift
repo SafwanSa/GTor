@@ -31,7 +31,7 @@ struct NewGoalView: View {
                     
                     if !goal.isSubGoal { GoalCategoriesCardView(goal: goalCopy) }
                     
-                    DateCardView(goal: $goalCopy)
+                    DateCardView(date: $goal.dueDate)
                     
                     if goal.isSubGoal {
                         NewTasksInfoView(goal: goalCopy)
@@ -113,7 +113,6 @@ struct NewGoalHeaderView: View {
             
             Color("Secondry")
                 .frame(height: 1)
-                .padding(.horizontal)
             
             HStack {
                 Text(goal.note.isEmpty ? "Empty Note" : goal.note)
@@ -132,7 +131,8 @@ struct NewGoalHeaderView: View {
             }
         }
         .foregroundColor(Color("Primary"))
-        .padding()
+        .padding(.vertical)
+        .padding(.horizontal, 22)
         .background(Color("Level 0"))
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .elevation()
@@ -178,14 +178,14 @@ struct GTorButton: View {
 }
 
 struct DateCardView: View {
-    @Binding var goal: Goal
+    @Binding var date: Date?
     
     var body: some View {
         VStack {
             NewCardView(content:
                 AnyView (
                     HStack {
-                        Text(goal.dueDate != nil ? "\(goal.dueDate!, formatter: dateFormatter2)" : "No deadline")
+                        Text(date != nil ? "\(date!, formatter: dateFormatter2)" : "No deadline")
                         
                         Spacer()
                         

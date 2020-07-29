@@ -14,7 +14,12 @@ struct TextEditorView: View {
     @Binding var text: String
     @State var textCopy = ""
     var isShowingDone: Bool {
-        !textCopy.isEmpty && textCopy != text
+        if title == "Edit Satisfaction" {
+            if Double(textCopy) == nil {
+                return false
+            }
+        }
+        return !textCopy.isEmpty && textCopy != text
     }
     
     var body: some View {
@@ -22,7 +27,17 @@ struct TextEditorView: View {
             VStack {
                 NewCardView(content: AnyView(
                     HStack {
-                        TextField(textCopy.isEmpty ? "Note (Optional)" : textCopy, text: $textCopy)
+                        TextField(text.isEmpty ? "Note (Optional)" : textCopy, text: $textCopy)
+                            .keyboardType(title == "Edit Satisfaction" ? .asciiCapableNumberPad : .default)
+                        
+                        Button(action: { self.textCopy = "" }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15, height: 15)
+                                .foregroundColor(Color("Primary"))
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 ))
                 Spacer()

@@ -15,46 +15,49 @@ enum DateClipType {
 struct NewTODOListView: View {
     @ObservedObject var taskService = TaskService.shared
     @State var isAddTaskSelected = false
-    @State var selectedDate = Date()
+    @State var selectedTask = Task.dummy
     
     var body: some View {
         NavigationView {
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 12.0) {
-                    TODOView()
-                    
-                    RowListView(title: "completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 })
-                    
-                    RowListView(title: "partially completed", tasks: taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) })
-                    
-                    RowListView(title: "ignored", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 })
+            ZStack {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 12.0) {
+                        TODOView(selectedTask: $selectedTask)
+                        
+                        RowListView(title: "completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }, selectedTask: $selectedTask)
+                        
+                        RowListView(title: "partially completed", tasks: taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) }, selectedTask: $selectedTask)
+                        
+                        RowListView(title: "not completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }, selectedTask: $selectedTask)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                .padding(.top, 20)
+                .navigationBarTitle("My Tasks", displayMode: .inline)
+                .navigationBarItems(trailing:
+                    Button(action: { self.isAddTaskSelected = true }) {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .imageScale(.large)
+                            .foregroundColor(Color("Button"))
+                            .font(.headline)
+                    }
+                    .sheet(isPresented: $isAddTaskSelected) {
+                        AddTaskView()
+                    }
+                )
+                .blur(radius: selectedTask == Task.dummy ? 0 : 2)
+                .disabled(selectedTask != Task.dummy)
+                
+                QuickSatisfactionView(selectedTask: $selectedTask)
             }
-            .padding(.top, 20)
-            .navigationBarTitle("My Tasks", displayMode: .inline)
-            .navigationBarItems(trailing:
-                Button(action: { self.isAddTaskSelected = true }) {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .imageScale(.large)
-                        .foregroundColor(Color("Button"))
-                        .font(.headline)
-                }
-                .sheet(isPresented: $isAddTaskSelected) {
-                    AddTaskView()
-                }
-            )
         }
-        
     }
-    
-    
-    
 }
 
 struct NewTODOListView_Previews: PreviewProvider {
     static var previews: some View {
-        NewTaskCardView(task: .dummy)
+        NewTODOListView()
     }
 }
 
@@ -124,7 +127,7 @@ struct DaysCardView: View {
 
 struct TODOView: View {
     @ObservedObject var taskService = TaskService.shared
-    @State var isAddTaskSelected = false
+    @Binding var selectedTask: Task
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -134,8 +137,9 @@ struct TODOView: View {
                 .padding(.horizontal)
             
             ForEach(taskService.tasks.filter { !$0.isSatisfied }) { task in
-                NavigationLink(destination: TaskView(task: task)) {
-                    NewTaskCardView(task: task)
+                NavigationLink(destination: NewTaskView(task: task)) {
+                    NewTaskCardView(task: task,
+                                    selectedTask: self.$selectedTask)
                         .padding(.horizontal)
                 }
             }
@@ -146,7 +150,8 @@ struct TODOView: View {
 struct RowListView: View {
     var title: String
     var tasks: [Task]
-    @State var isExpanded = false
+    @State var isExpanded = true
+    @Binding var selectedTask: Task
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -172,8 +177,9 @@ struct RowListView: View {
             VStack {
                 if isExpanded {
                     ForEach(tasks) { task in
-                        NavigationLink(destination: TaskView(task: task)) {
-                            NewTaskCardView(task: task)
+                        NavigationLink(destination: NewTaskView(task: task)) {
+                            NewTaskCardView(task: task,
+                                            selectedTask: self.$selectedTask)
                                 .padding(.horizontal)
                         }
                     }
@@ -186,17 +192,24 @@ struct RowListView: View {
 
 struct NewTaskCardView: View {
     var task: Task
+    @Binding var selectedTask: Task
     
     var body: some View {
         HStack(spacing: 12.0) {
-            Image(systemName: task.isSatisfied ? "circle.fill" : "circle")
-                .resizable()
-                .frame(width: 24, height: 24)
+            Button(action: {
+                self.selectedTask = self.task
+            }) {
+                Image(systemName: task.isSatisfied ? "circle.fill" : "circle")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            }
             
             VStack(alignment: .leading, spacing: 2.0) {
                 Text(task.title)
+                    .strikethrough(task.isSatisfied, color: Color("Primary"))
                     .font(.system(size: 15))
                     .offset(y: 13)
+                
                 Spacer()
                 
                 HStack {

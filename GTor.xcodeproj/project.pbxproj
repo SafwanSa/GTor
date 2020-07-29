@@ -29,6 +29,7 @@
 		176FE7842474E1A800B7FE82 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7832474E1A800B7FE82 /* LottieView.swift */; };
 		176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7852474E21100B7FE82 /* LoadingView.swift */; };
 		176FE78C2474EBAA00B7FE82 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 176FE78B2474EBAA00B7FE82 /* loading.json */; };
+		1776E25B24D170E1009FDF0D /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1776E25A24D170E1009FDF0D /* NewTaskView.swift */; };
 		177A215724B107F90031A665 /* CategoryEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A215624B107F90031A665 /* CategoryEditorView.swift */; };
 		177F4FFB24CCDD69005CDD75 /* TextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */; };
 		1785804624A7DC24009343DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1785804424A7DA05009343DB /* GoogleService-Info.plist */; };
@@ -89,6 +90,7 @@
 		176FE7832474E1A800B7FE82 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		176FE7852474E21100B7FE82 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		176FE78B2474EBAA00B7FE82 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		1776E25A24D170E1009FDF0D /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		177A215624B107F90031A665 /* CategoryEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditorView.swift; sourceTree = "<group>"; };
 		177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorView.swift; sourceTree = "<group>"; };
 		1785804424A7DA05009343DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				17C60F532492633700A3DEFF /* TaskView.swift */,
 				174DAC802493D92F008CE35D /* AddTaskView.swift */,
 				174DAC822493DD5C008CE35D /* LinkedGoalsView.swift */,
+				1776E25A24D170E1009FDF0D /* NewTaskView.swift */,
 			);
 			path = "Task Views";
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				17E7E7DD246CABFE00596500 /* SettingsView.swift in Sources */,
 				17E7E7D0246CAB0600596500 /* LaunchView.swift in Sources */,
 				17265AAE249EEE2A00E384ED /* CalcService.swift in Sources */,
+				1776E25B24D170E1009FDF0D /* NewTaskView.swift in Sources */,
 				17E7E7C6246CA6F400596500 /* Goal.swift in Sources */,
 				17A26C08249C3A16004776EA /* TaskCardView.swift in Sources */,
 				174DAC812493D92F008CE35D /* AddTaskView.swift in Sources */,
