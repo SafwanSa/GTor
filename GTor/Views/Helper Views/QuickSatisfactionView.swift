@@ -18,8 +18,8 @@ struct DoneAction: Identifiable, Hashable {
 
 let actions: [DoneAction] = [
     .init(title: "Completly Done", satisfaction: 100),
-    .init(title: "Ignored", satisfaction: 0),
-    .init(title: "Partially Done", satisfaction: 50)//TODO
+    .init(title: "Partially Done", satisfaction: 50),//TODO
+    .init(title: "Not Done", satisfaction: 0)
 ]
 
 struct QuickSatisfactionView: View {
@@ -41,13 +41,14 @@ struct QuickSatisfactionView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 25, height: 25)
-                            .foregroundColor(Color("Level 0"))
+                            .foregroundColor(Color("Primary"))
                     }
                     .buttonStyle(PlainButtonStyle())
+                    .offset(x: -8)
                     Spacer()
                 }
-                
-                VStack(spacing: 20.0) {
+                Spacer()
+                VStack(spacing: 10.0) {
                     if self.isHidingTextField {
                         ForEach(actions, id: \.self) { action in
                             VStack {
@@ -73,11 +74,12 @@ struct QuickSatisfactionView: View {
                                         }
                                 }) {
                                     Text(action.title)
+                                        .font(.system(size: 13))
                                         .frame(maxWidth: .infinity)
                                         .frame(height: 20)
-                                        .padding(8)
+                                        .padding(7)
                                         .foregroundColor(Color.black)
-                                        .background(Color("Level 0"))
+                                        .background(Color("Button"))
                                         .clipShape(RoundedRectangle(cornerRadius: 5))
                                 }
                             }
@@ -86,12 +88,16 @@ struct QuickSatisfactionView: View {
                     }else {
                         VStack {
                             TextField("50%", text: $updatedSatisfaction)
+                                .font(.system(size: 13))
                                 .frame(maxWidth: .infinity)
-                                .frame(height: 30)
-                                .keyboardType(.asciiCapableNumberPad)
-                                .background(Color(UIColor.systemBackground))
-                                .multilineTextAlignment(.center)
+                                .frame(height: 20)
+                                .padding(7)
+                                .foregroundColor(Color.black)
+                                .background(Color("Level 0"))
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
+                                .elevation()
+                            
+                            Spacer()
                             Button(action: {
                                 self.isLoading = true
                                 if self.updatedSatisfaction.isEmpty {
@@ -118,13 +124,16 @@ struct QuickSatisfactionView: View {
                                 }
                             }) {
                                 Text("Done")
+                                .font(.system(size: 13))
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 20)
-                                .padding(8)
-                                .background(Color.white)
+                                .padding(7)
+                                .foregroundColor(Color.black)
+                                .background(Color("Button"))
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                             }
                             .buttonStyle(PlainButtonStyle())
+                            Spacer()
                         }
                         .animation(.spring())
                     }
@@ -133,10 +142,11 @@ struct QuickSatisfactionView: View {
                 
                 
             }
-            .frame(width: 200, height: 200)
+            .frame(width: 200, height: 170)
             .padding()
-            .background(Color("Level 2"))
+            .background(Color("Level 0"))
             .clipShape(RoundedRectangle(cornerRadius: 10))
+            .elevation()
             .animation(.easeInOut)
             .offset(y: self.selectedTask != Task.dummy ? 0 : screen.height)
             
@@ -151,6 +161,6 @@ struct QuickSatisfactionView: View {
 
 struct QuickSatisfactionView_Previews: PreviewProvider {
     static var previews: some View {
-        QuickSatisfactionView(selectedTask: .constant(.dummy))
+        QuickSatisfactionView(selectedTask: .constant(.init(uid: "", title: "Ti", note: "", satisfaction: 0, isSatisfied: false, linkedGoalsIds: [], importance: .none)))
     }
 }

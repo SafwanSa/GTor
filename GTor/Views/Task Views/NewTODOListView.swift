@@ -19,32 +19,38 @@ struct NewTODOListView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 12.0) {
-                    TODOView(selectedTask: $selectedTask)
-                    
-                    RowListView(title: "completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }, selectedTask: $selectedTask)
-                    
-                    RowListView(title: "partially completed", tasks: taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) }, selectedTask: $selectedTask)
-                    
-                    RowListView(title: "not completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }, selectedTask: $selectedTask)
+            ZStack {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 12.0) {
+                        TODOView(selectedTask: $selectedTask)
+                        
+                        RowListView(title: "completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }, selectedTask: $selectedTask)
+                        
+                        RowListView(title: "partially completed", tasks: taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) }, selectedTask: $selectedTask)
+                        
+                        RowListView(title: "not completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }, selectedTask: $selectedTask)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 20)
+                .navigationBarTitle("My Tasks", displayMode: .inline)
+                .navigationBarItems(trailing:
+                    Button(action: { self.isAddTaskSelected = true }) {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .imageScale(.large)
+                            .foregroundColor(Color("Button"))
+                            .font(.headline)
+                    }
+                    .sheet(isPresented: $isAddTaskSelected) {
+                        AddTaskView()
+                    }
+                )
+                .blur(radius: selectedTask == Task.dummy ? 0 : 2)
+                .disabled(selectedTask != Task.dummy)
+                
+                QuickSatisfactionView(selectedTask: $selectedTask)
             }
-            .padding(.top, 20)
-            .navigationBarTitle("My Tasks", displayMode: .inline)
-            .navigationBarItems(trailing:
-                Button(action: { self.isAddTaskSelected = true }) {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .imageScale(.large)
-                        .foregroundColor(Color("Button"))
-                        .font(.headline)
-                }
-                .sheet(isPresented: $isAddTaskSelected) {
-                    AddTaskView()
-                }
-            )
         }
     }
 }
@@ -144,7 +150,7 @@ struct TODOView: View {
 struct RowListView: View {
     var title: String
     var tasks: [Task]
-    @State var isExpanded = false
+    @State var isExpanded = true
     @Binding var selectedTask: Task
     
     var body: some View {
@@ -200,8 +206,10 @@ struct NewTaskCardView: View {
             
             VStack(alignment: .leading, spacing: 2.0) {
                 Text(task.title)
+                    .strikethrough(task.isSatisfied, color: Color("Primary"))
                     .font(.system(size: 15))
                     .offset(y: 13)
+                
                 Spacer()
                 
                 HStack {
