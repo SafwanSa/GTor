@@ -28,11 +28,11 @@ struct NewTaskView: View {
                 VStack(spacing: 40.0) {
                     NewTaskHeaderView(task: $taskCopy)
                     
+                    NewImportanceCardView(task: $taskCopy)
+                    
                     NewSatisfactionCardView(task: $taskCopy)
                     
                     DateCardView(date: $task.dueDate)
-                    
-                    
                     
                     DeleteTaskCardView(task: $task, isLoading: $isLoading)
                 }
@@ -185,6 +185,31 @@ struct NewSatisfactionCardView: View {
                 }
                 .sheet(isPresented: $isShowingTextEditor) {
                     TextEditorView(title: "Edit Title", text: self.$task.title)
+                }
+            }
+        ))
+    }
+}
+
+struct NewImportanceCardView: View {
+    @Binding var task: Task
+    @State var isShowingEdit = false
+    
+    var body: some View {
+        NewCardView(content: AnyView(
+            HStack {
+                Text("Importance")
+                Spacer()
+                Text(task.importance.rawValue)
+                    .font(.system(size: 12))
+                    .padding(6)
+                    .background(Color("Secondry").opacity(0.5))
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .elevation()
+                Button(action: { self.isShowingEdit = true }) {
+                    Text("Edit")
+                        .foregroundColor(Color("Button"))
+                        .font(.callout)
                 }
             }
         ))
