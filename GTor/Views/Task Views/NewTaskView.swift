@@ -13,13 +13,14 @@ struct NewTaskView: View {
     @Environment(\.presentationMode) private var presentationMode
     @State var task: Task = .dummy
     @State var taskCopy = Task.dummy
+    @State var updatedSatisfaction = ""
     @State var isShowingDeleteAlert = false
     @State var alertMessage = ""
     @State var isShowingAlert = false
     @State var isLoading: Bool = false
     
     var isShowingSave: Bool {
-        (taskCopy.title != task.title || taskCopy.note != task.note || taskCopy.dueDate != task.dueDate)
+        (taskCopy.title != task.title || taskCopy.note != task.note || taskCopy.dueDate != task.dueDate || taskCopy.satisfaction != task.satisfaction || taskCopy.importance != task.importance)
     }
     
     var body: some View {
@@ -30,7 +31,7 @@ struct NewTaskView: View {
                     
                     NewImportanceCardView(task: $taskCopy)
                     
-                    NewSatisfactionCardView(task: $taskCopy)
+                    NewSatisfactionCardView(updatedSatisfaction: $updatedSatisfaction)
                     
                     DateCardView(date: $task.dueDate)
                     
@@ -52,11 +53,19 @@ struct NewTaskView: View {
         }
         .onAppear {
             self.taskCopy = self.task
+            self.updatedSatisfaction = String(self.task.satisfaction)
         }
     }
     
     func saveGoal() {
         isLoading = true
+        if Double(updatedSatisfaction) == nil {
+            self.isLoading = false
+            self.isShowingAlert = true
+            self.alertMessage = "Invalid satisfaction."
+            return
+        }
+        task.satisfaction = Double(updatedSatisfaction)!
         self.task = self.taskCopy
         taskService.saveTask(task: self.task) { (result) in
             switch result {
@@ -170,21 +179,22 @@ struct DeleteTaskCardView: View {
 }
 
 struct NewSatisfactionCardView: View {
-    @Binding var task: Task
     @State var isShowingTextEditor: Bool = false
+    @Binding var updatedSatisfaction: String
+    
     var body: some View {
         NewCardView(content: AnyView(
             HStack {
                 Text("Complete")
                 Spacer()
-                Text("\(String(format: "%.2f" ,task.satisfaction))%")
+                Text(updatedSatisfaction)
                 Button(action: { self.isShowingTextEditor = true }) {
                     Text("Edit")
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                 }
                 .sheet(isPresented: $isShowingTextEditor) {
-                    TextEditorView(title: "Edit Title", text: self.$task.title)
+                    TextEditorView(title: "Edit Satisfaction", text: self.$updatedSatisfaction)
                 }
             }
         ))
