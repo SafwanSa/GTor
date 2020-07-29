@@ -26,7 +26,7 @@ extension TaskErrors: LocalizedError {//TODO
 
 
 class TaskService: ObservableObject {
-    @Published var tasks: [Task] = [] {
+    @Published var tasks: [Task] = [.init(uid: "", title: "Test", note: "Teest", satisfaction: 0, isSatisfied: false, linkedGoalsIds: [], importance: .none)] {
         didSet {
             for task in tasks {
                 CalcService.shared.calcProgress(from: task)

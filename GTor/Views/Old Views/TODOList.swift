@@ -77,7 +77,7 @@ struct TODOList: View {
                     self.isSatisfiedPresented = false
                 }
                 
-                QuickSatisfactionView(isSatisfiedPresnted: $isSatisfiedPresented, selectedTask: $selectedTask)
+                QuickSatisfactionView(selectedTask: $selectedTask)
                 
                 
                 VStack {

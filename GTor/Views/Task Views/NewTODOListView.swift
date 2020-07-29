@@ -15,20 +15,21 @@ enum DateClipType {
 struct NewTODOListView: View {
     @ObservedObject var taskService = TaskService.shared
     @State var isAddTaskSelected = false
-    @State var selectedDate = Date()
+    @State var selectedTask = Task.dummy
     
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 12.0) {
-                    TODOView()
+                    TODOView(selectedTask: $selectedTask)
                     
-                    RowListView(title: "completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 })
+                    RowListView(title: "completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }, selectedTask: $selectedTask)
                     
-                    RowListView(title: "partially completed", tasks: taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) })
+                    RowListView(title: "partially completed", tasks: taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) }, selectedTask: $selectedTask)
                     
-                    RowListView(title: "ignored", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 })
+                    RowListView(title: "not completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }, selectedTask: $selectedTask)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.top, 20)
             .navigationBarTitle("My Tasks", displayMode: .inline)
@@ -45,16 +46,12 @@ struct NewTODOListView: View {
                 }
             )
         }
-        
     }
-    
-    
-    
 }
 
 struct NewTODOListView_Previews: PreviewProvider {
     static var previews: some View {
-        NewTaskCardView(task: .dummy)
+        NewTODOListView()
     }
 }
 
@@ -124,7 +121,7 @@ struct DaysCardView: View {
 
 struct TODOView: View {
     @ObservedObject var taskService = TaskService.shared
-    @State var isAddTaskSelected = false
+    @Binding var selectedTask: Task
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -135,7 +132,8 @@ struct TODOView: View {
             
             ForEach(taskService.tasks.filter { !$0.isSatisfied }) { task in
                 NavigationLink(destination: TaskView(task: task)) {
-                    NewTaskCardView(task: task)
+                    NewTaskCardView(task: task,
+                                    selectedTask: self.$selectedTask)
                         .padding(.horizontal)
                 }
             }
@@ -147,6 +145,7 @@ struct RowListView: View {
     var title: String
     var tasks: [Task]
     @State var isExpanded = false
+    @Binding var selectedTask: Task
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -173,7 +172,8 @@ struct RowListView: View {
                 if isExpanded {
                     ForEach(tasks) { task in
                         NavigationLink(destination: TaskView(task: task)) {
-                            NewTaskCardView(task: task)
+                            NewTaskCardView(task: task,
+                                            selectedTask: self.$selectedTask)
                                 .padding(.horizontal)
                         }
                     }
@@ -186,12 +186,17 @@ struct RowListView: View {
 
 struct NewTaskCardView: View {
     var task: Task
+    @Binding var selectedTask: Task
     
     var body: some View {
         HStack(spacing: 12.0) {
-            Image(systemName: task.isSatisfied ? "circle.fill" : "circle")
-                .resizable()
-                .frame(width: 24, height: 24)
+            Button(action: {
+                self.selectedTask = self.task
+            }) {
+                Image(systemName: task.isSatisfied ? "circle.fill" : "circle")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            }
             
             VStack(alignment: .leading, spacing: 2.0) {
                 Text(task.title)

@@ -24,7 +24,6 @@ let actions: [DoneAction] = [
 
 struct QuickSatisfactionView: View {
     @ObservedObject var taskService = TaskService.shared
-    @Binding var isSatisfiedPresnted: Bool
     @Binding var selectedTask: Task
     @State var updatedSatisfaction = ""
     @State var isHidingTextField = true
@@ -37,7 +36,7 @@ struct QuickSatisfactionView: View {
         ZStack {
             VStack {
                 HStack {
-                    Button(action: { self.isSatisfiedPresnted = false ; self.isHidingTextField = true }) {
+                    Button(action: { self.selectedTask = Task.dummy; self.isHidingTextField = true }) {
                         Image(systemName: "xmark.circle.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -66,7 +65,7 @@ struct QuickSatisfactionView: View {
                                                     self.alertMessage = error.localizedDescription
                                                 case .success(()):
                                                     self.isLoading = false
-                                                    self.isSatisfiedPresnted = false
+                                                    self.selectedTask = Task.dummy
                                                 }
                                             }
                                         }else {
@@ -112,7 +111,7 @@ struct QuickSatisfactionView: View {
                                         self.alertMessage = error.localizedDescription
                                     case .success(()):
                                         self.isLoading = false
-                                        self.isSatisfiedPresnted = false
+                                        self.selectedTask = Task.dummy
                                         self.isHidingTextField = true
                                         self.updatedSatisfaction = ""
                                     }
@@ -139,7 +138,7 @@ struct QuickSatisfactionView: View {
             .background(Color("Level 2"))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .animation(.easeInOut)
-            .offset(y: isSatisfiedPresnted ? 0 : screen.height)
+            .offset(y: self.selectedTask != Task.dummy ? 0 : screen.height)
             
             LoadingView(isLoading: $isLoading)
         }
@@ -152,6 +151,6 @@ struct QuickSatisfactionView: View {
 
 struct QuickSatisfactionView_Previews: PreviewProvider {
     static var previews: some View {
-        QuickSatisfactionView(isSatisfiedPresnted: .constant(true), selectedTask: .constant(.dummy))
+        QuickSatisfactionView(selectedTask: .constant(.dummy))
     }
 }
