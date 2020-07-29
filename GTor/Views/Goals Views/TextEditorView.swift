@@ -27,7 +27,7 @@ struct TextEditorView: View {
             VStack {
                 NewCardView(content: AnyView(
                     HStack {
-                        TextField(textCopy.isEmpty ? "Note (Optional)" : textCopy, text: $textCopy)
+                        TextField(text.isEmpty ? "Note (Optional)" : textCopy, text: $textCopy)
                             .keyboardType(title == "Edit Satisfaction" ? .asciiCapableNumberPad : .default)
                         
                         Button(action: { self.textCopy = "" }) {

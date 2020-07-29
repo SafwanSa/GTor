@@ -20,7 +20,7 @@ struct NewTaskView: View {
     @State var isLoading: Bool = false
     
     var isShowingSave: Bool {
-        (taskCopy.title != task.title || taskCopy.note != task.note || taskCopy.dueDate != task.dueDate || taskCopy.satisfaction != task.satisfaction || taskCopy.importance != task.importance)
+        (taskCopy.title != task.title || taskCopy.note != task.note || taskCopy.dueDate != task.dueDate || taskCopy.importance != task.importance || String(task.satisfaction) != updatedSatisfaction)
     }
     
     var body: some View {
@@ -65,7 +65,8 @@ struct NewTaskView: View {
             self.alertMessage = "Invalid satisfaction."
             return
         }
-        task.satisfaction = Double(updatedSatisfaction)!
+        if !taskCopy.isSatisfied { taskCopy.isSatisfied = true }
+        taskCopy.satisfaction = Double(updatedSatisfaction)!
         self.task = self.taskCopy
         taskService.saveTask(task: self.task) { (result) in
             switch result {
