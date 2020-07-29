@@ -137,7 +137,7 @@ struct TODOView: View {
                 .padding(.horizontal)
             
             ForEach(taskService.tasks.filter { !$0.isSatisfied }) { task in
-                NavigationLink(destination: TaskView(task: task)) {
+                NavigationLink(destination: NewTaskView(task: task)) {
                     NewTaskCardView(task: task,
                                     selectedTask: self.$selectedTask)
                         .padding(.horizontal)
@@ -177,7 +177,7 @@ struct RowListView: View {
             VStack {
                 if isExpanded {
                     ForEach(tasks) { task in
-                        NavigationLink(destination: TaskView(task: task)) {
+                        NavigationLink(destination: NewTaskView(task: task)) {
                             NewTaskCardView(task: task,
                                             selectedTask: self.$selectedTask)
                                 .padding(.horizontal)

@@ -31,7 +31,7 @@ struct NewGoalView: View {
                     
                     if !goal.isSubGoal { GoalCategoriesCardView(goal: goalCopy) }
                     
-                    DateCardView(goal: $goalCopy)
+                    DateCardView(date: $goal.dueDate)
                     
                     if goal.isSubGoal {
                         NewTasksInfoView(goal: goalCopy)
@@ -178,14 +178,14 @@ struct GTorButton: View {
 }
 
 struct DateCardView: View {
-    @Binding var goal: Goal
+    @Binding var date: Date?
     
     var body: some View {
         VStack {
             NewCardView(content:
                 AnyView (
                     HStack {
-                        Text(goal.dueDate != nil ? "\(goal.dueDate!, formatter: dateFormatter2)" : "No deadline")
+                        Text(date != nil ? "\(date!, formatter: dateFormatter2)" : "No deadline")
                         
                         Spacer()
                         
