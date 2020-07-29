@@ -113,7 +113,6 @@ struct NewGoalHeaderView: View {
             
             Color("Secondry")
                 .frame(height: 1)
-                .padding(.horizontal)
             
             HStack {
                 Text(goal.note.isEmpty ? "Empty Note" : goal.note)
@@ -132,7 +131,8 @@ struct NewGoalHeaderView: View {
             }
         }
         .foregroundColor(Color("Primary"))
-        .padding()
+        .padding(.vertical)
+        .padding(.horizontal, 22)
         .background(Color("Level 0"))
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .elevation()

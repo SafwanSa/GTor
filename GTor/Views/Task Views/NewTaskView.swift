@@ -27,10 +27,12 @@ struct NewTaskView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 40.0) {
                     NewTaskHeaderView(task: $taskCopy)
-                                        
+                    
+                    NewSatisfactionCardView(task: $taskCopy)
+                    
                     DateCardView(date: $task.dueDate)
                     
-
+                    
                     
                     DeleteTaskCardView(task: $task, isLoading: $isLoading)
                 }
@@ -40,8 +42,8 @@ struct NewTaskView: View {
             .navigationBarItems(trailing:
                 Button(action: saveGoal) {
                     Text("Save")
-                    .font(.callout)
-                    .foregroundColor(Color("Button"))
+                        .font(.callout)
+                        .foregroundColor(Color("Button"))
                 }
                 .opacity(isShowingSave ? 1 : 0)
             )
@@ -79,7 +81,7 @@ struct NewTaskHeaderView: View {
     @Binding var task: Task
     @State var isShowingTitleEditor = false
     @State var isShowingNoteEditor = false
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 15.0) {
             HStack {
@@ -100,7 +102,6 @@ struct NewTaskHeaderView: View {
             
             Color("Secondry")
                 .frame(height: 1)
-                .padding(.horizontal)
             
             HStack {
                 Text(task.note.isEmpty ? "Empty Note" : task.note)
@@ -119,13 +120,11 @@ struct NewTaskHeaderView: View {
             }
         }
         .foregroundColor(Color("Primary"))
-        .padding()
+        .padding(.vertical)
+        .padding(.horizontal, 22)
         .background(Color("Level 0"))
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .elevation()
-        .overlay(
-            ProgressBarView(color1: Color("Level 3"), color2: Color.red, percentage: self.task.satisfaction, fullWidth: 351, width: 343)
-        )
     }
 }
 struct DeleteTaskCardView: View {
@@ -154,18 +153,40 @@ struct DeleteTaskCardView: View {
         }
     }
     
-     func deleteTask() {
-           isLoading = true
-           self.taskService.deleteTask(task: task) { (result) in
-               switch result {
-               case .failure(let error):
-                   self.isLoading = false
-                   self.isShowingAlert = true
-                   self.alertMessage = error.localizedDescription
-               case .success(()):
-                   CalcService.shared.calcProgress(from: self.task)
-                   self.isLoading = false
-               }
-           }
-       }
+    func deleteTask() {
+        isLoading = true
+        self.taskService.deleteTask(task: task) { (result) in
+            switch result {
+            case .failure(let error):
+                self.isLoading = false
+                self.isShowingAlert = true
+                self.alertMessage = error.localizedDescription
+            case .success(()):
+                CalcService.shared.calcProgress(from: self.task)
+                self.isLoading = false
+            }
+        }
+    }
+}
+
+struct NewSatisfactionCardView: View {
+    @Binding var task: Task
+    @State var isShowingTextEditor: Bool = false
+    var body: some View {
+        NewCardView(content: AnyView(
+            HStack {
+                Text("Complete")
+                Spacer()
+                Text("\(String(format: "%.2f" ,task.satisfaction))%")
+                Button(action: { self.isShowingTextEditor = true }) {
+                    Text("Edit")
+                        .foregroundColor(Color("Button"))
+                        .font(.callout)
+                }
+                .sheet(isPresented: $isShowingTextEditor) {
+                    TextEditorView(title: "Edit Title", text: self.$task.title)
+                }
+            }
+        ))
+    }
 }
