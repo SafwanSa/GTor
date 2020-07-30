@@ -64,6 +64,7 @@
 		17E7E7E4246CE3D600596500 /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E3246CE3D600596500 /* TaskService.swift */; };
 		17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E5246CE3E400596500 /* CategoryService.swift */; };
 		17E7E7E8246CE47900596500 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E7246CE47900596500 /* FirestoreService.swift */; };
+		17F0B93624D2EF950068E2EE /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F0B93524D2EF950068E2EE /* HomeScreenView.swift */; };
 		17F9F53A24CCE70C004EC43B /* NewAddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F9F53924CCE70C004EC43B /* NewAddGoalView.swift */; };
 		5BF3CD28DF6450DA1901838B /* Pods_GTor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FCFD1B7B551547737EE0AB /* Pods_GTor.framework */; };
 /* End PBXBuildFile section */
@@ -128,6 +129,7 @@
 		17E7E7E3246CE3D600596500 /* TaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskService.swift; sourceTree = "<group>"; };
 		17E7E7E5246CE3E400596500 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 		17E7E7E7246CE47900596500 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		17F0B93524D2EF950068E2EE /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		17F9F53924CCE70C004EC43B /* NewAddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddGoalView.swift; sourceTree = "<group>"; };
 		D1FCFD1B7B551547737EE0AB /* Pods_GTor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GTor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -364,6 +366,7 @@
 		17E7E7DB246CABE600596500 /* Profile Views */ = {
 			isa = PBXGroup;
 			children = (
+				17F0B93524D2EF950068E2EE /* HomeScreenView.swift */,
 			);
 			path = "Profile Views";
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				177A215724B107F90031A665 /* CategoryEditorView.swift in Sources */,
 				1758A35724CD6EA00065CFA8 /* GTorCalendarView.swift in Sources */,
 				17E7E7E0246CE3B300596500 /* UserService.swift in Sources */,
+				17F0B93624D2EF950068E2EE /* HomeScreenView.swift in Sources */,
 				17091768247244800011BB8C /* AddSubGoalView.swift in Sources */,
 				17E7E7C8246CA6FE00596500 /* Task.swift in Sources */,
 				17E7E7AB246C921400596500 /* LoginView.swift in Sources */,
