@@ -158,7 +158,7 @@ struct TODOView: View {
 struct RowListView: View {
     var title: String
     var tasks: [Task]
-    @State var isExpanded = true
+    @State var isExpanded = false
     @Binding var selectedTask: Task
     
     var body: some View {
@@ -170,7 +170,7 @@ struct RowListView: View {
                     .rotationEffect(Angle(degrees: isExpanded ? 90 : 0))
                     .animation(.linear)
                 
-                Text(title)
+                Text("\(tasks.count) \(title)")
                 
             }
             .foregroundColor(Color("Primary"))

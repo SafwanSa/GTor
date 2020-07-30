@@ -12,7 +12,7 @@ struct HomeScreenView: View {
     @ObservedObject var userService = UserService.shared
     @ObservedObject var taskService = TaskService.shared
     @State var selectedDate: Date = Date()
-    @State var isShowingDashboard = false
+    @State var isShowingDashboard = true
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -32,7 +32,7 @@ struct HomeScreenView: View {
                 .transition(.slide)
                 .animation(.spring())
             }
-            .padding(.bottom, 20)
+            .padding(.vertical, 20)
             Spacer()
             
         }
@@ -53,22 +53,32 @@ struct HeaderHomeView: View {
     var body: some View {
         VStack {
             VStack {
-                Image("female-icon")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 238, height: 144)
-                Text(userService.user.name)
-                    .font(.system(size: 18))
-                Text(userService.user.email)
-                    .font(.system(size: 12))
-                
                 HStack {
+                    VStack(alignment: .leading) {
+                        Text("Hello,")
+                            .font(.system(size: 18))
+                        Text(userService.user.name)
+                            .font(.system(size: 18))
+                        Text(userService.user.email)
+                            .font(.system(size: 12))
+                    }
+                    Spacer()
+                    Image("female-icon")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 162, height: 78)
+                        .offset(x: 48, y: -10)
+                }
+
+
+                
+                HStack(spacing: 70.0) {
                     Text("DASHBOARD")
                         .onTapGesture {
                             self.isShowingDashboard = true
                     }
                     .foregroundColor(Color(isShowingDashboard ? "Button" : "Primary"))
-                    Spacer()
+
                     Text("SETTINGS")
                         .onTapGesture {
                             self.isShowingDashboard = false
@@ -79,7 +89,7 @@ struct HeaderHomeView: View {
                 .padding(.top, 25)
             }
             .foregroundColor(Color("Primary"))
-            .padding(.horizontal, 45)
+            .padding(.horizontal, 29)
             .padding(.vertical, 22)
             .padding(.top, 35)
             .background(Color(#colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.9960784314, alpha: 1)))
