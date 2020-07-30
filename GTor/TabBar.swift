@@ -24,7 +24,7 @@ struct TabBar: View {
     var body: some View {
         ZStack {
             TabView {
-                HomeView().tabItem {
+                HomeScreenView().tabItem {
                     Text("Home")
                     Image(systemName: "text.justify")
                 }
