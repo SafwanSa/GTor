@@ -24,7 +24,6 @@ struct CategoryEditorView: View {
     @State var isShowingAlert = false
     
     var body: some View {
-        NavigationView {
             ZStack {
                 List {
                     Picker(selection: $color, label: Text("Color")) {
@@ -109,7 +108,6 @@ struct CategoryEditorView: View {
             .alert(isPresented: $isShowingAlert) {
                 Alert(title: Text(self.alertMessage))
             }
-        }
     }
     
     func save() {

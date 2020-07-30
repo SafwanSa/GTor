@@ -15,28 +15,30 @@ struct HomeScreenView: View {
     @State var isShowingDashboard = true
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            HeaderHomeView(isShowingDashboard: $isShowingDashboard)
-            
-            VStack(spacing: 27.0) {
-                HStack {
-                    Group {
-                        if isShowingDashboard {
-                            CurrentTasksView()
-                        }else {
-                            SettingsView()
-                                .animation(nil)
+        NavigationView {
+            ScrollView(showsIndicators: false) {
+                HeaderHomeView(isShowingDashboard: $isShowingDashboard)
+                
+                VStack(spacing: 27.0) {
+                    HStack {
+                        Group {
+                            if isShowingDashboard {
+                                CurrentTasksView()
+                            }else {
+                                SettingsView()
+                                    .animation(nil)
+                            }
                         }
                     }
+                    .transition(.slide)
+                    .animation(.spring())
                 }
-                .transition(.slide)
-                .animation(.spring())
+                .padding(.vertical, 20)
+                Spacer()
+                
             }
-            .padding(.vertical, 20)
-            Spacer()
-            
+            .edgesIgnoringSafeArea(.top)
         }
-        .edgesIgnoringSafeArea(.top)
     }
 }
 
@@ -69,8 +71,8 @@ struct HeaderHomeView: View {
                         .frame(width: 162, height: 78)
                         .offset(x: 48, y: -10)
                 }
-
-
+                
+                
                 
                 HStack(spacing: 70.0) {
                     Text("DASHBOARD")
@@ -78,7 +80,7 @@ struct HeaderHomeView: View {
                             self.isShowingDashboard = true
                     }
                     .foregroundColor(Color(isShowingDashboard ? "Button" : "Primary"))
-
+                    
                     Text("SETTINGS")
                         .onTapGesture {
                             self.isShowingDashboard = false
@@ -105,7 +107,7 @@ struct CurrentTasksView: View {
     
     var body: some View {
         VStack(spacing: 27.0) {
-            //            DaysCardView(selectedDate: $selectedDate)
+            DaysCardView(selectedDate: $selectedDate)
             
             ForEach(taskService.tasks.filter { !$0.isSatisfied && ($0.dueDate == nil ? true : $0.dueDate!.fullDate == self.selectedDate.fullDate) }) { task in
                 NewTaskCardView(task: task, selectedTask: .constant(Task.dummy))
