@@ -103,7 +103,7 @@ struct NewAddGoalView: View {
                     }
                     ,trailing:
                     Button(action: !goal.isSubGoal ? createGoal : addGoal) {
-                        Text("Done")
+                        Text("Add")
                     }
                 )
                     .listStyle(GroupedListStyle())

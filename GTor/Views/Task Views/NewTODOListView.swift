@@ -13,6 +13,7 @@ enum DateClipType {
 }
 
 struct NewTODOListView: View {
+    @ObservedObject var userService = UserService.shared
     @ObservedObject var taskService = TaskService.shared
     @State var isAddTaskSelected = false
     @State var selectedTask = Task.dummy
@@ -43,7 +44,13 @@ struct NewTODOListView: View {
                             .font(.headline)
                     }
                     .sheet(isPresented: $isAddTaskSelected) {
-                        AddTaskView()
+                        NewAddTaskView(task: .init(uid: self.userService.user.uid,
+                                                   title: "",
+                                                   note: "",
+                                                   satisfaction: 0,
+                                                   isSatisfied: false,
+                                                   linkedGoalsIds: [],
+                                                   importance: .none))
                     }
                 )
                 .blur(radius: selectedTask == Task.dummy ? 0 : 2)
