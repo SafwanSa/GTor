@@ -12,17 +12,24 @@ struct HomeScreenView: View {
     @ObservedObject var userService = UserService.shared
     @ObservedObject var taskService = TaskService.shared
     @State var selectedDate: Date = Date()
-
+    @State var isShowingDashboard = true
+    
     var body: some View {
         VStack(spacing: 27.0) {
-            HeaderHomeView()
+            HeaderHomeView(isShowingDashboard: $isShowingDashboard)
 
-            DaysCardView(selectedDate: $selectedDate)
-            
-            ForEach(taskService.tasks.filter { !$0.isSatisfied && ($0.dueDate == nil ? true : $0.dueDate!.fullDate == self.selectedDate.fullDate) }) { task in
-                NewTaskCardView(task: task, selectedTask: .constant(Task.dummy))
-                    .padding(.horizontal)
+            HStack {
+                Group {
+                    if isShowingDashboard {
+                        CurrentTasksView()
+                    }else {
+                        SettingsView()
+                    }
+                }
             }
+            .transition(.slide)
+            .animation(.spring())
+
             Spacer()
         }
     }
@@ -36,6 +43,7 @@ struct HomeScreenView_Previews: PreviewProvider {
 
 struct HeaderHomeView: View {
     @ObservedObject var userService = UserService.shared
+    @Binding var isShowingDashboard: Bool
     
     var body: some View {
         VStack {
@@ -51,8 +59,16 @@ struct HeaderHomeView: View {
                 
                 HStack {
                     Text("DASHBOARD")
+                    .onTapGesture {
+                        self.isShowingDashboard = true
+                    }
+                    .foregroundColor(Color(isShowingDashboard ? "Button" : "Primary"))
                     Spacer()
                     Text("SETTINGS")
+                    .onTapGesture {
+                        self.isShowingDashboard = false
+                    }
+                    .foregroundColor(Color(isShowingDashboard ? "Primary" : "Button"))
                 }
                 .font(.system(size: 14))
                 .padding(.top, 25)
@@ -63,6 +79,22 @@ struct HeaderHomeView: View {
             .background(Color(#colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.9960784314, alpha: 1)))
             .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
             .shadow(color: Color.black.opacity(0.12), radius: 20, x: 0, y: 7)
+        }
+    }
+}
+
+struct CurrentTasksView: View {
+    @ObservedObject var taskService = TaskService.shared
+    @State var selectedDate: Date = Date()
+    
+    var body: some View {
+        VStack(spacing: 27.0) {
+            DaysCardView(selectedDate: $selectedDate)
+            
+            ForEach(taskService.tasks.filter { !$0.isSatisfied && ($0.dueDate == nil ? true : $0.dueDate!.fullDate == self.selectedDate.fullDate) }) { task in
+                NewTaskCardView(task: task, selectedTask: .constant(Task.dummy))
+                    .padding(.horizontal)
+            }
         }
     }
 }

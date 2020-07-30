@@ -84,6 +84,7 @@ struct DaysCardView: View {
             }
             .foregroundColor(Color("Primary"))
             .padding(.horizontal)
+            .animation(nil)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 14.0) {
@@ -114,7 +115,7 @@ struct DaysCardView: View {
     }
     
     func generateDates() {
-        for i in 1...2*10 {
+        for i in 1...365 {
             dates.append(Date().addingTimeInterval(TimeInterval(60*60*24*i)))
         }
     }
