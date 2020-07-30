@@ -10,11 +10,13 @@ import SwiftUI
 
 struct SettingsRowButtonView: View {
     var text: String
+    var icon: String
     var isHavingDestination: Bool
     
     var body: some View {
         VStack(spacing: 27.0) {
             HStack {
+                Image(systemName: icon)
                 Text(text)
                 Spacer()
                 Image(systemName: "chevron.right").opacity(isHavingDestination ? 1 : 0)
@@ -37,24 +39,24 @@ struct SettingsView: View {
         VStack(spacing: 50) {
             VStack(spacing: 40) {
                 NavigationLink(destination: CategoryEditorView()) {
-                    SettingsRowButtonView(text: "Tags Settings", isHavingDestination: true)
+                    SettingsRowButtonView(text: "Tags Settings", icon: "tag", isHavingDestination: true)
                 }
                 VStack {
                     Button(action: {}) {
-                        SettingsRowButtonView(text: "Rate The App", isHavingDestination: false)
+                        SettingsRowButtonView(text: "Rate The App", icon: "star", isHavingDestination: false)
                     }
                     
                     Button(action: {}) {
-                        SettingsRowButtonView(text: "Share The App", isHavingDestination: false)
+                        SettingsRowButtonView(text: "Share The App", icon: "square.and.arrow.up", isHavingDestination: false)
                     }
                     
                     NavigationLink(destination: AboutView()) {
-                        SettingsRowButtonView(text: "About GTor", isHavingDestination: true)
+                        SettingsRowButtonView(text: "About GTor", icon: "info.circle", isHavingDestination: true)
                     }
                 }
                 VStack {
                     Button(action: self.authService.signOutUser) {
-                        SettingsRowButtonView(text: "Logout", isHavingDestination: false)
+                        SettingsRowButtonView(text: "Logout", icon: "", isHavingDestination: false)
                     }
 //                    Button(action: {}) {
 //                        SettingsRowButtonView(text: "Delete Account", isHavingDestination: false)
