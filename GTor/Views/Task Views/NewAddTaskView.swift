@@ -56,7 +56,7 @@ struct NewAddTaskView: View {
                     
                     Section {
                         Picker(selection: $task.importance, label: Text("Importance")) {
-                            ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+                            ForEach(Priority.allCases.filter { $0 != .none }, id: \.self) { importance in
                                 Text(importance.rawValue)
                             }
                         }

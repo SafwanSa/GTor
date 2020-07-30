@@ -50,7 +50,7 @@ struct NewTODOListView: View {
                                                    satisfaction: 0,
                                                    isSatisfied: false,
                                                    linkedGoalsIds: [],
-                                                   importance: .none))
+                                                   importance: .normal))
                     }
                 )
                 .blur(radius: selectedTask == Task.dummy ? 0 : 2)

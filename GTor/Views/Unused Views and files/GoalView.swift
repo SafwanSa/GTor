@@ -194,7 +194,7 @@ struct ImportancePicker: View {
     
     var body: some View {
         Picker(selection: self.$goal.importance, label: Text("Importance")) {
-            ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+            ForEach(Priority.allCases.filter { $0 != .none }, id: \.self) { importance in
                 Text(importance.rawValue)
             }
         }

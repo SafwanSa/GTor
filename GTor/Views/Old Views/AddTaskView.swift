@@ -23,7 +23,7 @@ struct AddTaskView: View {
     @State var alertMessage = "None"
     @State var isLoading = false
     @State var isShowingAlert = false
-    @State var selectedImportance = Importance.none
+    @State var selectedImportance = Priority.none
     
     var body: some View {
         ZStack {
@@ -71,7 +71,7 @@ struct AddTaskView: View {
                     
                     if !isHavingLinkedGoals {
                         Picker(selection: $selectedImportance, label: Text("Importance")) {
-                            ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+                            ForEach(Priority.allCases.filter { $0 != .none }, id: \.self) { importance in
                                 Text(importance.rawValue)
                             }
                         }

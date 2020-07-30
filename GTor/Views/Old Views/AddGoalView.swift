@@ -60,7 +60,7 @@ struct AddGoalView: View {
                     if !self.isDecomposed {
                         Section {
                             Picker(selection: $goal.importance, label: Text("Importance")) {
-                                ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+                                ForEach(Priority.allCases.filter { $0 != .none }, id: \.self) { importance in
                                     Text(importance.rawValue)
                                 }
                             }
@@ -90,7 +90,7 @@ struct AddGoalView: View {
        func createGoal() {
         isLoading = true
         self.goal.id = UUID()
-        if isDecomposed { self.goal.importance = Importance.none }
+        if isDecomposed { self.goal.importance = Priority.none }
         self.goal.dueDate = isHavingDeadline ? deadline : nil
         self.goal.isDecomposed = self.isDecomposed
             goalService.saveGoal(goal: goal) { (result) in

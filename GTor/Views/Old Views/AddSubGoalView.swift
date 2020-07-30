@@ -14,7 +14,7 @@ struct AddSubGoalView: View {
     @State var title = ""
     @State var note = ""
     @State var deadline = Date()
-    @State var selectedImportance = Importance.none
+    @State var selectedImportance = Priority.none
 
     
     @State var isHavingDeadline = false
@@ -46,7 +46,7 @@ struct AddSubGoalView: View {
                     Section {
                         
                         Picker(selection: $selectedImportance, label: Text("Importance")) {
-                            ForEach(Importance.allCases.filter { $0 != .none }, id: \.self) { importance in
+                            ForEach(Priority.allCases.filter { $0 != .none }, id: \.self) { importance in
                                 Text(importance.rawValue)
                             }
                         }

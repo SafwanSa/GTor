@@ -8,20 +8,20 @@
 
 import Foundation
 
-enum Importance: String, Codable, CaseIterable{
-    case notImportant = "Not Important"
-    case important = "Important"
-    case veryImportant = "Very Important"
+enum Priority: String, Codable, CaseIterable{
+    case low = "Not Important"
+    case normal = "Important"
+    case high = "Very Important"
     case none = ""
     
     
     var value: Double {
         switch self {
-        case .veryImportant:
+        case .high:
             return 3.0
-        case .important:
+        case .normal:
             return 2.0
-        case .notImportant:
+        case .low:
             return 1.0
         case .none:
             return 0
@@ -36,7 +36,7 @@ struct Goal: Equatable, Codable, Identifiable, Hashable {
     var title: String
     var note: String
     var isSubGoal: Bool
-    var importance: Importance
+    var importance: Priority
     var satisfaction: Double
     var dueDate: Date?
     var categories: [Category]

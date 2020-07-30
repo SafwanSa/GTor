@@ -56,7 +56,7 @@ class CalcService {
         }
     }
     
-    func calcImportance(from linkedGoalsIds: [UUID]) -> Importance{
+    func calcImportance(from linkedGoalsIds: [UUID]) -> Priority{
         var sum = 0.0
         for subGoal in GoalService.shared.goals.filter({ linkedGoalsIds.contains($0.id) }){
             sum+=subGoal.importance.value
@@ -84,13 +84,13 @@ class CalcService {
         }
     }
     
-    func getImportance(value: Double ) -> Importance {
+    func getImportance(value: Double ) -> Priority {
         if value <= 1.0 {
-            return .notImportant
+            return .low
         }else if value > 1.0 && value <= 2.0 {
-            return .important
+            return .normal
         }else if value > 2.0 && value <= 3 {
-            return .veryImportant
+            return .high
         }else {
             return .none
         }
