@@ -237,7 +237,7 @@ struct GoalCategoriesCardView: View {
         VStack {
             NewCardView(content: AnyView(
                 HStack {
-                    Text("Categories")
+                    Text("Tags")
                     Spacer()
                     ForEach(goal.categories) { category in
                         CategoryCardView(category: category)

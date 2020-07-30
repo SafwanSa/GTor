@@ -43,7 +43,7 @@ struct NewAddGoalView: View {
                         Section(header: Text(isSelectCategoryExpanded ? "Press to fold" : "Press to open")) {
                             HStack {
                                 Image(systemName: "tag")
-                                Text(selectedCategoriesIds.isEmpty ? "Select Categories" : selectedCategories.map { $0.name }.joined(separator: ", "))
+                                Text(selectedCategoriesIds.isEmpty ? "Select Tags" : selectedCategories.map { $0.name }.joined(separator: ", "))
                             }
                             .onTapGesture {
                                 self.isSelectCategoryExpanded.toggle()

@@ -96,7 +96,7 @@ struct CategoryEditorView: View {
                 }
                 .listStyle(GroupedListStyle())
                 .environment(\.horizontalSizeClass, .regular)
-                .navigationBarTitle("Categories", displayMode: .inline)
+                .navigationBarTitle("Tags Settings", displayMode: .inline)
                 .navigationBarItems(trailing:
                     Button(action: save) {
                         Text("Save")
@@ -108,6 +108,9 @@ struct CategoryEditorView: View {
             .alert(isPresented: $isShowingAlert) {
                 Alert(title: Text(self.alertMessage))
             }
+            .onAppear {
+                self.categories = self.categoryService.categories
+        }
     }
     
     func save() {
