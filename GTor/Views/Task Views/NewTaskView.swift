@@ -35,6 +35,8 @@ struct NewTaskView: View {
                     
                     DateCardView(date: $task.dueDate)
                     
+                    if !task.linkedGoalsIds.isEmpty { NewLinkedGoalsCardView(task: task) }
+                    
                     DeleteTaskCardView(task: $task, isLoading: $isLoading)
                 }
                 .padding()
@@ -224,5 +226,40 @@ struct NewImportanceCardView: View {
                 }
             }
         ))
+    }
+}
+
+struct NewLinkedGoalsCardView: View {
+    @State var isExpanded = false
+    var task: Task
+    
+    var body: some View {
+        VStack {
+            NewCardView(content: AnyView(
+                Button(action: { self.isExpanded.toggle() }) {
+                    HStack{
+                        Text("Linked Goals")
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13))
+                            .frame(width: 15)
+                            .rotationEffect(Angle(degrees: isExpanded ? 90 : 0))
+                            .animation(.linear)
+                    }
+                .contentShape(Rectangle())
+                }
+            .buttonStyle(PlainButtonStyle())
+            ))
+            
+            VStack {
+                if isExpanded {
+                    ForEach(TaskService.shared.getLinkedGoals(task: task)) { goal in
+                        NewGoalCardView(goal: goal)
+                            .padding()
+                    }
+                }
+            }
+        }
+        .animation(.easeInOut)
     }
 }
