@@ -115,7 +115,7 @@ struct DaysCardView: View {
     }
     
     func generateDates() {
-        for i in 1...365 {
+        for i in 1...90 {
             dates.append(Date().addingTimeInterval(TimeInterval(60*60*24*i)))
         }
     }
@@ -127,7 +127,7 @@ struct DaysCardView: View {
             let index = str.index(str.startIndex, offsetBy: 3)
             return String(str[..<index])
         case .num:
-            let str = str.split(separator: ",")[1].split(separator: " ")[1]
+            let str = str.split(separator: ",")[1].split(separator: " ")[0]
             return String(str)
         }
     }
