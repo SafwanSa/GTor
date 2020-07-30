@@ -35,26 +35,32 @@ struct HomeScreenView: View {
     @State var isShowingDashboard = false
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 27.0) {
-                HeaderHomeView(isShowingDashboard: $isShowingDashboard)
-
-                HStack {
-                    Group {
-                        if isShowingDashboard {
-                            CurrentTasksView()
-                        }else {
-                            SettingsView()
+        ZStack {
+            ScrollView(showsIndicators: false) {
+                Color(UIColor.clear).frame(height: 330)
+                VStack(spacing: 27.0) {
+                    HStack {
+                        Group {
+                            if isShowingDashboard {
+                                CurrentTasksView()
+                            }else {
+                                SettingsView()
+                                    .animation(nil)
+                            }
                         }
                     }
+                    .transition(.slide)
+                    .animation(.spring())
                 }
-                .transition(.slide)
-                .animation(.spring())
-
+                .padding(.bottom, 20)
+            }
+            
+            VStack {
+                HeaderHomeView(isShowingDashboard: $isShowingDashboard)
                 Spacer()
             }
         }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.top)
     }
 }
 
@@ -134,7 +140,8 @@ struct SettingsRowButtonView: View {
                     Spacer()
                     Image(systemName: "chevron.right").opacity(isHavingDestination ? 1 : 0)
                 }
-                .padding(22)
+                .padding(.vertical)
+                .padding(.horizontal, 22)
                 .background(Color(text == "Delete Account" ? "Level 3" : "Level 0"))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .elevation()
