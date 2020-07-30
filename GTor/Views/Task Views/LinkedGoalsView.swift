@@ -8,24 +8,25 @@
 
 import SwiftUI
 
+
+struct LinkedGoal: Identifiable{
+    var id: UUID
+    var name: String
+}
+
 struct LinkedGoalsView: View {
     @ObservedObject var goalService = GoalService.shared
     @Environment(\.presentationMode) private var presentationMode
     @State var selectedGoalsIds: Set<UUID> = []
     @Binding var selectedGoals: [UUID]
+    @State var allGoals: [LinkedGoal] = []
     
     var body: some View {
         NavigationView {
             List(selection: $selectedGoalsIds) {
-                Section(header: Text("Main Goals")) {
-                    ForEach(goalService.getMainGoals().filter {!$0.isDecomposed}) {goal in
-                        Text(goal.title)
-                    }
-                }
-                
-                Section(header: Text("Sub Goals")) {
-                    ForEach(goalService.goals.filter {$0.isSubGoal}) {goal in
-                        Text("\(self.goalService.getMainGoals().filter { $0.id == goal.mid }.first?.title ?? "") > \(goal.title)")
+                Section {
+                    ForEach(allGoals) {goal in
+                        Text(goal.name)
                     }
                 }
             }
@@ -42,6 +43,19 @@ struct LinkedGoalsView: View {
                     Text("Done")
                 }
             )
+            .onAppear {
+                for goal in self.goalService.goals {
+                    if !goal.isSubGoal && goal.isDecomposed {
+                        if !self.goalService.getSubGoals(mainGoal: goal).isEmpty {
+                            for subGoal in self.goalService.getSubGoals(mainGoal: goal) {
+                                self.allGoals.append(.init(id: subGoal.id, name: goal.title + " -> \(subGoal.title)"))
+                            }
+                        }
+                    }else if !goal.isSubGoal && !goal.isDecomposed {
+                       self.allGoals.append(.init(id: goal.id, name: goal.title))
+                    }
+                }
+            }
             .onDisappear {
                 for id in self.selectedGoalsIds {
                     self.selectedGoals.append(id)
