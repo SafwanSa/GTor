@@ -38,7 +38,7 @@ struct NewLoginView: View {
                 .aspectRatio(contentMode: .fit)
                 .clipShape(Circle())
                 .frame(width: 300, height: 250)
-                .offset(x: 10,y: -screen.height/2.5)
+                .offset(x: isShowingSignup ? 10 : screen.width/2, y: -screen.height/2.5)
                 .opacity(isShowingSignup ? 0 : 1)
                 .rotationEffect(Angle(degrees: isShowingSignup ? -50 : 50))
                 .animation(Animation.easeInOut.speed(0.6))
@@ -116,7 +116,7 @@ struct NewLoginView: View {
                     .background(Color("Level 0"))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .shadow(color: Color("Primary").opacity(0.12), radius: 10, x: 0, y: 7)
-                    .offset(y: isStarted ? screen.height/5 : screen.height)
+                    .offset(y: isStarted ? screen.height/5.3 : screen.height)
                     .animation(.spring())
                 Spacer()
                 Color("Secondry").opacity(0.2)
@@ -151,6 +151,19 @@ struct NewLoginView: View {
                     }))
                     .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
             }
+            
+            VStack {
+                Spacer()
+                if isStarted{
+                   SignUpView(isNewUser: isShowingSignup)
+                    .padding(.horizontal, 200)
+                    .padding(.vertical, 20)
+                    .padding(.bottom, 200)
+                }
+            }
+            .offset(y: screen.height < 800 ? screen.height/9 : 0)
+            
+            
         }
         .edgesIgnoringSafeArea(.all)
     }

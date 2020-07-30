@@ -17,7 +17,7 @@ struct LaunchView: View {
             VStack {
                 Group {
                     if userService.authState == .udefined || userService.authState == .signOut {
-                        LoginView()
+                        NewLoginView()
                             .transition(.move(edge: .bottom))
                             .animation(.easeInOut)
                     }else {

@@ -12,31 +12,43 @@ struct SignUpView: View {
     @ObservedObject var authService = AuthService.shared
     @State var email = ""
     @State var password = ""
+    @State var name = ""
     @State var alertMessage = ""
     @State var isLoading = false
     var isNewUser = false
-
+    
     var body: some View {
         ZStack {
-            VStack {
-                Text(isNewUser ? "Sign up" : "Sign in")
-                    .font(.title)
-                
-                VStack(spacing: 5.0) {
+            VStack {                
+                VStack(spacing: 20.0) {
+                    if isNewUser {
+                        TextField("Name", text: $name)
+                            .autocapitalization(.none)
+                            .padding()
+                            .background(Color("Level 0"))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .shadow()
+                        .keyboardAware()
+                    }
+                    
                     TextField("Email", text: $email)
                         .autocapitalization(.none)
                         .keyboardType(.emailAddress)
                         .padding()
-                        .background(Color("Level 1"))
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .background(Color("Level 0"))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                         .shadow()
+                    .keyboardAware()
+
                     
-                    TextField("Password (At least 6 numbers)", text: $password)
+                    SecureField("Password (At least 6 digits)", text: $password)
                         .autocapitalization(.none)
                         .padding()
-                        .background(Color("Level 1"))
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .background(Color("Level 0"))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                         .shadow()
+                    .keyboardAware()
+
                     
                     Text(alertMessage)
                         .multilineTextAlignment(.center)
@@ -48,14 +60,14 @@ struct SignUpView: View {
                         .font(.system(size: 25))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
-                        .background(Color("Primary"))
-                        .foregroundColor(Color("Level 0"))
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .background(Color("Button"))
+                        .foregroundColor(Color("Primary"))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                         .shadow()
                 }
-                .padding(20)
+                .padding(.horizontal, 20)
             }
-
+            
             LoadingView(isLoading: self.$isLoading)
         }
         
