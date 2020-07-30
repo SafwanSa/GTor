@@ -14,11 +14,15 @@ struct LaunchView: View {
     
     var body: some View {
         ZStack {
-            Group {
-                if userService.authState == .udefined || userService.authState == .signOut {
-                    LoginView()
-                }else {
-                    TabBar()
+            VStack {
+                Group {
+                    if userService.authState == .udefined || userService.authState == .signOut {
+                        LoginView()
+                            .transition(.move(edge: .bottom))
+                            .animation(.easeInOut)
+                    }else {
+                        TabBar()
+                    }
                 }
             }
             LoadingView(isLoading: $isLoading)

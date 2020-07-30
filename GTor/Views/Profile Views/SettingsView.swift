@@ -21,7 +21,7 @@ struct SettingsRowButtonView: View {
             }
             .padding(.vertical)
             .padding(.horizontal, 22)
-            .background(Color(text == "Delete Account" ? "Level 3" : "Level 0"))
+            .background(Color(text == "Logout" ? "Level 3" : "Level 0"))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .elevation()
             .foregroundColor(Color("Primary"))
@@ -31,6 +31,8 @@ struct SettingsRowButtonView: View {
 }
 
 struct SettingsView: View {
+    @ObservedObject var authService = AuthService.shared
+
     var body: some View {
         VStack(spacing: 50) {
             VStack(spacing: 40) {
@@ -51,12 +53,12 @@ struct SettingsView: View {
                     }
                 }
                 VStack {
-                    Button(action: {}) {
+                    Button(action: self.authService.signOutUser) {
                         SettingsRowButtonView(text: "Logout", isHavingDestination: false)
                     }
-                    Button(action: {}) {
-                        SettingsRowButtonView(text: "Delete Account", isHavingDestination: false)
-                    }
+//                    Button(action: {}) {
+//                        SettingsRowButtonView(text: "Delete Account", isHavingDestination: false)
+//                    }
                 }
             }.padding(.horizontal)
         }
