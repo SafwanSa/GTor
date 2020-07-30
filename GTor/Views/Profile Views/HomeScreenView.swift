@@ -8,26 +8,6 @@
 
 import SwiftUI
 
-struct Setting: Identifiable {
-    var id = UUID()
-    var text: String
-    var isHavingDestination: Bool
-    var destination: AnyView?
-}
-
-let typicalSettings: [Setting] = [
-    .init(text: "Rate GTor", isHavingDestination: false),
-    .init(text: "Share GTor", isHavingDestination: false),
-    .init(text: "About GTor", isHavingDestination: true)
-]
-let appSettings: [Setting] = [
-    .init(text: "Tags Settings", isHavingDestination: true)
-]
-let actionSettings: [Setting] = [
-    .init(text: "Logout", isHavingDestination: false),
-    .init(text: "Delete Account", isHavingDestination: false)
-]
-
 struct HomeScreenView: View {
     @ObservedObject var userService = UserService.shared
     @ObservedObject var taskService = TaskService.shared
@@ -88,14 +68,14 @@ struct HeaderHomeView: View {
                 
                 HStack {
                     Text("DASHBOARD")
-                    .onTapGesture {
-                        self.isShowingDashboard = true
+                        .onTapGesture {
+                            self.isShowingDashboard = true
                     }
                     .foregroundColor(Color(isShowingDashboard ? "Button" : "Primary"))
                     Spacer()
                     Text("SETTINGS")
-                    .onTapGesture {
-                        self.isShowingDashboard = false
+                        .onTapGesture {
+                            self.isShowingDashboard = false
                     }
                     .foregroundColor(Color(isShowingDashboard ? "Primary" : "Button"))
                 }
@@ -119,60 +99,12 @@ struct CurrentTasksView: View {
     
     var body: some View {
         VStack(spacing: 27.0) {
-//            DaysCardView(selectedDate: $selectedDate)
+            //            DaysCardView(selectedDate: $selectedDate)
             
             ForEach(taskService.tasks.filter { !$0.isSatisfied && ($0.dueDate == nil ? true : $0.dueDate!.fullDate == self.selectedDate.fullDate) }) { task in
                 NewTaskCardView(task: task, selectedTask: .constant(Task.dummy))
                     .padding(.horizontal)
             }
         }
-    }
-}
-
-struct SettingsRowButtonView: View {
-    var text: String
-    var isHavingDestination: Bool
-    
-    var body: some View {
-        VStack(spacing: 27.0) {
-                HStack {
-                    Text(text)
-                    Spacer()
-                    Image(systemName: "chevron.right").opacity(isHavingDestination ? 1 : 0)
-                }
-                .padding(.vertical)
-                .padding(.horizontal, 22)
-                .background(Color(text == "Delete Account" ? "Level 3" : "Level 0"))
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .elevation()
-                .foregroundColor(Color("Primary"))
-        }
-        .foregroundColor(Color("Primary"))
-    }
-}
-
-struct SettingsView: View {
-    var body: some View {
-        VStack(spacing: 50) {
-            VStack(spacing: 20.0) {
-                ForEach(appSettings) { setting in
-                    SettingsRowButtonView(text: setting.text, isHavingDestination: setting.isHavingDestination)
-                }
-            }
-            
-            VStack(spacing: 20.0) {
-                ForEach(typicalSettings) { setting in
-                    SettingsRowButtonView(text: setting.text, isHavingDestination: setting.isHavingDestination)
-                }
-            }
-            
-            VStack(spacing: 20.0) {
-                ForEach(actionSettings) { setting in
-                    SettingsRowButtonView(text: setting.text, isHavingDestination: setting.isHavingDestination)
-                }
-            }
-            
-            
-        }.padding(.horizontal)
     }
 }

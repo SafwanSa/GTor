@@ -34,6 +34,8 @@
 		177F4FFB24CCDD69005CDD75 /* TextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */; };
 		1785804624A7DC24009343DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1785804424A7DA05009343DB /* GoogleService-Info.plist */; };
 		178601CE24CC9CBC00FFEE0E /* NewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178601CD24CC9CBC00FFEE0E /* NewGoalView.swift */; };
+		17913FFE24D321E100EE8016 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17913FFD24D321E100EE8016 /* AboutView.swift */; };
+		1791400024D3226D00EE8016 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17913FFF24D3226D00EE8016 /* SettingsView.swift */; };
 		179BC66B24D2DB9D004B0F87 /* NewAddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179BC66A24D2DB9D004B0F87 /* NewAddTaskView.swift */; };
 		179E77012476604000BB77F8 /* TODOList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179E77002476604000BB77F8 /* TODOList.swift */; };
 		17A26C04249C1145004776EA /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C03249C1145004776EA /* GoalView.swift */; };
@@ -96,6 +98,8 @@
 		177F4FFA24CCDD69005CDD75 /* TextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorView.swift; sourceTree = "<group>"; };
 		1785804424A7DA05009343DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		178601CD24CC9CBC00FFEE0E /* NewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
+		17913FFD24D321E100EE8016 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		17913FFF24D3226D00EE8016 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		179BC66A24D2DB9D004B0F87 /* NewAddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddTaskView.swift; sourceTree = "<group>"; };
 		179E77002476604000BB77F8 /* TODOList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOList.swift; sourceTree = "<group>"; };
 		17A26C03249C1145004776EA /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
@@ -312,7 +316,6 @@
 				1758A35524CD6E7D0065CFA8 /* Calendar Views */,
 				171400AB2470EAE10001A625 /* Helper Views */,
 				17E7E7DB246CABE600596500 /* Profile Views */,
-				17E7E7DA246CABD800596500 /* Settings Views */,
 				17E7E7D9246CAB8900596500 /* Task Views */,
 				17E7E7D8246CAB7900596500 /* Goals Views */,
 				17E7E7D1246CAB0F00596500 /* Authentication Views */,
@@ -352,18 +355,13 @@
 			path = "Task Views";
 			sourceTree = "<group>";
 		};
-		17E7E7DA246CABD800596500 /* Settings Views */ = {
-			isa = PBXGroup;
-			children = (
-				177A215624B107F90031A665 /* CategoryEditorView.swift */,
-			);
-			path = "Settings Views";
-			sourceTree = "<group>";
-		};
 		17E7E7DB246CABE600596500 /* Profile Views */ = {
 			isa = PBXGroup;
 			children = (
+				177A215624B107F90031A665 /* CategoryEditorView.swift */,
 				17F0B93524D2EF950068E2EE /* HomeScreenView.swift */,
+				17913FFD24D321E100EE8016 /* AboutView.swift */,
+				17913FFF24D3226D00EE8016 /* SettingsView.swift */,
 			);
 			path = "Profile Views";
 			sourceTree = "<group>";
@@ -542,11 +540,13 @@
 				174DAC832493DD5C008CE35D /* LinkedGoalsView.swift in Sources */,
 				17A26C06249C1DE9004776EA /* GoalCardView2.swift in Sources */,
 				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,
+				17913FFE24D321E100EE8016 /* AboutView.swift in Sources */,
 				177F4FFB24CCDD69005CDD75 /* TextEditorView.swift in Sources */,
 				1758A3A024CD73C30065CFA8 /* Date+DaysFromToday.swift in Sources */,
 				17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */,
 				17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */,
 				17A26C0A249C4C25004776EA /* QuickSatisfactionView.swift in Sources */,
+				1791400024D3226D00EE8016 /* SettingsView.swift in Sources */,
 				176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */,
 				17E7E7A9246C921400596500 /* SceneDelegate.swift in Sources */,
 				17E7E7D0246CAB0600596500 /* LaunchView.swift in Sources */,
