@@ -15,30 +15,26 @@ struct HomeScreenView: View {
     @State var isShowingDashboard = false
     
     var body: some View {
-        ZStack {
-            ScrollView(showsIndicators: false) {
-                Color(UIColor.clear).frame(height: 330)
-                VStack(spacing: 27.0) {
-                    HStack {
-                        Group {
-                            if isShowingDashboard {
-                                CurrentTasksView()
-                            }else {
-                                SettingsView()
-                                    .animation(nil)
-                            }
+        ScrollView(showsIndicators: false) {
+            HeaderHomeView(isShowingDashboard: $isShowingDashboard)
+            
+            VStack(spacing: 27.0) {
+                HStack {
+                    Group {
+                        if isShowingDashboard {
+                            CurrentTasksView()
+                        }else {
+                            SettingsView()
+                                .animation(nil)
                         }
                     }
-                    .transition(.slide)
-                    .animation(.spring())
                 }
-                .padding(.bottom, 20)
+                .transition(.slide)
+                .animation(.spring())
             }
+            .padding(.bottom, 20)
+            Spacer()
             
-            VStack {
-                HeaderHomeView(isShowingDashboard: $isShowingDashboard)
-                Spacer()
-            }
         }
         .edgesIgnoringSafeArea(.top)
     }
