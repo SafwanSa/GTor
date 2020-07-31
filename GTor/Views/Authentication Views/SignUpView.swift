@@ -16,11 +16,18 @@ struct SignUpView: View {
     @State var alertMessage = ""
     @State var isLoading = false
     var isNewUser = false
-    
+    @Binding var isShowingLogin: Bool
+
     var body: some View {
         ZStack {
             VStack {                
                 VStack(spacing: 20.0) {
+                    Text(isNewUser ? "Sign up" : "Login")
+                        .font(.system(size: 32))
+                        .foregroundColor(Color("Primary"))
+                        .padding(.bottom, 40)
+                    
+                    
                     if isNewUser {
                         TextField("Name", text: $name)
                             .autocapitalization(.none)
@@ -28,7 +35,6 @@ struct SignUpView: View {
                             .background(Color("Level 0"))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .shadow()
-                        .keyboardAware()
                     }
                     
                     TextField("Email", text: $email)
@@ -38,7 +44,6 @@ struct SignUpView: View {
                         .background(Color("Level 0"))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .shadow()
-                    .keyboardAware()
 
                     
                     SecureField("Password (At least 6 digits)", text: $password)
@@ -47,7 +52,6 @@ struct SignUpView: View {
                         .background(Color("Level 0"))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .shadow()
-                    .keyboardAware()
 
                     
                     Text(alertMessage)
@@ -57,16 +61,27 @@ struct SignUpView: View {
                 
                 Button(action: isNewUser ? signup : signin) {
                     Text("Go")
-                        .font(.system(size: 25))
+                        .font(.system(size: 18))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
                         .background(Color("Button"))
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(Color("Level 0"))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .shadow()
                 }
                 .padding(.horizontal, 20)
+                Spacer()
+                Text("Back")
+                Image(systemName: "arrowtriangle.down.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(Color("Button"))
+                    .onTapGesture {
+                        self.isShowingLogin = false
+                }
             }
+            .padding(.vertical, 30)
             
             LoadingView(isLoading: self.$isLoading)
         }
@@ -104,6 +119,6 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        SignUpView(isShowingLogin: .constant(true))
     }
 }

@@ -155,7 +155,7 @@ struct NewLoginView: View {
             VStack {
                 Spacer()
                 if isStarted{
-                   SignUpView(isNewUser: isShowingSignup)
+                    SignUpView(isNewUser: isShowingSignup, isShowingLogin: .constant(true))
                     .padding(.horizontal, 200)
                     .padding(.vertical, 20)
                     .padding(.bottom, 200)
