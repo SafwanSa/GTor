@@ -16,35 +16,22 @@ struct LoginView: View {
     var body: some View {
         Group {
             if !isShowingLogin {
-                VStack(spacing: 20.0) {
-                    Text("Welcome Tester")
-                        .font(.largeTitle)
-                    Text("Please send me feedbacks for any issues. ")
-                    
-                    Text("NOTE: Ignore the Colors and the Authentication functionality")
-                        .multilineTextAlignment(.center)
-                
+                VStack {
                     Text("GTor")
                         .font(.largeTitle)
                         .foregroundColor(Color("Primary"))
-                    
-                    VStack(spacing: 30.0) {
-                        Button(action: { self.isShowingLogin = true ; self.isNewUser = true }) {
-                            Text("Sign up")
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        
-                        Button(action: { self.isShowingLogin = true ; self.isNewUser = false }) {
-                            Text("Sign in")
-                        }
-                        .buttonStyle(PlainButtonStyle())
-
+                    Spacer()
+                    VStack(spacing: 20.0) {
+                        LoginButton(text: "Create an account", background: Color("Button"), foreground: Color("Level 0"),
+                                    action: { self.isShowingLogin = true ; self.isNewUser = true })
+                        LoginButton(text: "Login", background: Color("Level 0"), foreground: Color("Button"),
+                                    action: { self.isShowingLogin = true ; self.isNewUser = false })
                     }
-                    .foregroundColor(Color("Primary"))
+                    .frame(width: screen.width-200)
                 }
-                .padding(.top)
+                .padding(.vertical, 70)
             }else {
-                SignUpView(isNewUser: self.isNewUser)
+                SignUpView(isNewUser: self.isNewUser, isShowingLogin: $isShowingLogin)
             }
         }
     }
@@ -53,5 +40,26 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+    }
+}
+
+struct LoginButton: View {
+    var text: String
+    var background: Color
+    var foreground: Color
+    var action: () -> ()
+    
+    var body: some View {
+        Button(action: action) {
+            Text(text)
+                .font(.system(size: 14))
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(background)
+                .foregroundColor(foreground)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .shadow(color: Color.black.opacity(0.12), radius: 15, x: 0, y: 7)
+                .elevation()
+        }
     }
 }

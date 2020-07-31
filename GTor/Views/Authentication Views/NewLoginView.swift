@@ -155,7 +155,7 @@ struct NewLoginView: View {
             VStack {
                 Spacer()
                 if isStarted{
-                   SignUpView(isNewUser: isShowingSignup)
+                    SignUpView(isNewUser: isShowingSignup, isShowingLogin: .constant(true))
                     .padding(.horizontal, 200)
                     .padding(.vertical, 20)
                     .padding(.bottom, 200)
@@ -169,8 +169,3 @@ struct NewLoginView: View {
     }
 }
 
-struct NewLoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewLoginView()
-    }
-}
