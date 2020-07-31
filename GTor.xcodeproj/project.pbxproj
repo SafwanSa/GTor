@@ -25,6 +25,7 @@
 		1758A3AD24CD759F0065CFA8 /* ElegantCalendar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1758A3AC24CD759F0065CFA8 /* ElegantCalendar.xcassets */; };
 		1762732C24748759000E9661 /* SubGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732B24748759000E9661 /* SubGoalView.swift */; };
 		1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732D24748D39000E9661 /* GoalHeaderView.swift */; };
+		1765AEF624D4554F00F061EB /* animated-task2.json in Resources */ = {isa = PBXBuildFile; fileRef = 1765AEF524D4554F00F061EB /* animated-task2.json */; };
 		176FE77E2474E02400B7FE82 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 176FE77D2474E02400B7FE82 /* Lottie */; };
 		176FE7842474E1A800B7FE82 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7832474E1A800B7FE82 /* LottieView.swift */; };
 		176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7852474E21100B7FE82 /* LoadingView.swift */; };
@@ -39,6 +40,8 @@
 		1791400224D3492B00EE8016 /* NewLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1791400124D3492B00EE8016 /* NewLoginView.swift */; };
 		179BC66B24D2DB9D004B0F87 /* NewAddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179BC66A24D2DB9D004B0F87 /* NewAddTaskView.swift */; };
 		179E77012476604000BB77F8 /* TODOList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179E77002476604000BB77F8 /* TODOList.swift */; };
+		179F18B924D44AE0007A2693 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F18B824D44AE0007A2693 /* WelcomeView.swift */; };
+		179F18BB24D44C54007A2693 /* animated-task1.json in Resources */ = {isa = PBXBuildFile; fileRef = 179F18BA24D44C54007A2693 /* animated-task1.json */; };
 		17A26C04249C1145004776EA /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C03249C1145004776EA /* GoalView.swift */; };
 		17A26C06249C1DE9004776EA /* GoalCardView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C05249C1DE9004776EA /* GoalCardView2.swift */; };
 		17A26C08249C3A16004776EA /* TaskCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C07249C3A16004776EA /* TaskCardView.swift */; };
@@ -91,6 +94,7 @@
 		1758A3AC24CD759F0065CFA8 /* ElegantCalendar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = ElegantCalendar.xcassets; path = "../../../../Library/Developer/Xcode/DerivedData/GTor-gswenturrmbgpbgdlvrwtuaujfmj/SourcePackages/checkouts/ElegantCalendar/ElegantCalendar.xcassets"; sourceTree = "<group>"; };
 		1762732B24748759000E9661 /* SubGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGoalView.swift; sourceTree = "<group>"; };
 		1762732D24748D39000E9661 /* GoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalHeaderView.swift; sourceTree = "<group>"; };
+		1765AEF524D4554F00F061EB /* animated-task2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "animated-task2.json"; path = "../../../../../animated-task2.json"; sourceTree = "<group>"; };
 		176FE7832474E1A800B7FE82 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		176FE7852474E21100B7FE82 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		176FE78B2474EBAA00B7FE82 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
@@ -104,6 +108,8 @@
 		1791400124D3492B00EE8016 /* NewLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoginView.swift; sourceTree = "<group>"; };
 		179BC66A24D2DB9D004B0F87 /* NewAddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddTaskView.swift; sourceTree = "<group>"; };
 		179E77002476604000BB77F8 /* TODOList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOList.swift; sourceTree = "<group>"; };
+		179F18B824D44AE0007A2693 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		179F18BA24D44C54007A2693 /* animated-task1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "animated-task1.json"; path = "../../../../../animated-task1.json"; sourceTree = "<group>"; };
 		17A26C03249C1145004776EA /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		17A26C05249C1DE9004776EA /* GoalCardView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCardView2.swift; sourceTree = "<group>"; };
 		17A26C07249C3A16004776EA /* TaskCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCardView.swift; sourceTree = "<group>"; };
@@ -181,6 +187,8 @@
 		176FE77F2474E07300B7FE82 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				1765AEF524D4554F00F061EB /* animated-task2.json */,
+				179F18BA24D44C54007A2693 /* animated-task1.json */,
 				176FE78B2474EBAA00B7FE82 /* loading.json */,
 			);
 			path = Animations;
@@ -331,6 +339,7 @@
 				17E7E7AA246C921400596500 /* LoginView.swift */,
 				17E7E7CB246CAAE800596500 /* SignUpView.swift */,
 				1791400124D3492B00EE8016 /* NewLoginView.swift */,
+				179F18B824D44AE0007A2693 /* WelcomeView.swift */,
 			);
 			path = "Authentication Views";
 			sourceTree = "<group>";
@@ -466,6 +475,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1765AEF624D4554F00F061EB /* animated-task2.json in Resources */,
+				179F18BB24D44C54007A2693 /* animated-task1.json in Resources */,
 				17E7E7B3246C921800596500 /* LaunchScreen.storyboard in Resources */,
 				17E7E7B0246C921800596500 /* Preview Assets.xcassets in Resources */,
 				1785804624A7DC24009343DB /* GoogleService-Info.plist in Resources */,
@@ -555,6 +566,7 @@
 				17E7E7A9246C921400596500 /* SceneDelegate.swift in Sources */,
 				17E7E7D0246CAB0600596500 /* LaunchView.swift in Sources */,
 				17265AAE249EEE2A00E384ED /* CalcService.swift in Sources */,
+				179F18B924D44AE0007A2693 /* WelcomeView.swift in Sources */,
 				1776E25B24D170E1009FDF0D /* NewTaskView.swift in Sources */,
 				17E7E7C6246CA6F400596500 /* Goal.swift in Sources */,
 				17A26C08249C3A16004776EA /* TaskCardView.swift in Sources */,

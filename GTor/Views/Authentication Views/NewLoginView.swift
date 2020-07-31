@@ -169,8 +169,3 @@ struct NewLoginView: View {
     }
 }
 
-struct NewLoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewLoginView()
-    }
-}
