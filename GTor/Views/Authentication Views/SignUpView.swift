@@ -91,7 +91,7 @@ struct SignUpView: View {
     
     func signup() {
         isLoading = true
-        self.authService.createUser(name: "Tester.", email: email, password: password) { (result) in
+        self.authService.createUser(name: name, email: email, password: password) { (result) in
             switch result {
             case .failure(let error):
                 self.alertMessage = error.localizedDescription
