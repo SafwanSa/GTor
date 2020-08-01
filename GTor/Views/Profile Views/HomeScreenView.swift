@@ -116,7 +116,7 @@ struct CurrentTasksView: View {
     }
     var body: some View {
         VStack(spacing: 27.0) {
-            DaysCardView(selectedDate: $selectedDate)
+            DaysCardView(selectedDate: $selectedDate).padding(.leading, 4)
             
             if isShowingTasks{
                 ForEach(tasks) { task in
