@@ -147,6 +147,7 @@ struct NewAddGoalView: View {
                 self.isShowingAlert = true
                 self.alertMessage = error.localizedDescription
             case .success(()):
+                CalcService.shared.calcProgress(for: self.mainGoal)
                 self.isLoading = false
                 self.presentationMode.wrappedValue.dismiss()
             }
