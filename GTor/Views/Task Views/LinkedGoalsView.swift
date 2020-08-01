@@ -23,42 +23,47 @@ struct LinkedGoalsView: View {
     
     var body: some View {
         NavigationView {
-            List(selection: $selectedGoalsIds) {
-                Section {
-                    ForEach(allGoals) {goal in
-                        Text(goal.name)
+            ZStack {
+                List(selection: $selectedGoalsIds) {
+                    Section {
+                        ForEach(allGoals) {goal in
+                            Text(goal.name)
+                        }
                     }
                 }
-            }
-            .environment(\.editMode, .constant(EditMode.active))
-            .listStyle(GroupedListStyle())
-            .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle("Linked Goals")
-            .navigationBarItems(leading:
-                Button(action: { self.selectedGoalsIds.removeAll() ; self.presentationMode.wrappedValue.dismiss() }) {
-                    Text("Cancel")
-                }
-                ,trailing:
-                Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-                    Text("Done")
-                }
-            )
-            .onAppear {
-                for goal in self.goalService.goals {
-                    if !goal.isSubGoal && goal.isDecomposed {
-                        if !self.goalService.getSubGoals(mainGoal: goal).isEmpty {
-                            for subGoal in self.goalService.getSubGoals(mainGoal: goal) {
-                                self.allGoals.append(.init(id: subGoal.id, name: goal.title + " -> \(subGoal.title)"))
+                .environment(\.editMode, .constant(EditMode.active))
+                .listStyle(GroupedListStyle())
+                .environment(\.horizontalSizeClass, .regular)
+                .navigationBarTitle("Linked Goals")
+                .navigationBarItems(leading:
+                    Button(action: { self.selectedGoalsIds.removeAll() ; self.presentationMode.wrappedValue.dismiss() }) {
+                        Text("Cancel")
+                    }
+                    ,trailing:
+                    Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
+                        Text("Done")
+                    }
+                )
+                    .onAppear {
+                        for goal in self.goalService.goals {
+                            if !goal.isSubGoal && goal.isDecomposed {
+                                if !self.goalService.getSubGoals(mainGoal: goal).isEmpty {
+                                    for subGoal in self.goalService.getSubGoals(mainGoal: goal) {
+                                        self.allGoals.append(.init(id: subGoal.id, name: goal.title + " -> \(subGoal.title)"))
+                                    }
+                                }
+                            }else if !goal.isSubGoal && !goal.isDecomposed {
+                                self.allGoals.append(.init(id: goal.id, name: goal.title))
                             }
                         }
-                    }else if !goal.isSubGoal && !goal.isDecomposed {
-                       self.allGoals.append(.init(id: goal.id, name: goal.title))
+                }
+                .onDisappear {
+                    for id in self.selectedGoalsIds {
+                        self.selectedGoals.append(id)
                     }
                 }
-            }
-            .onDisappear {
-                for id in self.selectedGoalsIds {
-                    self.selectedGoals.append(id)
+                if allGoals.isEmpty {
+                    NoDataView(title: "You do not have goals to link this task. ", actionTitle: "", action: {})
                 }
             }
         }

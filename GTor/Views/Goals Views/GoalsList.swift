@@ -164,6 +164,7 @@ struct NoDataView: View {
             }
             .background(Color("Button"))
             .clipShape(RoundedRectangle(cornerRadius: 10))
+            .opacity(actionTitle.isEmpty ? 0 : 1)
         }
         .opacity(0.8)
     }
