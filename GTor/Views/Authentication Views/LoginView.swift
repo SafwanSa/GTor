@@ -17,9 +17,10 @@ struct LoginView: View {
         Group {
             if !isShowingLogin {
                 VStack {
-                    Text("GTor")
-                        .font(.largeTitle)
-                        .foregroundColor(Color("Primary"))
+                    Image("Trans-Gtor-New-Logo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 300, height: 300)
                     Spacer()
                     VStack(spacing: 20.0) {
                         LoginButton(text: "Create an account", background: Color("Button"), foreground: Color("Level 0"),
