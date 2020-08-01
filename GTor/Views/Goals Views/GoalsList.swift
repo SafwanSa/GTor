@@ -12,17 +12,21 @@ struct GoalsList: View {
     @ObservedObject var userService = UserService.shared
     @ObservedObject var goalService = GoalService.shared
     @State var isAddGoalSelceted = false
-
+    
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    ForEach(goalService.getMainGoals()) { goal in
-                        NavigationLink(destination: NewGoalView(mainGoal: .constant(goal), goal: goal)) {
-                            NewGoalCardView(mainGoal: .dummy, goal: goal)
-                                .padding()
+                    if goalService.getMainGoals().isEmpty {
+                        NoDataView(title: "You do not have goals yet.", actionTitle: "Let's Start", action: { self.isAddGoalSelceted = true })
+                    }else {
+                        ForEach(goalService.getMainGoals()) { goal in
+                            NavigationLink(destination: NewGoalView(mainGoal: .constant(goal), goal: goal)) {
+                                NewGoalCardView(mainGoal: .dummy, goal: goal)
+                                    .padding()
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
-                        .buttonStyle(PlainButtonStyle())
                     }
                 }
                 .padding(.vertical, 20)
@@ -54,7 +58,7 @@ struct GoalsList: View {
 
 struct GoalsView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGoalCardView().padding()
+        GoalsList()
     }
 }
 
@@ -133,5 +137,34 @@ struct CategoryCardView: View {
             .padding(6)
             .background(Color(GTColor.init(rawValue: self.category.colorId ?? 0)!.color).opacity(0.5))
             .clipShape(RoundedRectangle(cornerRadius: 5))
+    }
+}
+
+struct NoDataView: View {
+    var title: String
+    var actionTitle: String
+    var action: () -> ()
+    
+    var body: some View {
+        VStack(spacing: 15.0) {
+            Image("mentor-shape")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 300, height: 300)
+                .offset(x: 10, y: 55)
+            Text(title)
+                .font(.system(size: 14))
+                .foregroundColor(Color.secondary)
+            Button(action: action) {
+                Text(actionTitle)
+                    .font(.system(size: 13))
+                    .foregroundColor(Color("Primary"))
+                    .padding(.vertical, 13)
+                    .padding(.horizontal, 20)
+            }
+            .background(Color("Button"))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+        .opacity(0.8)
     }
 }

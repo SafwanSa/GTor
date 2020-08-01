@@ -19,12 +19,16 @@ struct SubGoalsList: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
-                ForEach(goalService.getSubGoals(mainGoal: goal)) { goal in
-                    NavigationLink(destination: NewGoalView(mainGoal: self.$goal, goal: goal)) {
-                        NewGoalCardView(mainGoal: self.goal, goal: goal)
-                        .padding()
+                if goalService.getSubGoals(mainGoal: goal).isEmpty {
+                    NoDataView(title: "There are no sub goals added to this goal yet.", actionTitle: "Add sub goal", action: { self.isAddGoalSelceted = true })
+                }else {
+                    ForEach(goalService.getSubGoals(mainGoal: goal)) { goal in
+                        NavigationLink(destination: NewGoalView(mainGoal: self.$goal, goal: goal)) {
+                            NewGoalCardView(mainGoal: self.goal, goal: goal)
+                                .padding()
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .buttonStyle(PlainButtonStyle())
                 }
             }
             .padding(.vertical, 20)
