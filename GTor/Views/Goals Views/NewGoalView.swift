@@ -194,6 +194,8 @@ struct DateCardView: View {
                                 .foregroundColor(Color("Button"))
                                 .font(.callout)
                         }
+                        .opacity(0)//TODO
+
                     }
             ))
         }
