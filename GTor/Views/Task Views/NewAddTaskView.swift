@@ -86,10 +86,14 @@ struct NewAddTaskView: View {
                 .navigationBarItems(leading:
                     Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                         Text("Cancel")
+                        .foregroundColor(Color("Button"))
+                        .font(.callout)
                     }
                     ,trailing:
                     Button(action: createTask) {
                         Text("Add")
+                        .foregroundColor(Color("Button"))
+                        .font(.callout)
                     }
                 )
             }

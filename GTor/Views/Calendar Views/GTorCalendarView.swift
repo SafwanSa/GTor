@@ -13,13 +13,15 @@ struct GTorCalendarView: View {
     
     var body: some View {
         NavigationView {
-            MonthlyCalendarView(calendarManager: calendarManager)                .theme(.init(primary: Color("Secondry")))
+            MonthlyCalendarView(calendarManager: calendarManager)
+                .theme(.init(primary: Color("Button")))
                 .padding(.top, 20)
                 .navigationBarTitle("Deadline", displayMode: .inline)
                 .navigationBarItems(leading:
                     Button(action: {self.presentationMode.wrappedValue.dismiss()}) {
                         Text("Cancel")
                         .foregroundColor(Color("Button"))
+                        .font(.callout)
                     }
                     , trailing:
                     Button(action: {
@@ -28,7 +30,7 @@ struct GTorCalendarView: View {
                     }) {
                         Text("Save")
                             .foregroundColor(Color("Button"))
-                    }
+                            .font(.callout)                    }
             )
         }
     }

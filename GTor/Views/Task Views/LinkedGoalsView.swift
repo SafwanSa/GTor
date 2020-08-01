@@ -38,10 +38,14 @@ struct LinkedGoalsView: View {
                 .navigationBarItems(leading:
                     Button(action: { self.selectedGoalsIds.removeAll() ; self.presentationMode.wrappedValue.dismiss() }) {
                         Text("Cancel")
+                        .foregroundColor(Color("Button"))
+                        .font(.callout)
                     }
                     ,trailing:
                     Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                         Text("Done")
+                        .foregroundColor(Color("Button"))
+                        .font(.callout)
                     }
                 )
                     .onAppear {

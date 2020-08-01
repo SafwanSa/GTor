@@ -86,6 +86,7 @@ struct CategoryEditorView: View {
                                     self.color = GTColor(rawValue: category.colorId ?? 0)!
                                 }) {
                                 Text("Edit")
+                                    .foregroundColor(Color("Button"))
                                 }
                                 .buttonStyle(PlainButtonStyle())
 
@@ -100,6 +101,8 @@ struct CategoryEditorView: View {
                 .navigationBarItems(trailing:
                     Button(action: save) {
                         Text("Save")
+                        .foregroundColor(Color("Button"))
+                        .font(.callout)
                     }
                 )
                 

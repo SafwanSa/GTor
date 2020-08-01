@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UITableViewCell.appearance().backgroundColor = UIColor(named: "Level 0")
 //
 //        UINavigationBar.appearance().backgroundColor = UIColor(named: "Level 1")
-//        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: "Primary")]
-//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: "Primary")]
+        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: "Primary") ??  UIColor.black]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: "Primary") ?? UIColor.black]
         return true
     }
 

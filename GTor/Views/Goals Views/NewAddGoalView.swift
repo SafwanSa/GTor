@@ -100,10 +100,14 @@ struct NewAddGoalView: View {
                 .navigationBarItems(leading:
                     Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                         Text("Cancel")
+                        .foregroundColor(Color("Button"))
+                        .font(.callout)
                     }
                     ,trailing:
                     Button(action: !goal.isSubGoal ? createGoal : addGoal) {
                         Text("Add")
+                        .foregroundColor(Color("Button"))
+                        .font(.callout)
                     }
                 )
                     .listStyle(GroupedListStyle())
