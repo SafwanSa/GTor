@@ -12,17 +12,21 @@ struct GoalsList: View {
     @ObservedObject var userService = UserService.shared
     @ObservedObject var goalService = GoalService.shared
     @State var isAddGoalSelceted = false
-
+    
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    ForEach(goalService.getMainGoals()) { goal in
-                        NavigationLink(destination: NewGoalView(mainGoal: .constant(goal), goal: goal)) {
-                            NewGoalCardView(mainGoal: .dummy, goal: goal)
-                                .padding()
+                    if goalService.getMainGoals().isEmpty {
+                        NoDataView(title: "You do not have goals yet.", actionTitle: "Let's Start", action: { self.isAddGoalSelceted = true })
+                    }else {
+                        ForEach(goalService.getMainGoals()) { goal in
+                            NavigationLink(destination: NewGoalView(mainGoal: .constant(goal), goal: goal)) {
+                                NewGoalCardView(mainGoal: .dummy, goal: goal)
+                                    .padding()
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
-                        .buttonStyle(PlainButtonStyle())
                     }
                 }
                 .padding(.vertical, 20)
@@ -99,32 +103,28 @@ struct NewGoalCardView: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(color: Color("Primary").opacity(0.12), radius: 10, x: 0, y: 7)
         .overlay(
-            ProgressBarView(color1: Color("Level 3"), color2: Color.red, percentage: self.goal.satisfaction, fullWidth: 351, width: 343)
+            ProgressBar(value: self.goal.satisfaction/100)
         )
     }
 }
 
-struct ProgressBarView: View {
-    var color1: Color
-    var color2: Color
-    var percentage: Double
-    var fullWidth: Double
-    var width: Double
+struct ProgressBar: View {
+    var value: Double
+    
     var body: some View {
-        ZStack {
-            HStack {
-                color1
-                Spacer()
-            }
-            HStack {
-                color2
-                    .frame(width: CGFloat((percentage / 100) * width))
-                Spacer()
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Rectangle().frame(width: geometry.size.width , height: geometry.size.height)
+                    .opacity(0.3)
+                    .foregroundColor(Color("Primary"))
+                
+                Rectangle().frame(width: min(CGFloat(self.value)*geometry.size.width, geometry.size.width), height: geometry.size.height)
+                    .foregroundColor(Color("Primary"))
+                    .animation(.linear)
             }
         }
-        .frame(width: CGFloat(fullWidth), height: 8)
-        .shadow(color: Color("Primary").opacity(0.12), radius: 10, x: 0, y: 7)
-        .offset(x: 4, y: 50)
+        .frame(height: 5)
+        .offset(y: 51)
     }
 }
 
@@ -137,5 +137,35 @@ struct CategoryCardView: View {
             .padding(6)
             .background(Color(GTColor.init(rawValue: self.category.colorId ?? 0)!.color).opacity(0.5))
             .clipShape(RoundedRectangle(cornerRadius: 5))
+    }
+}
+
+struct NoDataView: View {
+    var title: String
+    var actionTitle: String
+    var action: () -> ()
+    
+    var body: some View {
+        VStack(spacing: 15.0) {
+            Image("mentor-shape")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 300, height: 300)
+                .offset(x: 10, y: 55)
+            Text(title)
+                .font(.system(size: 14))
+                .foregroundColor(Color.secondary)
+            Button(action: action) {
+                Text(actionTitle)
+                    .font(.system(size: 13))
+                    .foregroundColor(Color("Primary"))
+                    .padding(.vertical, 13)
+                    .padding(.horizontal, 20)
+            }
+            .background(Color("Button"))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .opacity(actionTitle.isEmpty ? 0 : 1)
+        }
+        .opacity(0.8)
     }
 }

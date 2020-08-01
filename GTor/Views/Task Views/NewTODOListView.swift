@@ -18,18 +18,37 @@ struct NewTODOListView: View {
     @State var isAddTaskSelected = false
     @State var selectedTask = Task.dummy
     
+    var isShowingComplete: Bool {
+        !taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }.isEmpty
+    }
+    var isShowingPComplete: Bool {
+        !taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) }.isEmpty
+    }
+    var isShowingNComplete: Bool {
+        !taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }.isEmpty
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
                 ScrollView(showsIndicators: false) {
+                    if taskService.tasks.isEmpty {
+                        NoDataView(title: "You do not have tasks yet.", actionTitle: "Let's Add One", action: { self.isAddTaskSelected = true })
+                    }
                     VStack(alignment: .leading, spacing: 12.0) {
-                        TODOView(selectedTask: $selectedTask)
-                        
-                        RowListView(title: "completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }, selectedTask: $selectedTask)
-                        
-                        RowListView(title: "partially completed", tasks: taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) }, selectedTask: $selectedTask)
-                        
-                        RowListView(title: "not completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }, selectedTask: $selectedTask)
+                        if !taskService.tasks.isEmpty {
+                            TODOView(selectedTask: $selectedTask)
+                            
+                            if isShowingComplete {
+                                RowListView(title: "completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }, selectedTask: $selectedTask)
+                            }
+                            if isShowingPComplete {
+                                RowListView(title: "partially completed", tasks: taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) }, selectedTask: $selectedTask)
+                            }
+                            if isShowingNComplete {
+                                RowListView(title: "not completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }, selectedTask: $selectedTask)
+                            }
+                        }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -53,8 +72,8 @@ struct NewTODOListView: View {
                                                    importance: .normal))
                     }
                 )
-                .blur(radius: selectedTask == Task.dummy ? 0 : 2)
-                .disabled(selectedTask != Task.dummy)
+                    .blur(radius: selectedTask == Task.dummy ? 0 : 2)
+                    .disabled(selectedTask != Task.dummy)
                 
                 QuickSatisfactionView(selectedTask: $selectedTask)
             }
@@ -64,7 +83,7 @@ struct NewTODOListView: View {
 
 struct NewTODOListView_Previews: PreviewProvider {
     static var previews: some View {
-        NewTODOListView()
+        NewTaskCardView(task: Task.dummy, selectedTask: .constant(.dummy))
     }
 }
 
@@ -212,32 +231,33 @@ struct NewTaskCardView: View {
                     .frame(width: 24, height: 24)
             }
             
-            VStack(alignment: .leading, spacing: 2.0) {
-                Text(task.title)
-                    .strikethrough(task.isSatisfied, color: Color("Primary"))
-                    .font(.system(size: 15))
-                    .offset(y: 13)
-                
-                Spacer()
-                
-                HStack {
-                    Spacer()
-                    if task.dueDate != nil {
-                        Text("\(task.dueDate!, formatter: dateFormatter2)")
-                            .foregroundColor(Color("Secondry"))
-                            .font(.system(size: 10))
-                    }
-                }
-            }
-            .foregroundColor(Color("Primary"))
+            Text(task.title)
+                .strikethrough(task.isSatisfied, color: Color("Primary"))
+                .font(.system(size: 15))
             
             Spacer()
             
-
+            VStack(alignment: .trailing) {
+                Text(task.importance.rawValue)
+                    .font(.system(size: 12))
+                    .padding(6)
+                    .background(Color("Secondry").opacity(0.5))
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .elevation()
+                
+                if task.dueDate != nil {
+                    Spacer()
+                    Text("\(task.dueDate!, formatter: dateFormatter2)")
+                        .foregroundColor(Color("Secondry"))
+                        .font(.system(size: 10))
+                }
+            }
+            .foregroundColor(Color("Primary"))
         }
         .frame(height: 45)
         .padding(.vertical, 4)
         .padding(.leading, 10)
+        .padding(.trailing, 3)
         .background(Color("Level 0"))
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(color: Color("Primary").opacity(0.12), radius: 10, x: 0, y: 7)

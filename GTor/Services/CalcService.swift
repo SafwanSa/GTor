@@ -22,6 +22,7 @@ class CalcService {
             sum+=subGoal.satisfaction
         }
         goalCopy.satisfaction = (sum / ( sum == 0 ? 1 : Double(subGoals.count)))
+        print(goalCopy.satisfaction)
         GoalService.shared.saveGoal(goal: goalCopy) { result in
             switch result {
             case .failure(let error):

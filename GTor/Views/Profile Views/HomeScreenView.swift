@@ -102,17 +102,65 @@ struct HeaderHomeView: View {
 }
 
 struct CurrentTasksView: View {
+    @ObservedObject var userService = UserService.shared
     @ObservedObject var taskService = TaskService.shared
     @State var selectedDate: Date = Date()
+    @State var isShowingAddTask = false
     
+    var tasks: [Task] {
+        taskService.tasks.filter { !$0.isSatisfied && ($0.dueDate == nil ? true : $0.dueDate!.fullDate == self.selectedDate.fullDate) }
+    }
+    
+    var isShowingTasks: Bool {
+        !tasks.isEmpty
+    }
     var body: some View {
         VStack(spacing: 27.0) {
             DaysCardView(selectedDate: $selectedDate)
             
-            ForEach(taskService.tasks.filter { !$0.isSatisfied && ($0.dueDate == nil ? true : $0.dueDate!.fullDate == self.selectedDate.fullDate) }) { task in
-                NewTaskCardView(task: task, selectedTask: .constant(Task.dummy))
-                    .padding(.horizontal)
+            if isShowingTasks{
+                ForEach(tasks) { task in
+                    NewTaskCardView(task: task, selectedTask: .constant(Task.dummy))
+                        .padding(.horizontal)
+                }
+            }else {
+                NoTaskView(title: "You do not have tasks on this day. ", actionTitle: "Add Task", action: { self.isShowingAddTask = true })
             }
         }
+        .sheet(isPresented: $isShowingAddTask) {
+            NewAddTaskView(task: .init(uid: self.userService.user.uid,
+                                       title: "",
+                                       note: "",
+                                       satisfaction: 0,
+                                       isSatisfied: false,
+                                       linkedGoalsIds: [],
+                                       importance: .normal),
+                           deadline: self.selectedDate, isHavingDeadline: true)
+        }
+    }
+}
+
+struct NoTaskView: View {
+    var title: String
+    var actionTitle: String
+    var action: () -> ()
+    
+    var body: some View {
+        VStack(spacing: 15.0) {
+            Text(title)
+                .font(.system(size: 14))
+                .foregroundColor(Color.secondary)
+            Button(action: action) {
+                Text(actionTitle)
+                    .font(.system(size: 13))
+                    .foregroundColor(Color("Primary"))
+                    .padding(.vertical, 13)
+                    .padding(.horizontal, 20)
+            }
+            .background(Color("Button"))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+        .opacity(0.8)
+        .padding(.top)
     }
 }

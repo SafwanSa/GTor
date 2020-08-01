@@ -53,8 +53,8 @@ struct NewGoalView: View {
             .navigationBarItems(trailing:
                 Button(action: saveGoal) {
                     Text("Save")
-                    .font(.callout)
-                    .foregroundColor(Color("Button"))
+                        .font(.callout)
+                        .foregroundColor(Color("Button"))
                 }
                 .opacity(isShowingSave ? 1 : 0)
             )
@@ -92,7 +92,7 @@ struct NewGoalHeaderView: View {
     @Binding var goal: Goal
     @State var isShowingTitleEditor = false
     @State var isShowingNoteEditor = false
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 15.0) {
             HStack {
@@ -137,7 +137,7 @@ struct NewGoalHeaderView: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .elevation()
         .overlay(
-            ProgressBarView(color1: Color("Level 3"), color2: Color.red, percentage: self.goal.satisfaction, fullWidth: 351, width: 343)
+            ProgressBar(value: self.goal.satisfaction/100)
         )
     }
 }
