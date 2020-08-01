@@ -56,7 +56,7 @@ struct SettingsView: View {
                 }
                 VStack {
                     Button(action: self.authService.signOutUser) {
-                        SettingsRowButtonView(text: "Logout", icon: "", isHavingDestination: false)
+                        SettingsRowButtonView(text: "Logout", icon: "arrow.down.left.circle.fill", isHavingDestination: false)
                     }
 //                    Button(action: {}) {
 //                        SettingsRowButtonView(text: "Delete Account", isHavingDestination: false)
