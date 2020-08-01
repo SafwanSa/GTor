@@ -47,7 +47,7 @@ class TaskService: ObservableObject {
                 completion(.failure(error))
             case .success(let tasks):
                 DispatchQueue.main.async {
-                    self.tasks = tasks
+                    self.tasks = tasks.sorted { $0.importance.value > $1.importance.value }
                     completion(.success(()))
                 }
             }

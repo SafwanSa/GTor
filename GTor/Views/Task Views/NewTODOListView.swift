@@ -18,18 +18,37 @@ struct NewTODOListView: View {
     @State var isAddTaskSelected = false
     @State var selectedTask = Task.dummy
     
+    var isShowingComplete: Bool {
+        !taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }.isEmpty
+    }
+    var isShowingPComplete: Bool {
+        !taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) }.isEmpty
+    }
+    var isShowingNComplete: Bool {
+        !taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }.isEmpty
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
                 ScrollView(showsIndicators: false) {
+                    if taskService.tasks.isEmpty {
+                        NoDataView(title: "You do not have tasks yet.", actionTitle: "Let's Add One", action: { self.isAddTaskSelected = true })
+                    }
                     VStack(alignment: .leading, spacing: 12.0) {
-                        TODOView(selectedTask: $selectedTask)
-                        
-                        RowListView(title: "completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }, selectedTask: $selectedTask)
-                        
-                        RowListView(title: "partially completed", tasks: taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) }, selectedTask: $selectedTask)
-                        
-                        RowListView(title: "not completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }, selectedTask: $selectedTask)
+                        if !taskService.tasks.isEmpty {
+                            TODOView(selectedTask: $selectedTask)
+                            
+                            if isShowingComplete {
+                                RowListView(title: "completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }, selectedTask: $selectedTask)
+                            }
+                            if isShowingPComplete {
+                                RowListView(title: "partially completed", tasks: taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) }, selectedTask: $selectedTask)
+                            }
+                            if isShowingNComplete {
+                                RowListView(title: "not completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }, selectedTask: $selectedTask)
+                            }
+                        }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
