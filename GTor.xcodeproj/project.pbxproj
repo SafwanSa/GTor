@@ -196,6 +196,7 @@
 		178601CA24CC44BD00FFEE0E /* Old Views */ = {
 			isa = PBXGroup;
 			children = (
+				17E7E7D6246CAB5A00596500 /* HomeView.swift */,
 				174DAC802493D92F008CE35D /* AddTaskView.swift */,
 				17C60F532492633700A3DEFF /* TaskView.swift */,
 				179E77002476604000BB77F8 /* TODOList.swift */,
@@ -310,7 +311,6 @@
 			isa = PBXGroup;
 			children = (
 				17E7E7CF246CAB0600596500 /* LaunchView.swift */,
-				17E7E7D6246CAB5A00596500 /* HomeView.swift */,
 				17CC64F824A6B85900B81438 /* Unused Views and files */,
 				178601CA24CC44BD00FFEE0E /* Old Views */,
 				1758A35524CD6E7D0065CFA8 /* Calendar Views */,

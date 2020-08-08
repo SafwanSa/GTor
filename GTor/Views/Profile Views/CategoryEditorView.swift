@@ -71,7 +71,7 @@ struct CategoryEditorView: View {
                                 }
                                 .buttonStyle(PlainButtonStyle())
                                 
-                                Color(GTColor.init(rawValue: category.colorId ?? 0)!.color)
+                                Color(GTColor.init(rawValue: category.colorId ?? 0)!.color).opacity(0.7)
                                     .frame(width: 30, height: 30)
                                     .clipShape(RoundedRectangle(cornerRadius: 5))
                                 

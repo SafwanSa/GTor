@@ -26,7 +26,7 @@ struct TabBar: View {
             TabView {
                 HomeScreenView().tabItem {
                     Text("Home")
-                    Image(systemName: "text.justify")
+                    Image(systemName: "house")
                 }
                 GoalsList().tabItem {
                     Text("Goals")
@@ -34,8 +34,8 @@ struct TabBar: View {
                 }
                 
                 NewTODOListView().tabItem {
-                    Text("TODO")
-                    Image(systemName: "doc.text")
+                    Text("Tasks")
+                    Image(systemName: "rectangle.grid.1x2")
                 }
             }
             .accentColor(Color("Primary"))
