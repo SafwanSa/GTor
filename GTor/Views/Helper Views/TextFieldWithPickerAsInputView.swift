@@ -30,8 +30,9 @@ struct TextFieldWithPickerAsInputView : UIViewRepresentable {
         textField.placeholder = placeholder
         textField.inputView = picker
         //            textField.backgroundColor = .secondarySystemFill
-        textField.textAlignment = .center
-        textField.font = .systemFont(ofSize: 20)
+        textField.textColor = UIColor(named: "Primary")
+        textField.textAlignment = .left
+        textField.font = .systemFont(ofSize: 17)
         textField.delegate = context.coordinator
         return textField
     }

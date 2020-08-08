@@ -18,6 +18,9 @@ enum AuthError: Error {
     case emailAlreadyInUse
     case missingEmail
     case weakPassword
+    case incorrectPassword
+    case accountDoesNotExist
+    case unknownError
 }
 
 extension AuthError: LocalizedError {
@@ -32,11 +35,17 @@ extension AuthError: LocalizedError {
         case .tooManyRequests:
             return NSLocalizedString("Too Many Requests", comment: "")
         case .emailAlreadyInUse:
-            return NSLocalizedString("Used Email", comment: "")
+            return NSLocalizedString("This email is used", comment: "")
         case .missingEmail:
             return NSLocalizedString("Email Is Missing", comment: "")
         case .weakPassword:
-            return NSLocalizedString("Weeak Password", comment: "")
+            return NSLocalizedString("Weak Password", comment: "")
+       case .incorrectPassword:
+            return NSLocalizedString("Incorrect Password", comment: "")
+        case .accountDoesNotExist:
+             return NSLocalizedString("Account does not exist", comment: "")
+        case .unknownError:
+             return NSLocalizedString("Please contact us on Twitter", comment: "")
         }
     }
 }

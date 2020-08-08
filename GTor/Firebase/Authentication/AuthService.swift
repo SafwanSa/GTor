@@ -13,19 +13,36 @@ class AuthService: ObservableObject {
     static var shared = AuthService()
     
     
-    func createUser(name: String, email: String, password: String, completion: @escaping (Result<Void, Error>)->()){
-        Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
-            if let error = err {
-                completion(.failure(error))
+    func createUser(name: String, gender: Gender, email: String, password: String, completion: @escaping (Result<Void, Error>)->()){
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            var newError:NSError
+            if let err = error {
+                newError = err as NSError
+                var authError: AuthError?
+                switch newError.code {
+                    case 17008:
+                        authError = .invalidEmail
+                    case 17007:
+                        authError = .emailAlreadyInUse
+                    case 17034:
+                        authError = .missingEmail
+                    case 17026:
+                        authError = .weakPassword
+                    case 17010:
+                        authError = .tooManyRequests
+                    default:
+                        authError = .unknownError
+                }
+                completion(.failure(authError!))
                 return
             }
             
             guard let _ = result?.user, let result = result else {
-                completion(.failure(err!))
+                completion(.failure(error!))
                 return
             }
             
-            let user = User(uid: result.user.uid, name: name , email: email)
+            let user = User(uid: result.user.uid, name: name, gender: gender , email: email)
             FirestoreService.shared.saveDocument(collection: FirestoreKeys.Collection.users, documentId: user.uid, model: user) { completion($0) }
             
             let categoriesData: [Category] = [
@@ -45,8 +62,23 @@ class AuthService: ObservableObject {
     
     func signInUser(email: String, password: String, completion: @escaping (Result<Void, Error>)->()){
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-            if let error = error {
-                completion(.failure(error))
+            var newError:NSError
+            if let err = error {
+                newError = err as NSError
+                var authError: AuthError?
+                switch newError.code {
+                    case 17009:
+                        authError = .incorrectPassword
+                    case 17008:
+                        authError = .invalidEmail
+                    case 17011:
+                        authError = .accountDoesNotExist
+                    case 17010:
+                        authError = .tooManyRequests
+                    default:
+                        authError = .unknownError
+                }
+                completion(.failure(authError!))
                 return
             }
             

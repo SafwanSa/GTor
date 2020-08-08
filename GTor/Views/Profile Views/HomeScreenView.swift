@@ -65,7 +65,7 @@ struct HeaderHomeView: View {
                             .font(.system(size: 12))
                     }
                     Spacer()
-                    Image("female-icon")
+                    Image("\(userService.user.gender?.rawValue.lowercased() ?? "male")-icon")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 162, height: 78)
