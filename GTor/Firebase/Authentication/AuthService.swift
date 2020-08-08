@@ -13,7 +13,7 @@ class AuthService: ObservableObject {
     static var shared = AuthService()
     
     
-    func createUser(name: String, email: String, password: String, completion: @escaping (Result<Void, Error>)->()){
+    func createUser(name: String, gender: Gender, email: String, password: String, completion: @escaping (Result<Void, Error>)->()){
         Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
             if let error = err {
                 completion(.failure(error))
@@ -25,7 +25,7 @@ class AuthService: ObservableObject {
                 return
             }
             
-            let user = User(uid: result.user.uid, name: name , email: email)
+            let user = User(uid: result.user.uid, name: name, gender: gender , email: email)
             FirestoreService.shared.saveDocument(collection: FirestoreKeys.Collection.users, documentId: user.uid, model: user) { completion($0) }
             
             let categoriesData: [Category] = [

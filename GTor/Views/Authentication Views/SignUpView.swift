@@ -10,19 +10,20 @@ import SwiftUI
 
 struct SignUpView: View {
     @ObservedObject var authService = AuthService.shared
+    @State var gender : String = ""
+    @State var arrGenders = ["Male","Female"]
+    @State var selectionIndex = 0
+    
+    
     @State var email = ""
     @State var password = ""
     @State var name = ""
     @State var alertMessage = ""
     @State var isLoading = false
-    var isNewUser = false
+    var isNewUser = true
     @Binding var isShowingLogin: Bool
     var isDisableGo: Bool {
-        print(password.count < 6)
-        print((name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && isNewUser))
-        print(email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-        
-        return (password.count < 6 || (name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && isNewUser) || email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+        return (password.count < 6 || (name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && isNewUser) || email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || (gender.isEmpty && isNewUser))
 
     }
     var body: some View {
@@ -42,6 +43,17 @@ struct SignUpView: View {
                             .background(Color("Level 0"))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .shadow()
+                        
+                        TextFieldWithPickerAsInputView(data: self.arrGenders,
+                                                       placeholder: "Gender",
+                                                       selectionIndex: self.$selectionIndex,
+                                                       text: self.$gender)
+                            
+                        .frame(height: 20)
+                        .padding()
+                        .background(Color("Level 0"))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .shadow()
                     }
                     
                     TextField("Email", text: $email)
@@ -65,6 +77,7 @@ struct SignUpView: View {
                         .multilineTextAlignment(.center)
                 }
                 .padding(20)
+                .foregroundColor(Color("Primary"))
                 
                 Button(action: isNewUser ? signup : signin) {
                     Text("Go")
@@ -100,8 +113,9 @@ struct SignUpView: View {
     
     func signup() {
         name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let gender = Gender.init(rawValue: self.gender) else { return }
         isLoading = true
-        self.authService.createUser(name: name, email: email, password: password) { (result) in
+        self.authService.createUser(name: name, gender: gender, email: email, password: password) { (result) in
             switch result {
             case .failure(let error):
                 self.alertMessage = error.localizedDescription
