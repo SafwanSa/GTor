@@ -24,8 +24,10 @@ struct SignUpView: View {
     @Binding var isShowingLogin: Bool
     var isDisableGo: Bool {
         return (password.count < 6 || (name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && isNewUser) || email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || (gender.isEmpty && isNewUser))
-
+        
     }
+    @State var isShowingForgotPassword = false
+    
     var body: some View {
         ZStack {
             VStack {                
@@ -49,11 +51,11 @@ struct SignUpView: View {
                                                        selectionIndex: self.$selectionIndex,
                                                        text: self.$gender)
                             
-                        .frame(height: 20)
-                        .padding()
-                        .background(Color("Level 0"))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .shadow()
+                            .frame(height: 20)
+                            .padding()
+                            .background(Color("Level 0"))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .shadow()
                     }
                     
                     TextField("Email", text: $email)
@@ -63,7 +65,7 @@ struct SignUpView: View {
                         .background(Color("Level 0"))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .shadow()
-
+                    
                     
                     SecureField("Password (At least 6 digits)", text: $password)
                         .autocapitalization(.none)
@@ -71,8 +73,21 @@ struct SignUpView: View {
                         .background(Color("Level 0"))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .shadow()
-
                     
+                    
+                    if !isNewUser {
+                        Text("Forgot Password?")
+                            .underline()
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .onTapGesture {
+                                self.isShowingForgotPassword = true
+                        }
+                        .sheet(isPresented: $isShowingForgotPassword) {
+                            ForgetPasswordView()
+                        }
+                        
+                        
+                    }
                     Text(alertMessage)
                         .multilineTextAlignment(.center)
                 }

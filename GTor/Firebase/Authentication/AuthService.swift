@@ -104,8 +104,14 @@ class AuthService: ObservableObject {
         
     }
     
-    func forgotPassword(){
-        
+    func forgotPassword(withEmail: String, completion: @escaping (Result<Void, Error>)->()) {
+        Auth.auth().sendPasswordReset(withEmail: withEmail) { error in
+            if let err = error {
+                completion(.failure(err))
+                return
+            }
+            completion(.success(()))
+        }
     }
     
     func changePassword(){
