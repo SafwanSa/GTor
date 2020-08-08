@@ -17,7 +17,14 @@ struct SignUpView: View {
     @State var isLoading = false
     var isNewUser = false
     @Binding var isShowingLogin: Bool
+    var isDisableGo: Bool {
+        print(password.count < 6)
+        print((name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && isNewUser))
+        print(email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+        
+        return (password.count < 6 || (name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && isNewUser) || email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 
+    }
     var body: some View {
         ZStack {
             VStack {                
@@ -70,6 +77,8 @@ struct SignUpView: View {
                         .shadow()
                 }
                 .padding(.horizontal, 20)
+                .opacity(isDisableGo ? 0.5 : 1)
+                .disabled(isDisableGo)
                 Spacer()
                 Text("Back")
                 Image(systemName: "arrowtriangle.down.fill")
@@ -90,6 +99,7 @@ struct SignUpView: View {
     
     
     func signup() {
+        name = name.trimmingCharacters(in: .whitespacesAndNewlines)
         isLoading = true
         self.authService.createUser(name: name, email: email, password: password) { (result) in
             switch result {
