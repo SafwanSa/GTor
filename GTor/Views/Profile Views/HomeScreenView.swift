@@ -106,6 +106,7 @@ struct CurrentTasksView: View {
     @ObservedObject var taskService = TaskService.shared
     @State var selectedDate: Date = Date()
     @State var isShowingAddTask = false
+    @State var selectedTask: Task = .dummy
     
     var tasks: [Task] {
         taskService.tasks.filter { !$0.isSatisfied && ($0.dueDate == nil ? true : $0.dueDate!.fullDate == self.selectedDate.fullDate) }
@@ -115,27 +116,33 @@ struct CurrentTasksView: View {
         !tasks.isEmpty
     }
     var body: some View {
-        VStack(spacing: 27.0) {
-            DaysCardView(selectedDate: $selectedDate).padding(.leading, 4)
-            
-            if isShowingTasks{
-                ForEach(tasks) { task in
-                    NewTaskCardView(task: task, selectedTask: .constant(Task.dummy))
-                        .padding(.horizontal)
+        ZStack {
+            VStack(spacing: 27.0) {
+                DaysCardView(selectedDate: $selectedDate).padding(.leading, 4)
+                
+                if isShowingTasks{
+                    ForEach(tasks) { task in
+                        NewTaskCardView(task: task, selectedTask: self.$selectedTask)
+                            .padding(.horizontal)
+                    }
+                }else {
+                    NoTaskView(title: "You do not have tasks on this day. ", actionTitle: "Add Task", action: { self.isShowingAddTask = true })
                 }
-            }else {
-                NoTaskView(title: "You do not have tasks on this day. ", actionTitle: "Add Task", action: { self.isShowingAddTask = true })
             }
-        }
-        .sheet(isPresented: $isShowingAddTask) {
-            NewAddTaskView(task: .init(uid: self.userService.user.uid,
-                                       title: "",
-                                       note: "",
-                                       satisfaction: 0,
-                                       isSatisfied: false,
-                                       linkedGoalsIds: [],
-                                       importance: .normal),
-                           deadline: self.selectedDate, isHavingDeadline: true)
+            .sheet(isPresented: $isShowingAddTask) {
+                NewAddTaskView(task: .init(uid: self.userService.user.uid,
+                                           title: "",
+                                           note: "",
+                                           satisfaction: 0,
+                                           isSatisfied: false,
+                                           linkedGoalsIds: [],
+                                           importance: .normal),
+                               deadline: self.selectedDate, isHavingDeadline: true)
+            }
+            .blur(radius: selectedTask == Task.dummy ? 0 : 2)
+            .disabled(selectedTask != Task.dummy)
+            
+            QuickSatisfactionView(selectedTask: $selectedTask)
         }
     }
 }
