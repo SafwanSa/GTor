@@ -62,7 +62,7 @@ struct NewAddTaskView: View {
                         }
                     }
                     
-                    Section {
+                    Section(footer: Text("You can link your task to some of your goals, and these goals will progress if you accomplish the task that is linked to them. ")) {
                         HStack {
                             Text("Linked Goals")
                             Spacer()
