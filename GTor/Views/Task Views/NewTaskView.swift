@@ -41,7 +41,7 @@ struct NewTaskView: View {
                 }
                 .padding()
             }
-            .navigationBarTitle("Goal", displayMode: .inline)
+            .navigationBarTitle("Task", displayMode: .inline)
             .navigationBarItems(trailing:
                 Button(action: saveGoal) {
                     Text("Save")
