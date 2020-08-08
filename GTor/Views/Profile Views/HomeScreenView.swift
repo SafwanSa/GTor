@@ -56,7 +56,7 @@ struct HeaderHomeView: View {
         VStack {
             VStack {
                 HStack {
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 5.0) {
                         Text("Hello,")
                             .font(.system(size: 18))
                         Text(userService.user.name)
