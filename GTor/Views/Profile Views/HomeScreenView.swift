@@ -75,20 +75,31 @@ struct HeaderHomeView: View {
                 
                 
                 HStack(spacing: 70.0) {
-                    Text("DASHBOARD")
-                        .onTapGesture {
-                            self.isShowingDashboard = true
+                    VStack {
+                        Text("DASHBOARD")
+                        Color("Button").opacity(isShowingDashboard ? 1 : 0)
+                            .frame(width: 80, height: 3)
+                            .foregroundColor(Color(isShowingDashboard ? "Button" : "Primary"))
                     }
-                    .foregroundColor(Color(isShowingDashboard ? "Button" : "Primary"))
+                    .onTapGesture {
+                        self.isShowingDashboard = true
+                    }
                     
-                    Text("SETTINGS")
-                        .onTapGesture {
-                            self.isShowingDashboard = false
+                    
+                    
+                    VStack {
+                        Text("SETTINGS")
+                        Color("Button").opacity(isShowingDashboard ? 0 : 1)
+                            .frame(width: 80, height: 3)
+                            .foregroundColor(Color(isShowingDashboard ? "Primary" : "Button"))
                     }
-                    .foregroundColor(Color(isShowingDashboard ? "Primary" : "Button"))
+                    .onTapGesture {
+                        self.isShowingDashboard = false
+                    }
                 }
                 .font(.system(size: 14))
                 .padding(.top, 25)
+                .offset(y: 21)
             }
             .foregroundColor(Color("Primary"))
             .padding(.horizontal, 29)
