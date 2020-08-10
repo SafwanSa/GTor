@@ -21,11 +21,11 @@ struct AboutView: View {
                         Text("GTor")
                             .foregroundColor(Color("Primary"))
                             .font(.title)
-                        Text("Organize your life")
+                        Text(NSLocalizedString("Organize your life", comment: ""))
                             .font(.callout)
                             .foregroundColor(Color("Secondry"))
                         
-                        Text("Version \(String(format: "%.1f", 1.0))")
+                        Text("\(NSLocalizedString("Version", comment: "")) \(String(format: "%.1f", 1.0))")
                         .font(.caption)
                         .foregroundColor(Color("Button"))
                     }
@@ -33,11 +33,11 @@ struct AboutView: View {
 
                     
                     VStack(spacing: 15.0) {
-                        Text("GTor is a goal tracker that will help you to organize your life by tracking your goals. You can see your goals' progress and categorize them by tags. ")
+                        Text(NSLocalizedString("GTor is a goal tracker that will help you to organize your life by tracking your goals. You can see your goals' progress and categorize them by tags. ", comment: ""))
                         .lineLimit(4)
 
 
-                        Text("And to boost your productivity, GTor provides you with a dynamic todo list that will allow you to create tasks and linked them to your goals to satisfy them.")
+                        Text(NSLocalizedString("And to boost your productivity, GTor provides you with a dynamic todo list that will allow you to create tasks and linked them to your goals to satisfy them.", comment: ""))
 
                     }
                     .multilineTextAlignment(.center)
@@ -53,7 +53,7 @@ struct AboutView: View {
                     
                     
                     Button(action: {/*go to twitter*/}) {
-                        Text("Follow us on Twitter")
+                        Text(NSLocalizedString("Follow us on Twitter", comment: ""))
                         .font(.system(size: 17))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
@@ -67,7 +67,7 @@ struct AboutView: View {
                 }
                 .padding()
                 .offset(y: -25)
-                .navigationBarTitle("About GTor")
+                .navigationBarTitle("\(NSLocalizedString("About GTor", comment: ""))")
             }
     }
 }

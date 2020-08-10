@@ -57,7 +57,7 @@ struct HeaderHomeView: View {
             VStack {
                 HStack {
                     VStack(alignment: .leading, spacing: 5.0) {
-                        Text("Hello,")
+                        Text(NSLocalizedString("Hello,", comment: ""))
                             .font(.system(size: 18))
                         Text(userService.user.name)
                             .font(.system(size: 18))
@@ -76,7 +76,7 @@ struct HeaderHomeView: View {
                 
                 HStack(spacing: 70.0) {
                     VStack {
-                        Text("DASHBOARD")
+                        Text(NSLocalizedString("DASHBOARD", comment: ""))
                         Color("Button").opacity(isShowingDashboard ? 1 : 0)
                             .frame(width: 80, height: 3)
                             .foregroundColor(Color(isShowingDashboard ? "Button" : "Primary"))
@@ -88,7 +88,7 @@ struct HeaderHomeView: View {
                     
                     
                     VStack {
-                        Text("SETTINGS")
+                        Text(NSLocalizedString("SETTINGS", comment: ""))
                         Color("Button").opacity(isShowingDashboard ? 0 : 1)
                             .frame(width: 80, height: 3)
                             .foregroundColor(Color(isShowingDashboard ? "Primary" : "Button"))
@@ -137,7 +137,7 @@ struct CurrentTasksView: View {
                             .padding(.horizontal)
                     }
                 }else {
-                    NoTaskView(title: "You do not have tasks on this day. ", actionTitle: "Add Task", action: { self.isShowingAddTask = true })
+                    NoTaskView(title: NSLocalizedString("You do not have tasks on this day. ", comment: ""), actionTitle: NSLocalizedString("Add Task", comment: ""), action: { self.isShowingAddTask = true })
                 }
             }
             .sheet(isPresented: $isShowingAddTask) {

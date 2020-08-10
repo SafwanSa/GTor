@@ -18,7 +18,7 @@ struct GoalsList: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
                     if goalService.getMainGoals().isEmpty {
-                        NoDataView(title: "You do not have goals yet.", actionTitle: "Let's Start", action: { self.isAddGoalSelceted = true })
+                        NoDataView(title: NSLocalizedString("You do not have goals yet.", comment: ""), actionTitle: NSLocalizedString("Let's Start", comment: ""), action: { self.isAddGoalSelceted = true })
                     }else {
                         ForEach(goalService.getMainGoals()) { goal in
                             NavigationLink(destination: NewGoalView(mainGoal: .constant(goal), goal: goal)) {
@@ -31,7 +31,7 @@ struct GoalsList: View {
                 }
                 .padding(.vertical, 20)
             }
-            .navigationBarTitle("My Goals", displayMode: .inline)
+            .navigationBarTitle("\(NSLocalizedString("Goals", comment: ""))", displayMode: .inline)
             .navigationBarItems(trailing:
                 Button(action: { self.isAddGoalSelceted = true }) {
                     Image(systemName: "plus")
@@ -83,8 +83,8 @@ struct NewGoalCardView: View {
                 if goal.isSubGoal { Spacer() }
                 
                 HStack {
-                    Text(goal.isSubGoal ? "Tasks: \(self.goalService.getTasks(goal: self.goal).filter {$0.isSatisfied}.count)/\(self.goalService.getTasks(goal: self.goal).count)"
-                        : goal.isDecomposed ? "Sub-Goal: \(self.goalService.getSubGoals(mainGoal: goal).count)" : "Tasks: \(self.goalService.getTasks(goal: self.goal).filter {$0.isSatisfied}.count)/\(self.goalService.getTasks(goal: self.goal).count)")
+                    Text(goal.isSubGoal ? "\(NSLocalizedString("Tasks", comment: "")): \(self.goalService.getTasks(goal: self.goal).filter {$0.isSatisfied}.count)/\(self.goalService.getTasks(goal: self.goal).count)"
+                        : goal.isDecomposed ? "\(NSLocalizedString("Sub-Goal", comment: "")): \(self.goalService.getSubGoals(mainGoal: goal).count)" : "\(NSLocalizedString("Tasks", comment: "")): \(self.goalService.getTasks(goal: self.goal).filter {$0.isSatisfied}.count)/\(self.goalService.getTasks(goal: self.goal).count)")
                     Spacer()
                     if goal.dueDate != nil { Text("\(goal.dueDate!, formatter: dateFormatter2)") }
                 }
@@ -94,7 +94,7 @@ struct NewGoalCardView: View {
             
             HStack {
                 Spacer()
-                Image(systemName: "chevron.right")
+                Image(systemName: NSLocalizedString("chevron.right", comment: ""))
             }
         }
         .frame(height: 83)

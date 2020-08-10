@@ -27,7 +27,7 @@ struct TextEditorView: View {
             VStack {
                 NewCardView(content: AnyView(
                     HStack {
-                        TextField(text.isEmpty ? "Note (Optional)" : textCopy, text: $textCopy)
+                        TextField(text.isEmpty ? NSLocalizedString("Note (Optional)", comment: "") : textCopy, text: $textCopy)
                             .keyboardType(title == "Edit Satisfaction" ? .asciiCapableNumberPad : .default)
                         
                         Button(action: { self.textCopy = "" }) {
@@ -46,7 +46,7 @@ struct TextEditorView: View {
             .navigationBarTitle("\(title)", displayMode: .inline)
             .navigationBarItems(trailing:
                 Button(action: { self.text = self.textCopy ; self.presentationMode.wrappedValue.dismiss() }) {
-                    Text("Done")
+                    Text(NSLocalizedString("Done", comment: ""))
                         .font(.callout)
                         .foregroundColor(Color("Button"))
                 }

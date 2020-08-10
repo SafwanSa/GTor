@@ -34,16 +34,16 @@ struct LinkedGoalsView: View {
                 .environment(\.editMode, .constant(EditMode.active))
                 .listStyle(GroupedListStyle())
                 .environment(\.horizontalSizeClass, .regular)
-                .navigationBarTitle("Linked Goals")
+                .navigationBarTitle("\(NSLocalizedString("Linked Goals", comment: ""))")
                 .navigationBarItems(leading:
                     Button(action: { self.selectedGoalsIds.removeAll() ; self.presentationMode.wrappedValue.dismiss() }) {
-                        Text("Cancel")
+                        Text(NSLocalizedString("Cancel", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                     }
                     ,trailing:
                     Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-                        Text("Done")
+                        Text(NSLocalizedString("Done", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                     }
@@ -67,7 +67,7 @@ struct LinkedGoalsView: View {
                     }
                 }
                 if allGoals.isEmpty {
-                    NoDataView(title: "You do not have goals to link this task. ", actionTitle: "", action: {})
+                    NoDataView(title: NSLocalizedString("You do not have goals to link this task. ", comment: ""), actionTitle: "", action: {})
                 }
             }
         }

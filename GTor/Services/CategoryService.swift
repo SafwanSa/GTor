@@ -17,9 +17,9 @@ extension CategoryErrors: LocalizedError {//TODO
     var errorDescription: String? {
         switch self {
         case .noName:
-            return "The name is missing."
+            return NSLocalizedString("The name is missing.", comment: "")
         case .noColor:
-            return "The color is missing."
+            return NSLocalizedString("The color is missing.", comment: "")
         }
     }
 }

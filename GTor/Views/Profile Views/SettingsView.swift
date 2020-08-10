@@ -12,6 +12,7 @@ struct SettingsRowButtonView: View {
     var text: String
     var icon: String
     var isHavingDestination: Bool
+    var isLogout: Bool = false
     
     var body: some View {
         VStack(spacing: 27.0) {
@@ -23,7 +24,7 @@ struct SettingsRowButtonView: View {
             }
             .padding(.vertical)
             .padding(.horizontal, 22)
-            .background(Color(text == "Logout" ? "Level 3" : "Level 0"))
+            .background(Color(isLogout ? "Level 3" : "Level 0"))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .elevation()
             .foregroundColor(Color("Primary"))
@@ -39,24 +40,24 @@ struct SettingsView: View {
         VStack(spacing: 50) {
             VStack(spacing: 40) {
                 NavigationLink(destination: CategoryEditorView()) {
-                    SettingsRowButtonView(text: "Tags Settings", icon: "tag", isHavingDestination: true)
+                    SettingsRowButtonView(text: NSLocalizedString("Tags Settings", comment: ""), icon: "tag", isHavingDestination: true)
                 }
                 VStack {
                     Button(action: {}) {
-                        SettingsRowButtonView(text: "Rate The App", icon: "star", isHavingDestination: false)
+                        SettingsRowButtonView(text: NSLocalizedString("Rate The App", comment: ""), icon: "star", isHavingDestination: false)
                     }
                     
                     Button(action: {}) {
-                        SettingsRowButtonView(text: "Share The App", icon: "square.and.arrow.up", isHavingDestination: false)
+                        SettingsRowButtonView(text: NSLocalizedString("Share The App", comment: ""), icon: "square.and.arrow.up", isHavingDestination: false)
                     }
                     
                     NavigationLink(destination: AboutView()) {
-                        SettingsRowButtonView(text: "About GTor", icon: "info.circle", isHavingDestination: true)
+                        SettingsRowButtonView(text: NSLocalizedString("About GTor", comment: ""), icon: "info.circle", isHavingDestination: true)
                     }
                 }
                 VStack {
                     Button(action: self.authService.signOutUser) {
-                        SettingsRowButtonView(text: "Logout", icon: "arrow.down.left.circle.fill", isHavingDestination: false)
+                        SettingsRowButtonView(text: NSLocalizedString("Logout", comment: ""), icon: "arrow.down.left.circle.fill", isHavingDestination: false, isLogout: true)
                     }
 //                    Button(action: {}) {
 //                        SettingsRowButtonView(text: "Delete Account", isHavingDestination: false)

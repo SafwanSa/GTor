@@ -33,27 +33,27 @@ struct NewTODOListView: View {
             ZStack {
                 ScrollView(showsIndicators: false) {
                     if taskService.tasks.isEmpty {
-                        NoDataView(title: "You do not have tasks yet.", actionTitle: "Let's Add One", action: { self.isAddTaskSelected = true })
+                        NoDataView(title: NSLocalizedString("You do not have tasks yet.", comment: ""), actionTitle: NSLocalizedString("Let's Add One", comment: ""), action: { self.isAddTaskSelected = true })
                     }
                     VStack(alignment: .leading, spacing: 12.0) {
                         if !taskService.tasks.isEmpty {
                             TODOView(selectedTask: $selectedTask)
                             
                             if isShowingComplete {
-                                RowListView(title: "completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }, selectedTask: $selectedTask)
+                                RowListView(title: NSLocalizedString("completed", comment: ""), tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }, selectedTask: $selectedTask)
                             }
                             if isShowingPComplete {
-                                RowListView(title: "partially completed", tasks: taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) }, selectedTask: $selectedTask)
+                                RowListView(title: NSLocalizedString("partially completed", comment: ""), tasks: taskService.tasks.filter { $0.isSatisfied && ($0.satisfaction < 100 && $0.satisfaction > 0) }, selectedTask: $selectedTask)
                             }
                             if isShowingNComplete {
-                                RowListView(title: "not completed", tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }, selectedTask: $selectedTask)
+                                RowListView(title: NSLocalizedString("not completed", comment: ""), tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }, selectedTask: $selectedTask)
                             }
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding(.top, 20)
-                .navigationBarTitle("My Tasks", displayMode: .inline)
+                .navigationBarTitle("\(NSLocalizedString("Tasks", comment: ""))", displayMode: .inline)
                 .navigationBarItems(trailing:
                     Button(action: { self.isAddTaskSelected = true }) {
                         Image(systemName: "plus")
@@ -158,7 +158,7 @@ struct TODOView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("TODO")
+            Text(NSLocalizedString("TODO", comment: ""))
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundColor(Color("Primary"))
                 .padding(.horizontal)
@@ -183,7 +183,7 @@ struct RowListView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(systemName: "chevron.right")
+                Image(systemName: NSLocalizedString("chevron.right", comment: ""))
                     .font(.system(size: 13))
                     .frame(width: 15)
                     .rotationEffect(Angle(degrees: isExpanded ? 90 : 0))

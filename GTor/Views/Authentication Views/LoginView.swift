@@ -23,9 +23,9 @@ struct LoginView: View {
                         .frame(width: 300, height: 300)
                     Spacer()
                     VStack(spacing: 20.0) {
-                        LoginButton(text: "Create an account", background: Color("Button"), foreground: Color("Level 0"),
+                        LoginButton(text: NSLocalizedString("Create an account", comment: ""), background: Color("Button"), foreground: Color("Level 0"),
                                     action: { self.isShowingLogin = true ; self.isNewUser = true })
-                        LoginButton(text: "Login", background: Color("Level 0"), foreground: Color("Button"),
+                        LoginButton(text: NSLocalizedString("Login", comment: ""), background: Color("Level 0"), foreground: Color("Button"),
                                     action: { self.isShowingLogin = true ; self.isNewUser = false })
                     }
                     .frame(width: screen.width-200)

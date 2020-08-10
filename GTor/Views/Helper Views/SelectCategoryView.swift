@@ -19,16 +19,16 @@ struct SelectCategoryView: View {
     var body: some View {
         Section(header:
             HStack {
-                Text("Press to select categories")
+                Text(NSLocalizedString("Press to select categories", comment: ""))
                 Spacer()
                 Button(action: { self.isEditCategoriesPresented = true }) {
-                    Text("Edit")
+                    Text(NSLocalizedString("Edit", comment: ""))
                 }
             }
         ) {
             HStack {
                 Image(systemName: "tag")
-                Text("Cateogries ")
+                Text("\(NSLocalizedString("Categories", comment: "")) ")
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .contentShape(Rectangle())

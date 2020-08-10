@@ -16,10 +16,10 @@ struct GTorCalendarView: View {
             MonthlyCalendarView(calendarManager: calendarManager)
                 .theme(.init(primary: Color("Button")))
                 .padding(.top, 20)
-                .navigationBarTitle("Deadline", displayMode: .inline)
+                .navigationBarTitle("\(NSLocalizedString("Deadline", comment: ""))", displayMode: .inline)
                 .navigationBarItems(leading:
                     Button(action: {self.presentationMode.wrappedValue.dismiss()}) {
-                        Text("Cancel")
+                        Text(NSLocalizedString("Cancel", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                     }
@@ -28,7 +28,7 @@ struct GTorCalendarView: View {
                         self.date = self.calendarManager.selectedDate ?? Date()
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
-                        Text("Save")
+                        Text(NSLocalizedString("Save", comment: ""))
                             .foregroundColor(Color("Button"))
                             .font(.callout)                    }
             )
