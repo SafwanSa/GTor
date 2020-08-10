@@ -59,7 +59,7 @@ struct CategoryEditorView: View {
                             self.color = .none
                             self.isLoading = false
                         }) {
-                            Text(isEditMode ? NSLocalizedString("Done", comment: "") : NSLocalizedString("Add", comment: ""))
+                            Text(isEditMode ? NSLocalizedString("Done", comment: "") : NSLocalizedString("add", comment: ""))
                         }
                     }
                     

@@ -43,7 +43,7 @@ extension AuthError: LocalizedError {
        case .incorrectPassword:
             return NSLocalizedString("Incorrect Password", comment: "")
         case .accountDoesNotExist:
-             return NSLocalizedString("Account does not exist", comment: "")
+             return NSLocalizedString("accountDoesNotExist", comment: "")
         case .unknownError:
              return NSLocalizedString("Please contact us on Twitter", comment: "")
         }

@@ -105,7 +105,7 @@ struct NewAddGoalView: View {
                     }
                     ,trailing:
                     Button(action: !goal.isSubGoal ? createGoal : addGoal) {
-                        Text(NSLocalizedString("Add", comment: ""))
+                        Text(NSLocalizedString("add", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                     }

@@ -91,7 +91,7 @@ struct NewAddTaskView: View {
                     }
                     ,trailing:
                     Button(action: createTask) {
-                        Text(NSLocalizedString("Add", comment: ""))
+                        Text(NSLocalizedString("add", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                     }

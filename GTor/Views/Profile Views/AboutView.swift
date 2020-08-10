@@ -67,7 +67,7 @@ struct AboutView: View {
                 }
                 .padding()
                 .offset(y: -25)
-                .navigationBarTitle("\(NSLocalizedString("About GTor", comment: ""))")
+                .navigationBarTitle("\(NSLocalizedString("aboutGTor", comment: ""))")
             }
     }
 }

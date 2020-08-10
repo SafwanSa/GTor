@@ -52,7 +52,7 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink(destination: AboutView()) {
-                        SettingsRowButtonView(text: NSLocalizedString("About GTor", comment: ""), icon: "info.circle", isHavingDestination: true)
+                        SettingsRowButtonView(text: NSLocalizedString("aboutGTor", comment: ""), icon: "info.circle", isHavingDestination: true)
                     }
                 }
                 VStack {
