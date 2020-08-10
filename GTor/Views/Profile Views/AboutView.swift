@@ -21,11 +21,11 @@ struct AboutView: View {
                         Text("GTor")
                             .foregroundColor(Color("Primary"))
                             .font(.title)
-                        Text(NSLocalizedString("Organize your life", comment: ""))
+                        Text(NSLocalizedString("organizeYourLife", comment: ""))
                             .font(.callout)
                             .foregroundColor(Color("Secondry"))
                         
-                        Text("\(NSLocalizedString("Version", comment: "")) \(String(format: "%.1f", 1.0))")
+                        Text("\(NSLocalizedString("version", comment: "")) \(String(format: "%.1f", 1.0))")
                         .font(.caption)
                         .foregroundColor(Color("Button"))
                     }
@@ -33,11 +33,11 @@ struct AboutView: View {
 
                     
                     VStack(spacing: 15.0) {
-                        Text(NSLocalizedString("GTor is a goal tracker that will help you to organize your life by tracking your goals. You can see your goals' progress and categorize them by tags. ", comment: ""))
+                        Text(NSLocalizedString("aboutGTorPara1", comment: ""))
                         .lineLimit(4)
 
 
-                        Text(NSLocalizedString("And to boost your productivity, GTor provides you with a dynamic todo list that will allow you to create tasks and linked them to your goals to satisfy them.", comment: ""))
+                        Text(NSLocalizedString("aboutGTorPara2", comment: ""))
 
                     }
                     .multilineTextAlignment(.center)
@@ -53,7 +53,7 @@ struct AboutView: View {
                     
                     
                     Button(action: {/*go to twitter*/}) {
-                        Text(NSLocalizedString("Follow us on Twitter", comment: ""))
+                        Text(NSLocalizedString("followUsOnTwitter", comment: ""))
                         .font(.system(size: 17))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)

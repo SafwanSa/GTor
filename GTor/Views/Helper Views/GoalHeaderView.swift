@@ -26,7 +26,7 @@ struct GoalHeaderView: View {
                             if isEditingMode {
                                 TextField("\(self.goal.title)", text: self.$goal.title)
                                     .font(.system(size: 20, weight: .regular))
-                                TextField("\(self.goal.note.isEmpty ? "Note (Optional)" : self.goal.note)", text: $goal.note)
+                                TextField("\(self.goal.note.isEmpty ? "noteOptional" : self.goal.note)", text: $goal.note)
                                     .font(.subheadline)
                             }else{
                                 Text(self.goal.title)
@@ -71,7 +71,7 @@ struct TaskHeaderView: View {
                             if isEditingMode {
                                 TextField("\(self.task.title)", text: self.$task.title)
                                     .font(.system(size: 20, weight: .regular))
-                                TextField("\(self.task.note.isEmpty ? "Note (Optional)" : self.task.note)", text: $task.note)
+                                TextField("\(self.task.note.isEmpty ? "noteOptional" : self.task.note)", text: $task.note)
                                     .font(.subheadline)
                             }else{
                                 Text(self.task.title)

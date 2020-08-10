@@ -27,25 +27,25 @@ extension AuthError: LocalizedError {
     var errorDescription: String? {
        switch self {
         case .invalidEmail:
-            return NSLocalizedString("Invalid Email", comment: "")
+            return NSLocalizedString("invalidEmail", comment: "")
         case .operationNotAllowed:
-            return NSLocalizedString("Operation Not Allowed", comment: "")
+            return NSLocalizedString("operationNotAllowed", comment: "")
         case .userDisabled:
-            return NSLocalizedString("Disabled User", comment: "")
+            return NSLocalizedString("disabledUser", comment: "")
         case .tooManyRequests:
-            return NSLocalizedString("Too Many Requests", comment: "")
+            return NSLocalizedString("tooManyRequests", comment: "")
         case .emailAlreadyInUse:
-            return NSLocalizedString("This email is used", comment: "")
+            return NSLocalizedString("emailIsUsed", comment: "")
         case .missingEmail:
-            return NSLocalizedString("Email Is Missing", comment: "")
+            return NSLocalizedString("emailIsMissing", comment: "")
         case .weakPassword:
-            return NSLocalizedString("Weak Password", comment: "")
+            return NSLocalizedString("weakPassword" , comment: "")
        case .incorrectPassword:
-            return NSLocalizedString("Incorrect Password", comment: "")
+            return NSLocalizedString("incorrectPassword", comment: "")
         case .accountDoesNotExist:
              return NSLocalizedString("accountDoesNotExist", comment: "")
         case .unknownError:
-             return NSLocalizedString("Please contact us on Twitter", comment: "")
+             return NSLocalizedString("contactUsOnTwitter", comment: "")
         }
     }
 }

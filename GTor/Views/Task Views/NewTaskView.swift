@@ -41,10 +41,10 @@ struct NewTaskView: View {
                 }
                 .padding()
             }
-            .navigationBarTitle("\(NSLocalizedString("Task", comment: ""))", displayMode: .inline)
+            .navigationBarTitle("\(NSLocalizedString("task", comment: ""))", displayMode: .inline)
             .navigationBarItems(trailing:
                 Button(action: saveGoal) {
-                    Text(NSLocalizedString("Save", comment: ""))
+                    Text(NSLocalizedString("save", comment: ""))
                         .font(.callout)
                         .foregroundColor(Color("Button"))
                 }
@@ -64,7 +64,7 @@ struct NewTaskView: View {
         if Double(updatedSatisfaction) == nil {
             self.isLoading = false
             self.isShowingAlert = true
-            self.alertMessage = NSLocalizedString("Invalid satisfaction.", comment: "")
+            self.alertMessage = NSLocalizedString("invalidSatisfaction", comment: "")
             return
         }
         if !taskCopy.isSatisfied { taskCopy.isSatisfied = true }
@@ -103,12 +103,12 @@ struct NewTaskHeaderView: View {
                 Spacer()
                 
                 Button(action: { self.isShowingTitleEditor = true }) {
-                    Text(NSLocalizedString("Edit", comment: ""))
+                    Text(NSLocalizedString("edit", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                 }
                 .sheet(isPresented: $isShowingTitleEditor) {
-                    TextEditorView(title: NSLocalizedString("Edit Title", comment: ""), text: self.$task.title)
+                    TextEditorView(title: NSLocalizedString("editTitle", comment: ""), text: self.$task.title)
                 }
             }
             
@@ -116,18 +116,18 @@ struct NewTaskHeaderView: View {
                 .frame(height: 1)
             
             HStack {
-                Text(task.note.isEmpty ? NSLocalizedString("Empty Note", comment: "") : task.note)
+                Text(task.note.isEmpty ? NSLocalizedString("emptyNote", comment: "") : task.note)
                     .font(.subheadline)
                 
                 Spacer()
                 
                 Button(action: { self.isShowingNoteEditor = true }) {
-                    Text(NSLocalizedString("Edit", comment: ""))
+                    Text(NSLocalizedString("edit", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                 }
                 .sheet(isPresented: $isShowingNoteEditor) {
-                    TextEditorView(title: NSLocalizedString("Edit Note", comment: ""), text: self.$task.note)
+                    TextEditorView(title: NSLocalizedString("editNote", comment: ""), text: self.$task.note)
                 }
             }
         }
@@ -153,15 +153,15 @@ struct DeleteTaskCardView: View {
             GTorButton(content: AnyView(
                 HStack(spacing: 8.0) {
                     Image(systemName: "trash")
-                    Text(NSLocalizedString("Delete Task", comment: ""))
+                    Text(NSLocalizedString("deleteTask", comment: ""))
                     Spacer()
                 }
             ), backgroundColor: Color(.white), foregroundColor: Color("Primary"), action: { self.isShowingDeleteAlert = true })
         }
         .alert(isPresented: $isShowingDeleteAlert) {
-            Alert(title: Text(NSLocalizedString("Are you sure you want to delete this task?", comment: "")),
-                  primaryButton: .default(Text(NSLocalizedString("Cancel", comment: ""))),
-                  secondaryButton: .destructive(Text(NSLocalizedString("Delete", comment: "")), action: deleteTask))
+            Alert(title: Text(NSLocalizedString("areYouSureWantDeleteTask", comment: "")),
+                  primaryButton: .default(Text(NSLocalizedString("cancel", comment: ""))),
+                  secondaryButton: .destructive(Text(NSLocalizedString("delete", comment: "")), action: deleteTask))
         }
     }
     
@@ -188,16 +188,16 @@ struct NewSatisfactionCardView: View {
     var body: some View {
         NewCardView(content: AnyView(
             HStack {
-                Text(NSLocalizedString("Complete", comment: ""))
+                Text(NSLocalizedString("complete", comment: ""))
                 Spacer()
                 Text(updatedSatisfaction)
                 Button(action: { self.isShowingTextEditor = true }) {
-                    Text(NSLocalizedString("Edit", comment: ""))
+                    Text(NSLocalizedString("edit", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                 }
                 .sheet(isPresented: $isShowingTextEditor) {
-                    TextEditorView(title: NSLocalizedString("Edit Satisfaction", comment: ""), text: self.$updatedSatisfaction)
+                    TextEditorView(title: NSLocalizedString("editSatisfaction", comment: ""), text: self.$updatedSatisfaction)
                 }
             }
         ))
@@ -211,7 +211,7 @@ struct NewImportanceCardView: View {
     var body: some View {
         NewCardView(content: AnyView(
             HStack {
-                Text(NSLocalizedString("Importance", comment: ""))
+                Text(NSLocalizedString("importance", comment: ""))
                 Spacer()
                 Text(task.importance.rawValue)
                     .font(.system(size: 12))
@@ -220,7 +220,7 @@ struct NewImportanceCardView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                     .elevation()
                 Button(action: { self.isShowingEdit = true }) {
-                    Text(NSLocalizedString("Edit", comment: ""))
+                    Text(NSLocalizedString("edit", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                 }
@@ -239,9 +239,9 @@ struct NewLinkedGoalsCardView: View {
             NewCardView(content: AnyView(
                 Button(action: { self.isExpanded.toggle() }) {
                     HStack{
-                        Text(NSLocalizedString("Linked Goals", comment: ""))
+                        Text(NSLocalizedString("linkedGoals", comment: ""))
                         Spacer()
-                        Image(systemName: NSLocalizedString("chevron.right", comment: ""))
+                        Image(systemName: NSLocalizedString("chevron", comment: ""))
                             .font(.system(size: 13))
                             .frame(width: 15)
                             .rotationEffect(Angle(degrees: isExpanded ? 90 : 0))

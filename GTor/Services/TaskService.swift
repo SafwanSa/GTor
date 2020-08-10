@@ -17,9 +17,9 @@ extension TaskErrors: LocalizedError {//TODO
     var errorDescription: String? {
         switch self {
         case .noTitle:
-            return NSLocalizedString("The title is missing.", comment: "")
+            return NSLocalizedString("titleIsMissing", comment: "")
         case .invalidSatisfaction:
-            return NSLocalizedString("Invalid satisfaction", comment: "")
+            return NSLocalizedString("invalidSatisfaction", comment: "")
         }
     }
 }

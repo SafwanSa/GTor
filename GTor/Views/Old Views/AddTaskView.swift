@@ -30,13 +30,13 @@ struct AddTaskView: View {
             NavigationView {
                 List {
                     Section {
-                        TextField("Title", text: $title)
-                        TextField("Note (Optional)", text: $note)
+                        TextField("title", text: $title)
+                        TextField("noteOptional", text: $note)
                     }
                     
                     Section {
                         Toggle(isOn: self.$isHavingDeadline) {
-                            Text("Deadline")
+                            Text("deadline")
                         }
                         if self.isHavingDeadline {
                             DatePicker(selection: self.$deadline, in: Date()..., displayedComponents: .date) {
@@ -53,7 +53,7 @@ struct AddTaskView: View {
                         }
                         if isHavingLinkedGoals {
                             HStack {
-                                Text("Linked Goals")
+                                Text("linkedGoals")
                                 Spacer()
                                 Button(action: { self.isLinkedGoalsPresented = true }) {
                                     Image(systemName: "plus")
@@ -70,7 +70,7 @@ struct AddTaskView: View {
                     }
                     
                     if !isHavingLinkedGoals {
-                        Picker(selection: $selectedImportance, label: Text("Importance")) {
+                        Picker(selection: $selectedImportance, label: Text("importance")) {
                             ForEach(Priority.allCases.filter { $0 != .none }, id: \.self) { importance in
                                 Text(importance.rawValue)
                             }
@@ -80,14 +80,14 @@ struct AddTaskView: View {
                 }
                 .listStyle(GroupedListStyle())
                 .environment(\.horizontalSizeClass, .regular)
-                .navigationBarTitle("Add Task")
+                .navigationBarTitle("addTask")
                 .navigationBarItems(leading:
                     Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-                        Text("Cancel")
+                        Text("cancel")
                     }
                     ,trailing:
                     Button(action: createTask ) {
-                        Text("Done")
+                        Text("done")
                     }
                 )
             }

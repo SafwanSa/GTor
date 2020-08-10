@@ -41,7 +41,7 @@ struct TaskView: View {
                 }
                 
                 if !goalService.goals.filter { self.taskCopy.linkedGoalsIds.contains($0.id) }.isEmpty {
-                    Section(header: Text("Linked Goals")) {
+                    Section(header: Text("linkedGoals")) {
                         ForEach(taskService.getLinkedGoals(task: self.taskCopy)) { linkedGoal in
                             Text(linkedGoal.title)
                         }
@@ -50,7 +50,7 @@ struct TaskView: View {
                 
                 Section {
                     HStack {
-                        Text("Importance")
+                        Text("importance")
                         Spacer()
                         Text(self.taskCopy.importance.rawValue)
                     }
@@ -84,20 +84,20 @@ struct TaskView: View {
             .listStyle(GroupedListStyle())
             .animation(.spring())
             .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle("Task", displayMode: .inline)
+            .navigationBarTitle("task", displayMode: .inline)
             .navigationBarItems(leading:
                 Button(action: { self.isEditingMode = false ; self.taskCopy = self.task ; self.updatedSatisfaction = String(self.task.satisfaction)}) {
-                    Text("Cancel")
+                    Text("cancel")
                 }.opacity(isEditingMode ? 1 : 0)
                 , trailing:
                 Group {
                     if isEditingMode {
                         Button(action: saveTask) {
-                            Text("Save")
+                            Text("save")
                         }.opacity(isShowingSave ? 1 : 0)
                     }else if !isEditingMode{
                         Button(action: { self.isEditingMode = true }) {
-                            Text("Edit")
+                            Text("edit")
                         }
                     }
                 }
@@ -113,9 +113,9 @@ struct TaskView: View {
             Alert(title: Text(self.alertMessage))
         }
         .alert(isPresented: $isShowingDeleteAlert) {
-            Alert(title: Text("Are you sure you want to delete this task?"),
-            primaryButton: .default(Text("Cancel")),
-            secondaryButton: .destructive(Text("Delete"), action: {
+            Alert(title: Text("areYouSureWantDeleteTask"),
+            primaryButton: .default(Text("cancel")),
+            secondaryButton: .destructive(Text("delete"), action: {
                 self.deleteTask()
             }))
         }
@@ -142,7 +142,7 @@ struct TaskView: View {
         if Double(updatedSatisfaction) == nil {
             self.isLoading = false
             self.isShowingAlert = true
-            self.alertMessage = "Invalid satisfaction."
+            self.alertMessage = "invalidSatisfaction"
             return
         }
         task.satisfaction = Double(updatedSatisfaction)!

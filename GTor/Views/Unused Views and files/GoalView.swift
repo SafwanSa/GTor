@@ -32,7 +32,7 @@ struct GoalView: View {
                 if goal.dueDate != nil{
                     Section {
                         HStack {
-                            Text("Deadline")
+                            Text("deadline")
                             Spacer()
                             Text("\(goal.dueDate!, formatter: dateFormatter)")
                                 .foregroundColor(.secondary)
@@ -45,14 +45,14 @@ struct GoalView: View {
                     if goalCopy.isDecomposed {
                         if self.goalService.getSubGoals(mainGoal: goalCopy).count == 0 {
                             HStack {
-                                Text("Importance")
+                                Text("importance")
                                 Spacer()
                                 Image(systemName: "exclamationmark.square")
                                 Text("Add Sub Goals")
                             }
                         }else {
                             HStack {
-                                Text("Importance")
+                                Text("importance")
                                 Spacer()
                                 Text(goalCopy.importance.rawValue)
                             }
@@ -62,7 +62,7 @@ struct GoalView: View {
                             ImportancePicker(goal: $goalCopy)
                         }else {
                             HStack {
-                                Text("Importance")
+                                Text("importance")
                                 Spacer()
                                 Text(goalCopy.importance.rawValue)
                             }
@@ -91,10 +91,10 @@ struct GoalView: View {
                         }
                     }
                     .alert(isPresented: $isShowingDeleteAlert) {
-                        Alert(title: Text("Are you sure you want to delete this goal?"),
-                              message: Text(self.goalCopy.isDecomposed ? "All the Sub Goals of this goal will be deleted also" : ""),
-                              primaryButton: .default(Text("Cancel")),
-                              secondaryButton: .destructive(Text("Delete"), action: {
+                        Alert(title: Text("areYouSureWantDeleteGoal"),
+                              message: Text(self.goalCopy.isDecomposed ? "allSubGoalsWillBeDeleted" : ""),
+                              primaryButton: .default(Text("cancel")),
+                              secondaryButton: .destructive(Text("delete"), action: {
                                 self.deleteGoal()
                               }))
                     }
@@ -114,10 +114,10 @@ struct GoalView: View {
                     HStack(spacing: 50) {
                         if isEditingMode {
                             Button(action: { self.isEditingMode = false ; self.goalCopy = self.goal }) {
-                                Text("Cancel")
+                                Text("cancel")
                             }
                             Button(action: { self.saveGoal() }) {
-                                Text("Save")
+                                Text("save")
                             }.opacity(isShowingSave ? 1 : 0)
                         }else if !isEditingMode{
                             Button(action: { self.isEditingMode = true }) {
@@ -193,7 +193,7 @@ struct ImportancePicker: View {
     @Binding var goal: Goal
     
     var body: some View {
-        Picker(selection: self.$goal.importance, label: Text("Importance")) {
+        Picker(selection: self.$goal.importance, label: Text("importance")) {
             ForEach(Priority.allCases.filter { $0 != .none }, id: \.self) { importance in
                 Text(importance.rawValue)
             }

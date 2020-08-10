@@ -20,7 +20,7 @@ struct SettingsRowButtonView: View {
                 Image(systemName: icon)
                 Text(text)
                 Spacer()
-                Image(systemName: "chevron.right").opacity(isHavingDestination ? 1 : 0)
+                Image(systemName: "chevron").opacity(isHavingDestination ? 1 : 0)
             }
             .padding(.vertical)
             .padding(.horizontal, 22)
@@ -40,15 +40,15 @@ struct SettingsView: View {
         VStack(spacing: 50) {
             VStack(spacing: 40) {
                 NavigationLink(destination: CategoryEditorView()) {
-                    SettingsRowButtonView(text: NSLocalizedString("Tags Settings", comment: ""), icon: "tag", isHavingDestination: true)
+                    SettingsRowButtonView(text: NSLocalizedString("tagsSettings", comment: ""), icon: "tag", isHavingDestination: true)
                 }
                 VStack {
                     Button(action: {}) {
-                        SettingsRowButtonView(text: NSLocalizedString("Rate The App", comment: ""), icon: "star", isHavingDestination: false)
+                        SettingsRowButtonView(text: NSLocalizedString("rateTheApp", comment: ""), icon: "star", isHavingDestination: false)
                     }
                     
                     Button(action: {}) {
-                        SettingsRowButtonView(text: NSLocalizedString("Share The App", comment: ""), icon: "square.and.arrow.up", isHavingDestination: false)
+                        SettingsRowButtonView(text: NSLocalizedString("shareTheApp", comment: ""), icon: "square.and.arrow.up", isHavingDestination: false)
                     }
                     
                     NavigationLink(destination: AboutView()) {
@@ -57,7 +57,7 @@ struct SettingsView: View {
                 }
                 VStack {
                     Button(action: self.authService.signOutUser) {
-                        SettingsRowButtonView(text: NSLocalizedString("Logout", comment: ""), icon: "arrow.down.left.circle.fill", isHavingDestination: false, isLogout: true)
+                        SettingsRowButtonView(text: NSLocalizedString("logout", comment: ""), icon: "arrow.down.left.circle.fill", isHavingDestination: false, isLogout: true)
                     }
 //                    Button(action: {}) {
 //                        SettingsRowButtonView(text: "Delete Account", isHavingDestination: false)

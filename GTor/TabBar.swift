@@ -25,16 +25,16 @@ struct TabBar: View {
         ZStack {
             TabView {
                 HomeScreenView().tabItem {
-                    Text(NSLocalizedString("Home", comment: ""))
+                    Text(NSLocalizedString("home", comment: ""))
                     Image(systemName: "house")
                 }
                 GoalsList().tabItem {
-                    Text(NSLocalizedString("Goals", comment: ""))
+                    Text(NSLocalizedString("goals", comment: ""))
                     Image(systemName: "doc.text")
                 }
                 
                 NewTODOListView().tabItem {
-                    Text(NSLocalizedString("Tasks", comment: ""))
+                    Text(NSLocalizedString("tasks", comment: ""))
                     Image(systemName: "rectangle.grid.1x2")
                 }
             }

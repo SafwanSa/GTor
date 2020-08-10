@@ -27,18 +27,18 @@ struct NewAddTaskView: View {
             NavigationView {
                 List {
                     Section {
-                        TextField(NSLocalizedString("Title", comment: ""), text: $task.title)
-                        TextField(NSLocalizedString("Note (Optional)", comment: ""), text: $task.note)
+                        TextField(NSLocalizedString("title", comment: ""), text: $task.title)
+                        TextField(NSLocalizedString("noteOptional", comment: ""), text: $task.note)
                     }
                     
                     Section {
                         Toggle(isOn: $isHavingDeadline) {
-                            Text(NSLocalizedString("Deadline", comment: ""))
+                            Text(NSLocalizedString("deadline", comment: ""))
                         }
                         if isHavingDeadline {
                             Button(action: { self.isCalendarPresented = true }) {
                                 HStack {
-                                    Text(NSLocalizedString("Select a deadline", comment: ""))
+                                    Text(NSLocalizedString("selectADeadline", comment: ""))
                                         .foregroundColor(Color("Button"))
                                     Spacer()
                                     Text("\(self.deadline, formatter: dateFormatter2)")
@@ -55,16 +55,16 @@ struct NewAddTaskView: View {
                     
                     
                     Section {
-                        Picker(selection: $task.importance, label: Text(NSLocalizedString("Importance", comment: ""))) {
+                        Picker(selection: $task.importance, label: Text(NSLocalizedString("importance", comment: ""))) {
                             ForEach(Priority.allCases.filter { $0 != .none }, id: \.self) { importance in
                                 Text(importance.rawValue)
                             }
                         }
                     }
                     
-                    Section(footer: Text(NSLocalizedString("You can link your task to some of your goals, and these goals will progress if you accomplish the task that is linked to them. ", comment: ""))) {
+                    Section(footer: Text(NSLocalizedString("explainLinkedGoals", comment: ""))) {
                         HStack {
-                            Text(NSLocalizedString("Linked Goals", comment: ""))
+                            Text(NSLocalizedString("linkedGoals", comment: ""))
                             Spacer()
                             Button(action: { self.isLinkedGoalsPresented = true }) {
                                 Image(systemName: "plus")
@@ -82,10 +82,10 @@ struct NewAddTaskView: View {
                 }
                 .listStyle(GroupedListStyle())
                 .environment(\.horizontalSizeClass, .regular)
-                .navigationBarTitle("\(NSLocalizedString("Add Task", comment: ""))")
+                .navigationBarTitle("\(NSLocalizedString("addTask", comment: ""))")
                 .navigationBarItems(leading:
                     Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-                        Text(NSLocalizedString("Cancel", comment: ""))
+                        Text(NSLocalizedString("cancel", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                     }

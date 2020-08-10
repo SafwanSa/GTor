@@ -33,7 +33,7 @@ struct NewTODOListView: View {
             ZStack {
                 ScrollView(showsIndicators: false) {
                     if taskService.tasks.isEmpty {
-                        NoDataView(title: NSLocalizedString("You do not have tasks yet.", comment: ""), actionTitle: NSLocalizedString("Let's Add One", comment: ""), action: { self.isAddTaskSelected = true })
+                        NoDataView(title: NSLocalizedString("youDontHaveTasks", comment: ""), actionTitle: NSLocalizedString("let'sAddOne", comment: ""), action: { self.isAddTaskSelected = true })
                     }
                     VStack(alignment: .leading, spacing: 12.0) {
                         if !taskService.tasks.isEmpty {
@@ -53,7 +53,7 @@ struct NewTODOListView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding(.top, 20)
-                .navigationBarTitle("\(NSLocalizedString("Tasks", comment: ""))", displayMode: .inline)
+                .navigationBarTitle("\(NSLocalizedString("tasks", comment: ""))", displayMode: .inline)
                 .navigationBarItems(trailing:
                     Button(action: { self.isAddTaskSelected = true }) {
                         Image(systemName: "plus")
@@ -158,7 +158,7 @@ struct TODOView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(NSLocalizedString("TODO", comment: ""))
+            Text(NSLocalizedString("todo", comment: ""))
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundColor(Color("Primary"))
                 .padding(.horizontal)
@@ -183,7 +183,7 @@ struct RowListView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(systemName: NSLocalizedString("chevron.right", comment: ""))
+                Image(systemName: NSLocalizedString("chevron", comment: ""))
                     .font(.system(size: 13))
                     .frame(width: 15)
                     .rotationEffect(Angle(degrees: isExpanded ? 90 : 0))

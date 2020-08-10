@@ -20,7 +20,7 @@ struct SubGoalsList: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
                 if goalService.getSubGoals(mainGoal: goal).isEmpty {
-                    NoDataView(title: NSLocalizedString("There are no sub goals added to this goal yet.", comment: ""), actionTitle: NSLocalizedString("Add sub goal", comment: ""), action: { self.isAddGoalSelceted = true })
+                    NoDataView(title: NSLocalizedString("noSubGoals", comment: ""), actionTitle: NSLocalizedString("addSubGoal", comment: ""), action: { self.isAddGoalSelceted = true })
                 }else {
                     ForEach(goalService.getSubGoals(mainGoal: goal)) { goal in
                         NavigationLink(destination: NewGoalView(mainGoal: self.$goal, goal: goal)) {
@@ -33,7 +33,7 @@ struct SubGoalsList: View {
             }
             .padding(.vertical, 20)
         }
-        .navigationBarTitle("\(NSLocalizedString("Sub Goals", comment: ""))", displayMode: .inline)
+        .navigationBarTitle("\(NSLocalizedString("subGoals", comment: ""))", displayMode: .inline)
         .navigationBarItems(trailing:
             Button(action: { self.isAddGoalSelceted = true }) {
                 Image(systemName: "plus")

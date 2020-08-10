@@ -33,7 +33,7 @@ struct SubGoalView: View {
                 if goal.dueDate != nil{
                     Section {
                         HStack {
-                            Text("Deadline")
+                            Text("deadline")
                             Spacer()
                             Text("\(goal.dueDate!, formatter: dateFormatter)")
                                 .foregroundColor(.secondary)
@@ -47,14 +47,14 @@ struct SubGoalView: View {
                     if goalCopy.isDecomposed {
                         if self.goalService.getSubGoals(mainGoal: goalCopy).count == 0 {
                             HStack {
-                                Text("Importance")
+                                Text("importance")
                                 Spacer()
                                 Image(systemName: "exclamationmark.square")
                                 Text("Add Sub Goals")
                             }
                         }else {
                             HStack {
-                                Text("Importance")
+                                Text("importance")
                                 Spacer()
                                 Text(goalCopy.importance.rawValue)
                             }
@@ -64,7 +64,7 @@ struct SubGoalView: View {
                             ImportancePicker(goal: $goal)
                         }else {
                             HStack {
-                                Text("Importance")
+                                Text("importance")
                                 Spacer()
                                 Text(goal.importance.rawValue)
                             }
@@ -94,10 +94,10 @@ struct SubGoalView: View {
                         }
                     }
                      .alert(isPresented: $isShowingDeleteAlert) {
-                        Alert(title: Text("Are you sure you want to delete this goal?"),
-                              message: Text(self.goalCopy.isDecomposed ? "All the Sub Goals of this goal will be deleted also" : ""),
-                              primaryButton: .default(Text("Cancel")),
-                              secondaryButton: .destructive(Text("Delete"), action: {
+                        Alert(title: Text("areYouSureWantDeleteGoal"),
+                              message: Text(self.goalCopy.isDecomposed ? "allSubGoalsWillBeDeleted" : ""),
+                              primaryButton: .default(Text("cancel")),
+                              secondaryButton: .destructive(Text("delete"), action: {
                                 self.goal.isSubGoal ? self.deleteSubGoal() :self.deleteGoal()
                               }))
                     }
@@ -119,20 +119,20 @@ struct SubGoalView: View {
             .animation(.spring())
             .listStyle(GroupedListStyle())
             .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle(goal.isSubGoal ? "Sub-Goal" :"Goal")
+            .navigationBarTitle(goal.isSubGoal ? "subGoal" :"goal")
             .navigationBarItems(leading:
                 Button(action: { self.isEditingMode = false ; self.goal.importance = self.goalCopy.importance ; self.goalCopy = self.goal }) {
-                    Text("Cancel")
+                    Text("cancel")
                 }.opacity(isEditingMode ? 1 : 0)
                 , trailing:
                 Group {
                     if isEditingMode {
                         Button(action: { self.goal.isSubGoal ? self.saveSubGoal() : self.saveGoal()}) {
-                            Text("Save")
+                            Text("save")
                         }.opacity(isShowingSave ? 1 : 0)
                     }else if !isEditingMode{
                         Button(action: { self.isEditingMode = true }) {
-                            Text("Edit")
+                            Text("edit")
                         }
                     }
                 }

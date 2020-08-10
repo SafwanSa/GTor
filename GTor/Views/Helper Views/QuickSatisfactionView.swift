@@ -21,9 +21,9 @@ enum ActionType {
 }
 
 let actions: [DoneAction] = [
-    .init(title: NSLocalizedString("Completely Done", comment: ""), satisfaction: 100, type: .complete),
-    .init(title: NSLocalizedString("Partially Done", comment: ""), satisfaction: 50, type: .pComplete),//TODO
-    .init(title: NSLocalizedString("Not Done", comment: ""), satisfaction: 0, type: .notComplete)
+    .init(title: NSLocalizedString("completelyDone", comment: ""), satisfaction: 100, type: .complete),
+    .init(title: NSLocalizedString("partiallyDone", comment: ""), satisfaction: 50, type: .pComplete),//TODO
+    .init(title: NSLocalizedString("notDone", comment: ""), satisfaction: 0, type: .notComplete)
 ]
 
 struct QuickSatisfactionView: View {
@@ -107,7 +107,7 @@ struct QuickSatisfactionView: View {
                                 if self.updatedSatisfaction.isEmpty {
                                     self.isLoading = false
                                     self.isShowingAlert = true
-                                    self.alertMessage = NSLocalizedString("Please enter a value", comment: "")
+                                    self.alertMessage = NSLocalizedString("enterAValue", comment: "")
                                     return
                                 }else{
                                     self.selectedTask.satisfaction = Double(self.updatedSatisfaction)!
@@ -127,7 +127,7 @@ struct QuickSatisfactionView: View {
                                     }
                                 }
                             }) {
-                                Text(NSLocalizedString("Done", comment: ""))
+                                Text(NSLocalizedString("done", comment: ""))
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 20)
