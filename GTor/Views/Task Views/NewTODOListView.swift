@@ -140,14 +140,26 @@ struct DaysCardView: View {
     }
     
     func clipDate(date: Date, clipType: DateClipType) -> String {
-        let str = dateFormatter.string(from: date)
-        switch clipType {
-        case .char:
-            let index = str.index(str.startIndex, offsetBy: 3)
-            return String(str[..<index])
-        case .num:
-            let str = str.split(separator: ",")[1].split(separator: " ")[0]
-            return String(str)
+        if currentLanguage == "en" {
+                   let str = dateFormatter.string(from: date)
+            switch clipType {
+            case .char:
+                let index = str.index(str.startIndex, offsetBy: 3)
+                return String(str[..<index])
+            case .num:
+                let str = str.split(separator: ",")[1].split(separator: " ")[0]
+                return String(str)
+            }
+        }else {
+                   let str = dateFormatter.string(from: date)
+            switch clipType {
+            case .char:
+                let str = str.split(separator: "،")[0]
+                return String(str)
+            case .num:
+                let str = str.split(separator: "،")[1].split(separator: " ")[0]
+                return String(str)
+            }
         }
     }
 }

@@ -8,7 +8,6 @@
 
 import SwiftUI
 import FirebaseAuth
-let screen = UIScreen.main.bounds
 struct HomeView: View {
     @ObservedObject var userService = UserService.shared
     @ObservedObject var authService = AuthService.shared
