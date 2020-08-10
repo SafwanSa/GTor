@@ -195,7 +195,6 @@
 			children = (
 				17E7E7AC246C921800596500 /* Assets.xcassets */,
 				17E7E7B1246C921800596500 /* LaunchScreen.storyboard */,
-				17C2BE3224E1BE3F00DCE258 /* Localizable.strings */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -244,6 +243,7 @@
 		17E7E7A5246C921400596500 /* GTor */ = {
 			isa = PBXGroup;
 			children = (
+				17C2BE3224E1BE3F00DCE258 /* Localizable.strings */,
 				17E7E7A6246C921400596500 /* AppDelegate.swift */,
 				17E7E7A8246C921400596500 /* SceneDelegate.swift */,
 				171E6C3B246FA90B003EFF36 /* TabBar.swift */,
