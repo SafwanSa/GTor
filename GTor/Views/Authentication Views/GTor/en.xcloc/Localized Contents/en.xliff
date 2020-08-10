@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="GTor/en.lproj/InfoPlist.strings" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.5" build-num="11E608c"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>GTor</source>
+        <target>GTor</target>
+        <note>Bundle name</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="GTor/en.lproj/Localizable.strings" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.5" build-num="11E608c"/>
+    </header>
+    <body>
+      <trans-unit id="%@" xml:space="preserve">
+        <source>%@</source>
+        <target>%@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@ %@" xml:space="preserve">
+        <source>%1$@ %2$@</source>
+        <target>%1$@ %2$@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@%" xml:space="preserve">
+        <source>%1$@%2$</source>
+        <target>%1$@%2$</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@/%@" xml:space="preserve">
+        <source>%1$@/%2$@</source>
+        <target>%1$@/%2$@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="50%" xml:space="preserve">
+        <source>50%</source>
+        <target>50%</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Account does not exist" xml:space="preserve">
+        <source>Account does not exist</source>
+        <target>Account does not exist</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Activities: %@/%@" xml:space="preserve">
+        <source>Activities: %1$@/%2$@</source>
+        <target>Activities: %1$@/%2$@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Add" xml:space="preserve">
+        <source>Add</source>
+        <target>Add</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Add Linked Goals" xml:space="preserve">
+        <source>Add Linked Goals</source>
+        <target>Add Linked Goals</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Add Sub Goals" xml:space="preserve">
+        <source>Add Sub Goals</source>
+        <target>Add Sub Goals</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Add a deadline" xml:space="preserve">
+        <source>Add a deadline</source>
+        <target>Add a deadline</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="And to boost your productivity, GTor provides you with a dynamic todo list that will allow you to create tasks and linked them to your goals to satisfy them." xml:space="preserve">
+        <source>And to boost your productivity, GTor provides you with a dynamic todo list that will allow you to create tasks and linked them to your goals to satisfy them.</source>
+        <target>And to boost your productivity, GTor provides you with a dynamic todo list that will allow you to create tasks and linked them to your goals to satisfy them.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete this goal?" xml:space="preserve">
+        <source>Are you sure you want to delete this goal?</source>
+        <target>Are you sure you want to delete this goal?</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to delete this task?" xml:space="preserve">
+        <source>Are you sure you want to delete this task?</source>
+        <target>Are you sure you want to delete this task?</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Back" xml:space="preserve">
+        <source>Back</source>
+        <target>Back</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cancel" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cateogries " xml:space="preserve">
+        <source>Cateogries </source>
+        <target>Cateogries </target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Color" xml:space="preserve">
+        <source>Color</source>
+        <target>Color</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Complete" xml:space="preserve">
+        <source>Complete</source>
+        <target>Complete</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="DASHBOARD" xml:space="preserve">
+        <source>DASHBOARD</source>
+        <target>DASHBOARD</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Deadline" xml:space="preserve">
+        <source>Deadline</source>
+        <target>Deadline</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete" xml:space="preserve">
+        <source>Delete</source>
+        <target>Delete</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete Goal" xml:space="preserve">
+        <source>Delete Goal</source>
+        <target>Delete Goal</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete Task" xml:space="preserve">
+        <source>Delete Task</source>
+        <target>Delete Task</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete task" xml:space="preserve">
+        <source>Delete task</source>
+        <target>Delete task</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete the goal" xml:space="preserve">
+        <source>Delete the goal</source>
+        <target>Delete the goal</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Disabled User" xml:space="preserve">
+        <source>Disabled User</source>
+        <target>Disabled User</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Done" xml:space="preserve">
+        <source>Done</source>
+        <target>Done</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Due" xml:space="preserve">
+        <source>Due</source>
+        <target>Due</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Edit" xml:space="preserve">
+        <source>Edit</source>
+        <target>Edit</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Email" xml:space="preserve">
+        <source>Email</source>
+        <target>Email</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Email Is Missing" xml:space="preserve">
+        <source>Email Is Missing</source>
+        <target>Email Is Missing</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Filter By" xml:space="preserve">
+        <source>Filter By</source>
+        <target>Filter By</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Follow us on Twitter" xml:space="preserve">
+        <source>Follow us on Twitter</source>
+        <target>Follow us on Twitter</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Forgot Password?" xml:space="preserve">
+        <source>Forgot Password?</source>
+        <target>Forgot Password?</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="GTor" xml:space="preserve">
+        <source>GTor</source>
+        <target>GTor</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="GTor is a goal tracker that will help you to organize your life by tracking your goals. You can see your goals' progress and categorize them by tags. " xml:space="preserve">
+        <source>GTor is a goal tracker that will help you to organize your life by tracking your goals. You can see your goals' progress and categorize them by tags. </source>
+        <target>GTor is a goal tracker that will help you to organize your life by tracking your goals. You can see your goals' progress and categorize them by tags. </target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Go" xml:space="preserve">
+        <source>Go</source>
+        <target>Go</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Goals" xml:space="preserve">
+        <source>Goals</source>
+        <target>Goals</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hello," xml:space="preserve">
+        <source>Hello,</source>
+        <target>Hello,</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hello, tester %@." xml:space="preserve">
+        <source>Hello, tester %@.</source>
+        <target>Hello, tester %@.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home" xml:space="preserve">
+        <source>Home</source>
+        <target>Home</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Importance" xml:space="preserve">
+        <source>Importance</source>
+        <target>Importance</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Incorrect Password" xml:space="preserve">
+        <source>Incorrect Password</source>
+        <target>Incorrect Password</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Invalid Email" xml:space="preserve">
+        <source>Invalid Email</source>
+        <target>Invalid Email</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Linked Goals" xml:space="preserve">
+        <source>Linked Goals</source>
+        <target>Linked Goals</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Linked Tasks" xml:space="preserve">
+        <source>Linked Tasks</source>
+        <target>Linked Tasks</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Name" xml:space="preserve">
+        <source>Name</source>
+        <target>Name</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No Auth Data Result" xml:space="preserve">
+        <source>No Auth Data Result</source>
+        <target>No Auth Data Result</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No Current User" xml:space="preserve">
+        <source>No Current User</source>
+        <target>No Current User</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No Document Snapshot" xml:space="preserve">
+        <source>No Document Snapshot</source>
+        <target>No Document Snapshot</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No Snapshot Data" xml:space="preserve">
+        <source>No Snapshot Data</source>
+        <target>No Snapshot Data</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No User" xml:space="preserve">
+        <source>No User</source>
+        <target>No User</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Note (Optional)" xml:space="preserve">
+        <source>Note (Optional)</source>
+        <target>Note (Optional)</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Operation Not Allowed" xml:space="preserve">
+        <source>Operation Not Allowed</source>
+        <target>Operation Not Allowed</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Organize your life" xml:space="preserve">
+        <source>Organize your life</source>
+        <target>Organize your life</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Please contact us on Twitter" xml:space="preserve">
+        <source>Please contact us on Twitter</source>
+        <target>Please contact us on Twitter</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Press to select categories" xml:space="preserve">
+        <source>Press to select categories</source>
+        <target>Press to select categories</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Progress: %@%" xml:space="preserve">
+        <source>Progress: %1$@%2$</source>
+        <target>Progress: %1$@%2$</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="SETTINGS" xml:space="preserve">
+        <source>SETTINGS</source>
+        <target>SETTINGS</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Satisfaction" xml:space="preserve">
+        <source>Satisfaction</source>
+        <target>Satisfaction</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Save" xml:space="preserve">
+        <source>Save</source>
+        <target>Save</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Select a deadline" xml:space="preserve">
+        <source>Select a deadline</source>
+        <target>Select a deadline</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Send" xml:space="preserve">
+        <source>Send</source>
+        <target>Send</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sign out" xml:space="preserve">
+        <source>Sign out</source>
+        <target>Sign out</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sort By" xml:space="preserve">
+        <source>Sort By</source>
+        <target>Sort By</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sub Goals" xml:space="preserve">
+        <source>Sub Goals</source>
+        <target>Sub Goals</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="SubGoals" xml:space="preserve">
+        <source>SubGoals</source>
+        <target>SubGoals</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="SubGoals: %@" xml:space="preserve">
+        <source>SubGoals: %@</source>
+        <target>SubGoals: %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="TODO" xml:space="preserve">
+        <source>TODO</source>
+        <target>TODO</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Tags" xml:space="preserve">
+        <source>Tags</source>
+        <target>Tags</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Tasks" xml:space="preserve">
+        <source>Tasks</source>
+        <target>Tasks</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This email is used" xml:space="preserve">
+        <source>This email is used</source>
+        <target>This email is used</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Title" xml:space="preserve">
+        <source>Title</source>
+        <target>Title</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Too Many Requests" xml:space="preserve">
+        <source>Too Many Requests</source>
+        <target>Too Many Requests</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="User Model Mismatch" xml:space="preserve">
+        <source>User Model Mismatch</source>
+        <target>User Model Mismatch</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Version %@" xml:space="preserve">
+        <source>Version %@</source>
+        <target>Version %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Weak Password" xml:space="preserve">
+        <source>Weak Password</source>
+        <target>Weak Password</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="You can link your task to some of your goals, and these goals will progress if you accomplish the task that is linked to them. " xml:space="preserve">
+        <source>You can link your task to some of your goals, and these goals will progress if you accomplish the task that is linked to them. </source>
+        <target>You can link your task to some of your goals, and these goals will progress if you accomplish the task that is linked to them. </target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
