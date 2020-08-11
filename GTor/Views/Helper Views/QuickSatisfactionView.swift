@@ -13,13 +13,17 @@ struct DoneAction: Identifiable, Hashable {
     var id = UUID()
     var title: String
     var satisfaction: Double
+    var type: ActionType
 }
 
+enum ActionType {
+    case complete, pComplete, notComplete
+}
 
 let actions: [DoneAction] = [
-    .init(title: "Completly Done", satisfaction: 100),
-    .init(title: "Partially Done", satisfaction: 50),//TODO
-    .init(title: "Not Done", satisfaction: 0)
+    .init(title: NSLocalizedString("completelyDone", comment: ""), satisfaction: 100, type: .complete),
+    .init(title: NSLocalizedString("partiallyDone", comment: ""), satisfaction: 50, type: .pComplete),//TODO
+    .init(title: NSLocalizedString("notDone", comment: ""), satisfaction: 0, type: .notComplete)
 ]
 
 struct QuickSatisfactionView: View {
@@ -54,7 +58,7 @@ struct QuickSatisfactionView: View {
                             VStack {
                                 Button(
                                     action: {
-                                        if action.title != "Partially Done" {
+                                        if action.type != .pComplete {
                                             self.isLoading = true
                                             self.selectedTask.satisfaction = action.satisfaction
                                             self.selectedTask.isSatisfied = true
@@ -103,7 +107,7 @@ struct QuickSatisfactionView: View {
                                 if self.updatedSatisfaction.isEmpty {
                                     self.isLoading = false
                                     self.isShowingAlert = true
-                                    self.alertMessage = "Please enter a value"
+                                    self.alertMessage = NSLocalizedString("enterAValue", comment: "")
                                     return
                                 }else{
                                     self.selectedTask.satisfaction = Double(self.updatedSatisfaction)!
@@ -123,7 +127,7 @@ struct QuickSatisfactionView: View {
                                     }
                                 }
                             }) {
-                                Text("Done")
+                                Text(NSLocalizedString("done", comment: ""))
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 20)

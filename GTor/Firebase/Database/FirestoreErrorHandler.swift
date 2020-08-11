@@ -21,17 +21,17 @@ extension FirestoreErrorHandler: LocalizedError {
     var errorDescription: String? {
         switch self {
             case .noAuthDataResult:
-                return NSLocalizedString("No Auth Data Result", comment: "")
+                return NSLocalizedString("noAuthDataResult", comment: "")
             case .noCurrentUser:
-                return NSLocalizedString("No Current User", comment: "")
+                return NSLocalizedString("noCurrentUser", comment: "")
             case .noDocumentSnapshot:
-                return NSLocalizedString("No Document Snapshot", comment: "")
+                return NSLocalizedString("noDocumentSnapshot", comment: "")
             case .noSnapshotData:
-                return NSLocalizedString("No Snapshot Data", comment: "")
+                return NSLocalizedString("noSnapshotData", comment: "")
             case .noUser:
-                return NSLocalizedString("No User", comment: "")
+                return NSLocalizedString("noUser", comment: "")
             case .modelMismatch:
-                return NSLocalizedString("User Model Mismatch", comment: "")
+                return NSLocalizedString("userModelMismatch", comment: "")
         }
     }
 }

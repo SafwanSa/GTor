@@ -28,8 +28,8 @@ struct AddSubGoalView: View {
             NavigationView {
                 List {
                     Section {
-                        TextField("Title", text: $title)
-                        TextField("Note (Optional)", text: $note)
+                        TextField("title", text: $title)
+                        TextField("noteOptional", text: $note)
                     }
                     
                     Section {
@@ -45,7 +45,7 @@ struct AddSubGoalView: View {
                     
                     Section {
                         
-                        Picker(selection: $selectedImportance, label: Text("Importance")) {
+                        Picker(selection: $selectedImportance, label: Text("importance")) {
                             ForEach(Priority.allCases.filter { $0 != .none }, id: \.self) { importance in
                                 Text(importance.rawValue)
                             }
@@ -54,11 +54,11 @@ struct AddSubGoalView: View {
                 }
                 .navigationBarItems(leading:
                     Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-                        Text("Cancel")
+                        Text("cancel")
                     }
                     ,trailing:
                     Button(action: { self.addGoal()}) {
-                        Text("Done")
+                        Text("done")
                     }
                 )
                     .listStyle(GroupedListStyle())

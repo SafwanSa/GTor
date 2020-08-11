@@ -32,14 +32,14 @@ struct SignUpView: View {
         ZStack {
             VStack {                
                 VStack(spacing: 20.0) {
-                    Text(isNewUser ? "Sign up" : "Login")
+                    Text(isNewUser ? NSLocalizedString("signUp", comment: "") : NSLocalizedString("login", comment: ""))
                         .font(.system(size: 32))
                         .foregroundColor(Color("Primary"))
                         .padding(.bottom, 40)
                     
                     
                     if isNewUser {
-                        TextField("Name", text: $name)
+                        TextField(NSLocalizedString("name", comment: ""), text: $name)
                             .autocapitalization(.none)
                             .padding()
                             .background(Color("Level 0"))
@@ -47,7 +47,7 @@ struct SignUpView: View {
                             .shadow()
                         
                         TextFieldWithPickerAsInputView(data: self.arrGenders,
-                                                       placeholder: "Gender",
+                                                       placeholder: NSLocalizedString("gender", comment: ""),
                                                        selectionIndex: self.$selectionIndex,
                                                        text: self.$gender)
                             
@@ -58,7 +58,7 @@ struct SignUpView: View {
                             .shadow()
                     }
                     
-                    TextField("Email", text: $email)
+                    TextField(NSLocalizedString("email", comment: ""), text: $email)
                         .autocapitalization(.none)
                         .keyboardType(.emailAddress)
                         .padding()
@@ -67,7 +67,7 @@ struct SignUpView: View {
                         .shadow()
                     
                     
-                    SecureField("Password (At least 6 digits)", text: $password)
+                    SecureField(NSLocalizedString("passwordLimit", comment: ""), text: $password)
                         .autocapitalization(.none)
                         .padding()
                         .background(Color("Level 0"))
@@ -76,7 +76,7 @@ struct SignUpView: View {
                     
                     
                     if !isNewUser {
-                        Text("Forgot Password?")
+                        Text(NSLocalizedString("forgotPassword", comment: ""))
                             .underline()
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .onTapGesture {
@@ -95,7 +95,7 @@ struct SignUpView: View {
                 .foregroundColor(Color("Primary"))
                 
                 Button(action: isNewUser ? signup : signin) {
-                    Text("Go")
+                    Text(NSLocalizedString("go", comment: ""))
                         .font(.system(size: 18))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
@@ -108,7 +108,7 @@ struct SignUpView: View {
                 .opacity(isDisableGo ? 0.5 : 1)
                 .disabled(isDisableGo)
                 Spacer()
-                Text("Back")
+                Text(NSLocalizedString("back", comment: ""))
                 Image(systemName: "arrowtriangle.down.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)

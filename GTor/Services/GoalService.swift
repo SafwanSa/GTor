@@ -16,11 +16,11 @@ extension GoalErrors: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .noCategory:
-            return "The category is misssing."
+            return NSLocalizedString("categoryIsMissing", comment: "")
         case .noTitle:
-            return "The title is missing."
+            return NSLocalizedString("titleIsMissing", comment: "")
         case .noImportance:
-            return "The importance of is misssing."
+            return NSLocalizedString("importanceIsMissing", comment: "")
         }
     }
 }

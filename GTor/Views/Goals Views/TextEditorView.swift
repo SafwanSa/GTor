@@ -14,7 +14,7 @@ struct TextEditorView: View {
     @Binding var text: String
     @State var textCopy = ""
     var isShowingDone: Bool {
-        if title == "Edit Satisfaction" {
+        if title == "editSatisfaction" {
             if Double(textCopy) == nil {
                 return false
             }
@@ -27,8 +27,8 @@ struct TextEditorView: View {
             VStack {
                 NewCardView(content: AnyView(
                     HStack {
-                        TextField(text.isEmpty ? "Note (Optional)" : textCopy, text: $textCopy)
-                            .keyboardType(title == "Edit Satisfaction" ? .asciiCapableNumberPad : .default)
+                        TextField(text.isEmpty ? NSLocalizedString("noteOptional", comment: "") : textCopy, text: $textCopy)
+                            .keyboardType(title == "editSatisfaction" ? .asciiCapableNumberPad : .default)
                         
                         Button(action: { self.textCopy = "" }) {
                             Image(systemName: "xmark.circle.fill")
@@ -46,7 +46,7 @@ struct TextEditorView: View {
             .navigationBarTitle("\(title)", displayMode: .inline)
             .navigationBarItems(trailing:
                 Button(action: { self.text = self.textCopy ; self.presentationMode.wrappedValue.dismiss() }) {
-                    Text("Done")
+                    Text(NSLocalizedString("done", comment: ""))
                         .font(.callout)
                         .foregroundColor(Color("Button"))
                 }
@@ -61,6 +61,6 @@ struct TextEditorView: View {
 
 struct TextEditorView_Previews: PreviewProvider {
     static var previews: some View {
-        TextEditorView(title: "Edit Title", text: .constant(""))
+        TextEditorView(title: "editTitle", text: .constant(""))
     }
 }

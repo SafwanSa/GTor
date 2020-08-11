@@ -36,13 +36,13 @@ struct AddGoalView: View {
                     SelectCategoryView(isCategoryPressed: $isSelectCategoryExpanded, selectedCategories: self.$goal.categories, categories: self.$categoryService.categories)
                     
                     Section {
-                        TextField("Title", text: $goal.title)
-                        TextField("Note (Optional)", text: $goal.note)
+                        TextField("title", text: $goal.title)
+                        TextField("noteOptional", text: $goal.note)
                     }
                     
                     Section {
                         Toggle(isOn: $isHavingDeadline) {
-                            Text("Deadline")
+                            Text("deadline")
                         }
                         if isHavingDeadline {
                             DatePicker(selection: $deadline, in: Date()..., displayedComponents: .date) {
@@ -53,13 +53,13 @@ struct AddGoalView: View {
                     
                     Section {
                         Toggle(isOn: $isDecomposed) {
-                            Text("Sub Goals")
+                            Text("subGoals")
                         }
                     }
                     
                     if !self.isDecomposed {
                         Section {
-                            Picker(selection: $goal.importance, label: Text("Importance")) {
+                            Picker(selection: $goal.importance, label: Text("importance")) {
                                 ForEach(Priority.allCases.filter { $0 != .none }, id: \.self) { importance in
                                     Text(importance.rawValue)
                                 }
@@ -69,16 +69,16 @@ struct AddGoalView: View {
                 }
                 .navigationBarItems(leading:
                     Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-                        Text("Cancel")
+                        Text("cancel")
                     }
                     ,trailing:
                     Button(action: { self.createGoal()}) {
-                        Text("Done")
+                        Text("done")
                     }
                 )
                     .listStyle(GroupedListStyle())
                     .environment(\.horizontalSizeClass, .regular)
-                    .navigationBarTitle("Add Goal")
+                    .navigationBarTitle("addGoal")
             }
             LoadingView(isLoading: $isLoading)
         }

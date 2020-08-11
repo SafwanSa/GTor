@@ -1,0 +1,323 @@
+/* No comment provided by engineer. */
+"aboutGTor" = "عن GTor";
+
+/* No comment provided by engineer. */
+"accountDoesNotExist" = "الحساب غير موجود. ";
+
+/* No comment provided by engineer. */
+"add" = "أضف";
+
+/* No comment provided by engineer. */
+"addGoal" = "أضف هدف";
+
+/* No comment provided by engineer. */
+"addSubGoal" = "أضف هدف فرعي";
+
+/* No comment provided by engineer. */
+"addTask" = "أضف مهمة";
+
+/* No comment provided by engineer. */
+"allSubGoalsWillBeDeleted" = "جميع الأهداف الفرعية الخاصة بهذا الهدف ستحذف أيضا. ";
+
+/* No comment provided by engineer. */
+"aboutGTorPara2" = "And to boost your productivity, GTor provides you with a dynamic todo list that will allow you to create tasks and linked them to your goals to satisfy them.";//TODO
+
+/* No comment provided by engineer. */
+"areYouSureWantDeleteGoal" = "هل أنت متأكد من حذف الهدف ؟";
+
+/* No comment provided by engineer. */
+"areYouSureWantDeleteTask" = "هل أنت متأكد من حذف المهمة ؟";
+
+/* No comment provided by engineer. */
+"back" = "رجوع";
+
+/* No comment provided by engineer. */
+"cancel" = "إلغاء";
+
+/* No comment provided by engineer. */
+"categories" = "أقسام";
+
+/* No comment provided by engineer. */
+"chevron" = "chevron.left";
+
+/* No comment provided by engineer. */
+"color" = "لون";
+
+/* No comment provided by engineer. */
+"complete" = "مكتمل";
+
+/* No comment provided by engineer. */
+"completed" = "مكتمل";
+
+/* No comment provided by engineer. */
+"completelyDone" = "مكتمل";
+
+/* No comment provided by engineer. */
+"createAnAccount" = "انشئ حساب";
+
+/* No comment provided by engineer. */
+"dashboard" = "لوحة التحكم";
+
+/* No comment provided by engineer. */
+"deadline" = "موعد أخير";
+
+/* No comment provided by engineer. */
+"delete" = "احذف";
+
+/* No comment provided by engineer. */
+"deleteGoal" = "احذف الهدف";
+
+/* No comment provided by engineer. */
+"deleteTask" = "احذف المهمة";
+
+/* No comment provided by engineer. */
+"disabledUser" = "الحساب معطّل";
+
+/* No comment provided by engineer. */
+"done" = "انتهى";
+
+/* No comment provided by engineer. */
+"edit" = "تعديل";
+
+/* No comment provided by engineer. */
+"editNote" = "تعديل الوصف";
+
+/* No comment provided by engineer. */
+"editSatisfaction" = "تعديل نسبة الإكمال";
+
+/* No comment provided by engineer. */
+"editTitle" = "تعديل العنوان";
+
+/* No comment provided by engineer. */
+"email" = "البريد الإلكتروني";
+
+/* No comment provided by engineer. */
+"emailIsMissing" = "ادخل البريد الإلكتروني";
+
+/* No comment provided by engineer. */
+"emptyNote" = "الوصف فارغ";
+
+/* No comment provided by engineer. */
+"followUsOnTwitter" = "تابعونا على تويتر";
+
+/* No comment provided by engineer. */
+"forgotPassword" = "نسيت كلمة المرور ؟";
+
+/* No comment provided by engineer. */
+"gender" = "الجنس";
+
+/* No comment provided by engineer. */
+"go" = "يلا";
+
+/* No comment provided by engineer. */
+"goal" = "هدف";
+
+/* No comment provided by engineer. */
+"goals" = "الأهداف";
+
+/* No comment provided by engineer. */
+"aboutGTorPara1" = "GTor is a goal tracker that will help you to organize your life by tracking your goals. You can see your goals' progress and categorize them by tags. ";//TODO
+
+/* No comment provided by engineer. */
+"hello" = "مرحبا، ";
+
+/* No comment provided by engineer. */
+"home" = "الرئيسية";
+
+/* No comment provided by engineer. */
+"importance" = "الأهمية";
+
+/* No comment provided by engineer. */
+"incorrectPassword" = "كلمة المرور خاطئة";
+
+/* No comment provided by engineer. */
+"invalidEmail" = "أدخل الإيميل بشكل صحيح";
+
+/* No comment provided by engineer. */
+"invalidSatisfaction" = "أدخل نسبة الإكمال بشكل صحيح";
+
+/* No comment provided by engineer. */
+"let'sAddOne" = "أضف واحد";
+
+/* No comment provided by engineer. */
+"let'sStart" = "يلا بدينا";
+
+/* No comment provided by engineer. */
+"linkedGoals" = "الأهداف المربوطة";
+
+/* No comment provided by engineer. */
+"linkedTasks" = "المهام المربوطة";
+
+/* No comment provided by engineer. */
+"login" = "دخول";
+
+/* No comment provided by engineer. */
+"logout" = "خروج";
+
+/* No comment provided by engineer. */
+"name" = "الاسم";
+
+/* No comment provided by engineer. */
+"noAuthDataResult" = "حصل خطأ، تواصل معنا على تويتر";
+
+/* No comment provided by engineer. */
+"noCurrentUser" = "لا يوجد مستخدم حالي، تواصل معنا على تويتر";
+
+/* No comment provided by engineer. */
+"noDeadline" = "بدون موعد أخير";
+
+/* No comment provided by engineer. */
+"noDocumentSnapshot" = "No Document Snapshot";
+
+/* No comment provided by engineer. */
+"noSnapshotData" = "No Snapshot Data";
+
+/* No comment provided by engineer. */
+"noUser" = "No User";
+
+/* No comment provided by engineer. */
+"not completed" = "لم يكتمل";
+
+/* No comment provided by engineer. */
+"notDone" = "لم يكتمل";
+
+/* No comment provided by engineer. */
+"noteOptional" = "الوصف (اختياري)";
+
+/* No comment provided by engineer. */
+"operationNotAllowed" = "Operation Not Allowed";
+
+/* No comment provided by engineer. */
+"organizeYourLife" = "نظّم حياتك";
+
+/* No comment provided by engineer. */
+"partially completed" = "مكتمل جزئياً";
+
+/* No comment provided by engineer. */
+"partiallyDone" = "مكتمل جزئياً";
+
+/* No comment provided by engineer. */
+"passwordLimit" = "كلمة المرور (أقل شي ٦ خانات)";
+
+/* No comment provided by engineer. */
+"contactUsOnTwitter" = "تواصل معنا على تويتر";
+
+/* No comment provided by engineer. */
+"enterAValue" = "ادخل نسبة";
+
+/* Press to open */
+"pressToFold" = "اضغط للطي";
+
+/* No comment provided by engineer. */
+"pressToOpen" = "اضغط للفتح";
+
+/* No comment provided by engineer. */
+"pressToSelectCategories" = "اضغط ل";
+
+/* No comment provided by engineer. */
+"rateTheApp" = "قيّم التطبيق";
+
+/* No comment provided by engineer. */
+"save" = "احفظ";
+
+/* No comment provided by engineer. */
+"selectADeadline" = "اختار موعد أخير";
+
+/* No comment provided by engineer. */
+"selectTags" = "اختار وسم";
+
+/* No comment provided by engineer. */
+"send" = "ارسل";
+
+/* No comment provided by engineer. */
+"settings" = "الإعدادات";
+
+/* No comment provided by engineer. */
+"shareTheApp" = "شارك التطبيق";
+
+/* No comment provided by engineer. */
+"signUp" = "تسجيل جديد";
+
+/* No comment provided by engineer. */
+"subGoals" = "أهداف فرعية";
+
+/* No comment provided by engineer. */
+"subGoal" = "هدف فرعي";
+
+/* No comment provided by engineer. */
+"tags" = "الأوسام";
+
+/* No comment provided by engineer. */
+"tagsSettings" = "إعدادات الأوسام";
+
+/* No comment provided by engineer. */
+"task" = "معمة";
+
+/* No comment provided by engineer. */
+"tasks" = "المهام";
+
+/* No comment provided by engineer. */
+"categoryIsMissing" = "اختار وسم";
+
+/* No comment provided by engineer. */
+"colorIsMissing" = "اختار لون";
+
+/* No comment provided by engineer. */
+"importanceIsMissing" = "اختار الأهمية";
+
+/* No comment provided by engineer. */
+"nameIsMissing" = "ادخل عنوان";
+
+/* No comment provided by engineer. */
+"resetEmailSent" = "تم ارسال رسالة التأكد على البريد الإلكتروني، تحقق من بريدك";
+
+/* No comment provided by engineer. */
+"titleIsMissing" = "ادخل العنوان";
+
+/* No comment provided by engineer. */
+"noSubGoals" = "لا يوجد أهداف فرعية لهذا الهدف";
+
+/* No comment provided by engineer. */
+"emailIsUsed" = "البريد الإلكتروني مستخدم";
+
+/* No comment provided by engineer. */
+"title" = "العنوان";
+
+/* No comment provided by engineer. */
+"todo" = "يجب أن يتحقق";
+
+/* No comment provided by engineer. */
+"tooManyRequests" = "تجاوزت عدد المحاولات، حاول في وقت لاحق";
+
+/* No comment provided by engineer. */
+"userModelMismatch" = "User Model Mismatch";
+
+/* No comment provided by engineer. */
+"version" = "الإصدار";
+
+/* No comment provided by engineer. */
+"weakPassword" = "كلمة مرور ضعيفة" ;
+
+/* No comment provided by engineer. */
+"explainLinkedGoals" = "You can link your task to some of your goals, and these goals will progress if you accomplish the task that is linked to them. ";//TODO
+
+/* No comment provided by engineer. */
+"noGoalsToLinkTask" = "لا يوجد لديك أهداف لربط هذه المهمة";
+
+/* No comment provided by engineer. */
+"youDontHaveGoals" = "لا يوجد لديك أهداف";
+
+/* No comment provided by engineer. */
+"youDontHaveTaskThisDay" = "لا يوجد لديك مهام في هذا اليوم";
+
+/* No comment provided by engineer. */
+"youDontHaveTasks" = "لا يوجد لديك مهام";
+
+"today" = "اليوم";
+
+"important" = "مهم";
+
+"very important" = "جداً مهم";
+
+"not important" = "غير مهم";
+

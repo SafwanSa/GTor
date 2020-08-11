@@ -49,10 +49,10 @@ struct NewGoalView: View {
                 }
                 .padding()
             }
-            .navigationBarTitle("Goal", displayMode: .inline)
+            .navigationBarTitle("\(NSLocalizedString("goal", comment: ""))", displayMode: .inline)
             .navigationBarItems(trailing:
                 Button(action: saveGoal) {
-                    Text("Save")
+                    Text(NSLocalizedString("save", comment: ""))
                         .font(.callout)
                         .foregroundColor(Color("Button"))
                 }
@@ -102,12 +102,12 @@ struct NewGoalHeaderView: View {
                 Spacer()
                 
                 Button(action: { self.isShowingTitleEditor = true }) {
-                    Text("Edit")
+                    Text(NSLocalizedString("edit", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                 }
                 .sheet(isPresented: $isShowingTitleEditor) {
-                    TextEditorView(title: "Edit Title", text: self.$goal.title)
+                    TextEditorView(title: NSLocalizedString("editTitle", comment: ""), text: self.$goal.title)
                 }
             }
             
@@ -115,18 +115,18 @@ struct NewGoalHeaderView: View {
                 .frame(height: 1)
             
             HStack {
-                Text(goal.note.isEmpty ? "Empty Note" : goal.note)
+                Text(goal.note.isEmpty ? NSLocalizedString("emptyNote", comment: "") : goal.note)
                     .font(.subheadline)
                 
                 Spacer()
                 
                 Button(action: { self.isShowingNoteEditor = true }) {
-                    Text("Edit")
+                    Text(NSLocalizedString("edit", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                 }
                 .sheet(isPresented: $isShowingNoteEditor) {
-                    TextEditorView(title: "Edit Note", text: self.$goal.note)
+                    TextEditorView(title: NSLocalizedString("editNote", comment: ""), text: self.$goal.note)
                 }
             }
         }
@@ -185,12 +185,12 @@ struct DateCardView: View {
             NewCardView(content:
                 AnyView (
                     HStack {
-                        Text(date != nil ? "\(date!, formatter: dateFormatter2)" : "No deadline")
+                        Text(date != nil ? "\(date!, formatter: dateFormatter2)" : "\(NSLocalizedString("noDeadline", comment: ""))")
                         
                         Spacer()
                         
                         Button(action: {}) {
-                            Text("Edit")
+                            Text(NSLocalizedString("edit", comment: ""))
                                 .foregroundColor(Color("Button"))
                                 .font(.callout)
                         }
@@ -207,9 +207,9 @@ struct NewSubGoalsCardView: View {
         VStack {
             NewCardView(content: AnyView(
                 HStack {
-                    Text("Sub Goals")
+                    Text(NSLocalizedString("subGoals", comment: ""))
                     Spacer()
-                    Image(systemName: "chevron.right")
+                    Image(systemName: NSLocalizedString("chevron", comment: ""))
                 }
             ))
         }
@@ -223,7 +223,7 @@ struct NewTasksInfoView: View {
         VStack {
             NewCardView(content: AnyView(
                 HStack {
-                    Text("Linked Tasks")
+                    Text(NSLocalizedString("linkedTasks", comment: ""))
                     Spacer()
                     Text("\(self.goalService.getTasks(goal: self.goal).filter { $0.isSatisfied }.count)/\(self.goalService.getTasks(goal: self.goal).count)")
                 }
@@ -239,7 +239,7 @@ struct GoalCategoriesCardView: View {
         VStack {
             NewCardView(content: AnyView(
                 HStack {
-                    Text("Tags")
+                    Text(NSLocalizedString("tags", comment: ""))
                     Spacer()
                     ForEach(goal.categories) { category in
                         CategoryCardView(category: category)
@@ -266,16 +266,16 @@ struct DeleteGoalCardView: View {
             GTorButton(content: AnyView(
                 HStack(spacing: 8.0) {
                     Image(systemName: "trash")
-                    Text("Delete Goal")
+                    Text(NSLocalizedString("deleteGoal", comment: ""))
                     Spacer()
                 }
             ), backgroundColor: Color(.white), foregroundColor: Color("Primary"), action: { self.isShowingDeleteAlert = true })
         }
         .alert(isPresented: $isShowingDeleteAlert) {
-            Alert(title: Text("Are you sure you want to delete this goal?"),
-                  message: Text(self.goal.isDecomposed ? "All the Sub Goals of this goal will be deleted also" : ""),
-                  primaryButton: .default(Text("Cancel")),
-                  secondaryButton: .destructive(Text("Delete"), action: deleteGoal))
+            Alert(title: Text(NSLocalizedString("areYouSureWantDeleteGoal", comment: "")),
+                  message: Text(self.goal.isDecomposed ? NSLocalizedString("allSubGoalsWillBeDeleted", comment: "") : ""),
+                  primaryButton: .default(Text(NSLocalizedString("cancel", comment: ""))),
+                  secondaryButton: .destructive(Text(NSLocalizedString("delete", comment: "")), action: deleteGoal))
         }
     }
     

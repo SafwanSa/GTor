@@ -26,7 +26,7 @@ struct CategoryEditorView: View {
     var body: some View {
             ZStack {
                 List {
-                    Picker(selection: $color, label: Text("Color")) {
+                    Picker(selection: $color, label: Text(NSLocalizedString("color", comment: ""))) {
                         ForEach(GTColor.allCases.filter { $0 != .none } , id: \.self) { color in
                             Color(color.color)
                                 .opacity(0.7)
@@ -35,7 +35,7 @@ struct CategoryEditorView: View {
                     }
                     
                     HStack {
-                        TextField("Title", text: $title)
+                        TextField(NSLocalizedString("title", comment: ""), text: $title)
                         
                         Button(action: {
                             self.isLoading = true
@@ -59,7 +59,7 @@ struct CategoryEditorView: View {
                             self.color = .none
                             self.isLoading = false
                         }) {
-                            Text(isEditMode ? "Done" :"Add")
+                            Text(isEditMode ? NSLocalizedString("done", comment: "") : NSLocalizedString("add", comment: ""))
                         }
                     }
                     
@@ -85,7 +85,7 @@ struct CategoryEditorView: View {
                                     self.title = category.name
                                     self.color = GTColor(rawValue: category.colorId ?? 0)!
                                 }) {
-                                Text("Edit")
+                                Text(NSLocalizedString("edit", comment: ""))
                                     .foregroundColor(Color("Button"))
                                 }
                                 .buttonStyle(PlainButtonStyle())
@@ -97,10 +97,10 @@ struct CategoryEditorView: View {
                 }
                 .listStyle(GroupedListStyle())
                 .environment(\.horizontalSizeClass, .regular)
-                .navigationBarTitle("Tags Settings", displayMode: .inline)
+                .navigationBarTitle("\(NSLocalizedString("tagsSettings", comment: ""))", displayMode: .inline)
                 .navigationBarItems(trailing:
                     Button(action: save) {
-                        Text("Save")
+                        Text(NSLocalizedString("save", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                     }

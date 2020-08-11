@@ -41,10 +41,10 @@ struct NewTaskView: View {
                 }
                 .padding()
             }
-            .navigationBarTitle("Task", displayMode: .inline)
+            .navigationBarTitle("\(NSLocalizedString("task", comment: ""))", displayMode: .inline)
             .navigationBarItems(trailing:
                 Button(action: saveGoal) {
-                    Text("Save")
+                    Text(NSLocalizedString("save", comment: ""))
                         .font(.callout)
                         .foregroundColor(Color("Button"))
                 }
@@ -64,7 +64,7 @@ struct NewTaskView: View {
         if Double(updatedSatisfaction) == nil {
             self.isLoading = false
             self.isShowingAlert = true
-            self.alertMessage = "Invalid satisfaction."
+            self.alertMessage = NSLocalizedString("invalidSatisfaction", comment: "")
             return
         }
         if !taskCopy.isSatisfied { taskCopy.isSatisfied = true }
@@ -103,12 +103,12 @@ struct NewTaskHeaderView: View {
                 Spacer()
                 
                 Button(action: { self.isShowingTitleEditor = true }) {
-                    Text("Edit")
+                    Text(NSLocalizedString("edit", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                 }
                 .sheet(isPresented: $isShowingTitleEditor) {
-                    TextEditorView(title: "Edit Title", text: self.$task.title)
+                    TextEditorView(title: NSLocalizedString("editTitle", comment: ""), text: self.$task.title)
                 }
             }
             
@@ -116,18 +116,18 @@ struct NewTaskHeaderView: View {
                 .frame(height: 1)
             
             HStack {
-                Text(task.note.isEmpty ? "Empty Note" : task.note)
+                Text(task.note.isEmpty ? NSLocalizedString("emptyNote", comment: "") : task.note)
                     .font(.subheadline)
                 
                 Spacer()
                 
                 Button(action: { self.isShowingNoteEditor = true }) {
-                    Text("Edit")
+                    Text(NSLocalizedString("edit", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                 }
                 .sheet(isPresented: $isShowingNoteEditor) {
-                    TextEditorView(title: "Edit Note", text: self.$task.note)
+                    TextEditorView(title: NSLocalizedString("editNote", comment: ""), text: self.$task.note)
                 }
             }
         }
@@ -153,15 +153,15 @@ struct DeleteTaskCardView: View {
             GTorButton(content: AnyView(
                 HStack(spacing: 8.0) {
                     Image(systemName: "trash")
-                    Text("Delete Task")
+                    Text(NSLocalizedString("deleteTask", comment: ""))
                     Spacer()
                 }
             ), backgroundColor: Color(.white), foregroundColor: Color("Primary"), action: { self.isShowingDeleteAlert = true })
         }
         .alert(isPresented: $isShowingDeleteAlert) {
-            Alert(title: Text("Are you sure you want to delete this task?"),
-                  primaryButton: .default(Text("Cancel")),
-                  secondaryButton: .destructive(Text("Delete"), action: deleteTask))
+            Alert(title: Text(NSLocalizedString("areYouSureWantDeleteTask", comment: "")),
+                  primaryButton: .default(Text(NSLocalizedString("cancel", comment: ""))),
+                  secondaryButton: .destructive(Text(NSLocalizedString("delete", comment: "")), action: deleteTask))
         }
     }
     
@@ -188,16 +188,16 @@ struct NewSatisfactionCardView: View {
     var body: some View {
         NewCardView(content: AnyView(
             HStack {
-                Text("Complete")
+                Text(NSLocalizedString("complete", comment: ""))
                 Spacer()
                 Text(updatedSatisfaction)
                 Button(action: { self.isShowingTextEditor = true }) {
-                    Text("Edit")
+                    Text(NSLocalizedString("edit", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                 }
                 .sheet(isPresented: $isShowingTextEditor) {
-                    TextEditorView(title: "Edit Satisfaction", text: self.$updatedSatisfaction)
+                    TextEditorView(title: NSLocalizedString("editSatisfaction", comment: ""), text: self.$updatedSatisfaction)
                 }
             }
         ))
@@ -211,16 +211,16 @@ struct NewImportanceCardView: View {
     var body: some View {
         NewCardView(content: AnyView(
             HStack {
-                Text("Importance")
+                Text(NSLocalizedString("importance", comment: ""))
                 Spacer()
-                Text(task.importance.rawValue)
+                Text(NSLocalizedString(task.importance.rawValue.lowercased(), comment: ""))
                     .font(.system(size: 12))
                     .padding(6)
                     .background(Color("Secondry").opacity(0.5))
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                     .elevation()
                 Button(action: { self.isShowingEdit = true }) {
-                    Text("Edit")
+                    Text(NSLocalizedString("edit", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                 }
@@ -239,9 +239,9 @@ struct NewLinkedGoalsCardView: View {
             NewCardView(content: AnyView(
                 Button(action: { self.isExpanded.toggle() }) {
                     HStack{
-                        Text("Linked Goals")
+                        Text(NSLocalizedString("linkedGoals", comment: ""))
                         Spacer()
-                        Image(systemName: "chevron.right")
+                        Image(systemName: NSLocalizedString("chevron", comment: ""))
                             .font(.system(size: 13))
                             .frame(width: 15)
                             .rotationEffect(Angle(degrees: isExpanded ? 90 : 0))

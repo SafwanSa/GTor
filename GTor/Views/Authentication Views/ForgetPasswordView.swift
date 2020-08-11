@@ -19,7 +19,7 @@ struct ForgetPasswordView: View {
             VStack(spacing: 15.0) {
                 NewCardView(content: AnyView(
                     HStack {
-                        TextField("Email", text: $email)
+                        TextField(NSLocalizedString("email", comment: ""), text: $email)
                             .keyboardType(.emailAddress)
                             .autocapitalization(.none)
                         
@@ -38,7 +38,7 @@ struct ForgetPasswordView: View {
                     .multilineTextAlignment(.center)
                 
                 Button(action: reset) {
-                    Text("Send")
+                    Text(NSLocalizedString("send", comment: ""))
                     .font(.system(size: 18))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 10)
@@ -66,7 +66,7 @@ struct ForgetPasswordView: View {
                 self.alertMessage = error.localizedDescription
             case .success(()):
                 self.isLoading = false
-                self.alertMessage = "The reset password email has been sent. Please check your email.  "
+                self.alertMessage = NSLocalizedString("resetEmailSent", comment: "")
             }
         }
     }

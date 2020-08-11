@@ -40,10 +40,10 @@ struct NewAddGoalView: View {
             NavigationView {
                 List(selection: $selectedCategoriesIds) {
                     if !goal.isSubGoal {
-                        Section(header: Text(isSelectCategoryExpanded ? "Press to fold" : "Press to open")) {
+                        Section(header: Text(isSelectCategoryExpanded ? NSLocalizedString("pressToFold", comment: "pressToOpen") : NSLocalizedString("pressToOpen", comment: ""))) {
                             HStack {
                                 Image(systemName: "tag")
-                                Text(selectedCategoriesIds.isEmpty ? "Select Tags" : selectedCategories.map { $0.name }.joined(separator: ", "))
+                                Text(selectedCategoriesIds.isEmpty ? NSLocalizedString("selectTags", comment: "") : selectedCategories.map { $0.name }.joined(separator: ", "))
                             }
                             .onTapGesture {
                                 self.isSelectCategoryExpanded.toggle()
@@ -62,18 +62,18 @@ struct NewAddGoalView: View {
                     }
                     
                     Section {
-                        TextField("Title", text: $goal.title)
-                        TextField("Note (Optional)", text: $goal.note)
+                        TextField(NSLocalizedString("title", comment: ""), text: $goal.title)
+                        TextField(NSLocalizedString("noteOptional", comment: ""), text: $goal.note)
                     }
                     
                     Section {
                         Toggle(isOn: $isHavingDeadline) {
-                            Text("Deadline")
+                            Text(NSLocalizedString("deadline", comment: ""))
                         }
                         if isHavingDeadline {
                             Button(action: { self.isCalendarPresented = true }) {
                             HStack {
-                                Text("Select a deadline")
+                                Text(NSLocalizedString("selectADeadline", comment: ""))
                                     .foregroundColor(Color("Button"))
                                 Spacer()
                                 Text("\(self.deadline, formatter: dateFormatter2)")
@@ -91,7 +91,7 @@ struct NewAddGoalView: View {
                     if !goal.isSubGoal {
                         Section {
                             Toggle(isOn: $goal.isDecomposed) {
-                                Text("Sub Goals")
+                                Text(NSLocalizedString("subGoals", comment: ""))
                             }
                         }
                     }
@@ -99,20 +99,20 @@ struct NewAddGoalView: View {
                 .environment(\.editMode, .constant(EditMode.active))
                 .navigationBarItems(leading:
                     Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-                        Text("Cancel")
+                        Text(NSLocalizedString("cancel", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                     }
                     ,trailing:
                     Button(action: !goal.isSubGoal ? createGoal : addGoal) {
-                        Text("Add")
+                        Text(NSLocalizedString("add", comment: ""))
                         .foregroundColor(Color("Button"))
                         .font(.callout)
                     }
                 )
                     .listStyle(GroupedListStyle())
                     .environment(\.horizontalSizeClass, .regular)
-                    .navigationBarTitle(goal.isSubGoal ? "Add Sub-Goal" : "Add Goal")
+                    .navigationBarTitle(goal.isSubGoal ? NSLocalizedString("addSubGoal", comment: "") : NSLocalizedString("addGoal", comment: ""))
             }
             LoadingView(isLoading: $isLoading)
         }

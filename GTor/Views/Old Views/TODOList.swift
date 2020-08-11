@@ -157,7 +157,7 @@ struct TODOList: View {
                 .blur(radius:isSatisfiedPresented || isFilterViewPresented ? 2: 0)
                 .disabled(self.isSatisfiedPresented || self.isFilterViewPresented)
             )
-                .navigationBarTitle("Tasks", displayMode: .inline)
+                .navigationBarTitle("tasks", displayMode: .inline)
         }
     }
 }
@@ -169,9 +169,9 @@ struct TODOList_Previews: PreviewProvider {
 
 enum FilterType: String, CaseIterable {
     case todo = "To-do"
-    case completelyDone = "Completely Done"
+    case completelyDone = "completelyDone"
     case ignored = "Ignored"
-    case partiallyDone = "Partially Done"
+    case partiallyDone = "partiallyDone"
 }
 
 enum SorterType: String, CaseIterable {

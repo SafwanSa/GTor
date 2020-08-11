@@ -44,6 +44,7 @@
 		17A26C0A249C4C25004776EA /* QuickSatisfactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C09249C4C25004776EA /* QuickSatisfactionView.swift */; };
 		17A61A6124707F12008B8C31 /* AddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A61A6024707F12008B8C31 /* AddGoalView.swift */; };
 		17B7A15224DED4AA0023CBD0 /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B7A15124DED4AA0023CBD0 /* ForgetPasswordView.swift */; };
+		17C2BE3024E1BE3F00DCE258 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17C2BE3224E1BE3F00DCE258 /* Localizable.strings */; };
 		17C60F542492633700A3DEFF /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C60F532492633700A3DEFF /* TaskView.swift */; };
 		17D44200247337C700DF91EC /* ModifiersViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D441FF247337C700DF91EC /* ModifiersViews.swift */; };
 		17DC11B724CD92CB0035EFD9 /* NewTODOListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DC11B624CD92CB0035EFD9 /* NewTODOListView.swift */; };
@@ -109,6 +110,9 @@
 		17A26C09249C4C25004776EA /* QuickSatisfactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSatisfactionView.swift; sourceTree = "<group>"; };
 		17A61A6024707F12008B8C31 /* AddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalView.swift; sourceTree = "<group>"; };
 		17B7A15124DED4AA0023CBD0 /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
+		17C2BE2D24E1BE1100DCE258 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		17C2BE3124E1BE3F00DCE258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		17C2BE3324E1BE4600DCE258 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17C60F532492633700A3DEFF /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		17D441FF247337C700DF91EC /* ModifiersViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiersViews.swift; sourceTree = "<group>"; };
 		17DC11B624CD92CB0035EFD9 /* NewTODOListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTODOListView.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 		17E7E7A5246C921400596500 /* GTor */ = {
 			isa = PBXGroup;
 			children = (
+				17C2BE3224E1BE3F00DCE258 /* Localizable.strings */,
 				17E7E7A6246C921400596500 /* AppDelegate.swift */,
 				17E7E7A8246C921400596500 /* SceneDelegate.swift */,
 				171E6C3B246FA90B003EFF36 /* TabBar.swift */,
@@ -446,6 +451,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 17E7E79A246C921300596500;
 			packageReferences = (
@@ -469,6 +475,7 @@
 				17E7E7B3246C921800596500 /* LaunchScreen.storyboard in Resources */,
 				17E7E7B0246C921800596500 /* Preview Assets.xcassets in Resources */,
 				1785804624A7DC24009343DB /* GoogleService-Info.plist in Resources */,
+				17C2BE3024E1BE3F00DCE258 /* Localizable.strings in Resources */,
 				1758A3AD24CD759F0065CFA8 /* ElegantCalendar.xcassets in Resources */,
 				17E7E7AD246C921800596500 /* Assets.xcassets in Resources */,
 				176FE78C2474EBAA00B7FE82 /* loading.json in Resources */,
@@ -583,10 +590,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		17C2BE3224E1BE3F00DCE258 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17C2BE3124E1BE3F00DCE258 /* en */,
+				17C2BE3324E1BE4600DCE258 /* ar */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		17E7E7B1246C921800596500 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				17E7E7B2246C921800596500 /* Base */,
+				17C2BE2D24E1BE1100DCE258 /* ar */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -598,6 +615,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -658,6 +676,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
