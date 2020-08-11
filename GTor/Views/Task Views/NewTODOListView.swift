@@ -271,7 +271,7 @@ struct NewTaskCardView: View {
             Spacer()
             
             VStack(alignment: .trailing) {
-                Text(task.importance.rawValue)
+                Text(NSLocalizedString(task.importance.rawValue.lowercased(), comment: ""))
                     .font(.system(size: 12))
                     .padding(6)
                     .background(Color("Secondry").opacity(0.5))

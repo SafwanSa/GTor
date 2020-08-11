@@ -213,7 +213,7 @@ struct NewImportanceCardView: View {
             HStack {
                 Text(NSLocalizedString("importance", comment: ""))
                 Spacer()
-                Text(task.importance.rawValue)
+                Text(NSLocalizedString(task.importance.rawValue.lowercased(), comment: ""))
                     .font(.system(size: 12))
                     .padding(6)
                     .background(Color("Secondry").opacity(0.5))
