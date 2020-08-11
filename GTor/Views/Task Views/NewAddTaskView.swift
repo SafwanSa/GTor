@@ -57,7 +57,7 @@ struct NewAddTaskView: View {
                     Section {
                         Picker(selection: $task.importance, label: Text(NSLocalizedString("importance", comment: ""))) {
                             ForEach(Priority.allCases.filter { $0 != .none }, id: \.self) { importance in
-                                Text(importance.rawValue)
+                                Text(NSLocalizedString(importance.rawValue.lowercased(), comment: ""))
                             }
                         }
                     }
