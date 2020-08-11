@@ -88,60 +88,81 @@ struct NewTODOListView_Previews: PreviewProvider {
 }
 
 struct DaysCardView: View {
-    @State var dates: [Date] = [Date()]
+    @State var dates: [Date] = []
     @Binding var selectedDate: Date
     
+    var dateTitle: String {
+        if currentLanguage == "en" {
+            return selectedDate == dates[0] ? NSLocalizedString("today", comment: "") : "\(String(selectedDate.fullDate.split(separator: ",")[0]))"
+        }else {
+            return selectedDate == dates[dates.count-1] ? NSLocalizedString("today", comment: "") : "\(String(selectedDate.fullDate.split(separator: ",")[0]))"
+        }
+    }
     var body: some View {
         VStack {
-            HStack {
-                Text(selectedDate == dates[0] ? "Today" : "\(String(selectedDate.fullDate.split(separator: ",")[0]))")
-                    .font(.system(size: 24, weight: .semibold))
-                Spacer()
-                Text(selectedDate == dates[0] ? "\(String(selectedDate.fullDate.split(separator: ",")[0])) | \(String(selectedDate.fullDate.split(separator: ",")[1])), \(String(selectedDate.fullDate.split(separator: ",")[2]))" :
-                    "\(selectedDate, formatter: dateFormatter2)")
-                    .font(.system(size: 13, weight: .semibold))
-            }
-            .foregroundColor(Color("Primary"))
-            .padding(.horizontal)
-            .animation(nil)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 14.0) {
-                    ForEach(dates, id: \.self) { date in
-                        VStack(spacing: 7.0) {
-                            Text("\(self.clipDate(date: date, clipType: .num))")
-                            Text("\(self.clipDate(date: date, clipType: .char))")
-                        }
-                        .foregroundColor(Color("Primary"))
-                        .font(.system(size: 14))
-                        .frame(minWidth: 64)
-                        .frame(height: 70, alignment: .center)
-                        .background(Color(date == self.selectedDate ? "Button" : "Level 0"))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .elevation()
-                        .onTapGesture {
-                            self.selectedDate = date
+            if dates.isEmpty {
+                Text("Loading...")
+            }else {
+                HStack {
+                    Text(dateTitle)
+                        .font(.system(size: 24, weight: .semibold))
+                    Spacer()
+                    Text(selectedDate == dates[0] ? "\(String(selectedDate.fullDate.split(separator: ",")[0])) | \(String(selectedDate.fullDate.split(separator: ",")[1])), \(String(selectedDate.fullDate.split(separator: ",")[2]))" :
+                        "\(selectedDate, formatter: dateFormatter2)")
+                        .font(.system(size: 13, weight: .semibold))
+                }
+                .foregroundColor(Color("Primary"))
+                .padding(.horizontal)
+                .animation(nil)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 14.0) {
+                        ForEach(dates, id: \.self) { date in
+                            VStack(spacing: 7.0) {
+                                Text("\(self.clipDate(date: date, clipType: .num))")
+                                Text("\(self.clipDate(date: date, clipType: .char))")
+                            }
+                            .foregroundColor(Color("Primary"))
+                            .font(.system(size: 14))
+                            .frame(minWidth: 64)
+                            .frame(height: 70, alignment: .center)
+                            .background(Color(date == self.selectedDate ? "Button" : "Level 0"))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .elevation()
+                            .onTapGesture {
+                                self.selectedDate = date
+                            }
                         }
                     }
-                }
-                .padding(4)
-                .onAppear {
-                    self.selectedDate = self.dates[0]
-                    self.generateDates()
+                    .padding(4)
                 }
             }
+            
+            
+        }
+        .onAppear {
+            self.generateDates()
+            self.selectedDate = currentLanguage == "en" ? self.dates[0] : self.dates[self.dates.count-1]
         }
     }
     
     func generateDates() {
-        for i in 1...90 {
-            dates.append(Date().addingTimeInterval(TimeInterval(60*60*24*i)))
+        if currentLanguage == "en" {
+            for i in 1...90 {
+                dates.append(Date().addingTimeInterval(TimeInterval(60*60*24*i)))
+            }
+        }else {
+            var counter = 90
+            while counter != -1 {
+                dates.append(Date().addingTimeInterval(TimeInterval(60*60*24*counter)))
+                counter -= 1
+            }
         }
     }
     
     func clipDate(date: Date, clipType: DateClipType) -> String {
         if currentLanguage == "en" {
-                   let str = dateFormatter.string(from: date)
+            let str = dateFormatter.string(from: date)
             switch clipType {
             case .char:
                 let index = str.index(str.startIndex, offsetBy: 3)
@@ -151,7 +172,7 @@ struct DaysCardView: View {
                 return String(str)
             }
         }else {
-                   let str = dateFormatter.string(from: date)
+            let str = dateFormatter.string(from: date)
             switch clipType {
             case .char:
                 let str = str.split(separator: "،")[0]
