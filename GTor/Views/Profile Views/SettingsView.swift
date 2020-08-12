@@ -20,7 +20,7 @@ struct SettingsRowButtonView: View {
                 Image(systemName: icon)
                 Text(text)
                 Spacer()
-                Image(systemName: "chevron").opacity(isHavingDestination ? 1 : 0)
+                Image(systemName: NSLocalizedString("chevron", comment: "")).opacity(isHavingDestination ? 1 : 0)
             }
             .padding(.vertical)
             .padding(.horizontal, 22)
