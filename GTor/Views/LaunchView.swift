@@ -13,6 +13,7 @@ let currentLanguage: String = Locale.current.languageCode ?? "en"
 
 struct LaunchView: View {
     @ObservedObject var userService = UserService.shared
+    var notificationService = NotificationService.shared
     @State var isLoading = false
     
     var body: some View {
@@ -35,6 +36,14 @@ struct LaunchView: View {
             self.userService.configureAuthStateDidChangeListner { _ in
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
                     self.isLoading = false
+                }
+            }
+            self.notificationService.sendRequest { (result) in
+                switch result {
+                case .failure(let error):
+                    print("Error while sending requests. ", error.localizedDescription)
+                case .success(let response):
+                    print("User responded with: ", response)
                 }
             }
         }

@@ -11,6 +11,8 @@ import SwiftUI
 struct NewAddTaskView: View {
     @ObservedObject var taskService = TaskService.shared
     @ObservedObject var goalService = GoalService.shared
+    var notificationService = NotificationService.shared
+
     @Environment(\.presentationMode) private var presentationMode
     @State var task = Task.dummy
     @State var deadline = Date()
@@ -127,9 +129,16 @@ struct NewAddTaskView: View {
                 self.isShowingAlert = true
                 self.alertMessage = error.localizedDescription
             case .success(()):
+                self.notifyMe()
                 self.isLoading = false
                 self.presentationMode.wrappedValue.dismiss()
             }
+        }
+    }
+    
+    func notifyMe() {
+        if isRemindMe && isHavingDeadline {
+            self.notificationService.setNotification(on: self.deadline, at: self.remindMeAt, task: self.task)
         }
     }
 }

@@ -155,7 +155,7 @@ struct DaysCardView: View {
                 counter -= 1
             }
         }else {
-            for i in 1...90 {
+            for i in 0...90 {
                 dates.append(Date().addingTimeInterval(TimeInterval(60*60*24*i)))
             }
         }
