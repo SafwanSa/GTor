@@ -65,7 +65,7 @@ class NotificationService {
     }
     
     
-    func deleteNotification(task id: UUID) {
+    func deleteNotification(taskUID: UUID) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id.uuidString])
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [id.uuidString])
     }

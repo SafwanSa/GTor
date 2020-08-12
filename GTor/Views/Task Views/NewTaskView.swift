@@ -141,6 +141,7 @@ struct NewTaskHeaderView: View {
 }
 struct DeleteTaskCardView: View {
     @ObservedObject var taskService = TaskService.shared
+    var notificationService = NotificationService.shared
     @Environment(\.presentationMode) private var presentationMode
     @Binding var task: Task
     @State var isShowingDeleteAlert = false
@@ -175,6 +176,7 @@ struct DeleteTaskCardView: View {
                 self.alertMessage = error.localizedDescription
             case .success(()):
                 CalcService.shared.calcProgress(from: self.task)
+                self.notificationService.deleteNotification(taskUID: self.task.id)
                 self.isLoading = false
             }
         }
