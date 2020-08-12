@@ -92,10 +92,11 @@ struct DaysCardView: View {
     @Binding var selectedDate: Date
     
     var dateTitle: String {
-        if currentLanguage == "en" {
-            return selectedDate == dates[0] ? NSLocalizedString("today", comment: "") : "\(String(selectedDate.fullDate.split(separator: ",")[0]))"
-        }else {
+        if currentLanguage == "ar" {
             return selectedDate == dates[dates.count-1] ? NSLocalizedString("today", comment: "") : "\(String(selectedDate.fullDate.split(separator: ",")[0]))"
+            
+        }else {
+            return selectedDate == dates[0] ? NSLocalizedString("today", comment: "") : "\(String(selectedDate.fullDate.split(separator: ",")[0]))"
         }
     }
     var body: some View {
@@ -142,36 +143,26 @@ struct DaysCardView: View {
         }
         .onAppear {
             self.generateDates()
-            self.selectedDate = currentLanguage == "en" ? self.dates[0] : self.dates[self.dates.count-1]
+            self.selectedDate = currentLanguage == "ar" ? self.dates[self.dates.count-1] : self.dates[0]
         }
     }
     
     func generateDates() {
-        if currentLanguage == "en" {
-            for i in 1...90 {
-                dates.append(Date().addingTimeInterval(TimeInterval(60*60*24*i)))
-            }
-        }else {
+        if currentLanguage == "ar" {
             var counter = 90
             while counter != -1 {
                 dates.append(Date().addingTimeInterval(TimeInterval(60*60*24*counter)))
                 counter -= 1
             }
+        }else {
+            for i in 1...90 {
+                dates.append(Date().addingTimeInterval(TimeInterval(60*60*24*i)))
+            }
         }
     }
     
     func clipDate(date: Date, clipType: DateClipType) -> String {
-        if currentLanguage == "en" {
-            let str = dateFormatter.string(from: date)
-            switch clipType {
-            case .char:
-                let index = str.index(str.startIndex, offsetBy: 3)
-                return String(str[..<index])
-            case .num:
-                let str = str.split(separator: ",")[1].split(separator: " ")[0]
-                return String(str)
-            }
-        }else {
+        if currentLanguage == "ar" {
             let str = dateFormatter.string(from: date)
             switch clipType {
             case .char:
@@ -179,6 +170,16 @@ struct DaysCardView: View {
                 return String(str)
             case .num:
                 let str = str.split(separator: "،")[1].split(separator: " ")[0]
+                return String(str)
+            }
+        }else {
+            let str = dateFormatter.string(from: date)
+            switch clipType {
+            case .char:
+                let index = str.index(str.startIndex, offsetBy: 3)
+                return String(str[..<index])
+            case .num:
+                let str = str.split(separator: ",")[1].split(separator: " ")[0]
                 return String(str)
             }
         }
