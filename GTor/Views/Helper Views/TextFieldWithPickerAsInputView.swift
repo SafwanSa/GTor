@@ -31,14 +31,14 @@ struct TextFieldWithPickerAsInputView : UIViewRepresentable {
         textField.inputView = picker
         //            textField.backgroundColor = .secondarySystemFill
         textField.textColor = UIColor(named: "Primary")
-        textField.textAlignment = .left
+        textField.textAlignment = currentLanguage == "ar" ? .right : .left
         textField.font = .systemFont(ofSize: 17)
         textField.delegate = context.coordinator
         return textField
     }
     
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<TextFieldWithPickerAsInputView>) {
-        uiView.text = text
+        uiView.text = NSLocalizedString(text.lowercased(), comment: "")
     }
     
     class Coordinator: NSObject, UIPickerViewDataSource, UIPickerViewDelegate , UITextFieldDelegate {
@@ -56,7 +56,7 @@ struct TextFieldWithPickerAsInputView : UIViewRepresentable {
             return self.parent.data.count
         }
         func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-            return self.parent.data[row]
+            return NSLocalizedString(self.parent.data[row].lowercased(), comment: "")
         }
         func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
             self.parent.$selectionIndex.wrappedValue = row
