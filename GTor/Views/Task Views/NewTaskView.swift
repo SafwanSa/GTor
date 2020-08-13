@@ -33,7 +33,9 @@ struct NewTaskView: View {
                     
                     NewSatisfactionCardView(updatedSatisfaction: $updatedSatisfaction)
                     
-                    DateCardView(date: $task.dueDate)
+                    if task.dueDate != nil { DateCardView(date: $task.dueDate, title: NSLocalizedString("deadline", comment: "")) }
+                    
+                    if task.time != nil { DateCardView(date: $task.time, title: NSLocalizedString("reminderAt", comment: "")) }
                     
                     if !task.linkedGoalsIds.isEmpty { NewLinkedGoalsCardView(task: task) }
                     
@@ -208,7 +210,6 @@ struct NewSatisfactionCardView: View {
 
 struct NewImportanceCardView: View {
     @Binding var task: Task
-    @State var isShowingEdit = false
     
     var body: some View {
         NewCardView(content: AnyView(
@@ -221,12 +222,6 @@ struct NewImportanceCardView: View {
                     .background(Color("Secondry").opacity(0.5))
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                     .elevation()
-                Button(action: { self.isShowingEdit = true }) {
-                    Text(NSLocalizedString("edit", comment: ""))
-                        .foregroundColor(Color("Button"))
-                        .font(.callout)
-                }
-                .opacity(0)//TODO
             }
         ))
     }

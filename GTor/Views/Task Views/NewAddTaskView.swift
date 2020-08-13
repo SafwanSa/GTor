@@ -83,13 +83,15 @@ struct NewAddTaskView: View {
                         GTorCalendarView(date: self.$deadline)
                     }
                     
-                    Section {
-                        Toggle(isOn: $isRemindMe) {
-                            Text(NSLocalizedString("remindMe", comment: ""))
-                        }
-                        if isRemindMe {
-                            DatePicker(selection: $remindMeAt, displayedComponents: .hourAndMinute) {
-                                Text(NSLocalizedString("at", comment: ""))
+                    if isHavingDeadline {
+                        Section {
+                            Toggle(isOn: $isRemindMe) {
+                                Text(NSLocalizedString("remindMe", comment: ""))
+                            }
+                            if isRemindMe {
+                                DatePicker(selection: $remindMeAt, displayedComponents: .hourAndMinute) {
+                                    Text(NSLocalizedString("at", comment: ""))
+                                }
                             }
                         }
                     }
@@ -122,6 +124,7 @@ struct NewAddTaskView: View {
         isLoading = true
         task.id = UUID()
         task.dueDate = isHavingDeadline ? deadline : nil
+        task.time = task.dueDate != nil ? remindMeAt : nil
         self.taskService.saveTask(task: task) { (result) in
             switch result {
             case .failure(let error):
