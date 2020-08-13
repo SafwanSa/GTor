@@ -11,13 +11,17 @@ import SwiftUI
 struct NewAddTaskView: View {
     @ObservedObject var taskService = TaskService.shared
     @ObservedObject var goalService = GoalService.shared
+    var notificationService = NotificationService.shared
+
     @Environment(\.presentationMode) private var presentationMode
     @State var task = Task.dummy
     @State var deadline = Date()
+    @State var remindMeAt = Date()
     
     @State var isHavingDeadline = false
     @State var isCalendarPresented = false
     @State var isLinkedGoalsPresented = false
+    @State var isRemindMe = false
     
     @State var alertMessage = "None"
     @State var isLoading = false
@@ -30,29 +34,6 @@ struct NewAddTaskView: View {
                         TextField(NSLocalizedString("title", comment: ""), text: $task.title)
                         TextField(NSLocalizedString("noteOptional", comment: ""), text: $task.note)
                     }
-                    
-                    Section {
-                        Toggle(isOn: $isHavingDeadline) {
-                            Text(NSLocalizedString("deadline", comment: ""))
-                        }
-                        if isHavingDeadline {
-                            Button(action: { self.isCalendarPresented = true }) {
-                                HStack {
-                                    Text(NSLocalizedString("selectADeadline", comment: ""))
-                                        .foregroundColor(Color("Button"))
-                                    Spacer()
-                                    Text("\(self.deadline, formatter: dateFormatter2)")
-                                }
-                                .frame(maxWidth: .infinity)
-                                .contentShape(Rectangle())
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                    }
-                    .sheet(isPresented: $isCalendarPresented) {
-                        GTorCalendarView(date: self.$deadline)
-                    }
-                    
                     
                     Section {
                         Picker(selection: $task.importance, label: Text(NSLocalizedString("importance", comment: ""))) {
@@ -78,6 +59,41 @@ struct NewAddTaskView: View {
                     }
                     .sheet(isPresented: $isLinkedGoalsPresented) {
                         LinkedGoalsView(selectedGoals: self.$task.linkedGoalsIds)
+                    }
+                    
+                    Section {
+                        Toggle(isOn: $isHavingDeadline) {
+                            Text(NSLocalizedString("deadline", comment: ""))
+                        }
+                        if isHavingDeadline {
+                            Button(action: { self.isCalendarPresented = true }) {
+                                HStack {
+                                    Text(NSLocalizedString("selectADeadline", comment: ""))
+                                        .foregroundColor(Color("Button"))
+                                    Spacer()
+                                    Text("\(self.deadline, formatter: dateFormatter2)")
+                                }
+                                .frame(maxWidth: .infinity)
+                                .contentShape(Rectangle())
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                    .sheet(isPresented: $isCalendarPresented) {
+                        GTorCalendarView(date: self.$deadline)
+                    }
+                    
+                    if isHavingDeadline {
+                        Section {
+                            Toggle(isOn: $isRemindMe) {
+                                Text(NSLocalizedString("remindMe", comment: ""))
+                            }
+                            if isRemindMe {
+                                DatePicker(selection: $remindMeAt, displayedComponents: .hourAndMinute) {
+                                    Text(NSLocalizedString("at", comment: ""))
+                                }
+                            }
+                        }
                     }
                 }
                 .listStyle(GroupedListStyle())
@@ -108,6 +124,7 @@ struct NewAddTaskView: View {
         isLoading = true
         task.id = UUID()
         task.dueDate = isHavingDeadline ? deadline : nil
+        task.time = task.dueDate != nil ? remindMeAt : nil
         self.taskService.saveTask(task: task) { (result) in
             switch result {
             case .failure(let error):
@@ -115,9 +132,16 @@ struct NewAddTaskView: View {
                 self.isShowingAlert = true
                 self.alertMessage = error.localizedDescription
             case .success(()):
+                self.notifyMe()
                 self.isLoading = false
                 self.presentationMode.wrappedValue.dismiss()
             }
+        }
+    }
+    
+    func notifyMe() {
+        if isRemindMe && isHavingDeadline {
+            self.notificationService.setNotification(on: self.deadline, at: self.remindMeAt, task: self.task)
         }
     }
 }

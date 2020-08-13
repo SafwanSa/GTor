@@ -25,6 +25,7 @@
 		1758A3AD24CD759F0065CFA8 /* ElegantCalendar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1758A3AC24CD759F0065CFA8 /* ElegantCalendar.xcassets */; };
 		1762732C24748759000E9661 /* SubGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732B24748759000E9661 /* SubGoalView.swift */; };
 		1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732D24748D39000E9661 /* GoalHeaderView.swift */; };
+		176C74B624E4216D00582E03 /* NotiificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176C74B524E4216D00582E03 /* NotiificationService.swift */; };
 		176FE77E2474E02400B7FE82 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 176FE77D2474E02400B7FE82 /* Lottie */; };
 		176FE7842474E1A800B7FE82 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7832474E1A800B7FE82 /* LottieView.swift */; };
 		176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FE7852474E21100B7FE82 /* LoadingView.swift */; };
@@ -92,6 +93,7 @@
 		1758A3AC24CD759F0065CFA8 /* ElegantCalendar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = ElegantCalendar.xcassets; path = "../../../../Library/Developer/Xcode/DerivedData/GTor-gswenturrmbgpbgdlvrwtuaujfmj/SourcePackages/checkouts/ElegantCalendar/ElegantCalendar.xcassets"; sourceTree = "<group>"; };
 		1762732B24748759000E9661 /* SubGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGoalView.swift; sourceTree = "<group>"; };
 		1762732D24748D39000E9661 /* GoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalHeaderView.swift; sourceTree = "<group>"; };
+		176C74B524E4216D00582E03 /* NotiificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiificationService.swift; sourceTree = "<group>"; };
 		176FE7832474E1A800B7FE82 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		176FE7852474E21100B7FE82 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		176FE78B2474EBAA00B7FE82 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				17E7E7E1246CE3C700596500 /* GoalService.swift */,
 				17E7E7E3246CE3D600596500 /* TaskService.swift */,
 				17E7E7E5246CE3E400596500 /* CategoryService.swift */,
+				176C74B524E4216D00582E03 /* NotiificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */,
 				17A26C0A249C4C25004776EA /* QuickSatisfactionView.swift in Sources */,
 				1791400024D3226D00EE8016 /* SettingsView.swift in Sources */,
+				176C74B624E4216D00582E03 /* NotiificationService.swift in Sources */,
 				176FE7862474E21100B7FE82 /* LoadingView.swift in Sources */,
 				17E7E7A9246C921400596500 /* SceneDelegate.swift in Sources */,
 				17E7E7D0246CAB0600596500 /* LaunchView.swift in Sources */,
@@ -733,7 +737,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"GTor/Preview Content\"";
 				DEVELOPMENT_TEAM = PVD368MQKH;
 				ENABLE_PREVIEWS = YES;
@@ -755,7 +759,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"GTor/Preview Content\"";
 				DEVELOPMENT_TEAM = PVD368MQKH;
 				ENABLE_PREVIEWS = YES;

@@ -31,7 +31,7 @@ struct NewGoalView: View {
                     
                     if !goal.isSubGoal { GoalCategoriesCardView(goal: goalCopy) }
                     
-                    DateCardView(date: $goal.dueDate)
+                    if goal.dueDate != nil { DateCardView(date: $goal.dueDate, title: NSLocalizedString("deadline", comment: "")) }
                     
                     if goal.isSubGoal {
                         NewTasksInfoView(goal: goalCopy)
@@ -179,23 +179,18 @@ struct GTorButton: View {
 
 struct DateCardView: View {
     @Binding var date: Date?
+    var title: String
     
     var body: some View {
         VStack {
             NewCardView(content:
                 AnyView (
                     HStack {
-                        Text(date != nil ? "\(date!, formatter: dateFormatter2)" : "\(NSLocalizedString("noDeadline", comment: ""))")
+                        Text(title)
                         
                         Spacer()
                         
-                        Button(action: {}) {
-                            Text(NSLocalizedString("edit", comment: ""))
-                                .foregroundColor(Color("Button"))
-                                .font(.callout)
-                        }
-                        .opacity(0)//TODO
-
+                        Text(date != nil ? "\(date!, formatter: dateFormatter2)": "-")
                     }
             ))
         }
@@ -298,6 +293,26 @@ struct DeleteGoalCardView: View {
                 self.isLoading = false
                 self.presentationMode.wrappedValue.dismiss()
             }
+        }
+    }
+}
+
+struct TimeCardView: View {
+    @Binding var date: Date?
+    var title: String
+    
+    var body: some View {
+        VStack {
+            NewCardView(content:
+                AnyView (
+                    HStack {
+                        Text(title)
+                        
+                        Spacer()
+                        
+                        Text(date != nil ? date!.time: "-")
+                    }
+            ))
         }
     }
 }

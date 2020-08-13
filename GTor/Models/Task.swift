@@ -14,6 +14,7 @@ struct Task: Codable, Identifiable, Equatable, Hashable {
     var title: String
     var note: String
     var dueDate: Date?
+    var time: Date?
     var satisfaction: Double
     var isSatisfied: Bool
     var linkedGoalsIds: [UUID]

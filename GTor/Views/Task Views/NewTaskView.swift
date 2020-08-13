@@ -33,7 +33,9 @@ struct NewTaskView: View {
                     
                     NewSatisfactionCardView(updatedSatisfaction: $updatedSatisfaction)
                     
-                    DateCardView(date: $task.dueDate)
+                    if task.dueDate != nil { DateCardView(date: $task.dueDate, title: NSLocalizedString("deadline", comment: "")) }
+                    
+                    if task.time != nil { TimeCardView(date: $task.time, title: NSLocalizedString("reminderAt", comment: "")) }
                     
                     if !task.linkedGoalsIds.isEmpty { NewLinkedGoalsCardView(task: task) }
                     
@@ -67,7 +69,7 @@ struct NewTaskView: View {
             self.alertMessage = NSLocalizedString("invalidSatisfaction", comment: "")
             return
         }
-        if !taskCopy.isSatisfied { taskCopy.isSatisfied = true }
+        if !taskCopy.isSatisfied && taskCopy.satisfaction != 0{ taskCopy.isSatisfied = true }
         taskCopy.satisfaction = Double(updatedSatisfaction)!
         self.task = self.taskCopy
         taskService.saveTask(task: self.task) { (result) in
@@ -141,6 +143,7 @@ struct NewTaskHeaderView: View {
 }
 struct DeleteTaskCardView: View {
     @ObservedObject var taskService = TaskService.shared
+    var notificationService = NotificationService.shared
     @Environment(\.presentationMode) private var presentationMode
     @Binding var task: Task
     @State var isShowingDeleteAlert = false
@@ -175,6 +178,7 @@ struct DeleteTaskCardView: View {
                 self.alertMessage = error.localizedDescription
             case .success(()):
                 CalcService.shared.calcProgress(from: self.task)
+                self.notificationService.deleteNotification(taskUID: self.task.id)
                 self.isLoading = false
             }
         }
@@ -206,7 +210,6 @@ struct NewSatisfactionCardView: View {
 
 struct NewImportanceCardView: View {
     @Binding var task: Task
-    @State var isShowingEdit = false
     
     var body: some View {
         NewCardView(content: AnyView(
@@ -219,12 +222,6 @@ struct NewImportanceCardView: View {
                     .background(Color("Secondry").opacity(0.5))
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                     .elevation()
-                Button(action: { self.isShowingEdit = true }) {
-                    Text(NSLocalizedString("edit", comment: ""))
-                        .foregroundColor(Color("Button"))
-                        .font(.callout)
-                }
-                .opacity(0)//TODO
             }
         ))
     }
