@@ -15,28 +15,40 @@ let appVersion = 1.0
 struct LaunchView: View {
     @ObservedObject var userService = UserService.shared
     var notificationService = NotificationService.shared
-    @State var isLoading = false
+    @State var isLoading = true
     
     var body: some View {
         ZStack {
             VStack {
                 Group {
                     if userService.authState == .udefined || userService.authState == .signOut {
-                        LoginView()
-                            .transition(.move(edge: .bottom))
-                            .animation(.easeInOut)
+                        if isLoading {
+                            LogoView()
+                        }else {
+                            LoginView()
+                                .transition(.move(edge: .bottom))
+                                .animation(.easeInOut)
+                        }
+                        
                     }else {
-                        TabBar()
+                        if isLoading {
+                            LogoView()
+                        }else {
+                            TabBar()
+                        }
                     }
                 }
             }
             LoadingView(isLoading: $isLoading)
         }
         .onAppear {
-            self.isLoading = true
-            self.userService.configureAuthStateDidChangeListner { _ in
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-                    self.isLoading = false
+            self.userService.configureAuthStateDidChangeListner { (complete) in
+                if complete {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                        self.isLoading = false
+                    }
+                }else {
+                        self.isLoading = false
                 }
             }
             self.notificationService.sendRequest { (result) in
@@ -53,7 +65,19 @@ struct LaunchView: View {
 
 struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {
-        LaunchView()
+        LogoView()
     }
 }
 
+
+
+struct LogoView: View {
+    var body: some View {
+        VStack {
+            Image("Trans-Gtor-New-Logo")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 367, height: 311)
+        }
+    }
+}
