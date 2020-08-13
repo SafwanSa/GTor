@@ -10,6 +10,7 @@ import SwiftUI
 import FirebaseAuth
 let screen = UIScreen.main.bounds
 let currentLanguage: String = Locale.current.languageCode ?? "en"
+let appVersion = 1.0
 
 struct LaunchView: View {
     @ObservedObject var userService = UserService.shared

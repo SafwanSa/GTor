@@ -143,7 +143,8 @@ class FirestoreService {
         }catch(let error) {
             fatalError("Error in encoding the model: \(error.localizedDescription)")
         }
-        doc["updated_at"] = Timestamp(date: Date())
+        if collection == .users { doc["appVersion"] = appVersion } // This is a customized code
+        doc["updated_at"] = Timestamp(date: Date()) // This is a customized code
         reference.setData(doc, merge: true) { error in
             DispatchQueue.main.async {
                 if let error = error {

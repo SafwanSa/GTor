@@ -25,7 +25,7 @@ struct AboutView: View {
                             .font(.callout)
                             .foregroundColor(Color("Secondry"))
                         
-                        Text("\(NSLocalizedString("version", comment: "")) \(String(format: "%.1f", 1.0))")
+                        Text("\(NSLocalizedString("version", comment: "")) \(String(format: "%.1f", appVersion))")
                         .font(.caption)
                         .foregroundColor(Color("Button"))
                     }
