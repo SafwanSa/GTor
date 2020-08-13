@@ -67,7 +67,7 @@ struct NewTaskView: View {
             self.alertMessage = NSLocalizedString("invalidSatisfaction", comment: "")
             return
         }
-        if !taskCopy.isSatisfied { taskCopy.isSatisfied = true }
+        if !taskCopy.isSatisfied && taskCopy.satisfaction != 0{ taskCopy.isSatisfied = true }
         taskCopy.satisfaction = Double(updatedSatisfaction)!
         self.task = self.taskCopy
         taskService.saveTask(task: self.task) { (result) in
