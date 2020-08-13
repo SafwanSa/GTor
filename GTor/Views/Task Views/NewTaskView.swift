@@ -35,7 +35,7 @@ struct NewTaskView: View {
                     
                     if task.dueDate != nil { DateCardView(date: $task.dueDate, title: NSLocalizedString("deadline", comment: "")) }
                     
-                    if task.time != nil { DateCardView(date: $task.time, title: NSLocalizedString("reminderAt", comment: "")) }
+                    if task.time != nil { TimeCardView(date: $task.time, title: NSLocalizedString("reminderAt", comment: "")) }
                     
                     if !task.linkedGoalsIds.isEmpty { NewLinkedGoalsCardView(task: task) }
                     

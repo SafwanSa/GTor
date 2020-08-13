@@ -24,7 +24,10 @@ extension DateFormatter {
     
     static var time: DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:MM"
+        formatter.locale = .current
+        formatter.dateFormat = "h:mm:00 a"
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
         return formatter
     }
 

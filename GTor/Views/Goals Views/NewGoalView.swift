@@ -296,3 +296,23 @@ struct DeleteGoalCardView: View {
         }
     }
 }
+
+struct TimeCardView: View {
+    @Binding var date: Date?
+    var title: String
+    
+    var body: some View {
+        VStack {
+            NewCardView(content:
+                AnyView (
+                    HStack {
+                        Text(title)
+                        
+                        Spacer()
+                        
+                        Text(date != nil ? date!.time: "-")
+                    }
+            ))
+        }
+    }
+}
