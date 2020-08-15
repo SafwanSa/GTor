@@ -104,7 +104,7 @@ struct QuickSatisfactionView: View {
                             Spacer()
                             Button(action: {
                                 self.isLoading = true
-                                if self.updatedSatisfaction.isEmpty {
+                                if self.updatedSatisfaction.isEmpty || Double(self.updatedSatisfaction) == nil{
                                     self.isLoading = false
                                     self.isShowingAlert = true
                                     self.alertMessage = NSLocalizedString("enterAValue", comment: "")
