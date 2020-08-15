@@ -46,10 +46,10 @@ class AuthService: ObservableObject {
             FirestoreService.shared.saveDocument(collection: FirestoreKeys.Collection.users, documentId: user.uid, model: user) { completion($0) }
             
             let categoriesData: [Category] = [
-                .init(uid: result.user.uid, name: "Work", colorId: 0),
-                .init(uid: result.user.uid, name: "Study", colorId: 1),
-                .init(uid: result.user.uid, name: "Relationships", colorId: 2),
-                .init(uid: result.user.uid, name: "Life", colorId: 3)
+                .init(uid: result.user.uid, name: NSLocalizedString("work", comment: ""), colorId: 0),
+                .init(uid: result.user.uid, name: NSLocalizedString("study", comment: ""), colorId: 1),
+                .init(uid: result.user.uid, name: NSLocalizedString("relationships", comment: ""), colorId: 2),
+                .init(uid: result.user.uid, name: NSLocalizedString("life", comment: ""), colorId: 3)
             ]
             
             for category in categoriesData {

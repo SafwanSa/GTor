@@ -20,7 +20,7 @@
 "allSubGoalsWillBeDeleted" = "جميع الأهداف الفرعية الخاصة بهذا الهدف ستحذف أيضا. ";
 
 /* No comment provided by engineer. */
-"aboutGTorPara2" = "ولتسريع إنتاجيتك، GTor يقدم لائحة تساعدك لوضع مهام، وتستطيع ربط هذه المهام بأهدافك لتحقيقهم، مما يساعدك على إحراز تقدم ";//TODO
+"aboutGTorPara2" = "ولتسريع إنتاجيتك، GTor يقدم لائحة تساعدك لوضع مهام، وتستطيع ربط هذه المهام بأهدافك لتحقيقهم، مما يساعدك على إحراز تقدم سريع في حياتك ";//TODO
 
 /* No comment provided by engineer. */
 "areYouSureWantDeleteGoal" = "هل أنت متأكد من حذف الهدف ؟";
@@ -337,3 +337,10 @@
 
 "progress" = "التقدم";
 
+"work" = "عمل";
+
+"study" = "دراسة";
+
+"relationships" = "علاقات";
+
+"life" = "حياة";
