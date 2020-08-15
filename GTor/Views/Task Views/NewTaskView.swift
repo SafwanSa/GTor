@@ -37,7 +37,7 @@ struct NewTaskView: View {
                     
                     if task.time != nil { TimeCardView(date: $task.time, title: NSLocalizedString("reminderAt", comment: "")) }
                     
-                    if !task.linkedGoalsIds.isEmpty { NewLinkedGoalsCardView(task: task) }
+                    if !taskService.getLinkedGoals(task: task).isEmpty { NewLinkedGoalsCardView(task: task) }
                     
                     DeleteTaskCardView(task: $task, isLoading: $isLoading)
                 }

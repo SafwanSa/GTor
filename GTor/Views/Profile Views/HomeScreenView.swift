@@ -173,7 +173,7 @@ struct NoTaskView: View {
                     .font(.system(size: 13))
                     .foregroundColor(Color("Primary"))
                     .padding(.vertical, 13)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, 25)
             }
             .background(Color("Button"))
             .clipShape(RoundedRectangle(cornerRadius: 10))
