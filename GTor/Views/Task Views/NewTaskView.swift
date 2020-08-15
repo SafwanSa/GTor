@@ -257,7 +257,8 @@ struct NewLinkedGoalsCardView: View {
                     }
                 }
             }
+            .animation(.easeInOut)
         }
-        .animation(.easeInOut)
+    .animation(nil)
     }
 }

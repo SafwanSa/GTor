@@ -29,6 +29,14 @@ struct NewGoalView: View {
                 VStack(spacing: 40.0) {
                     NewGoalHeaderView(goal: $goalCopy)
                     
+                    NewCardView(content: AnyView(
+                        HStack {
+                            Text(NSLocalizedString("progress", comment: ""))
+                            Spacer()
+                            Text("\(String(format: "%.1f", goal.satisfaction))%")
+                        }
+                    ))
+                    
                     if !goal.isSubGoal { GoalCategoriesCardView(goal: goalCopy) }
                     
                     if goal.dueDate != nil { DateCardView(date: $goal.dueDate, title: NSLocalizedString("deadline", comment: "")) }
@@ -47,6 +55,7 @@ struct NewGoalView: View {
                     
                     DeleteGoalCardView(goal: $goalCopy, mainGoal: $mainGoal, isLoading: $isLoading)
                 }
+                .foregroundColor(Color("Primary"))
                 .padding()
             }
             .navigationBarTitle("\(NSLocalizedString("goal", comment: ""))", displayMode: .inline)

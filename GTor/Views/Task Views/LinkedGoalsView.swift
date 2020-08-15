@@ -53,7 +53,7 @@ struct LinkedGoalsView: View {
                             if !goal.isSubGoal && goal.isDecomposed {
                                 if !self.goalService.getSubGoals(mainGoal: goal).isEmpty {
                                     for subGoal in self.goalService.getSubGoals(mainGoal: goal) {
-                                        self.allGoals.append(.init(id: subGoal.id, name: goal.title + " -> \(subGoal.title)"))
+                                        self.allGoals.append(.init(id: subGoal.id, name: subGoal.title))
                                     }
                                 }
                             }else if !goal.isSubGoal && !goal.isDecomposed {

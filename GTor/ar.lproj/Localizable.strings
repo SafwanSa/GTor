@@ -20,7 +20,7 @@
 "allSubGoalsWillBeDeleted" = "جميع الأهداف الفرعية الخاصة بهذا الهدف ستحذف أيضا. ";
 
 /* No comment provided by engineer. */
-"aboutGTorPara2" = "And to boost your productivity, GTor provides you with a dynamic todo list that will allow you to create tasks and linked them to your goals to satisfy them.";//TODO
+"aboutGTorPara2" = "ولتسريع إنتاجيتك، GTor يقدم لائحة تساعدك لوضع مهام، وتستطيع ربط هذه المهام بأهدافك لتحقيقهم، مما يساعدك على إحراز تقدم ";//TODO
 
 /* No comment provided by engineer. */
 "areYouSureWantDeleteGoal" = "هل أنت متأكد من حذف الهدف ؟";
@@ -98,7 +98,7 @@
 "emptyNote" = "الوصف فارغ";
 
 /* No comment provided by engineer. */
-"followUsOnTwitter" = "تابعونا على تويتر";
+"followUsOnTwitter" = "تابعنا على تويتر";
 
 /* No comment provided by engineer. */
 "forgotPassword" = "نسيت كلمة المرور ؟";
@@ -116,7 +116,7 @@
 "goals" = "الأهداف";
 
 /* No comment provided by engineer. */
-"aboutGTorPara1" = "GTor is a goal tracker that will help you to organize your life by tracking your goals. You can see your goals' progress and categorize them by tags. ";//TODO
+"aboutGTorPara1" = "هو برنامج يساعدك على تنظيم حياتك عن طريق متابعتك لأهدافك وتصنيفهم باستخدام أوسام";
 
 /* No comment provided by engineer. */
 "hello" = "مرحبا، ";
@@ -299,7 +299,7 @@
 "weakPassword" = "كلمة مرور ضعيفة" ;
 
 /* No comment provided by engineer. */
-"explainLinkedGoals" = "You can link your task to some of your goals, and these goals will progress if you accomplish the task that is linked to them. ";//TODO
+"explainLinkedGoals" = "تسطيع ربط المهمة ببعض الأهداف لديك، وهذه الأهداف سوف تتقدم اذا انجزت المهام المربوطة بها.";
 
 /* No comment provided by engineer. */
 "noGoalsToLinkTask" = "لا يوجد لديك أهداف لربط هذه المهمة";
@@ -334,3 +334,6 @@
 "itIsTime" = "جا الوقت عشان تسوي ";
 
 "reminderAt" = "تنبيه الساعة";
+
+"progress" = "التقدم";
+
