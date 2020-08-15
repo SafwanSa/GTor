@@ -9,21 +9,18 @@
 /* Begin PBXBuildFile section */
 		17091760247233120011BB8C /* SubGoalsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1709175F247233120011BB8C /* SubGoalsList.swift */; };
 		17091764247235180011BB8C /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17091763247235180011BB8C /* SelectCategoryView.swift */; };
-		17091768247244800011BB8C /* AddSubGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17091767247244800011BB8C /* AddSubGoalView.swift */; };
 		171400AD2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */; };
 		171E6C3C246FA90B003EFF36 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171E6C3B246FA90B003EFF36 /* TabBar.swift */; };
 		17265AAE249EEE2A00E384ED /* CalcService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17265AAD249EEE2A00E384ED /* CalcService.swift */; };
 		1729898B246CFCF300449C4F /* FirestoreErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898A246CFCF300449C4F /* FirestoreErrorHandler.swift */; };
 		1729898D246D0F2F00449C4F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898C246D0F2F00449C4F /* AuthService.swift */; };
 		1729898F246D13C200449C4F /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729898E246D13C200449C4F /* AuthError.swift */; };
-		174DAC812493D92F008CE35D /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174DAC802493D92F008CE35D /* AddTaskView.swift */; };
 		174DAC832493DD5C008CE35D /* LinkedGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174DAC822493DD5C008CE35D /* LinkedGoalsView.swift */; };
 		1758A35224CCF8820065CFA8 /* ElegantCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 1758A35124CCF8820065CFA8 /* ElegantCalendar */; };
 		1758A35724CD6EA00065CFA8 /* GTorCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1758A35624CD6EA00065CFA8 /* GTorCalendarView.swift */; };
 		1758A3A024CD73C30065CFA8 /* Date+DaysFromToday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1758A38024CD73C30065CFA8 /* Date+DaysFromToday.swift */; };
 		1758A3A924CD744C0065CFA8 /* Date+FullDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1758A3A824CD744C0065CFA8 /* Date+FullDate.swift */; };
 		1758A3AD24CD759F0065CFA8 /* ElegantCalendar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1758A3AC24CD759F0065CFA8 /* ElegantCalendar.xcassets */; };
-		1762732C24748759000E9661 /* SubGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732B24748759000E9661 /* SubGoalView.swift */; };
 		1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762732D24748D39000E9661 /* GoalHeaderView.swift */; };
 		176C74B624E4216D00582E03 /* NotiificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176C74B524E4216D00582E03 /* NotiificationService.swift */; };
 		176FE77E2474E02400B7FE82 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 176FE77D2474E02400B7FE82 /* Lottie */; };
@@ -38,15 +35,11 @@
 		17913FFE24D321E100EE8016 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17913FFD24D321E100EE8016 /* AboutView.swift */; };
 		1791400024D3226D00EE8016 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17913FFF24D3226D00EE8016 /* SettingsView.swift */; };
 		179BC66B24D2DB9D004B0F87 /* NewAddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179BC66A24D2DB9D004B0F87 /* NewAddTaskView.swift */; };
-		179E77012476604000BB77F8 /* TODOList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179E77002476604000BB77F8 /* TODOList.swift */; };
-		17A26C04249C1145004776EA /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C03249C1145004776EA /* GoalView.swift */; };
 		17A26C06249C1DE9004776EA /* GoalCardView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C05249C1DE9004776EA /* GoalCardView2.swift */; };
 		17A26C08249C3A16004776EA /* TaskCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C07249C3A16004776EA /* TaskCardView.swift */; };
 		17A26C0A249C4C25004776EA /* QuickSatisfactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A26C09249C4C25004776EA /* QuickSatisfactionView.swift */; };
-		17A61A6124707F12008B8C31 /* AddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A61A6024707F12008B8C31 /* AddGoalView.swift */; };
 		17B7A15224DED4AA0023CBD0 /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B7A15124DED4AA0023CBD0 /* ForgetPasswordView.swift */; };
 		17C2BE3024E1BE3F00DCE258 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17C2BE3224E1BE3F00DCE258 /* Localizable.strings */; };
-		17C60F542492633700A3DEFF /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C60F532492633700A3DEFF /* TaskView.swift */; };
 		17D44200247337C700DF91EC /* ModifiersViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D441FF247337C700DF91EC /* ModifiersViews.swift */; };
 		17DC11B724CD92CB0035EFD9 /* NewTODOListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DC11B624CD92CB0035EFD9 /* NewTODOListView.swift */; };
 		17E7E7A7246C921400596500 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7A6246C921400596500 /* AppDelegate.swift */; };
@@ -62,7 +55,6 @@
 		17E7E7CC246CAAE800596500 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7CB246CAAE800596500 /* SignUpView.swift */; };
 		17E7E7D0246CAB0600596500 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7CF246CAB0600596500 /* LaunchView.swift */; };
 		17E7E7D5246CAB5100596500 /* GoalsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7D4246CAB5100596500 /* GoalsList.swift */; };
-		17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7D6246CAB5A00596500 /* HomeView.swift */; };
 		17E7E7E0246CE3B300596500 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7DF246CE3B300596500 /* UserService.swift */; };
 		17E7E7E2246CE3C700596500 /* GoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E1246CE3C700596500 /* GoalService.swift */; };
 		17E7E7E4246CE3D600596500 /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E7E3246CE3D600596500 /* TaskService.swift */; };
@@ -78,20 +70,17 @@
 		116A19C2249FA9F0A4483872 /* Pods-GTor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GTor.debug.xcconfig"; path = "Target Support Files/Pods-GTor/Pods-GTor.debug.xcconfig"; sourceTree = "<group>"; };
 		1709175F247233120011BB8C /* SubGoalsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGoalsList.swift; sourceTree = "<group>"; };
 		17091763247235180011BB8C /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
-		17091767247244800011BB8C /* AddSubGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "\U0010AddSubGoalView.swift"; sourceTree = "<group>"; };
 		171400AC2470EB0D0001A625 /* TextFieldWithPickerAsInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPickerAsInputView.swift; sourceTree = "<group>"; };
 		171E6C3B246FA90B003EFF36 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		17265AAD249EEE2A00E384ED /* CalcService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcService.swift; sourceTree = "<group>"; };
 		1729898A246CFCF300449C4F /* FirestoreErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorHandler.swift; sourceTree = "<group>"; };
 		1729898C246D0F2F00449C4F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1729898E246D13C200449C4F /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
-		174DAC802493D92F008CE35D /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 		174DAC822493DD5C008CE35D /* LinkedGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedGoalsView.swift; sourceTree = "<group>"; };
 		1758A35624CD6EA00065CFA8 /* GTorCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTorCalendarView.swift; sourceTree = "<group>"; };
 		1758A38024CD73C30065CFA8 /* Date+DaysFromToday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+DaysFromToday.swift"; sourceTree = "<group>"; };
 		1758A3A824CD744C0065CFA8 /* Date+FullDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+FullDate.swift"; sourceTree = "<group>"; };
 		1758A3AC24CD759F0065CFA8 /* ElegantCalendar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = ElegantCalendar.xcassets; path = "../../../../Library/Developer/Xcode/DerivedData/GTor-gswenturrmbgpbgdlvrwtuaujfmj/SourcePackages/checkouts/ElegantCalendar/ElegantCalendar.xcassets"; sourceTree = "<group>"; };
-		1762732B24748759000E9661 /* SubGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubGoalView.swift; sourceTree = "<group>"; };
 		1762732D24748D39000E9661 /* GoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalHeaderView.swift; sourceTree = "<group>"; };
 		176C74B524E4216D00582E03 /* NotiificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiificationService.swift; sourceTree = "<group>"; };
 		176FE7832474E1A800B7FE82 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -105,17 +94,13 @@
 		17913FFD24D321E100EE8016 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		17913FFF24D3226D00EE8016 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		179BC66A24D2DB9D004B0F87 /* NewAddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddTaskView.swift; sourceTree = "<group>"; };
-		179E77002476604000BB77F8 /* TODOList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOList.swift; sourceTree = "<group>"; };
-		17A26C03249C1145004776EA /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		17A26C05249C1DE9004776EA /* GoalCardView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCardView2.swift; sourceTree = "<group>"; };
 		17A26C07249C3A16004776EA /* TaskCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCardView.swift; sourceTree = "<group>"; };
 		17A26C09249C4C25004776EA /* QuickSatisfactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSatisfactionView.swift; sourceTree = "<group>"; };
-		17A61A6024707F12008B8C31 /* AddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalView.swift; sourceTree = "<group>"; };
 		17B7A15124DED4AA0023CBD0 /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		17C2BE2D24E1BE1100DCE258 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		17C2BE3124E1BE3F00DCE258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17C2BE3324E1BE4600DCE258 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
-		17C60F532492633700A3DEFF /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		17D441FF247337C700DF91EC /* ModifiersViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiersViews.swift; sourceTree = "<group>"; };
 		17DC11B624CD92CB0035EFD9 /* NewTODOListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTODOListView.swift; sourceTree = "<group>"; };
 		17E7E7A3246C921400596500 /* GTor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,7 +118,6 @@
 		17E7E7CB246CAAE800596500 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		17E7E7CF246CAB0600596500 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		17E7E7D4246CAB5100596500 /* GoalsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsList.swift; sourceTree = "<group>"; };
-		17E7E7D6246CAB5A00596500 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		17E7E7DF246CE3B300596500 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		17E7E7E1246CE3C700596500 /* GoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalService.swift; sourceTree = "<group>"; };
 		17E7E7E3246CE3D600596500 /* TaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskService.swift; sourceTree = "<group>"; };
@@ -199,28 +183,6 @@
 				17E7E7B1246C921800596500 /* LaunchScreen.storyboard */,
 			);
 			path = Other;
-			sourceTree = "<group>";
-		};
-		178601CA24CC44BD00FFEE0E /* Old Views */ = {
-			isa = PBXGroup;
-			children = (
-				17E7E7D6246CAB5A00596500 /* HomeView.swift */,
-				174DAC802493D92F008CE35D /* AddTaskView.swift */,
-				17C60F532492633700A3DEFF /* TaskView.swift */,
-				179E77002476604000BB77F8 /* TODOList.swift */,
-				17091767247244800011BB8C /* AddSubGoalView.swift */,
-				17A61A6024707F12008B8C31 /* AddGoalView.swift */,
-				1762732B24748759000E9661 /* SubGoalView.swift */,
-			);
-			path = "Old Views";
-			sourceTree = "<group>";
-		};
-		17CC64F824A6B85900B81438 /* Unused Views and files */ = {
-			isa = PBXGroup;
-			children = (
-				17A26C03249C1145004776EA /* GoalView.swift */,
-			);
-			path = "Unused Views and files";
 			sourceTree = "<group>";
 		};
 		17E7E79A246C921300596500 = {
@@ -320,8 +282,6 @@
 			isa = PBXGroup;
 			children = (
 				17E7E7CF246CAB0600596500 /* LaunchView.swift */,
-				17CC64F824A6B85900B81438 /* Unused Views and files */,
-				178601CA24CC44BD00FFEE0E /* Old Views */,
 				1758A35524CD6E7D0065CFA8 /* Calendar Views */,
 				171400AB2470EAE10001A625 /* Helper Views */,
 				17E7E7DB246CABE600596500 /* Profile Views */,
@@ -539,12 +499,10 @@
 				1729898B246CFCF300449C4F /* FirestoreErrorHandler.swift in Sources */,
 				17E7E7E8246CE47900596500 /* FirestoreService.swift in Sources */,
 				178601CE24CC9CBC00FFEE0E /* NewGoalView.swift in Sources */,
-				17C60F542492633700A3DEFF /* TaskView.swift in Sources */,
 				17E7E7E2246CE3C700596500 /* GoalService.swift in Sources */,
 				17DC11B724CD92CB0035EFD9 /* NewTODOListView.swift in Sources */,
 				171E6C3C246FA90B003EFF36 /* TabBar.swift in Sources */,
 				17091760247233120011BB8C /* SubGoalsList.swift in Sources */,
-				17A26C04249C1145004776EA /* GoalView.swift in Sources */,
 				1762732E24748D39000E9661 /* GoalHeaderView.swift in Sources */,
 				17E7E7C4246CA6EB00596500 /* User.swift in Sources */,
 				17E7E7E6246CE3E400596500 /* CategoryService.swift in Sources */,
@@ -552,7 +510,6 @@
 				1729898D246D0F2F00449C4F /* AuthService.swift in Sources */,
 				174DAC832493DD5C008CE35D /* LinkedGoalsView.swift in Sources */,
 				17A26C06249C1DE9004776EA /* GoalCardView2.swift in Sources */,
-				17E7E7D7246CAB5A00596500 /* HomeView.swift in Sources */,
 				17913FFE24D321E100EE8016 /* AboutView.swift in Sources */,
 				177F4FFB24CCDD69005CDD75 /* TextEditorView.swift in Sources */,
 				1758A3A024CD73C30065CFA8 /* Date+DaysFromToday.swift in Sources */,
@@ -568,19 +525,14 @@
 				1776E25B24D170E1009FDF0D /* NewTaskView.swift in Sources */,
 				17E7E7C6246CA6F400596500 /* Goal.swift in Sources */,
 				17A26C08249C3A16004776EA /* TaskCardView.swift in Sources */,
-				174DAC812493D92F008CE35D /* AddTaskView.swift in Sources */,
-				1762732C24748759000E9661 /* SubGoalView.swift in Sources */,
 				179BC66B24D2DB9D004B0F87 /* NewAddTaskView.swift in Sources */,
-				179E77012476604000BB77F8 /* TODOList.swift in Sources */,
 				17E7E7CC246CAAE800596500 /* SignUpView.swift in Sources */,
-				17A61A6124707F12008B8C31 /* AddGoalView.swift in Sources */,
 				1729898F246D13C200449C4F /* AuthError.swift in Sources */,
 				17E7E7E4246CE3D600596500 /* TaskService.swift in Sources */,
 				177A215724B107F90031A665 /* CategoryEditorView.swift in Sources */,
 				1758A35724CD6EA00065CFA8 /* GTorCalendarView.swift in Sources */,
 				17E7E7E0246CE3B300596500 /* UserService.swift in Sources */,
 				17F0B93624D2EF950068E2EE /* HomeScreenView.swift in Sources */,
-				17091768247244800011BB8C /* AddSubGoalView.swift in Sources */,
 				17E7E7C8246CA6FE00596500 /* Task.swift in Sources */,
 				17E7E7AB246C921400596500 /* LoginView.swift in Sources */,
 				17B7A15224DED4AA0023CBD0 /* ForgetPasswordView.swift in Sources */,
