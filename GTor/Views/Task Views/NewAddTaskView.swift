@@ -41,6 +41,7 @@ struct NewAddTaskView: View {
                                 Text(NSLocalizedString(importance.rawValue.lowercased(), comment: ""))
                             }
                         }
+                        .navigationBarTitle("", displayMode: .inline)
                     }
                     
                     Section(footer: Text(NSLocalizedString("explainLinkedGoals", comment: ""))) {
