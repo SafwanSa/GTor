@@ -61,6 +61,9 @@ struct CategoryEditorView: View {
                         }) {
                             Text(isEditMode ? NSLocalizedString("done", comment: "") : NSLocalizedString("add", comment: ""))
                         }
+                        .buttonStyle(PlainButtonStyle())
+                        .contentShape(Rectangle())
+                        .foregroundColor(Color("Button"))
                     }
                     
                     Section {
@@ -70,6 +73,7 @@ struct CategoryEditorView: View {
                                     Image(systemName: "trash")
                                 }
                                 .buttonStyle(PlainButtonStyle())
+                                .foregroundColor(Color("Button"))
                                 
                                 Color(GTColor.init(rawValue: category.colorId ?? 0)!.color).opacity(0.7)
                                     .frame(width: 30, height: 30)
@@ -112,8 +116,10 @@ struct CategoryEditorView: View {
                 Alert(title: Text(self.alertMessage))
             }
             .onAppear {
-                self.categories = self.categoryService.categories
-        }
+                if self.categories.count == self.categoryService.categories.count || self.categories.isEmpty {
+                    self.categories = self.categoryService.categories
+                }
+            }
     }
     
     func save() {
