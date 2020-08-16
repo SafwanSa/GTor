@@ -35,7 +35,8 @@ struct SettingsRowButtonView: View {
 
 struct SettingsView: View {
     @ObservedObject var authService = AuthService.shared
-
+    @State var isSharePresented = false
+    
     var body: some View {
         VStack(spacing: 50) {
             VStack(spacing: 40) {
@@ -43,13 +44,18 @@ struct SettingsView: View {
                     SettingsRowButtonView(text: NSLocalizedString("tagsSettings", comment: ""), icon: "tag", isHavingDestination: true)
                 }
                 VStack {
-                    Button(action: {}) {
-                        SettingsRowButtonView(text: NSLocalizedString("rateTheApp", comment: ""), icon: "star", isHavingDestination: false)
-                    }
+//                    Button(action: {}) {
+//                        SettingsRowButtonView(text: NSLocalizedString("rateTheApp", comment: ""), icon: "star", isHavingDestination: false)
+//                    }
                     
-                    Button(action: {}) {
+                    Button(action: { self.isSharePresented = true  }) {
                         SettingsRowButtonView(text: NSLocalizedString("shareTheApp", comment: ""), icon: "square.and.arrow.up", isHavingDestination: false)
                     }
+                    .sheet(isPresented: self.$isSharePresented, content: {
+                        ActivityViewController(activityItems: ["https://apps.apple.com/app/id1520865647"])
+                    })
+                    
+                    
                     
                     NavigationLink(destination: AboutView()) {
                         SettingsRowButtonView(text: NSLocalizedString("aboutGTor", comment: ""), icon: "info.circle", isHavingDestination: true)
@@ -59,9 +65,9 @@ struct SettingsView: View {
                     Button(action: self.authService.signOutUser) {
                         SettingsRowButtonView(text: NSLocalizedString("logout", comment: ""), icon: "arrow.down.left.circle.fill", isHavingDestination: false, isLogout: true)
                     }
-//                    Button(action: {}) {
-//                        SettingsRowButtonView(text: "Delete Account", isHavingDestination: false)
-//                    }
+                    //                    Button(action: {}) {
+                    //                        SettingsRowButtonView(text: "Delete Account", isHavingDestination: false)
+                    //                    }
                 }
             }.padding(.horizontal)
         }
@@ -74,3 +80,18 @@ struct SettingsView_Previews: PreviewProvider {
         SettingsView()
     }
 }
+
+struct ActivityViewController: UIViewControllerRepresentable {
+    
+    var activityItems: [Any]
+    var applicationActivities: [UIActivity]? = nil
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
+        return controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
+    
+}
+
