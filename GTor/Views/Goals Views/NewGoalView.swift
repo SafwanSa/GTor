@@ -126,6 +126,7 @@ struct NewGoalHeaderView: View {
             HStack {
                 Text(goal.note.isEmpty ? NSLocalizedString("emptyNote", comment: "") : goal.note)
                     .font(.subheadline)
+                    .foregroundColor(Color(goal.note.isEmpty ? "Secondry" : "Primary"))
                 
                 Spacer()
                 

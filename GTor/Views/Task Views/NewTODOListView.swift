@@ -196,6 +196,7 @@ struct TODOView: View {
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundColor(Color("Primary"))
                 .padding(.horizontal)
+                .opacity(taskService.tasks.filter { !$0.isSatisfied }.isEmpty ? 0 : 1)
             
             ForEach(taskService.tasks.filter { !$0.isSatisfied }) { task in
                 NavigationLink(destination: NewTaskView(task: task)) {

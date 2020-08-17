@@ -120,6 +120,7 @@ struct NewTaskHeaderView: View {
             HStack {
                 Text(task.note.isEmpty ? NSLocalizedString("emptyNote", comment: "") : task.note)
                     .font(.subheadline)
+                    .foregroundColor(Color(task.note.isEmpty ? "Secondry" : "Primary"))
                 
                 Spacer()
                 
