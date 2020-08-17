@@ -28,6 +28,10 @@ struct NewTODOListView: View {
         !taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 0 }.isEmpty
     }
     
+    var isShowingTODO: Bool {
+        !taskService.tasks.filter { !$0.isSatisfied }.isEmpty
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -37,7 +41,8 @@ struct NewTODOListView: View {
                     }
                     VStack(alignment: .leading, spacing: 12.0) {
                         if !taskService.tasks.isEmpty {
-                            TODOView(selectedTask: $selectedTask)
+                            
+                            if isShowingTODO { TODOView(selectedTask: $selectedTask) }
                             
                             if isShowingComplete {
                                 RowListView(title: NSLocalizedString("completed", comment: ""), tasks: taskService.tasks.filter { $0.isSatisfied && $0.satisfaction == 100 }, selectedTask: $selectedTask)
@@ -196,7 +201,6 @@ struct TODOView: View {
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundColor(Color("Primary"))
                 .padding(.horizontal)
-                .opacity(taskService.tasks.filter { !$0.isSatisfied }.isEmpty ? 0 : 1)
             
             ForEach(taskService.tasks.filter { !$0.isSatisfied }) { task in
                 NavigationLink(destination: NewTaskView(task: task)) {
