@@ -32,7 +32,7 @@ struct LoginView: View {
                 }
                 .padding(.vertical, 70)
             }else {
-                SignUpView(isNewUser: self.isNewUser, isShowingLogin: $isShowingLogin)
+                SignUpView(isNewUser: self.$isNewUser, isShowingLogin: $isShowingLogin)
             }
         }
     }

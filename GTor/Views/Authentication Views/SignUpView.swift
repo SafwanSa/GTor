@@ -20,7 +20,7 @@ struct SignUpView: View {
     @State var name = ""
     @State var alertMessage = ""
     @State var isLoading = false
-    var isNewUser = true
+    @Binding var isNewUser: Bool
     @Binding var isShowingLogin: Bool
     var isDisableGo: Bool {
         return (password.count < 6 || (name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && isNewUser) || email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || (gender.isEmpty && isNewUser))
@@ -107,6 +107,21 @@ struct SignUpView: View {
                 .padding(.horizontal, 20)
                 .opacity(isDisableGo ? 0.5 : 1)
                 .disabled(isDisableGo)
+                
+                HStack(spacing: 0.0) {
+                    Text(NSLocalizedString(isNewUser ? "alreadyHaveAccount" : "dontHaveAccount", comment: ""))
+                        .foregroundColor(Color("Primary"))
+                        
+                    Text(NSLocalizedString(isNewUser ? "signIn" : "signUp", comment: ""))
+                        .foregroundColor(Color("Button"))
+                        .onTapGesture {
+                            self.isNewUser.toggle()
+                        }
+                }
+                .padding(.top)
+
+
+                
                 Spacer()
                 Text(NSLocalizedString("back", comment: ""))
                 Image(systemName: "arrowtriangle.down.fill")
@@ -158,6 +173,6 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(isShowingLogin: .constant(true))
+        SignUpView(isNewUser: .constant(false), isShowingLogin: .constant(true))
     }
 }

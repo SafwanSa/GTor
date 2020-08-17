@@ -236,7 +236,7 @@
 "shareTheApp" = "شارك التطبيق";
 
 /* No comment provided by engineer. */
-"signUp" = "تسجيل جديد";
+"signUp" = "تسجيل حساب";
 
 /* No comment provided by engineer. */
 "subGoals" = "أهداف فرعية";
@@ -344,3 +344,9 @@
 "relationships" = "علاقات";
 
 "life" = "حياة";
+
+"alreadyHaveAccount" = " يوجد لديك حساب؟ ";
+
+"dontHaveAccount" = " ليس لديك حساب؟ ";
+
+"signIn" = "تسجيل دخول";
